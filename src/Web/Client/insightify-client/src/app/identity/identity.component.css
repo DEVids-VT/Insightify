@@ -1,0 +1,17 @@
+button {
+    background-color: #808080; /* gray color */
+    border: none;
+    color: white; /* text color */
+    text-align: center;
+    padding: 10px 20px; /* vertical and horizontal padding */
+    font-size: 14px; /* text size */
+    cursor: pointer;
+    border-radius: 25px; /* round edges */
+    transition: background 0.3s, color 0.3s; /* smooth color transition */
+  }
+  
+  button:hover {
+    background-color: #606060; /* darker gray color on hover */
+    color: white; /* text color on hover */
+  }
+  

@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<PropertyGroup>
+		<PackageId>Insightify.Framework.Mongo</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Insightify</Authors>
+		<Description>MongoDb Logic for the Insighfity.Project</Description>
+	</PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Insightify.Framework\Insightify.Framework.csproj" />
+    <ProjectReference Include="..\Insightify.Framework.MongoDb.Abstractions\Insightify.Framework.MongoDb.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

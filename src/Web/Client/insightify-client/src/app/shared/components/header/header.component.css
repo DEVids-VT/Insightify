@@ -1,0 +1,20 @@
+.header-transparent {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  .navbar-light .navbar-brand {
+    color: rgba(0,0,0,.9);
+  }
+  
+  .navbar-light .navbar-nav .nav-link {
+    color: rgba(0,0,0,.5);
+  }
+  
+  .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+    color: rgba(0,0,0,.7);
+  }
+  
+  .navbar-light .navbar-nav .nav-link.active {
+    color: rgba(0,0,0,.9);
+  }
+  

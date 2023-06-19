@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Ins1ghtSxrvxr153
+    ports:
+      - "1433:1433"
+  identityapi:
+    image: sk1es/insightify.identityapi
+    
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - PORT=5001
+      - CONNECTION_STRING=Server=sqlserver,1433;Database=Insightify.IdentityApi;User Id=sa;Password=Ins1ghtSxrvxr153; TrustServerCertificate=True;
+    ports:
+      - "5001:5001"
+    depends_on:
+      - sqlserver
