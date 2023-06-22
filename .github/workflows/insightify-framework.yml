@@ -1,0 +1,67 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build-test-package-publish:
+    runs-on: ubuntu-latest
+    env:
+      NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.x' # replace this with your .NET version
+
+      - name: Auto Increment Version
+        run: |
+          VERSION_PATTERN="(\d+.\d+.\d+)"
+          for CSFILE in $(find . -name "*.csproj")
+          do
+            CURRENT_VERSION=$(grep -o $VERSION_PATTERN $CSFILE)
+            IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
+            VERSION_PARTS[2]=$((${VERSION_PARTS[2]}+1))
+            NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2]}"
+            sed -i "s/$CURRENT_VERSION/$NEW_VERSION/g" $CSFILE
+            echo "New version of $CSFILE is $NEW_VERSION"
+          done
+        shell: bash
+
+      - name: Commit version changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Increment version" -a || echo "No changes to commit"
+          git push
+
+      - name: Restore dependencies
+        run: dotnet restore src/Common/Insightify.Framework/Insightify.Framework.sln
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore src/Common/Insightify.Framework/Insightify.Framework.sln
+
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal src/Common/Insightify.Framework/Insightify.Framework.sln
+
+      - name: Pack
+        run: dotnet pack --no-build --configuration Release --output ./nupkg src/Common/Insightify.Framework/Insightify.Framework.sln
+
+      - name: Setup .NET for push
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.x' # replace this with your .NET version
+          source-url: https://api.nuget.org/v3/index.json
+
+      - name: Push
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push "./nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate --source "https://api.nuget.org/v3/index.json"
