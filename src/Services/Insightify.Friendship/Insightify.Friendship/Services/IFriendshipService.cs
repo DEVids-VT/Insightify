@@ -1,13 +1,17 @@
-﻿using Insightify.Friendship.Models.Dtos;
+﻿using Insightify.Friendships.Models;
+using Insightify.Friendships.Models.Dtos;
 
-namespace Insightify.Friendship.Services
+namespace Insightify.Friendships.Services
 {
     public interface IFriendshipService
     {
-        Task<bool> AcceptFriendRequest(string requestId);
-        Task<IEnumerable<FriendDto>> GetFriends(string userId);
+        Task AcceptFriendRequest(string requestId);
+        Task<IEnumerable<FriendRequest>> GetRequests(string userId, bool includeDeleted = false);
         Task RejectFriendRequest(string requestId);
-        Task<bool> SendFriendRequest(string senderId, string receiverId);
-        Task<bool> Unfriend(string friendshipId);
+        Task SendFriendRequest(string senderId, string receiverId);
+        Task Unfriend(string friendshipId);
+        Task<IEnumerable<Friendship>> GetFriendships(string userId, bool includeDeleted = false);
+        Task<IEnumerable<FriendRequest>> AllRequests();
+        Task<IEnumerable<Friendship>> AllFriendships();
     }
 }

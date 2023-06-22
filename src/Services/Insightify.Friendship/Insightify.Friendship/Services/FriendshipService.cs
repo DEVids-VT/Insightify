@@ -1,21 +1,22 @@
-﻿using Insightify.Friendship.Models;
-using Insightify.Friendship.Models.Dtos;
-using Insightify.Friendship.Repositories;
+﻿using Insightify.Framework.MongoDb.Abstractions.Interfaces;
+using Insightify.Friendships.Models;
+using Insightify.Friendships.Models.Dtos;
+using k8s.KubeConfigModels;
 
-namespace Insightify.Friendship.Services
+namespace Insightify.Friendships.Services
 {
     public class FriendshipService : IFriendshipService
     {
-        private readonly IFriendshipRequestRepository _friendshipRequestRepository;
-        private readonly IFriendRepository _friendRepository;
+        private readonly IRepository<FriendRequest> _friendRequestRepo;
+        private readonly IRepository<Friendship> _friendshipRepo;
 
-        public FriendshipService(IFriendshipRequestRepository friendshipRequestRepository, IFriendRepository friendRepository)
+        public FriendshipService(IRepository<FriendRequest> friendRequestRepo, IRepository<Friendship> friendshipRepo)
         {
-            _friendshipRequestRepository = friendshipRequestRepository;
-            _friendRepository = friendRepository;
+            _friendRequestRepo = friendRequestRepo;
+            _friendshipRepo = friendshipRepo;
         }
 
-        public async Task<bool> SendFriendRequest(string senderId, string receiverId)
+        public async Task SendFriendRequest(string senderId, string receiverId)
         {
             var friendRequest = new FriendRequest
             {
@@ -24,55 +25,82 @@ namespace Insightify.Friendship.Services
                 Status = FriendRequestStatus.Pending
             };
 
-            try
-            {
-                await _friendshipRequestRepository.Create(friendRequest);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            return true;
+            await _friendRequestRepo.InsertAsync(friendRequest);
         }
 
-        public async Task<bool> AcceptFriendRequest(string requestId)
+        public async Task AcceptFriendRequest(string requestId)
         {
-            var friendRequest = await _friendshipRequestRepository.GetById(requestId);
+            var friendRequest = await _friendRequestRepo.GetByIdAsync(requestId);
+
+            if(friendRequest == null)
+            {
+                throw new ArgumentException("Friend request not found.");
+            }
 
             friendRequest.Status = FriendRequestStatus.Accepted;
 
-            var updatedRequest = await _friendshipRequestRepository.Update(friendRequest);
+            await _friendRequestRepo.UpdateAsync(friendRequest);
 
-            await _friendRepository.AddFriend(updatedRequest.SenderId, updatedRequest.ReceiverId);
-            await _friendRepository.AddFriend(updatedRequest.ReceiverId, updatedRequest.SenderId);
-
-            return updatedRequest != null;
+            await _friendshipRepo.InsertAsync(new Friendship
+            {
+                RequesterUserId = friendRequest.SenderId,
+                ReceiverUserId = friendRequest.ReceiverId,
+                CreatedAt = DateTime.Now
+            });
         }
 
         public async Task RejectFriendRequest(string requestId)
         {
-            var friendRequest = await _friendshipRequestRepository.GetById(requestId);
+            var friendRequest = await _friendRequestRepo.GetByIdAsync(requestId);
+
+            if (friendRequest == null)
+            {
+                throw new ArgumentException("Friend request not found.");
+            }
 
             friendRequest.Status = FriendRequestStatus.Rejected;
 
-            await _friendshipRequestRepository.Update(friendRequest);
+            await _friendRequestRepo.UpdateAsync(friendRequest);
         }
 
-        public async Task<bool> Unfriend(string friendshipId)
+        public async Task Unfriend(string friendshipId)
         {
-            var friendship = await _friendRepository.GetById(friendshipId);
+            var friendship = await _friendshipRepo.GetByIdAsync(friendshipId);
 
-            var removedFriendship = await _friendRepository.RemoveFriendship(friendship);
+            if (friendship == null)
+            {
+                throw new ArgumentException("Friend request not found.");
+            }
 
-            return removedFriendship;
+            await _friendshipRepo.DeleteAsync(friendship);
         }
 
-        public async Task<IEnumerable<FriendDto>> GetFriends(string userId)
+        public async Task<IEnumerable<FriendRequest>> GetRequests(string userId, bool includeDeleted = false)
         {
-            var friends = await _friendRepository.GetFriends(userId);
+            var requests = await _friendRequestRepo.GetAllAsync(x => x.SenderId == userId || x.ReceiverId == userId, includeDeleted: includeDeleted);
 
-            return friends;
+            return requests.AsEnumerable();
+        }
+
+        public async Task<IEnumerable<Friendship>> GetFriendships(string userId, bool includeDeleted = false)
+        {
+            var friends = await _friendshipRepo.GetAllAsync(x => x.RequesterUserId == userId || x.ReceiverUserId == userId, includeDeleted: includeDeleted);
+
+            return friends.AsEnumerable();
+        }
+
+        public async Task<IEnumerable<FriendRequest>> AllRequests()
+        {
+            var requests = await _friendRequestRepo.GetAllAsync();
+
+            return requests.AsEnumerable();
+        }
+
+        public async Task<IEnumerable<Friendship>> AllFriendships()
+        {
+            var friendships = await _friendshipRepo.GetAllAsync();
+
+            return friendships.AsEnumerable();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Insightify.Friendship.Models
+﻿namespace Insightify.Friendships.Models
 {
     public enum FriendRequestStatus
     {

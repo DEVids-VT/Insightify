@@ -1,8 +1,8 @@
-﻿namespace Insightify.Friendship.Models.Dtos
+﻿namespace Insightify.Friendships.Models.Dtos
 {
     public class FriendRequestDto
     {
-        public string SenderId { get; internal set; }
-        public string ReceiverId { get; internal set; }
+        public string SenderId { get; set; }
+        public string ReceiverId { get; set; }
     }
 }

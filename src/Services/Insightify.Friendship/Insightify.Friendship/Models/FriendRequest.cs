@@ -1,8 +1,11 @@
-﻿namespace Insightify.Friendship.Models
+﻿using Insightify.Framework.MongoDb.Abstractions;
+using Insightify.Framework.MongoDb.Abstractions.Attributes;
+
+namespace Insightify.Friendships.Models
 {
-    public class FriendRequest
+    [CollectionName("friend-requests")]
+    public class FriendRequest : MongoEntity
     {
-        public string Id { get; set; }
         public string SenderId { get; set; }
         public string ReceiverId { get; set; }
         public FriendRequestStatus Status { get; set; }

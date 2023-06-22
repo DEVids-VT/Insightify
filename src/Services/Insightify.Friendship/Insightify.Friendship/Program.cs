@@ -8,8 +8,7 @@ using Insightify.Framework.Logging;
 using Insightify.Framework.MongoDb.Abstractions.Configuration;
 using Insightify.Framework.Swagger;
 using Insightify.Framework.Swagger.Settings;
-using Insightify.Friendship.Repositories;
-using Insightify.Friendship.Services;
+using Insightify.Friendships.Services;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using MongoDB.Bson;
 using Newtonsoft.Json.Converters;
@@ -64,8 +63,6 @@ builder.Services.AddControllers()
 });
 
 builder.Services.AddSignalR();
-builder.Services.AddScoped<IFriendRepository, FriendRepository>();
-builder.Services.AddScoped<IFriendshipRequestRepository, FriendshipRequestRepository>();
 builder.Services.AddScoped<IFriendshipService, FriendshipService>();
 builder.Services.AddValidatorsFromAssembly(Assembly.Load(Namespace), ServiceLifetime.Scoped);
 builder.Services.AddCors(p => p.AddPolicy("Friends", b => b

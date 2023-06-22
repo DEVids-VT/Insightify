@@ -1,12 +1,13 @@
-﻿using Insightify.Friendship.Models.Dtos;
-using Insightify.Friendship.Services;
+﻿using Insightify.Friendships.Models.Dtos;
+using Insightify.Friendships.Services;
 using Microsoft.AspNet.SignalR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Insightify.Friendship.Controllers
+namespace Insightify.Friendships.Controllers
 {
     [ApiController]
-    [Authorize]
+    [AllowAnonymous]
     public class FriendshipController : Controller
     {
         private readonly IFriendshipService _friendshipService;
@@ -16,31 +17,21 @@ namespace Insightify.Friendship.Controllers
             _friendshipService = friendshipService;
         }
 
-        [HttpPost("requests")]
-        public async Task<IActionResult> SendFriendRequest(FriendRequestDto friendRequestDto)
+        [HttpPost("request")]
+        public async Task<IActionResult> SendFriendRequest([FromBody] FriendRequestDto friendRequestDto)
         {
-            var request = await _friendshipService
+            await _friendshipService
                 .SendFriendRequest(friendRequestDto.SenderId, friendRequestDto.ReceiverId);
 
-            if (request)
-            {
-                return Ok(request);
-            }
-
-            return BadRequest("Unable to send friend request");
+            return Ok("Friend request sent");
         }
 
         [HttpPut("requests/{requestId}/accept")]
         public async Task<IActionResult> AcceptFriendRequest(string requestId)
         {
-            var accepted = await _friendshipService.AcceptFriendRequest(requestId);
+            await _friendshipService.AcceptFriendRequest(requestId);
 
-            if (accepted)
-            {
-                return Ok("Friend request accepted");
-            }
-
-            return BadRequest("Unable to accept friend request");
+            return Ok("Friend request accepted");
         }
 
         [HttpPut("requests/{requestId}/reject")]
@@ -54,22 +45,42 @@ namespace Insightify.Friendship.Controllers
         [HttpDelete("{friendshipId}")]
         public async Task<IActionResult> Unfriend(string friendshipId)
         {
-            var unfriended = await _friendshipService.Unfriend(friendshipId);
+            await _friendshipService.Unfriend(friendshipId);
 
-            if (unfriended)
-            {
-                return Ok("Unfriended successfully");
-            }
+            return Ok("Unfriended successfully");
 
-            return BadRequest("Unable to unfriend");
+        }
+
+        [HttpGet("{userId}/requests")]
+        public async Task<IActionResult> GetRequests(string userId, bool includeDeleted = false)
+        {
+            var requests = await _friendshipService.GetRequests(userId, includeDeleted);
+
+            return Ok(requests);
+        }
+
+        [HttpGet("/requests")]
+        public async Task<IActionResult> GetAllRequests()
+        {
+            var requests = await _friendshipService.AllRequests();
+
+            return Ok(requests);
         }
 
         [HttpGet("{userId}/friends")]
-        public async Task<IActionResult> GetFriends(string userId)
+        public async Task<IActionResult> GetFriendships(string userId, bool includeDeleted = false)
         {
-            var friends = await _friendshipService.GetFriends(userId);
+            var friends = await _friendshipService.GetFriendships(userId, includeDeleted);
 
             return Ok(friends);
+        }
+
+        [HttpGet("/friendships")]
+        public async Task<IActionResult> GetAllFriendships()
+        {
+            var friendships = await _friendshipService.AllFriendships();
+
+            return Ok(friendships);
         }
     }
 }
