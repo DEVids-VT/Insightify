@@ -14,5 +14,11 @@
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Mongo\Insightify.Framework.MongoDb.Abstractions\Insightify.Framework.MongoDb.Abstractions.csproj" />
+	</ItemGroup>
 
 </Project>

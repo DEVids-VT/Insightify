@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Insightify.Framework.Pagination.Headers;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace Insightify.Framework.Pagination.Extensions
 {
