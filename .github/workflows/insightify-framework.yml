@@ -25,12 +25,19 @@ jobs:
           VERSION_PATTERN="(\d+.\d+.\d+)"
           for CSFILE in $(find . -name "*.csproj")
           do
+            echo "Processing $CSFILE"
             CURRENT_VERSION=$(grep -o $VERSION_PATTERN $CSFILE)
+            if [ -z "$CURRENT_VERSION" ]
+            then
+              echo "No version found in $CSFILE"
+              continue
+            fi
+            echo "Current version is $CURRENT_VERSION"
             IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
             VERSION_PARTS[2]=$((${VERSION_PARTS[2]}+1))
             NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2]}"
+            echo "New version will be $NEW_VERSION"
             sed -i "s/$CURRENT_VERSION/$NEW_VERSION/g" $CSFILE
-            echo "New version of $CSFILE is $NEW_VERSION"
           done
         shell: bash
 
