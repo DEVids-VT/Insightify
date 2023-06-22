@@ -27,11 +27,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insightify.Framework.Fetchi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fetching", "Fetching", "{3031ED5D-39EA-4B6F-8F5D-3EA62E4F6A90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insightify.Framework.Tests", "Tests\Insightify.Framework.Tests\Insightify.Framework.Tests.csproj", "{B1AA5380-74BE-48FC-831F-9CFBD2CB099A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insightify.Framework.Tests", "Tests\Insightify.Framework.Tests\Insightify.Framework.Tests.csproj", "{B1AA5380-74BE-48FC-831F-9CFBD2CB099A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5B9102B1-7025-4B05-9DD9-8F9FF574619F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insightify.Framework.Mongo.Tests", "Insightify.Framework.Mongo.Tests\Insightify.Framework.Mongo.Tests.csproj", "{016F2B3A-1679-4EC0-8496-E03908019E62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Insightify.Framework.Mongo.Tests", "Insightify.Framework.Mongo.Tests\Insightify.Framework.Mongo.Tests.csproj", "{016F2B3A-1679-4EC0-8496-E03908019E62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pagination", "Pagination", "{97B5021A-D2C9-49A0-B47F-9C62DDAF4960}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insightify.Framework.Pagination", "Insightify.Framework.Pagination\Insightify.Framework.Pagination.csproj", "{049077D3-BEE5-41E7-913B-1A7120F50AAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +79,10 @@ Global
 		{016F2B3A-1679-4EC0-8496-E03908019E62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016F2B3A-1679-4EC0-8496-E03908019E62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{016F2B3A-1679-4EC0-8496-E03908019E62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049077D3-BEE5-41E7-913B-1A7120F50AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049077D3-BEE5-41E7-913B-1A7120F50AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049077D3-BEE5-41E7-913B-1A7120F50AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049077D3-BEE5-41E7-913B-1A7120F50AAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +97,7 @@ Global
 		{CEF8F10A-6BDE-4D28-86A9-D6C0FC619848} = {3031ED5D-39EA-4B6F-8F5D-3EA62E4F6A90}
 		{B1AA5380-74BE-48FC-831F-9CFBD2CB099A} = {5B9102B1-7025-4B05-9DD9-8F9FF574619F}
 		{016F2B3A-1679-4EC0-8496-E03908019E62} = {5B9102B1-7025-4B05-9DD9-8F9FF574619F}
+		{049077D3-BEE5-41E7-913B-1A7120F50AAD} = {97B5021A-D2C9-49A0-B47F-9C62DDAF4960}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09964715-42CA-45EC-A059-A0C3FF37074F}
