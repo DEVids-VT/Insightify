@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Insightify.Framework.MongoDb.Abstractions.Interfaces;
 
 namespace Insightify.Framework.Pagination.Extensions
 {
