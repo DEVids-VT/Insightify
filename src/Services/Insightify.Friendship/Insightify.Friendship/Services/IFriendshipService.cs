@@ -11,7 +11,7 @@ namespace Insightify.Friendships.Services
         Task SendFriendRequest(string senderId, string receiverId);
         Task Unfriend(string friendshipId);
         Task<IEnumerable<Friendship>> GetFriendships(string userId, bool includeDeleted = false);
-        Task<IEnumerable<FriendRequest>> AllRequests();
-        Task<IEnumerable<Friendship>> AllFriendships();
+        Task<IEnumerable<FriendRequest>> AllRequests(bool includeDeleted = false);
+        Task<IEnumerable<Friendship>> AllFriendships(bool includeDeleted = false);
     }
 }

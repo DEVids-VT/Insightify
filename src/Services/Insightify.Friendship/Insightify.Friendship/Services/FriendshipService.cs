@@ -89,16 +89,16 @@ namespace Insightify.Friendships.Services
             return friends.AsEnumerable();
         }
 
-        public async Task<IEnumerable<FriendRequest>> AllRequests()
+        public async Task<IEnumerable<FriendRequest>> AllRequests(bool includeDeleted = false)
         {
-            var requests = await _friendRequestRepo.GetAllAsync();
+            var requests = await _friendRequestRepo.GetAllAsync(includeDeleted: includeDeleted);
 
             return requests.AsEnumerable();
         }
 
-        public async Task<IEnumerable<Friendship>> AllFriendships()
+        public async Task<IEnumerable<Friendship>> AllFriendships(bool includeDeleted = false)
         {
-            var friendships = await _friendshipRepo.GetAllAsync();
+            var friendships = await _friendshipRepo.GetAllAsync(includeDeleted: includeDeleted);
 
             return friendships.AsEnumerable();
         }

@@ -60,9 +60,9 @@ namespace Insightify.Friendships.Controllers
         }
 
         [HttpGet("/requests")]
-        public async Task<IActionResult> GetAllRequests()
+        public async Task<IActionResult> GetAllRequests(bool includeDeleted = false)
         {
-            var requests = await _friendshipService.AllRequests();
+            var requests = await _friendshipService.AllRequests(includeDeleted);
 
             return Ok(requests);
         }
@@ -76,9 +76,9 @@ namespace Insightify.Friendships.Controllers
         }
 
         [HttpGet("/friendships")]
-        public async Task<IActionResult> GetAllFriendships()
+        public async Task<IActionResult> GetAllFriendships(bool includeDeleted = false)
         {
-            var friendships = await _friendshipService.AllFriendships();
+            var friendships = await _friendshipService.AllFriendships(includeDeleted);
 
             return Ok(friendships);
         }
