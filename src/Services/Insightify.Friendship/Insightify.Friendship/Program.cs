@@ -62,7 +62,6 @@ builder.Services.AddControllers()
         new StringEnumConverter(new DefaultNamingStrategy(), false));
 });
 
-builder.Services.AddSignalR();
 builder.Services.AddScoped<IFriendshipService, FriendshipService>();
 builder.Services.AddValidatorsFromAssembly(Assembly.Load(Namespace), ServiceLifetime.Scoped);
 builder.Services.AddCors(p => p.AddPolicy("Friends", b => b
