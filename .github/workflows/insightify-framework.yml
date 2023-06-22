@@ -9,7 +9,7 @@ jobs:
   build-test-package-publish:
     runs-on: ubuntu-latest
     env:
-      NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NUGET_AUTH_TOKEN: ${{ secrets.NUGET_AUTH_TOKEN }}
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     steps:
       - name: Checkout code
@@ -47,7 +47,7 @@ jobs:
             echo "New version will be $NEW_VERSION"
             sed -i "s#$CURRENT_VERSION#$NEW_VERSION#g" $CSFILE
           done
-          
+
         shell: bash
 
       - name: Commit version changes
