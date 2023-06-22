@@ -50,14 +50,6 @@ jobs:
 
         shell: bash
 
-      - name: Commit version changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Increment version" -a || echo "No changes to commit"
-          git push
-
       - name: Restore dependencies
         run: dotnet restore src/Common/Insightify.Framework/Insightify.Framework.sln
 
