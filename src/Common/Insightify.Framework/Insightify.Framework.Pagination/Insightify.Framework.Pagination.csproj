@@ -5,6 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+	<PropertyGroup>
+		<PackageId>Insightify.Framework.Pagination</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Insightify</Authors>
+		<Description>Pagination Logic for the Insighfity.Project</Description>
+	</PropertyGroup>
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>

@@ -23,7 +23,7 @@ jobs:
       - name: Auto Increment Version
         run: |
           VERSION_PATTERN="\<Version\>[0-9]*\.[0-9]*\.[0-9]*\<\/Version\>"
-          for CSFILE in $(find . -name "*.csproj")
+          for CSFILE in $(find src/Common/Insightify.Framework/ -name "*.csproj")
           do
             echo "Processing $CSFILE"
             CURRENT_VERSION=$(grep -oP "$VERSION_PATTERN" $CSFILE)
