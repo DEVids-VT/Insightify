@@ -22,20 +22,20 @@ jobs:
 
       - name: Auto Increment Version
         run: |
-          VERSION_PATTERN="(\d+.\d+.\d+)"
+          VERSION_PATTERN="\<Version\>[0-9]*\.[0-9]*\.[0-9]*\<\/Version\>"
           for CSFILE in $(find . -name "*.csproj")
           do
             echo "Processing $CSFILE"
-            CURRENT_VERSION=$(grep -o $VERSION_PATTERN $CSFILE)
+            CURRENT_VERSION=$(grep -oP "$VERSION_PATTERN" $CSFILE)
             if [ -z "$CURRENT_VERSION" ]
             then
               echo "No version found in $CSFILE"
               continue
             fi
             echo "Current version is $CURRENT_VERSION"
-            IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
+            IFS='.' read -ra VERSION_PARTS <<< "${CURRENT_VERSION//[^0-9.]/}"
             VERSION_PARTS[2]=$((${VERSION_PARTS[2]}+1))
-            NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2]}"
+            NEW_VERSION="<Version>${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2]}</Version>"
             echo "New version will be $NEW_VERSION"
             sed -i "s/$CURRENT_VERSION/$NEW_VERSION/g" $CSFILE
           done
