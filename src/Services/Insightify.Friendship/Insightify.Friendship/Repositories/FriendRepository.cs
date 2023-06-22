@@ -24,7 +24,7 @@ namespace Insightify.Friendship.Repositories
             await _friendshipCollection.InsertOneAsync(friendship);
         }
 
-        public async Task<FriendshipDto> GetById(int friendshipId)
+        public async Task<FriendshipDto> GetById(string friendshipId)
         {
             var filter = Builders<FriendshipDto>.Filter.Eq(f => f.Id, friendshipId);
             return await _friendshipCollection.Find(filter).FirstOrDefaultAsync();

@@ -1,4 +1,5 @@
-﻿using Insightify.Friendship.Services;
+﻿using Insightify.Friendship.Models.Dtos;
+using Insightify.Friendship.Services;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +32,7 @@ namespace Insightify.Friendship.Controllers
         }
 
         [HttpPut("requests/{requestId}/accept")]
-        public async Task<IActionResult> AcceptFriendRequest(int requestId)
+        public async Task<IActionResult> AcceptFriendRequest(string requestId)
         {
             var accepted = await _friendshipService.AcceptFriendRequest(requestId);
 
@@ -44,20 +45,15 @@ namespace Insightify.Friendship.Controllers
         }
 
         [HttpPut("requests/{requestId}/reject")]
-        public async Task<IActionResult> RejectFriendRequest(int requestId)
+        public async Task<IActionResult> RejectFriendRequest(string requestId)
         {
-            var rejected = await _friendshipService.RejectFriendRequest(requestId);
+            await _friendshipService.RejectFriendRequest(requestId);
 
-            if (rejected)
-            {
-                return Ok("Friend request rejected");
-            }
-
-            return BadRequest("Unable to reject friend request");
+            return Ok("Friend request rejected");
         }
 
         [HttpDelete("{friendshipId}")]
-        public async Task<IActionResult> Unfriend(int friendshipId)
+        public async Task<IActionResult> Unfriend(string friendshipId)
         {
             var unfriended = await _friendshipService.Unfriend(friendshipId);
 
