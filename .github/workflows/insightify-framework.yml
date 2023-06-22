@@ -37,7 +37,7 @@ jobs:
             VERSION_PARTS[2]=$((${VERSION_PARTS[2]}+1))
             NEW_VERSION="<Version>${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2]}</Version>"
             echo "New version will be $NEW_VERSION"
-            sed -i "s/$CURRENT_VERSION/$NEW_VERSION/g" $CSFILE
+            sed -i "s#$CURRENT_VERSION#$NEW_VERSION#g" $CSFILE
           done
         shell: bash
 
