@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace Insightify.Friendship.Controllers
 {
     [ApiController]
-    [Route("friendship")]
     [Authorize]
     public class FriendshipController : Controller
     {
