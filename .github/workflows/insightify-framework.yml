@@ -23,22 +23,31 @@ jobs:
       - name: Auto Increment Version
         run: |
           VERSION_PATTERN="\<Version\>[0-9]*\.[0-9]*\.[0-9]*\<\/Version\>"
-          for CSFILE in $(find src/Common/Insightify.Framework/ -name "*.csproj")
+          for CSFILE in $(find common/framework -name "*.csproj")
           do
             echo "Processing $CSFILE"
             CURRENT_VERSION=$(grep -oP "$VERSION_PATTERN" $CSFILE)
+            echo "grep result: $CURRENT_VERSION"
             if [ -z "$CURRENT_VERSION" ]
             then
-              echo "No version found in $CSFILE"
+              echo "No version found in $CSFILE, skipping..."
               continue
             fi
             echo "Current version is $CURRENT_VERSION"
             IFS='.' read -ra VERSION_PARTS <<< "${CURRENT_VERSION//[^0-9.]/}"
+            echo "Version parts: ${VERSION_PARTS[0]} ${VERSION_PARTS[1]} ${VERSION_PARTS[2]}"
+            if [ -z "${VERSION_PARTS[0]}" ] || [ -z "${VERSION_PARTS[1]}" ] || [ -z "${VERSION_PARTS[2]}" ]
+            then
+              echo "Version string in $CSFILE is not complete, skipping..."
+              continue
+            fi
             VERSION_PARTS[2]=$((${VERSION_PARTS[2]}+1))
+            echo "Incremented patch version: ${VERSION_PARTS[2]}"
             NEW_VERSION="<Version>${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2]}</Version>"
             echo "New version will be $NEW_VERSION"
             sed -i "s#$CURRENT_VERSION#$NEW_VERSION#g" $CSFILE
           done
+          
         shell: bash
 
       - name: Commit version changes
