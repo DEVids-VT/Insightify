@@ -1,7 +1,9 @@
-﻿using Insightify.Framework.MongoDb.Abstractions.Interfaces;
+﻿using Insightify.Framework.Messaging.Abstractions.Interfaces;
+using Insightify.Framework.MongoDb.Abstractions.Interfaces;
 using Insightify.Friendships.Models;
 using Insightify.Friendships.Models.Dtos;
 using k8s.KubeConfigModels;
+using MongoDB.Driver.Core.Servers;
 
 namespace Insightify.Friendships.Services
 {
@@ -9,11 +11,13 @@ namespace Insightify.Friendships.Services
     {
         private readonly IRepository<FriendRequest> _friendRequestRepo;
         private readonly IRepository<Friendship> _friendshipRepo;
+        private readonly IMessagePublisher _publisher;
 
-        public FriendshipService(IRepository<FriendRequest> friendRequestRepo, IRepository<Friendship> friendshipRepo)
+        public FriendshipService(IRepository<FriendRequest> friendRequestRepo, IRepository<Friendship> friendshipRepo, IMessagePublisher publisher)
         {
             _friendRequestRepo = friendRequestRepo;
             _friendshipRepo = friendshipRepo;
+            _publisher = publisher;
         }
 
         public async Task SendFriendRequest(string senderId, string receiverId)
@@ -24,6 +28,8 @@ namespace Insightify.Friendships.Services
                 ReceiverId = receiverId,
                 Status = FriendRequestStatus.Pending
             };
+
+            await PublishEvent(senderId, receiverId);
 
             await _friendRequestRepo.InsertAsync(friendRequest);
         }
@@ -38,6 +44,8 @@ namespace Insightify.Friendships.Services
             }
 
             friendRequest.Status = FriendRequestStatus.Accepted;
+
+            await PublishEvent(friendRequest.ReceiverId, friendRequest.SenderId);
 
             await _friendRequestRepo.UpdateAsync(friendRequest);
 
@@ -57,6 +65,8 @@ namespace Insightify.Friendships.Services
             {
                 throw new ArgumentException("Friend request not found.");
             }
+
+            await PublishEvent(friendRequest.ReceiverId, friendRequest.SenderId);
 
             friendRequest.Status = FriendRequestStatus.Rejected;
 
@@ -101,6 +111,25 @@ namespace Insightify.Friendships.Services
             var friendships = await _friendshipRepo.GetAllAsync(includeDeleted: includeDeleted);
 
             return friendships.AsEnumerable();
+        }
+
+        /// <summary>
+        /// Publishes a NotificationEvent [from {sender} to {receiver}]
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="receiver"></param>
+        /// <returns></returns>
+        private async Task PublishEvent(string sender, string receiver)
+        {
+            var @event = new NotificationEvent
+            {
+                SenderId = sender,
+                ReceiverId = receiver,
+                CreationDate = DateTime.Now,
+                Id = Guid.NewGuid()
+            };
+
+            await _publisher.PublishAsync(@event);
         }
     }
 }
