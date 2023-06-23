@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\FriendshipController.cs~RF61ef4.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="6.0.2" />
+    <PackageReference Include="FluentValidation" Version="11.5.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
+    <PackageReference Include="Insightify.Framework" Version="2.0.0" />
+    <PackageReference Include="Insightify.Framework.Fetching" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Logging" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Messaging" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Messaging.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Mongo" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.MongoDb.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.3" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.7" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+</Project>
