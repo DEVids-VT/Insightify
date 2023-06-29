@@ -7,7 +7,7 @@
     using static ModelConstants.Common;
     using static ModelConstants.Post;
 
-    internal class Post : Entity<Guid>, IAggregateRoot
+    public class Post : Entity<Guid>, IAggregateRoot
     {
         private readonly HashSet<Like> likes;
         private readonly HashSet<Save> saves;
@@ -137,7 +137,7 @@
                 nameof(this.ImageUrl));
 
         private void ValidateAuthor(string authorId)
-            => Guard.AgainstEmptyString<InvalidLikeException>(
+            => Guard.AgainstEmptyString<InvalidPostException>(
                 authorId, 
                 nameof(this.AuthorId));
 

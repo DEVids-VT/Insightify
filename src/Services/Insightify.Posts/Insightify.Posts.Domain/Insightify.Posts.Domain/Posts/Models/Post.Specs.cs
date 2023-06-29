@@ -1,14 +1,9 @@
-﻿using FluentAssertions;
-using Insightify.Posts.Domain.Posts.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace Insightify.Posts.Domain.Posts.Models
+﻿namespace Insightify.Posts.Domain.Posts.Models
 {
+    using FluentAssertions;
+    using Insightify.Posts.Domain.Posts.Exceptions;
+    using Xunit;
+
     public class PostSpecs
     {
         [Fact]

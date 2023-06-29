@@ -8,6 +8,17 @@ namespace Insightify.Posts.Domain.Common.Models
 {
     public abstract class Entity<TId> : IEntity
     {
+        private readonly ICollection<IDomainEvent> events;
+
+        protected Entity() => this.events = new List<IDomainEvent>();
+        public IReadOnlyCollection<IDomainEvent> Events
+            => this.events.ToList().AsReadOnly();
+
+        public void ClearEvents() => this.events.Clear();
+
+        protected void RaiseEvent(IDomainEvent domainEvent)
+            => this.events.Add(domainEvent);
+
         public TId Id { get; private set; } = default;
 
         public override bool Equals(object? obj)
