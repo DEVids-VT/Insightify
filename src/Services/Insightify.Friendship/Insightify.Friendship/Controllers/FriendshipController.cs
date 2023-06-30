@@ -23,7 +23,7 @@ namespace Insightify.Friendships.Controllers
             await _friendshipService
                 .SendFriendRequest(friendRequestDto.SenderId, friendRequestDto.ReceiverId);
 
-            return Ok("Friend request sent");
+            return StatusCode(StatusCodes.Status201Created);
         }
 
         [HttpPut("requests/{requestId}/accept")]
@@ -31,7 +31,7 @@ namespace Insightify.Friendships.Controllers
         {
             await _friendshipService.AcceptFriendRequest(requestId);
 
-            return Ok("Friend request accepted");
+            return StatusCode(StatusCodes.Status202Accepted);
         }
 
         [HttpPut("requests/{requestId}/reject")]
@@ -39,7 +39,7 @@ namespace Insightify.Friendships.Controllers
         {
             await _friendshipService.RejectFriendRequest(requestId);
 
-            return Ok("Friend request rejected");
+            return StatusCode(StatusCodes.Status200OK);
         }
 
         [HttpDelete("{friendshipId}")]
@@ -47,7 +47,7 @@ namespace Insightify.Friendships.Controllers
         {
             await _friendshipService.Unfriend(friendshipId);
 
-            return Ok("Unfriended successfully");
+            return StatusCode(StatusCodes.Status200OK);
 
         }
 
