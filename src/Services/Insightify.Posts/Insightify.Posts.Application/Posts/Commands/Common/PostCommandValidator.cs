@@ -7,7 +7,7 @@ using static Insightify.Posts.Domain.Posts.ModelConstants.Post;
 namespace Insightify.Posts.Application.Posts.Commands.Common
 {
     public class PostCommandValidator<TCommand> : AbstractValidator<PostCommand<TCommand>>
-        where TCommand : EntityCommand<Guid>
+        where TCommand : EntityCommand<int>
     {
         public PostCommandValidator()
         {

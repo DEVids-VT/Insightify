@@ -7,8 +7,8 @@ using Insightify.Posts.Application.Common;
 
 namespace Insightify.Posts.Application.Posts.Commands.Common
 {
-    public abstract class PostCommand<TCommand> : EntityCommand<Guid>
-        where TCommand : EntityCommand<Guid>
+    public abstract class PostCommand<TCommand> : EntityCommand<int>
+        where TCommand : EntityCommand<int>
     {
         public string Title { get; set; } = default!;
         public string Description { get; set; } = default!;
