@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Insightify.Posts.Application\Insightify.Posts.Application.csproj" />
+    <ProjectReference Include="..\Insightify.Posts.Domain\Insightify.Posts.Domain.csproj" />
+    <ProjectReference Include="..\Insightify.Posts.Domain\Insightify.Posts.Domain\Insightify.Posts.Domain.csproj" />
+    <ProjectReference Include="..\Insightify.Posts.Infrastructure\Insightify.Posts.Infrastructure.csproj" />
+    <ProjectReference Include="..\Insightify.Posts.Web\Insightify.Posts.Web.csproj" />
+  </ItemGroup>
+
+</Project>

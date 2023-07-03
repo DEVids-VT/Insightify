@@ -6,7 +6,7 @@ namespace Insightify.Posts.Domain.Posts.Models
 
     using static ModelConstants.Comment;
 
-    public class Comment : Entity<Guid>
+    public class Comment : Entity<int>
     {
         private readonly HashSet<Comment> comments;
 

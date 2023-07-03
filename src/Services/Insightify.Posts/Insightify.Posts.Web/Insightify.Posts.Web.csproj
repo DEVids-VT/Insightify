@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="FluentValidation" Version="11.5.2" />
+	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
+	  <PackageReference Include="MediatR" Version="12.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Insightify.Posts.Application\Insightify.Posts.Application.csproj" />
+	</ItemGroup>
+</Project>
