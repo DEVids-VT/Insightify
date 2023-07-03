@@ -10,9 +10,9 @@ namespace Insightify.Posts.Domain.Common.Models
         public void EntitiesWithEqualIdsShouldBeEqual()
         {
             // Arrange
-            var id = Guid.NewGuid();
-            var first = new Like("First", DateTime.Now).SetId(id);
-            var second = new Like("Second", DateTime.Now).SetId(id);
+            
+            var first = new Like("First", DateTime.Now).SetId(1);
+            var second = new Like("Second", DateTime.Now).SetId(1);
 
             // Act
             var result = first == second;
@@ -25,8 +25,8 @@ namespace Insightify.Posts.Domain.Common.Models
         public void EntitiesWithDifferentIdsShouldNotBeEqual()
         {
             // Arrange
-            var first = new Like("First", DateTime.Now).SetId(Guid.NewGuid());
-            var second = new Like("Second", DateTime.Now).SetId(Guid.NewGuid());
+            var first = new Like("First", DateTime.Now).SetId(1);
+            var second = new Like("Second", DateTime.Now).SetId(2);
 
             // Act
             var result = first == second;
@@ -37,11 +37,11 @@ namespace Insightify.Posts.Domain.Common.Models
     }
     internal static class EntityExtensions
     {
-        public static TEntity SetId<TEntity>(this TEntity entity, Guid id)
-            where TEntity : Entity<Guid>
+        public static TEntity SetId<TEntity>(this TEntity entity, int id)
+            where TEntity : Entity<int>
             => (entity.SetIdentifier(id) as TEntity)!;
 
-        private static Entity<T> SetIdentifier<T>(this Entity<T> entity, Guid id)
+        private static Entity<T> SetIdentifier<T>(this Entity<T> entity, int id)
             where T : struct
         {
             entity

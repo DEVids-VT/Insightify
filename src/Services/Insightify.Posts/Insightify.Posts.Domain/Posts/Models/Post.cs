@@ -7,7 +7,7 @@
     using static ModelConstants.Common;
     using static ModelConstants.Post;
 
-    public class Post : Entity<Guid>, IAggregateRoot
+    public class Post : Entity<int>, IAggregateRoot
     {
         private readonly HashSet<Like> likes;
         private readonly HashSet<Save> saves;
@@ -64,7 +64,7 @@
             return this;
         }
 
-        public Post RemoveLike(Guid likeId)
+        public Post RemoveLike(int likeId)
         {
             if (likes.Any(l => l.Id == likeId))
             {
@@ -72,7 +72,7 @@
             }
             return this;
         }
-        public Post RemoveSave(Guid saveId)
+        public Post RemoveSave(int saveId)
         {
             if (saves.Any(s => s.Id == saveId))
             {
@@ -80,7 +80,7 @@
             }
             return this;
         }
-        public Post RemoveComment(Guid commentId)
+        public Post RemoveComment(int commentId)
         {
             if (comments.Any(c => c.Id == commentId))
             {
