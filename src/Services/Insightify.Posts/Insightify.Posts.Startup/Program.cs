@@ -12,7 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDomain().AddApplication(builder.Configuration).AddInfrastructure(builder.Configuration).AddWebComponents(builder.Configuration);
+builder.Services
+    .AddDomain()
+    .AddApplication(builder.Configuration)
+    .AddInfrastructure(builder.Configuration)
+    .AddWebComponents(builder.Configuration)
+    .AddCustomAuthentication(builder.Configuration);
 
 builder.Host.UseLogging(p =>
 {

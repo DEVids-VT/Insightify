@@ -23,6 +23,11 @@ namespace Insightify.Posts.Infrastructure.Posts.Configuration
             builder
                 .Property(a => a.Timestamp)
                 .IsRequired();
+            builder.Property<int>("PostId");
+
+            builder.HasOne<Post>()
+                .WithMany(p=> p.Likes)
+                .HasForeignKey("PostId");
         }
     }
 }

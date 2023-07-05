@@ -42,5 +42,24 @@ namespace Insightify.Posts.Web
 
             return services;
         }
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            var identityUrl = configuration.GetValue<string>("IdentityUrl");
+
+            services.AddAuthentication("Bearer").AddJwtBearer(options => {
+                options.Authority = identityUrl;
+                options.RequireHttpsMetadata = false;
+                options.Audience = "posts";
+                options.TokenValidationParameters.ValidateAudience = false;
+            });
+            services.AddAuthorization(options => {
+                options.AddPolicy("ApiScope", policy => {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("scope", "posts");
+                });
+            });
+
+            return services;
+        }
     }
 }

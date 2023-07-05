@@ -34,7 +34,7 @@ namespace Insightify.Posts.Application.Posts.Commands.Create
                 var post = factory
                     .WithTitle(request.Title)
                     .WithDescription(request.Description)
-                    .WithAuthor("1")//TEST
+                    .WithAuthor(currentUser.UserId)
                     .Build();
 
                 await this.postRepository.Save(post, cancellationToken);

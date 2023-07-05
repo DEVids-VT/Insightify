@@ -39,5 +39,33 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
 
             return true;
         }
+
+        public bool UserHasPost(string userId, int postId)
+            =>  this.All().Where(p => p.AuthorId == userId).Any(p => p.Id == postId);
+
+        public bool UserHasLiked(string userId, int postId)
+            => this.All().Include(p => p.Likes).First(p => p.Id == postId).Likes.Any(l => l.UserId == userId);
+
+        public async Task<int> FindLikeId(string userId, int postId, CancellationToken cancellationToken = default)
+        => (await this
+            .All()
+            .Include(p => p.Likes)
+            .FirstAsync(p => p.Id == postId, cancellationToken))
+            .Likes
+            .First(l => l.UserId == userId)
+            .Id;
+
+        public bool UserHasSaved(string userId, int postId)
+            => this.All().Include(p => p.Saves).First(p => p.Id == postId).Saves.Any(s => s.UserId == userId);
+
+        public async Task<int> FindSaveId(string userId, int postId, CancellationToken cancellationToken = default)
+            => (await this
+                    .All()
+                    .Include(p => p.Saves)
+                    .FirstAsync(p => p.Id == postId, cancellationToken))
+                .Saves
+                .First(l => l.UserId == userId)
+                .Id;
+
     }
 }
