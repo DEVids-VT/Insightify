@@ -32,5 +32,9 @@ namespace Insightify.Posts.Web.Features
         public async Task<ActionResult> Unsave([FromRoute] int id)
             => await this.Send(new UnsavePostCommand() { Id = id });
 
+        [HttpPost("addcomment")]
+        public async Task<ActionResult> AddComment([FromBody] AddCommentCommand command)
+            => await this.Send(command);
+
     }
 }
