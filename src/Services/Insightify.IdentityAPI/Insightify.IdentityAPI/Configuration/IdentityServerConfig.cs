@@ -7,12 +7,20 @@ namespace Insightify.IdentityAPI.Configuration
     {
         public static IEnumerable<ApiResource> GetApis()
         {
-            return new List<ApiResource>();
+            return new List<ApiResource>()
+            {
+                new ApiResource("posts", "Posts Service"),
+                new ApiResource("news", "News Service")
+            };
         }
 
         public static IEnumerable<ApiScope> GetApiScopes()
         {
-            return new List<ApiScope>();
+            return new List<ApiScope>()
+            {
+                new ApiScope("posts", "Posts Service"),
+                new ApiScope("news", "News Service")
+            };
         }
 
         public static IEnumerable<IdentityResource> GetResources()
@@ -47,6 +55,21 @@ namespace Insightify.IdentityAPI.Configuration
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                     },
+                },
+                new Client
+                {
+                    ClientId = "postsswaggerui",
+                    ClientName = "Posts Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"http://localhost:5036/oauth2-redirect.html" },
+                    //PostLogoutRedirectUris = { $"{configuration["PostsApiClient"]}/swagger/" },
+                    AllowedCorsOrigins = { "http://localhost:5036" },
+                    AllowedScopes =
+                    {
+                        "posts"
+                    }
                 },
             };
         }

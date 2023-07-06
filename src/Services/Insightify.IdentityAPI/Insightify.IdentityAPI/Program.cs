@@ -1,12 +1,10 @@
-using Insightify.IdentityAPI.Extensions;
-using System.Diagnostics.CodeAnalysis;
-using Insightify.IdentityAPI.Middleware;
-using Serilog;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using Microsoft.AspNetCore.Builder;
-using HealthChecks.UI.Client;
-using System.Reflection;
 using FluentValidation;
+using HealthChecks.UI.Client;
+using Insightify.IdentityAPI.Extensions;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Serilog;
+using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 
 var appName = "Identity.API";
 var builder = WebApplication.CreateBuilder(args);
