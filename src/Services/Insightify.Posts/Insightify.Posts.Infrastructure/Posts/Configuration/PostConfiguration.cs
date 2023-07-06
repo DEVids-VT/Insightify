@@ -55,6 +55,7 @@ namespace Insightify.Posts.Infrastructure.Posts.Configuration
             builder
                 .HasMany(p => p.Comments)
                 .WithOne()
+                .OnDelete(DeleteBehavior.Cascade)
                 .Metadata
                 .PrincipalToDependent
                 .SetField("comments");

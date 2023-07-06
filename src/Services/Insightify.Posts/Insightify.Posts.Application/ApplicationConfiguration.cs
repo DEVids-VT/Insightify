@@ -15,7 +15,8 @@ namespace Insightify.Posts.Application
         {
             services.Configure<ApplicationSettings>(
                 a => a = (ApplicationSettings)configuration.GetSection(nameof(ApplicationSettings)));
-            services.AddAutoMapper(Assembly.GetExecutingAssembly())
+            services
+                .AddAutoMapper(Assembly.GetExecutingAssembly())
                 .AddMediatR(cfg => 
                     cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()))
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));

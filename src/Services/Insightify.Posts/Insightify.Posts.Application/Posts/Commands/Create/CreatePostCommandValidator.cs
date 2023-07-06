@@ -1,11 +1,11 @@
-﻿namespace Insightify.Posts.Application.Posts.Commands.Create
+﻿namespace Insightify.Posts.Application.Posts.Commands.Edit
 {
     using FluentValidation;
     using Insightify.Posts.Application.Posts.Commands.Common;
 
-    public class CreatePostCommandValidator : AbstractValidator<CreatePostCommand>
+    public class EditPostCommandValidator : AbstractValidator<EditPostCommand>
     {
-        public CreatePostCommandValidator() => this.Include(new PostCommandValidator<CreatePostCommand>());
+        public EditPostCommandValidator() => this.Include(new PostCommandValidator<EditPostCommand>());
 
     }
 }
