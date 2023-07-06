@@ -1,0 +1,75 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build-test-package-publish:
+    runs-on: ubuntu-latest
+    env:
+      NUGET_AUTH_TOKEN: ${{ secrets.NUGET_AUTH_TOKEN }}
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.x' # replace this with your .NET version
+
+      - name: Auto Increment Version
+        run: |
+          VERSION_PATTERN="\<Version\>[0-9]*\.[0-9]*\.[0-9]*\<\/Version\>"
+          for CSFILE in $(find common/framework -name "*.csproj")
+          do
+            echo "Processing $CSFILE"
+            CURRENT_VERSION=$(grep -oP "$VERSION_PATTERN" $CSFILE)
+            echo "grep result: $CURRENT_VERSION"
+            if [ -z "$CURRENT_VERSION" ]
+            then
+              echo "No version found in $CSFILE, skipping..."
+              continue
+            fi
+            echo "Current version is $CURRENT_VERSION"
+            IFS='.' read -ra VERSION_PARTS <<< "${CURRENT_VERSION//[^0-9.]/}"
+            echo "Version parts: ${VERSION_PARTS[0]} ${VERSION_PARTS[1]} ${VERSION_PARTS[2]}"
+            if [ -z "${VERSION_PARTS[0]}" ] || [ -z "${VERSION_PARTS[1]}" ] || [ -z "${VERSION_PARTS[2]}" ]
+            then
+              echo "Version string in $CSFILE is not complete, skipping..."
+              continue
+            fi
+            VERSION_PARTS[2]=$((${VERSION_PARTS[2]}+1))
+            echo "Incremented patch version: ${VERSION_PARTS[2]}"
+            NEW_VERSION="<Version>${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.${VERSION_PARTS[2]}</Version>"
+            echo "New version will be $NEW_VERSION"
+            sed -i "s#$CURRENT_VERSION#$NEW_VERSION#g" $CSFILE
+          done
+
+        shell: bash
+
+      - name: Restore dependencies
+        run: dotnet restore src/Common/Insightify.Framework/Insightify.Framework.sln
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore src/Common/Insightify.Framework/Insightify.Framework.sln
+
+      - name: Test
+        run: dotnet test --no-restore --verbosity normal src/Common/Insightify.Framework/Insightify.Framework.sln
+
+      - name: Pack
+        run: dotnet pack --no-build --configuration Release --output ./nupkg src/Common/Insightify.Framework/Insightify.Framework.sln
+
+      - name: Setup .NET for push
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.x' # replace this with your .NET version
+          source-url: https://api.nuget.org/v3/index.json
+
+      - name: Push
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push "./nupkg/*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate --source "https://api.nuget.org/v3/index.json"
