@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Insightify.Framework;
 using Insightify.Framework.HealthChecks;
+using Insightify.Framework.Pagination.Headers;
 using Insightify.Framework.Swagger;
 using Insightify.Framework.Swagger.Settings;
 using Insightify.Posts.Application.Common;
@@ -34,7 +35,10 @@ namespace Insightify.Posts.Web
             });
             services.AddValidatorsFromAssemblyContaining<Result>();
             services.AddScoped<ICurrentUser, CurrentUserService>();
-
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<PaginationHeadersFilter>();
+            });
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;

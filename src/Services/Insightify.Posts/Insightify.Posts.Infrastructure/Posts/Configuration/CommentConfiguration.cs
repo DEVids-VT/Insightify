@@ -28,13 +28,10 @@ namespace Insightify.Posts.Infrastructure.Posts.Configuration
             builder
                 .Property(p => p.AuthorId)
                 .IsRequired();
+            builder.HasOne<Post>()
+                .WithMany(p => p.Comments)
+                .HasForeignKey("PostId");
 
-            builder
-                .HasMany(p => p.Comments)
-                .WithOne()
-                .Metadata
-                .PrincipalToDependent
-                .SetField("comments");
         }
     }
 }

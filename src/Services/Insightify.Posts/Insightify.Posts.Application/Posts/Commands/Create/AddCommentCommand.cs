@@ -27,37 +27,14 @@ namespace Insightify.Posts.Application.Posts.Commands.Create
 
             public async Task<Result> Handle(AddCommentCommand request, CancellationToken cancellationToken)
             {
-                if (request is { PostId: { }, CommentId: null })
+                var post = await this.postRepository.Find(request.Id, cancellationToken);
+                if (post == null)
                 {
-                    var post = await this.postRepository.Find((int)request.PostId, cancellationToken);
-                    if (post == null)
-                    {
-                        return false;
-                    }
-                    post.AddComment(request.Content, currentUser.UserId);
-                    await this.postRepository.Save(post, cancellationToken);
-                    return true;
-
+                    return false;
                 }
-                else if (request is { PostId: { }, CommentId: { }})
-                {
-                    var post = await this.postRepository.Find((int)request.PostId, cancellationToken);
-                    if (post == null)
-                    {
-                        return false;
-                    }
-                    var comment = post.Comments.FirstOrDefault(c => c.Id == request.CommentId);
-                    if (comment == null)
-                    {
-                        return false;
-                    }
-                    comment.AddComment(request.Content, currentUser.UserId);
-                    await this.postRepository.Save(post, cancellationToken);
-                    return true;
-                }
-
-                return false;
-
+                post.AddComment(request.Content, currentUser.UserId);
+                await this.postRepository.Save(post, cancellationToken);
+                return true;
             }
         }
     }

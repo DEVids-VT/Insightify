@@ -12,5 +12,7 @@
         Task<int> FindLikeId(string userId, int postId, CancellationToken cancellationToken = default);
         bool UserHasSaved(string userId, int postId);
         Task<int> FindSaveId(string userId, int postId, CancellationToken cancellationToken = default);
+        bool UserHasCommentOnPost(string userId, int postId, int commentId);
+        Task<bool> DeleteComment(int commentId, CancellationToken cancellationToken = default);
     }
 }

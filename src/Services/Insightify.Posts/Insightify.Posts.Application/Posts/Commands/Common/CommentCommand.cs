@@ -9,8 +9,6 @@ namespace Insightify.Posts.Application.Posts.Commands.Common
 {
     public class CommentCommand<TCommand> : EntityCommand<int> where TCommand : EntityCommand<int>
     {
-        public int? PostId { get; set; }
-        public int? CommentId { get; set; }
         public string Content { get; set; } = default!;
     }
 }

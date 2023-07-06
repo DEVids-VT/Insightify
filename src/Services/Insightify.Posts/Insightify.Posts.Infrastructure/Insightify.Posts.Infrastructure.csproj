@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Insightify.Framework.Pagination" Version="1.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.8">
@@ -17,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Insightify.Posts.Application\Insightify.Posts.Application.csproj" />
     <ProjectReference Include="..\Insightify.Posts.Domain\Insightify.Posts.Domain.csproj" />
     <ProjectReference Include="..\Insightify.Posts.Domain\Insightify.Posts.Domain\Insightify.Posts.Domain.csproj" />
   </ItemGroup>

@@ -14,6 +14,7 @@
 	  <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.2" />
 	  <PackageReference Include="Insightify.Framework" Version="2.0.0" />
 	  <PackageReference Include="Insightify.Framework.Logging" Version="1.0.0" />
+	  <PackageReference Include="Insightify.Framework.Pagination" Version="1.0.0" />
 	  <PackageReference Include="MediatR" Version="12.0.1" />
 	</ItemGroup>
 	<ItemGroup>
