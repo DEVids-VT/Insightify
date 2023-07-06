@@ -17,7 +17,7 @@ namespace Insightify.Posts.Application.Posts
             int pageSize = 10, 
             CancellationToken cancellationToken = default);
 
-        Task<IPagedList<TCommentOutputModel>> GetComments<TCommentOutputModel>(
+        Task<IEnumerable<TCommentOutputModel>> GetComments<TCommentOutputModel>(
             int id, 
             CancellationToken cancellationToken = default);
 

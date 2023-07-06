@@ -95,7 +95,7 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             int pageNumber, int pageSize = 10,
             CancellationToken cancellationToken = default)
         {
-            int totalCount = Data.Posts.Count();
+            int totalCount = Data.Posts.Count(postSpecification);
 
             var postsQuery = this.GetPostsQuery(postSpecification).ToList();
 
@@ -115,7 +115,7 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             return new PagedList<TOutputModel>(mappedPosts, pageNumber + 1, pageSize, totalPages, totalCount);
         }
 
-        public Task<IPagedList<TCommentOutputModel>> GetComments<TCommentOutputModel>(int id, CancellationToken cancellationToken = default)
+        public Task<IEnumerable<TCommentOutputModel>> GetComments<TCommentOutputModel>(int id, CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

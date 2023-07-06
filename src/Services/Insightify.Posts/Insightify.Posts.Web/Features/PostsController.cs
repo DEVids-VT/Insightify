@@ -3,6 +3,7 @@ using Insightify.Framework.Pagination.Abstractions;
 using Insightify.Posts.Application.Posts.Commands.Edit;
 using Insightify.Posts.Application.Posts.Commands.Like;
 using Insightify.Posts.Application.Posts.Commands.Save;
+using Insightify.Posts.Application.Posts.Queries.Mine;
 using Insightify.Posts.Application.Posts.Queries.Search;
 using Microsoft.AspNetCore.Authorization;
 
@@ -47,6 +48,10 @@ namespace Insightify.Posts.Web.Features
         [HttpGet("search")]
         [AllowAnonymous]
         public async Task<ActionResult<IPage<PostOutputModel>>> Search([FromQuery] SearchPostsQuery postsQuery)
+            => await this.Send(postsQuery);
+
+        [HttpGet("mine")]
+        public async Task<ActionResult<IPage<PostOutputModel>>> Mine([FromQuery] MinePostsQuery postsQuery)
             => await this.Send(postsQuery);
     }
 }

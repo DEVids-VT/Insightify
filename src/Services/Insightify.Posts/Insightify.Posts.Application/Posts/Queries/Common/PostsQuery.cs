@@ -12,7 +12,6 @@ namespace Insightify.Posts.Application.Posts.Queries.Common
 {
     public abstract class PostsQuery
     {
-        public string? AuthorId { get; set; }
         public string? Title { get; set; }
         public int Page { get; set; } = 0;
         public int PageSize { get; set; } = 10;
@@ -26,10 +25,12 @@ namespace Insightify.Posts.Application.Posts.Queries.Common
                 this.postQueryRepository = postQueryRepository;
             }
 
-            protected async Task<IPagedList<TOutputModel>> GetPosts<TOutputModel>(PostsQuery request,
+            protected async Task<IPagedList<TOutputModel>> GetPosts<TOutputModel>(
+                PostsQuery request, 
+                string? authorId = default,
                 CancellationToken cancellationToken = default)
             {
-                var postSpecification = this.GetPostSpecification(request);
+                var postSpecification = this.GetPostSpecification(request, authorId);
 
                 return await this.postQueryRepository.GetPosts<TOutputModel>(
                     postSpecification, 
@@ -38,8 +39,8 @@ namespace Insightify.Posts.Application.Posts.Queries.Common
                     cancellationToken);
             }
 
-            private Specification<Post> GetPostSpecification(PostsQuery request)
-                => new PostTitleSpecification(request.Title).And(new PostAuthorIdSpecification(request.AuthorId));
+            private Specification<Post> GetPostSpecification(PostsQuery request, string? authorId)
+                => new PostTitleSpecification(request.Title).And(new PostAuthorIdSpecification(authorId));
 
         }
     }
