@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Insightify.Framework.MongoDb.Abstractions.Interfaces;
+using Insightify.Posts.Application.Common.Exceptions;
 using Insightify.Posts.Application.Posts;
 using Insightify.Posts.Domain.Common;
 using Insightify.Posts.Domain.Posts.Models;
@@ -115,19 +116,40 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             return new PagedList<TOutputModel>(mappedPosts, pageNumber + 1, pageSize, totalPages, totalCount);
         }
 
-        public Task<IEnumerable<TCommentOutputModel>> GetComments<TCommentOutputModel>(int id, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TCommentOutputModel>> GetComments<TCommentOutputModel>(int id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var post = await this.All().Include(c => c.Comments).FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            if (post == null)
+            {
+                throw new NotFoundException("post", id);
+            }
+
+            var mappedComments = mapper.Map<List<TCommentOutputModel>>(post.Comments);
+            return mappedComments;
         }
 
-        public Task<IEnumerable<TLikeOutputModel>> GetLikes<TLikeOutputModel>(int id, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TLikeOutputModel>> GetLikes<TLikeOutputModel>(int id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var post = await this.All().Include(c => c.Likes).FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            if (post == null)
+            {
+                throw new NotFoundException("post", id);
+            }
+
+            var mappedLikes = mapper.Map<List<TLikeOutputModel>>(post.Likes);
+            return mappedLikes;
         }
 
-        public Task<IEnumerable<TSaveOutputModel>> GetSaves<TSaveOutputModel>(int id, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<TSaveOutputModel>> GetSaves<TSaveOutputModel>(int id, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var post = await this.All().Include(c => c.Saves).FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            if (post == null)
+            {
+                throw new NotFoundException("post", id);
+            }
+
+            var mappedSaves = mapper.Map<List<TSaveOutputModel>>(post.Saves);
+            return mappedSaves;
         }
 
 
@@ -136,7 +158,8 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             var posts = this.Data.Posts
                 .Include(p => p.Saves)
                 .Include(p => p.Comments)
-                .Include(p => p.Likes).Where(specification);
+                .Include(p => p.Likes)
+                .Where(specification);
             return posts;
         }
     }

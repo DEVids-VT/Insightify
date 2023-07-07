@@ -1,7 +1,6 @@
 ﻿namespace Insightify.Posts.Domain.Posts.Models
 {
     using Insightify.Posts.Domain.Common.Models;
-    using Insightify.Posts.Domain.Posts.Exceptions;
 
     public class Like : Entity<int>
     {

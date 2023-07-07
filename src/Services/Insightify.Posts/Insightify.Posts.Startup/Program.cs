@@ -7,6 +7,7 @@ using Insightify.Posts.Infrastructure;
 using Insightify.Posts.Web;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using System.Diagnostics.CodeAnalysis;
+using Insightify.Posts.Web.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
+app.UseValidationExceptionHandler();
 app.UseSwagger(builder.Configuration.GetSection("Swagger").Get<SwaggerSettings>()!);
 
 // Configure the HTTP request pipeline.
