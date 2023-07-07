@@ -1,2 +1,2 @@
 # Insightify
-AI-Driven Crypto and Stocks Prediction Platform
+ A hub for everything crypto and stocks related.
