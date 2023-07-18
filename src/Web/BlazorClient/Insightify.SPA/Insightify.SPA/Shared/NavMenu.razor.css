@@ -49,6 +49,84 @@
     background-color: rgba(255,255,255,0.1);
     color: white;
 }
+.nav-title {
+    color: white;
+    padding: 10%;
+}
+
+.nav-link {
+    color: white;
+}
+
+.profile-picture {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-picture-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+.activity-status {
+    position: absolute;
+    bottom: 0;
+    top: 25%;
+    right: 0;
+}
+
+.status-image {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+message-content {
+    height: inherit;
+    width: 160px;
+}
+
+.message-content .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.message-sender, .message-time {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.message-content.active {
+    color: white;
+    font-weight: 600;
+}
+.direct-message-item {
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.view-all-btn{
+    color: gainsboro;
+    padding:10%;
+}
+
+p{
+    margin:0;
+}
 
 @media (min-width: 641px) {
     .navbar-toggler {

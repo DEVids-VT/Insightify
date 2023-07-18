@@ -1,39 +1,143 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Insightify.SPA</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
+	<div class="container-fluid">
+		<a class="navbar-brand" href="">Insightify.SPA</a>
+		<button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
 </div>
 
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-    </nav>
+	<nav class="flex-column">
+		<section>
+			<!-- Search bar -->
+			<div class="nav-item px-3">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+
+			<!-- Main navigation -->
+			<h5 class="nav-title">Main</h5>
+			<div class="nav-item px-3">
+				<NavLink class="nav-link" href="#">
+					<span class="oi oi-dashboard" aria-hidden="true"></span> Dashboard
+				</NavLink>
+			</div>
+			<div class="nav-item px-3">
+				<NavLink class="nav-link" href="#">
+					<span class="oi oi-people" aria-hidden="true"></span> Friends
+				</NavLink>
+			</div>
+			<div class="nav-item px-3">
+				<NavLink class="nav-link" href="#">
+					<span class="oi oi-globe" aria-hidden="true"></span> News
+				</NavLink>
+			</div>
+			<div class="nav-item px-3">
+				<NavLink class="nav-link" href="#">
+					<span class="oi oi-graph" aria-hidden="true"></span> Crypto Wave
+				</NavLink>
+			</div>
+			<div class="nav-item px-3">
+				<NavLink class="nav-link" href="#">
+					<span class="oi oi-dollar" aria-hidden="true"></span> Wallet
+				</NavLink>
+			</div>
+
+			<!-- Direct messages -->
+			<h5 class="nav-title">Direct Messages</h5>
+			@*<div class="nav-item px-3">
+			<NavLink style="text-decoration: none;" class="direct-message-item" href="#">
+			<span class="profile-picture">
+			<img class="profile-picture-image" src="/images/ey5szvew8acsw2m.jpg" alt="pfp">
+			<span class="activity-status"><img class="status-image" src="/images/status-active-icon-2048x2048-2pgmrqod.png" alt="sts"></span>
+			</span>
+			<div class="message-content">
+			<span class="message-sender">John Doe</span>
+			</div>
+			</NavLink>
+			</div>
+			<div class="nav-item px-3">
+			<NavLink style="text-decoration: none;" class="direct-message-item" href="#">
+			<span class="profile-picture">
+			<img class="profile-picture-image" src="/images/ey5szvew8acsw2m.jpg" alt="pfp">
+			<span class="activity-status"><img class="status-image" src="/images/status-active-icon-2048x2048-2pgmrqod.png" alt="sts"></span>
+			</span>
+			<div class="message-content">
+			<span class="message-sender">John Doe</span>
+			</div>
+			</NavLink>
+			</div>
+			<div class="nav-item px-3">
+			<NavLink style="text-decoration: none;" class="direct-message-item" href="#">
+			<span class="profile-picture">
+			<img class="profile-picture-image" src="/images/ey5szvew8acsw2m.jpg" alt="pfp">
+			<span class="activity-status"><img class="status-image" src="/images/status-active-icon-2048x2048-2pgmrqod.png" alt="sts"></span>
+			</span>
+			<div class="message-content">
+			<span class="message-sender">John Doe</span>
+			</div>
+			</NavLink>
+			</div>*@
+			<div class="nav-item px-3">
+				<NavLink style="text-decoration: none;" class="direct-message-item" href="#">
+					<span class="profile-picture">
+						<img class="profile-picture-image" src="/images/ey5szvew8acsw2m.jpg" alt="pfp">
+						<span class="activity-status"><img class="status-image" src="/images/status-active-icon-2048x2048-2pgmrqod.png" alt="sts"></span>
+					</span>
+					<div class="message-content">
+						<div class="text">
+							<div class="header">
+								<p class="message-sender active">John Doe </p>
+								<span class="message-time active">12:45 PM</span>
+							</div>
+							<p class="message-content active">Kurwa bo...</p>
+						</div>
+					</div>
+				</NavLink>
+			</div>@*
+			<div class="nav-item px-3">
+			<NavLink style="text-decoration: none;" class="direct-message-item" href="#">
+			<span class="profile-picture">
+			<img class="profile-picture-image" src="/images/ey5szvew8acsw2m.jpg" alt="pfp">
+			<span class="activity-status"><img class="status-image" src="/images/status-active-icon-2048x2048-2pgmrqod.png" alt="sts"></span>
+			</span>
+			<div class="message-content">
+			<span class="message-sender">John Doe</span>
+			</div>
+			</NavLink>
+			</div>*@
+			<span class="view-all-btn">View all</span>
+		</section>
+		<section>
+			<!-- Profile section -->
+			<div class="nav-item px-3">
+				<NavLink style="text-decoration: none;" class="direct-message-item" href="#">
+					<span class="profile-picture">
+						<img class="profile-picture-image" src="/images/ey5szvew8acsw2m.jpg" alt="pfp">
+						<span class="activity-status"><img class="status-image" src="/images/status-active-icon-2048x2048-2pgmrqod.png" alt="sts"></span>
+					</span>
+					<div class="message-content">
+						<span class="message-sender">Joe Mama</span>
+					</div>
+				</NavLink>
+			</div>
+		</section>
+	</nav>
 </div>
 
 @code {
-    private bool collapseNavMenu = true;
+	private bool collapseNavMenu = true;
+	private bool showProfileMenu = false;
 
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+	private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
+	private void ToggleNavMenu()
+	{
+		collapseNavMenu = !collapseNavMenu;
+	}
+
+	private void ToggleProfileMenu()
+	{
+		showProfileMenu = !showProfileMenu;
+	}
 }
