@@ -1,30 +1,31 @@
+
+
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);
 }
-
 .top-row {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
 }
 
 .navbar-brand {
-    font-size: 1.1rem;
+	color: gray;
+	font-style: italic;
+    font-size: 18px;
 }
 
 .oi {
     width: 2rem;
     font-size: 1.1rem;
-    vertical-align: text-top;
-    top: -2px;
+	top: -3px;
 }
 
 .nav-item {
-    font-size: 0.9rem;
     padding-bottom: 0.5rem;
+	color: gray;
+
 }
 
     .nav-item:first-of-type {
-        padding-top: 1rem;
     }
 
     .nav-item:last-of-type {
@@ -32,7 +33,7 @@
     }
 
     .nav-item ::deep a {
-        color: #d7d7d7;
+        color: gray;
         border-radius: 4px;
         height: 3rem;
         display: flex;
@@ -40,22 +41,22 @@
         line-height: 3rem;
     }
 
-.nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.25);
-    color: white;
-}
+	
 
 .nav-item ::deep a:hover {
     background-color: rgba(255,255,255,0.1);
     color: white;
 }
 .nav-title {
-    color: white;
-    padding: 10%;
+    color: gray;
+	font-size: 13px;
+	font-weight: 600;
+	padding: 24px 16px 4px 16px;
 }
 
-.nav-link {
-    color: white;
+.oi {
+	text-align: center;
+	margin-right: 6px;
 }
 
 .profile-picture {
@@ -83,49 +84,28 @@
     height: 15px;
 }
 
-message-content {
-    height: inherit;
-    width: 160px;
+.message-content {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-content: center;
 }
 
-.message-content .text {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+p {
+	margin: 0;
 }
 
-.message-sender, .message-time {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.message-element {
+	margin-left: 12px;
+	font-size: 16px;
 }
 
-.message-content.active {
-    color: white;
-    font-weight: 600;
-}
-.direct-message-item {
-    text-decoration: none;
-}
-
-a {
-    text-decoration: none;
-}
-
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.view-all-btn{
-    color: gainsboro;
-    padding:10%;
-}
-
-p{
-    margin:0;
+.view-all-btn {
+	color: gray;
+	font-size: 13px;
+	font-weight: 600;
 }
 
 @media (min-width: 641px) {
