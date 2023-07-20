@@ -1,8 +1,6 @@
 
 
-.navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+
 .top-row {
     height: 3.5rem;
 }
@@ -11,17 +9,20 @@
 	color: gray;
 	font-style: italic;
     font-size: 18px;
+	padding: 0;
+	margin: auto;
 }
 
 .oi {
     width: 2rem;
     font-size: 1.1rem;
-	top: -3px;
+    top: -3px;
+    color: #bec1c3;
 }
 
 .nav-item {
     padding-bottom: 0.5rem;
-	color: gray;
+	color: black;
 
 }
 
@@ -33,20 +34,24 @@
     }
 
     .nav-item ::deep a {
-        color: gray;
-        border-radius: 4px;
+        color: #2b263b;
+	    font-weight: 400;
+        border-radius: 16px;
         height: 3rem;
         display: flex;
         align-items: center;
         line-height: 3rem;
     }
 
-	
 
-.nav-item ::deep a:hover {
-    background-color: rgba(255,255,255,0.1);
-    color: white;
-}
+
+    .nav-item ::deep a:hover {
+        background-color: #ecdff5;
+        color: #ad5adc;
+    }
+    .nav-item ::deep a:hover .oi {
+        color: #ad5adc;
+    }
 .nav-title {
     color: gray;
 	font-size: 13px;
@@ -108,12 +113,25 @@ p {
 	font-weight: 600;
 }
 
-@media (min-width: 641px) {
-    .navbar-toggler {
-        display: none;
-    }
+.navbar-toggler {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    background: none;
+    height: 38px;
+    font-size: 16px;
+	color: #ad5adc;
+}
 
-    .collapse {
+    .navbar-toggler:hover {
+        background-color: rgba(255,255,255,0.1);
+	    color: #ad5adc;
+    }
+@media (min-width: 641px) {
+	.navbar-toggler {
+		display: none;
+	}
+	.collapse {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
