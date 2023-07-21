@@ -10,7 +10,8 @@ namespace Insightify.IdentityAPI.Configuration
             return new List<ApiResource>()
             {
                 new ApiResource("posts", "Posts Service"),
-                new ApiResource("news", "News Service")
+                new ApiResource("news", "News Service"),
+                new ApiResource("gateway", "Web Gateway"),
             };
         }
 
@@ -19,7 +20,8 @@ namespace Insightify.IdentityAPI.Configuration
             return new List<ApiScope>()
             {
                 new ApiScope("posts", "Posts Service"),
-                new ApiScope("news", "News Service")
+                new ApiScope("news", "News Service"),
+                new ApiScope("gateway", "Web Gateway"),
             };
         }
 
@@ -69,6 +71,37 @@ namespace Insightify.IdentityAPI.Configuration
                     AllowedScopes =
                     {
                         "posts"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "newsswaggerui",
+                    ClientName = "News Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"http://localhost:5035/swagger/oauth2-redirect.html" },
+                    //PostLogoutRedirectUris = { $"{configuration["PostsApiClient"]}/swagger/" },
+                    AllowedCorsOrigins = { "http://localhost:5035" },
+                    AllowedScopes =
+                    {
+                        "news"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "gatewayswaggerui",
+                    ClientName = "Gateway Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"http://localhost:5030/oauth2-redirect.html" },
+                    //PostLogoutRedirectUris = { $"{configuration["PostsApiClient"]}/swagger/" },
+                    AllowedCorsOrigins = { "http://localhost:5030" },
+                    AllowedScopes =
+                    {
+                        "gateway",
+                        "news"
                     }
                 },
             };

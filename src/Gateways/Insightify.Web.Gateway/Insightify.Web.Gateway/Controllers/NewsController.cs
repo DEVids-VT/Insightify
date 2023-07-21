@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Insightify.Web.Gateway.Services.News;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Insightify.Web.Gateway.Controllers
@@ -7,10 +8,15 @@ namespace Insightify.Web.Gateway.Controllers
     [Route("[controller]")]
     public class NewsController : ControllerBase    
     {
-        [HttpGet]
-        public async Task<IActionResult> Test()
+        private readonly INewsService _newsService;
+        public NewsController(INewsService newsService)
         {
-            return Ok();
+            _newsService = newsService;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Test([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 50)
+        {
+            return Ok(await _newsService.GetArticles(pageIndex, pageSize));
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Insightify.Framework;
+using Insightify.Framework.Automapper;
 using Insightify.Framework.HealthChecks;
 using Insightify.Framework.Logging;
 using Insightify.Framework.Pagination.Headers;
@@ -33,6 +34,7 @@ builder.Services.AddCoreServices(coreBuilder =>
     {
 
     });
+    coreBuilder.AddAutomapper(typeof(Program).Assembly);
 
 }, enforceAuthorization: true);
 
@@ -43,6 +45,7 @@ builder.Services.AddControllers(options =>
 {
     opts.SerializerSettings.Converters.Add(
         new StringEnumConverter(new DefaultNamingStrategy(), false));
+    opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 });
 
 builder.Services
