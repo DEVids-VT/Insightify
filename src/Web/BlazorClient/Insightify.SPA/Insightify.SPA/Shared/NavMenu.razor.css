@@ -52,6 +52,7 @@
     .nav-item ::deep a:hover .oi {
         color: #ad5adc;
     }
+
 .nav-title {
     color: gray;
 	font-size: 13px;
@@ -60,8 +61,9 @@
 }
 
 .oi {
-	text-align: center;
-	margin-right: 6px;
+	margin-right: 3px;
+	margin-left: 6px;
+    margin-top: 3%;
 }
 
 .profile-picture {
@@ -98,8 +100,12 @@
 	align-content: center;
 }
 
+.hover{
+    cursor: pointer;
+}
+
 p {
-	margin: 0;
+    margin: 0;
 }
 
 .message-element {
