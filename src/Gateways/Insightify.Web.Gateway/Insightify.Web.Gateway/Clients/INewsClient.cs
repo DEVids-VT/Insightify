@@ -6,6 +6,6 @@ namespace Insightify.Web.Gateway.Clients
     public interface INewsClient
     {
         [Get("/news/articles")]
-        Task<List<NewsArticleResponseModel>> Articles([Query] int pageIndex = 1, [Query] int pageSize = 50);
+        Task<ApiResponse<List<NewsArticleResponseModel>>> Articles([Query] int pageIndex = 1, [Query] int pageSize = 50);
     }
 }

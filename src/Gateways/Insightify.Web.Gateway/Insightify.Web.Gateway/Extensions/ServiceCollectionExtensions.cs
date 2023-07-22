@@ -39,12 +39,7 @@ namespace Insightify.Web.Gateway.Extensions
                 options.Audience = "gateway";
                 options.TokenValidationParameters.ValidateAudience = false;
             });
-            services.AddAuthorization(options => {
-                options.AddPolicy("ApiScope", policy => {
-                    policy.RequireAuthenticatedUser();
-                    policy.RequireClaim("scope", "gateway");
-                });
-            });
+            
 
             return services;
         }
