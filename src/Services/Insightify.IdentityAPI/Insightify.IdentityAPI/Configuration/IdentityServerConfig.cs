@@ -58,6 +58,22 @@ namespace Insightify.IdentityAPI.Configuration
                 },
                 new Client
                 {
+                    ClientId = "blazor",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+                    AllowedCorsOrigins = { "http://localhost:5099" },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                    },                    
+                    RedirectUris = { "http://localhost:5099/authentication/login-callback" },
+                    PostLogoutRedirectUris = { "http://localhost:5099/authentication/logout-callback" },
+
+                },
+                new Client
+                {
                     ClientId = "postsswaggerui",
                     ClientName = "Posts Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,
