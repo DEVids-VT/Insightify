@@ -1,6 +1,7 @@
 using FluentValidation;
 using HealthChecks.UI.Client;
 using Insightify.IdentityAPI.Extensions;
+using Insightify.IdentityAPI.Middleware;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using System.Diagnostics.CodeAnalysis;
