@@ -7,6 +7,7 @@ using Insightify.Framework.Pagination.Headers;
 using Insightify.Framework.Swagger;
 using Insightify.Framework.Swagger.Settings;
 using Insightify.Web.Gateway.Extensions;
+using Insightify.Web.Gateway.Middlewares;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -63,6 +64,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
+app.UseValidationExceptionHandler();
 app.UseSwagger(swaggerSettings!);
 
 // Configure the HTTP request pipeline.

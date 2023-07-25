@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Insightify.Web.Gateway.Controllers
 {
-    [AllowAnonymous]
     [Route("[controller]")]
+    [ApiController]
     public class NewsController : ControllerBase    
     {
         private readonly INewsService _newsService;
@@ -14,9 +14,10 @@ namespace Insightify.Web.Gateway.Controllers
             _newsService = newsService;
         }
         [HttpGet]
-        public async Task<IActionResult> Test([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 50)
+        public async Task<IActionResult> Articles([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 50)
         {
-            return Ok(await _newsService.GetArticles(pageIndex, pageSize));
+            var result = await _newsService.GetArticles(pageIndex, pageSize);
+            return result != null ? Ok(result) : NotFound();
         }
     }
 }
