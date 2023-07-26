@@ -1,5 +1,6 @@
 .page {
     background-color: #f3f2f7;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -15,17 +16,28 @@ article {
 
 main {
     flex: 1;
+    font-family: 'Poppins', sans-serif;
 }
 
 .sidebar {
     background-color: #f8f7fa;
-    font-family: "muli", sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-style: normal;
-    margin: 16px;
-    border-radius: 24px;
 }
 
+.auth {
+    background-color: #E2E3E5; /* This is just an example, replace with your color */
+    padding: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 5px; /* This makes the corners rounded. Remove if you want a perfect rectangle */
+}
+
+    .auth > * {
+        margin-left: 10px; /* This adds some spacing between the elements */
+    }
 
 @media (min-width: 641px) {
     .page {
@@ -34,7 +46,7 @@ main {
 
     .sidebar {
         width: 250px;
-        height: 100vh;
+        height: 99vh;
         position: sticky;
         top: 0;
     }

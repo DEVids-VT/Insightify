@@ -1,0 +1,44 @@
+﻿body {
+}
+
+div .flexbox{
+    display: flex;
+    flex-direction: column;
+}
+
+.single-cards {
+    display: flex;
+    flex-direction: column;
+}
+
+.crypto-card{
+
+}
+
+.chart-cards{
+
+}
+
+.price-cards{
+
+}
+
+.price-card{
+
+}
+
+.change-card{
+
+}
+
+.market-cards{
+
+}
+
+.status-card{
+
+}
+
+.analytics-card{
+
+}
