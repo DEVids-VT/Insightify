@@ -59,16 +59,19 @@
 .latest-news .news-container {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	width: 100%;
 	padding: 0 24px;
 	justify-content: space-between;
+	gap: 8px;
 }
 	.latest-news .news-container .card {
 		display: flex;
 		flex-direction: column;
-		width: 256px;
+		width: 384px;
 		border: none;
 		border-radius: 18px;
+		margin-bottom: 18px;
 	}
 	.latest-news .news-container .card .img {
 		display: block;
