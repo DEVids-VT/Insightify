@@ -32,6 +32,22 @@
     <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="https://kit.fontawesome.com/1f167bd3a1.js" crossorigin="anonymous"></script>
+
+    <script>
+        window.addScrollListener = (dotNetRef) => {
+            window.onscroll = () => {
+                if (window.scrollY > 50) {  // change this value as per your need
+                    dotNetRef.invokeMethodAsync("MakeHeaderSticky");
+                } else {
+                    dotNetRef.invokeMethodAsync("MakeHeaderUnSticky");
+                }
+            };
+        };
+
+        window.removeScrollListener = () => {
+            window.onscroll = null;
+        };
+    </script>
 </body>
 
 </html>

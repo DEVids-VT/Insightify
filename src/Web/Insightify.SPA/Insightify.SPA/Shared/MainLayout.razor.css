@@ -27,17 +27,29 @@ main {
 }
 
 .auth {
-    background-color: #E2E3E5; /* This is just an example, replace with your color */
+    background-color: #F8F7FA; /* This is just an example, replace with your color */
     padding: 10px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+    height: 80px;
     border-radius: 5px; /* This makes the corners rounded. Remove if you want a perfect rectangle */
 }
 
     .auth > * {
         margin-left: 10px; /* This adds some spacing between the elements */
     }
+
+.sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Put it on top of other elements */
+}
+
+.h3-title {
+    font-size: larger;
+}
 
 @media (min-width: 641px) {
     .page {

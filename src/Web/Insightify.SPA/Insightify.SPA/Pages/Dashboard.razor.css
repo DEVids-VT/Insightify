@@ -4,41 +4,81 @@
 div .flexbox{
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .single-cards {
     display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    height: 30%;
+}
+
+.crypto-card {
+    width: 30%;
+    border-radius: 30px;
+    background: linear-gradient(90deg, hsla(207, 100%, 57%, 1) 0%, hsla(193, 98%, 52%, 1) 100%);
+    border: none;
+    transition: ease;
+    transition-duration: 1s;
+    box-shadow: 0px 44px 74px -54px #56D0FC;
+}
+
+.chart-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 80vh;
+}
+
+.price-cards {
+    display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    border: none;
 }
 
-.crypto-card{
-
+.price-card {
+    height: 60%;
+    border-radius: 30px;
+    background-color: #F8F7FA;
+    box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
+    border: none;
 }
 
-.chart-cards{
-
+.change-card {
+    height: 40%;
+    border-radius: 30px;
+    background-color: #F8F7FA;
+    box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
+    border: none;
 }
 
-.price-cards{
-
+.market-cards {
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.price-card{
-
+.status-card {
+    height: 60%;
+    border-radius: 30px;
+    background-color: #F8F7FA;
+    box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
+    border: none;
 }
 
-.change-card{
-
+.analytics-card {
+    height: 40%;
+    border-radius: 30px;
+    background-color: #F8F7FA;
+    box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
+    border: none;
 }
 
-.market-cards{
-
-}
-
-.status-card{
-
-}
-
-.analytics-card{
-
+.card{
+    padding: 15px;
+    margin: 20px;
 }

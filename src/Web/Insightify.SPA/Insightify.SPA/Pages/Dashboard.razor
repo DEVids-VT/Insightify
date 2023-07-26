@@ -1,42 +1,38 @@
 ﻿@page "/dashboard"
-@*@using Microsoft.AspNetCore.Authorization;
-@attribute [Authorize]
-*@
+@using Microsoft.AspNetCore.Authorization;
+@attribute [AllowAnonymous]
+
 <div class="flexbox">
     <section class="single-cards">
-        <div class="crypto-card">
+        <div class="crypto-card card">
             kokos
         </div>
-        <div class="crypto-card">
+        <div class="crypto-card card">
             kokos
         </div>
-        <div class="crypto-card">
+        <div class="crypto-card card">
             kokos
         </div>
-        <div class="crypto-card">
+        <div class="crypto-card card">
             kokos
         </div>
     </section>
     <section class="chart-cards">
         <section class="price-cards">
-            <div class="price-card">
+            <div class="price-card card">
                 cena
             </div>
-            <div class="change-card">
+            <div class="change-card card">
                 change
             </div>
         </section>
         <section class="market-cards">
-            <div class="status-card">
+            <div class="status-card card">
                 status
             </div>
-            <div class="analytics-card">
+            <div class="analytics-card card">
                 analytics
             </div>
         </section>
     </section>
 </div>
-
-@code {
-
-}
