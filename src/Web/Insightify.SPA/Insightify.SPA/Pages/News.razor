@@ -1,11 +1,12 @@
 ﻿@page "/news"
 @using Microsoft.AspNetCore.Authorization
+@using Insightify.SPA.Models
 @attribute [Authorize]
 
 <PageTitle>News</PageTitle>
 
 <section class="title-container">
-    <h1>Welcome to Insightify News</h1>
+    <h1>Welcome to Insightify News!</h1>
     <h3>Your Real-time Pulse on the Financial Markets</h3>
 </section>
 <section class="top-news">
@@ -23,67 +24,21 @@
 <section class="latest-news">
     <h2 class="title">Latest News</h2>
     <div class="news-container">
-        <div class="card">
-            <img class="img" src="https://placehold.co/600x400"/>
-            <div class="content">
-                <div class="info">
-                    <p class="author">Elon Musk</p>
-                    <p class="timestamp">12:00</p>
+        @foreach (var article in Articles)
+        {
+            <div class="card">
+                <img class="img" src="https://placehold.co/600x400"/>
+                <div class="content">
+                    <div class="info">
+                        <p class="author">@article.Author</p>
+                        <p class="timestamp">@article.CreatedDateTime</p>
+                    </div>
+                    <h4 class="heading">@article.Title</h4>
+                    <p class="description">@article.Description</p>
                 </div>
-                <h4 class="heading">Some random article</h4>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            
-        </div>
-        <div class="card">
-            <img class="img" src="https://placehold.co/600x400"/>
-            <div class="content">
-                <div class="info">
-                    <p class="author">Elon Musk</p>
-                    <p class="timestamp">12:00</p>
-                </div>
-                <h4 class="heading">Some random article</h4>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            
-        </div>
-        <div class="card">
-            <img class="img" src="https://placehold.co/600x400"/>
-            <div class="content">
-                <div class="info">
-                    <p class="author">Elon Musk</p>
-                    <p class="timestamp">12:00</p>
-                </div>
-                <h4 class="heading">Some random article</h4>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            
-        </div>
-        <div class="card">
-            <img class="img" src="https://placehold.co/600x400"/>
-            <div class="content">
-                <div class="info">
-                    <p class="author">Elon Musk</p>
-                    <p class="timestamp">12:00</p>
-                </div>
-                <h4 class="heading">Some random article</h4>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            
-        </div>
-        <div class="card">
-            <img class="img" src="https://placehold.co/600x400"/>
-            <div class="content">
-                <div class="info">
-                    <p class="author">Elon Musk</p>
-                    <p class="timestamp">12:00</p>
-                </div>
-                <h4 class="heading">Some random article</h4>
-                <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-            
-        </div>
 
+            </div>
+        }
     </div>
 </section>
 
