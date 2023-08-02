@@ -1,7 +1,4 @@
-﻿body {
-}
-
-div .flexbox{
+﻿div .flexbox {
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -10,18 +7,66 @@ div .flexbox{
 .single-cards {
     display: flex;
     flex-direction: row;
-    justify-content:space-between;
+    justify-content: space-between;
     height: 30%;
 }
 
 .crypto-card {
+    display: flex;
+    flex-direction: column;
     width: 30%;
+    color: white;
     border-radius: 30px;
     background: linear-gradient(90deg, hsla(207, 100%, 57%, 1) 0%, hsla(193, 98%, 52%, 1) 100%);
     border: none;
     transition: ease;
     transition-duration: 1s;
     box-shadow: 0px 44px 74px -54px #56D0FC;
+}
+
+    .crypto-card .top-area {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 50%;
+        padding: 25px;
+    }
+
+.top-area button {
+    border: none;
+    background-color: orange;
+}
+
+.top-area .image-container {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+}
+
+.image-container img {
+    width: 30px;
+    height: 30px;
+}
+
+.crypto-card .bottom-area {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    padding: 25px;
+}
+
+.bottom-area .price-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bottom-area h4{
+    width: 50%;
+}
+
+.bottom-area h7 {
+    width: 50%;
 }
 
 .chart-cards {
@@ -78,7 +123,7 @@ div .flexbox{
     border: none;
 }
 
-.card{
+.card {
     padding: 15px;
     margin: 20px;
 }
