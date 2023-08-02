@@ -34,18 +34,29 @@
 
 .top-area button {
     border: none;
-    background-color: orange;
+    height: 30px;
+    color:beige;
+    border-radius: 20%;
+    background-color: transparent;
+}
+.top-area button:hover {
+    color: white;
 }
 
 .top-area .image-container {
-    width: 50px;
-    height: 50px;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .25);
+    width: 60px;
+    height: 60px;
     border-radius: 100%;
 }
 
 .image-container img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
 }
 
 .crypto-card .bottom-area {
@@ -67,6 +78,7 @@
 
 .bottom-area h7 {
     width: 50%;
+    text-align:end;
 }
 
 .chart-cards {

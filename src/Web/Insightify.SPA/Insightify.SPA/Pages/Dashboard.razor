@@ -1,6 +1,6 @@
 ﻿@page "/dashboard"
 @using Microsoft.AspNetCore.Authorization;
-@attribute [AllowAnonymous]
+@attribute [Authorize]
 
 <div class="flexbox">
     <section class="single-cards">
@@ -9,7 +9,7 @@
                 <div class="image-container">
                     <img src="/images/crypto/bitcoin.png" />
                 </div>
-                <button>kys aaa</button>
+                <button>Details</button>
             </div>
             <div class="bottom-area">
                 <h5>Bitcoin</h5>
@@ -24,7 +24,7 @@
                 <div class="image-container">
                     <img src="/images/crypto/ethereum.png" />
                 </div>
-                <button>kys aaa</button>
+                <button>Details</button>
             </div>
             <div class="bottom-area">
                 <h5>Ethereum</h5>
@@ -39,7 +39,7 @@
                 <div class="image-container">
                     <img src="/images/crypto/solana.png" />
                 </div>
-                <button>kys aaa</button>
+                <button>Details</button>
             </div>
             <div class="bottom-area">
                 <h5>Solana</h5>
@@ -54,7 +54,7 @@
                 <div class="image-container">
                     <img src="/images/crypto/stellar.png" />
                 </div>
-                <button>kys aaa</button>
+                <button>Details</button>
             </div>
             <div class="bottom-area">
                 <h5>Stellar</h5>
