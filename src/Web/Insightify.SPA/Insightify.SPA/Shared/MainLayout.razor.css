@@ -3,12 +3,39 @@
     font-family: 'Poppins', sans-serif;
 }
 
-
-.page {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+.top-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
+    .top-row .top-row-left {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+        gap: 12px;
+	    align-items: center;
+	    overflow-y: visible;
+	    height: 100%;
+    }
+    .top-row .top-row-left .top-row-item {
+        height: 100%;
+        font-size: 22px;
+	    color: black;
+	    padding: 6px 12px;
+	    border-radius: 12px;
+	    display: flex;
+	    align-items: center;
+	    text-decoration: none;
+    }
+        .top-row .top-row-left .top-row-item:hover {
+	        background-color: #ecdff5;
+	        color: #ad5adc;
+        }
+        .page {
+		    position: relative;
+		    display: flex;
+		    flex-direction: column;
+		}
 
 article {
     padding: 32px 72px;
@@ -40,12 +67,6 @@ main {
         margin-left: 10px; /* This adds some spacing between the elements */
     }
 
-.sticky-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000; /* Put it on top of other elements */
-}
 
 .h3-title {
     font-size: larger;
