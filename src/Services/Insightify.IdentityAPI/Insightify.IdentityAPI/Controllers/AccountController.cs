@@ -1,19 +1,19 @@
-﻿using System.Collections.Specialized;
-
-using Duende.IdentityServer.Events;
+﻿using System.Text;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
 using FluentValidation;
-
+using Insightify.IdentityAPI.EmailSending;
 using Insightify.IdentityAPI.Models;
 using Insightify.IdentityAPI.Options;
-using Insightify.IdentityAPI.Validators;
 using Insightify.IdentityAPI.ViewModels;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Rest;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace Insightify.IdentityAPI.Controllers
 {
@@ -25,6 +25,7 @@ namespace Insightify.IdentityAPI.Controllers
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IEventService _events;
         private readonly ILogger _logger;
+        private readonly IMailSender _mailSender;
         private readonly IValidator<RegisterInputViewModel> _registerValidator;
 
         public AccountController(
@@ -33,7 +34,8 @@ namespace Insightify.IdentityAPI.Controllers
             IIdentityServerInteractionService interaction,
             ILogger<AccountController> logger,
             IEventService events,
-            IValidator<RegisterInputViewModel> registerValidator)
+            IValidator<RegisterInputViewModel> registerValidator,
+            IMailSender mailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -41,12 +43,14 @@ namespace Insightify.IdentityAPI.Controllers
             _events = events;
             _logger = logger;
             _registerValidator = registerValidator;
+            _mailSender = mailSender;
         }
 
         /// <summary>
         /// Entry point into the login workflow
         /// </summary>
         [HttpGet]
+        [Route("login")]
         public IActionResult Login(string returnUrl)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -59,6 +63,7 @@ namespace Insightify.IdentityAPI.Controllers
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("login")]
         public async Task<IActionResult> Login(LoginInputViewModel model, string button)
         {
             var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
@@ -118,6 +123,8 @@ namespace Insightify.IdentityAPI.Controllers
 
         [HttpGet]
         [Authorize]
+        [Route("logout")]
+
         public async Task<IActionResult> Logout()
         {
             _logger.LogInformation($"Logging out user.");
@@ -128,6 +135,8 @@ namespace Insightify.IdentityAPI.Controllers
         }
 
         [HttpGet]
+        [Route("register")]
+
         public IActionResult Register()
         {
             if (User?.Identity?.IsAuthenticated ?? false)
@@ -141,6 +150,8 @@ namespace Insightify.IdentityAPI.Controllers
         }
 
         [HttpPost]
+        [Route("register")]
+
         public async Task<IActionResult> Register(RegisterInputViewModel model)
         {
             var resultValidation = await _registerValidator.ValidateAsync(model);
@@ -159,6 +170,15 @@ namespace Insightify.IdentityAPI.Controllers
 
             if (result.Succeeded)
             {
+                await _userManager.UpdateSecurityStampAsync(user);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+
+                var token =  WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+
+                string callbackUrl = Url.Action("ConfirmEmail", "Account", new { user.Id, token }, Request.Scheme)!;
+
+                await _mailSender.SendEmailAsync(new EmailMessage(){ To = model.Email, Subject = "Email Confirmation for Insightify", Content = callbackUrl });
+
                 _logger.LogInformation("Succesfully registered new user with username: {0}", model.Username);
                 return RedirectToAction(nameof(AccountController.Login), "Account");
             }
@@ -171,5 +191,23 @@ namespace Insightify.IdentityAPI.Controllers
 
             return View(model);
         }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string? id, string? token)
+        {
+            if (id == null || token == null)
+            {
+                return RedirectToAction(nameof(AccountController.Login), "Account");
+            }
+            var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+
+            IdentityResult result = await _userManager.ConfirmEmailAsync(await _userManager.FindByIdAsync(id), code);
+
+            TempData["StatusMessage"] = result.Succeeded ? "Thank you for confirming your email." : "An error occurred while trying to confirm your email";
+
+            return RedirectToAction("Login", "Account");
+        }
+
+
     }
 }
