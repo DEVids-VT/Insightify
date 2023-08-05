@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="7.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.6.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
+    <PackageReference Include="Insightify.Framework" Version="2.0.0" />
+    <PackageReference Include="Insightify.Framework.Fetching" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Logging" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Mongo" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Mongo.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.MongoDb.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Pagination" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.9" />
+    <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
+    <PackageReference Include="Quartz" Version="3.7.0" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.7.0" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.7.0" />
+    <PackageReference Include="Quartz.Jobs" Version="3.7.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configuration\Enums\" />
+    <Folder Include="Infrastructure\Models\" />
+    <Folder Include="Jobs\" />
+    <Folder Include="MappingProfiles\" />
+    <Folder Include="Validators\" />
+    <Folder Include="ResponceModels\" />
+    <Folder Include="Services\Contracts\" />
+  </ItemGroup>
+
+</Project>
