@@ -171,5 +171,38 @@ namespace Insightify.IdentityAPI.Controllers
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAccountDetails([FromQuery] string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            var result = new AccountDetailsViewModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
+                TwoFactorEnabled = user.TwoFactorEnabled,
+                UserName = user.UserName
+            };
+
+            return Json(result);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string? id, string? token)
+        {
+            if (id == null || token == null)
+            {
+                return RedirectToAction(nameof(AccountController.Login), "Account");
+            }
+            var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+
+            IdentityResult result = await _userManager.ConfirmEmailAsync(await _userManager.FindByIdAsync(id), code);
+
+            TempData["StatusMessage"] = result.Succeeded ? "Thank you for confirming your email." : "An error occurred while trying to confirm your email";
+
+            return RedirectToAction("Login", "Account");
+        }
     }
 }
