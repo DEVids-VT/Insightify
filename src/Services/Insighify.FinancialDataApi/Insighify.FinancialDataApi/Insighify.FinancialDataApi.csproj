@@ -29,4 +29,14 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configuration\Enums\" />
+    <Folder Include="Infrastructure\Models\" />
+    <Folder Include="Jobs\" />
+    <Folder Include="MappingProfiles\" />
+    <Folder Include="Validators\" />
+    <Folder Include="ResponceModels\" />
+    <Folder Include="Services\Contracts\" />
+  </ItemGroup>
+
 </Project>
