@@ -35,7 +35,6 @@
     <Folder Include="Jobs\" />
     <Folder Include="MappingProfiles\" />
     <Folder Include="Validators\" />
-    <Folder Include="ResponceModels\" />
     <Folder Include="Services\Contracts\" />
   </ItemGroup>
 

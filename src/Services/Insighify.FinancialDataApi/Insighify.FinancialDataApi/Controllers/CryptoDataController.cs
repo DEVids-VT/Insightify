@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Insighify.FinancialDataApi.Configuration;
+using Insighify.FinancialDataApi.ResponceModels.Crypto;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Insighify.FinancialDataApi.Controllers
 {
@@ -6,12 +9,24 @@ namespace Insighify.FinancialDataApi.Controllers
     [Route("[controller]")]
     public class CryptoDataController : ControllerBase
     {
-        [HttpGet("{coinId}")]
-        public IActionResult GetCryptoData(string coinId, [FromQuery] bool includeDeleted)
+        [HttpGet("/historicalData")]
+        public async Task<IActionResult> GetHistoricalData(string id, string currency, string days, string interval, string precision)
         {
-            var result = new List<string> { "bitcoin", "etherium" };
+            using (var client = new HttpClient())
+            {
+                var response = await client.GetAsync(UrlsConfig.CryptoCoinsOpperations.GetHistoricalDataByCoinId(id, currency, days, interval, precision));
 
-            return Ok(result);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    var coinHistory = JsonConvert.DeserializeObject<CoinHistory>(jsonResponse);
+                    return Ok(coinHistory);
+                }
+                else
+                {
+                    throw new Exception($"Failed to fetch data. Status code: {response.StatusCode}");
+                }
+            }
         }
     }
 }
