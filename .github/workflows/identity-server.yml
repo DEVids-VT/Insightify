@@ -44,17 +44,10 @@ jobs:
           username: orionvt3@gmail.com
           password: orion0713
       
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-        with:
-          images: sk13s/insightify.identity
-      
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI
           file: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI/Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: sk13s/insightify.identity
