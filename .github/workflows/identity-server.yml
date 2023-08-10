@@ -43,7 +43,7 @@ jobs:
         with:
           username: ${{secrets.DOCKER_USERNAME}}
           password: ${{secrets.DOCKER_PASSWORD}}
-      
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -51,3 +51,4 @@ jobs:
           file: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI/Dockerfile
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/insightify.identity
+
