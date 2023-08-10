@@ -32,6 +32,8 @@ jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    env:
+      working-directory: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -51,7 +53,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
-          context: .
+          context: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI
           file: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
