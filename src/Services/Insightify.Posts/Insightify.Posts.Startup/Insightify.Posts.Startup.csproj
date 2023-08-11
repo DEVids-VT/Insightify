@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Insightify.Posts.Application\Insightify.Posts.Application.csproj" />
     <ProjectReference Include="..\Insightify.Posts.Domain\Insightify.Posts.Domain.csproj" />
-    <ProjectReference Include="..\Insightify.Posts.Domain\Insightify.Posts.Domain\Insightify.Posts.Domain.csproj" />
     <ProjectReference Include="..\Insightify.Posts.Infrastructure\Insightify.Posts.Infrastructure.csproj" />
     <ProjectReference Include="..\Insightify.Posts.Web\Insightify.Posts.Web.csproj" />
   </ItemGroup>
