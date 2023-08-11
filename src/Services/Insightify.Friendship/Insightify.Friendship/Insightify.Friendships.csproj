@@ -21,8 +21,8 @@
     <PackageReference Include="Insightify.Framework.Messaging.Abstractions" Version="1.0.0" />
     <PackageReference Include="Insightify.Framework.Mongo" Version="1.0.0" />
     <PackageReference Include="Insightify.Framework.MongoDb.Abstractions" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.3" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.10" />
     <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
