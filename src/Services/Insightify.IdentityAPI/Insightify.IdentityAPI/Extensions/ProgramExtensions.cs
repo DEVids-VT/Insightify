@@ -100,7 +100,7 @@ namespace Insightify.IdentityAPI.Extensions
         {
             var identityServerBuilder = builder.Services.AddIdentityServer(options =>
             {
-                options.UserInteraction.LoginUrl = "/Account/Login";
+                options.UserInteraction.LoginUrl = "/login";
 
                 options.IssuerUri = "http://localhost:5001";
                 options.Authentication.CookieLifetime = TimeSpan.FromHours(2);
