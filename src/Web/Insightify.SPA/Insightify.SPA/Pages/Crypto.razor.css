@@ -11,7 +11,7 @@
 }
 	.top .info {
 		height: 100%;
-		width: 35%;
+		width: 25%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -32,3 +32,48 @@
 		height: 156px;
 		width: 156px;
 	}
+
+	.top .data {
+		display: flex;
+		flex-direction: row;
+		height: 100%;
+		align-items: start;
+		justify-content: space-between;
+		width: 40%;
+		padding: 30px 24px;
+}
+	.top .data .market-cap {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		justify-content: center;
+	}
+		.top .data .market-cap .name {
+			color: gray;
+			font-size: 16px;
+			font-weight: 600;
+		}
+.top .data .day-vol {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+}
+
+	.top .data .day-vol .name {
+		color: gray;
+		font-size: 16px;
+		font-weight: 600;
+	}
+.top .data .day-change {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+}
+
+.top .data .day-change .name {
+	color: gray;
+	font-size: 16px;
+	font-weight: 600;
+}
