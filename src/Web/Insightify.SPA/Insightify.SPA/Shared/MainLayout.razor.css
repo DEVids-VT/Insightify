@@ -44,6 +44,8 @@ article {
 main {
     flex: 1;
     font-family: 'Poppins', sans-serif;
+	overflow: scroll;
+	height: 100%;
 }
 
 .sidebar {
@@ -51,6 +53,10 @@ main {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-style: normal;
+    flex-shrink: 0;
+    position: sticky;
+	width: 256px;
+	height: 100%;
 }
 
 .auth {
@@ -77,10 +83,10 @@ main {
         flex-direction: row;
     }
 
-    .sidebar {
-        width: 250px;
-        height: 99vh;
-        position: sticky;
-        top: 0;
-    }
+	.sidebar {
+		width: 250px;
+		height: 99vh;
+		position: sticky;
+		top: 0;
+	}
 }
