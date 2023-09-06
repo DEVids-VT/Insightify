@@ -44,7 +44,6 @@ article {
 main {
     flex: 1;
     font-family: 'Poppins', sans-serif;
-	overflow: scroll;
 	height: 100%;
 }
 
