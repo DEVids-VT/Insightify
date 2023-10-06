@@ -13,13 +13,13 @@ namespace Insightify.SPA.Pages
         {
             if (firstRender)
             {
-                //////////////////await JSRuntime.InvokeVoidAsync("createChart", ChartDatas(500), "price-card", Theme, "600", "900");
+                await JSRuntime.InvokeVoidAsync("createChart", ChartDatas(500), "price-card", Theme, "600", "900");
 
-                //////////////////await JSRuntime.InvokeVoidAsync("createChart", ChartDatas(400), "change-card", Theme, "200", "600");
+                await JSRuntime.InvokeVoidAsync("createChart", ChartDatas(400), "change-card", Theme, "200", "600");
 
-                //////////////////await JSRuntime.InvokeVoidAsync("createLineChart", CandlestickDatas(400), "status-card", Theme, "320", "200");
+                await JSRuntime.InvokeVoidAsync("createLineChart", CandlestickDatas(400), "status-card", Theme, "320", "200");
 
-                //////////////////await JSRuntime.InvokeVoidAsync("createLineChart", CandlestickDatas(500), "analytics-card", Theme, "200", "200");
+                await JSRuntime.InvokeVoidAsync("createLineChart", CandlestickDatas(500), "analytics-card", Theme, "200", "200");
             }
         }
 

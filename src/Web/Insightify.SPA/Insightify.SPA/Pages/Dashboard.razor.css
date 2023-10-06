@@ -1,14 +1,14 @@
 ﻿div .flexbox {
     display: flex;
     flex-direction: column;
-    height: 300vh;
+    
 }
 
 .single-cards {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 30%;
+    height: 10%;
 }
 
 .crypto-card {
