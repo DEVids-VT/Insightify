@@ -3,11 +3,44 @@
     font-family: 'Poppins', sans-serif;
 }
 
+.top-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+    .top-row .top-row-left {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+        gap: 3px;
+	    align-items: center;
+	    overflow-y: visible;
+	    height: 100%;
+    }
+    .top-row .top-row-left .top-row-item {
+        height: 100%;
+        font-size: 22px;
+	    color: black;
+	    padding: 6px 12px;
+	    border-radius: 12px;
+	    display: flex;
+	    align-items: center;
+	    text-decoration: none;
+    }
+        .top-row .top-row-left .top-row-item:hover {
+	        background-color: #ecdff5;
+	        color: #ad5adc;
+        }
+        .page {
+		    position: relative;
+		    display: flex;
+		    flex-direction: column;
+		}
 
-.page {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+.top-row-left {
+    margin: 0;
+    width: 300px;
+    border-radius: 25px;
 }
 
 article {
@@ -17,6 +50,7 @@ article {
 main {
     flex: 1;
     font-family: 'Poppins', sans-serif;
+	height: 100%;
 }
 
 .sidebar {
@@ -24,6 +58,10 @@ main {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-style: normal;
+    flex-shrink: 0;
+    position: sticky;
+	width: 256px;
+	height: 100%;
 }
 
 .auth {
@@ -40,12 +78,6 @@ main {
         margin-left: 10px; /* This adds some spacing between the elements */
     }
 
-.sticky-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000; /* Put it on top of other elements */
-}
 
 .h3-title {
     font-size: larger;
@@ -56,10 +88,10 @@ main {
         flex-direction: row;
     }
 
-    .sidebar {
-        width: 250px;
-        height: 99vh;
-        position: sticky;
-        top: 0;
-    }
+	.sidebar {
+		width: 250px;
+		height: 99vh;
+		position: sticky;
+		top: 0;
+	}
 }

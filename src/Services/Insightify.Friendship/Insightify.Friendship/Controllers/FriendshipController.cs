@@ -1,6 +1,5 @@
 ﻿using Insightify.Friendships.Models.Dtos;
 using Insightify.Friendships.Services;
-using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

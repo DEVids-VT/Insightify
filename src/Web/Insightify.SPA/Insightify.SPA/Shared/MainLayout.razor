@@ -8,11 +8,10 @@
     </div>
 
     <main>
-        <div class="top-row px-4 auth @headerClass">
+        <div class="top-row px-4 auth">
             <div><h3 class="h3-title">@navigationManager.Uri.Remove(0, navigationManager.BaseUri.Count()).ToUpper()</h3></div>
-            <div>
-                <LoginDisplay />
-                <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+            <div class="top-row-left">
+                <LoginDisplay/>
             </div>
         </div>
 
@@ -22,35 +21,3 @@
     </main>
 </div>
 
-@code {
-    private ElementReference header;
-    private string headerClass = "";
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            var dotNetRef = DotNetObjectReference.Create(this);
-            await JsRuntime.InvokeVoidAsync("addScrollListener", dotNetRef);
-        }
-    }
-
-    [JSInvokable]
-    public void MakeHeaderSticky()
-    {
-        headerClass = "sticky-header";
-        StateHasChanged();
-    }
-
-    [JSInvokable]
-    public void MakeHeaderUnSticky()
-    {
-        headerClass = "";
-        StateHasChanged();
-    }
-
-    public void Dispose()
-    {
-        JsRuntime.InvokeVoidAsync("removeScrollListener");
-    }
-}

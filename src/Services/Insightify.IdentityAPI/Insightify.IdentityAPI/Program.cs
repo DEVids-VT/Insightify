@@ -21,6 +21,7 @@ builder.AddCustomDatabase();
 builder.AddCustomIdentity();
 builder.AddCustomAuthentication();
 builder.AddCustomIdentityServer();
+builder.AddEmailSending();
 
 builder.Host.UseSerilog(ProgramExtensions.CreateSerilogLogger(builder.Configuration, appName));
 
