@@ -1,7 +1,38 @@
 ﻿@page "/authentication/{action}"
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-<RemoteAuthenticatorView Action="@Action" />
+<RemoteAuthenticatorView Action="@Action">
+    <LoggingIn>
+        <span>LoggingIn</span>
+    </LoggingIn>
+    <Registering>
+        <span>Registering</span>
+    </Registering>
+    <Registering>
+        <span>LoggingIn</span>
+    </Registering>
+    <UserProfile>
+        <span>UserProfile is loaded....</span>
+    </UserProfile>
+    <CompletingLoggingIn>
+        <span>CompletingLoggingIn</span>
+    </CompletingLoggingIn>
+    <LogInFailed>
+        <span>Login failed. Reason: @context</span>
+    </LogInFailed>
+    <LogOut>
+        <span>Logout from the application</span>
+    </LogOut>
+    <LogOut>
+        <span>CompletingLogOut</span>
+    </LogOut>
+    <LogOutFailed>
+        <span>Logout failed. Reason: @context</span>
+    </LogOutFailed>
+    <LogOut>
+        <span>LogOutSucceeded</span>
+    </LogOut>
+</RemoteAuthenticatorView>
 
-@code{
-    [Parameter] public string? Action { get; set; }
+@code {
+    [Parameter] public string Action { get; set; }
 }

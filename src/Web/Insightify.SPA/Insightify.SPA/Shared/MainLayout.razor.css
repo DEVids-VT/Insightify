@@ -12,7 +12,7 @@
         display: flex;
         justify-content: space-evenly;
         flex-direction: row;
-        gap: 12px;
+        gap: 3px;
 	    align-items: center;
 	    overflow-y: visible;
 	    height: 100%;
@@ -37,6 +37,12 @@
 		    flex-direction: column;
 		}
 
+.top-row-left {
+    margin: 0;
+    width: 300px;
+    border-radius: 25px;
+}
+
 article {
     padding: 32px 72px;
 }
@@ -44,6 +50,7 @@ article {
 main {
     flex: 1;
     font-family: 'Poppins', sans-serif;
+	height: 100%;
 }
 
 .sidebar {
@@ -51,6 +58,10 @@ main {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-style: normal;
+    flex-shrink: 0;
+    position: sticky;
+	width: 256px;
+	height: 100%;
 }
 
 .auth {
@@ -77,10 +88,10 @@ main {
         flex-direction: row;
     }
 
-    .sidebar {
-        width: 250px;
-        height: 99vh;
-        position: sticky;
-        top: 0;
-    }
+	.sidebar {
+		width: 250px;
+		height: 99vh;
+		position: sticky;
+		top: 0;
+	}
 }

@@ -1,14 +1,14 @@
 ﻿div .flexbox {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    
 }
 
 .single-cards {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 30%;
+    height: 10%;
 }
 
 .crypto-card {
@@ -138,4 +138,67 @@
 .card {
     padding: 15px;
     margin: 20px;
+}
+
+@media(max-width: 641px){
+    .card {
+        padding: 0px;
+        margin: 5px;
+    }
+    .flexbox{
+        height: max-content;
+    }
+    .single-cards {
+        height: max-content;
+        flex-direction: column;
+    }
+    .crypto-card {
+        width: inherit;
+        height: 200px;
+        padding: 5px;
+    }
+    .bottom-area .price-holder {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .bottom-area h4{
+        width: 50%;
+        font-size: 16px;
+    }
+    .bottom-area h7 {
+        width: 50%;
+        text-align:end;
+        font-size: 14px;
+    }
+    .chart-cards{
+        flex-direction: column;
+        height: max-content;
+    }
+    .price-cards {
+        width: 100%;
+    }
+    
+    .price-card {
+        height: 60%;
+        border-radius: 30px;
+        background-color: #F8F7FA;
+        box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
+        border: none;
+    }
+    
+    .change-card {
+        height: 40%;
+        border-radius: 30px;
+        background-color: #F8F7FA;
+        box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
+        border: none;
+    }
+    
+    .market-cards {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+    }
 }

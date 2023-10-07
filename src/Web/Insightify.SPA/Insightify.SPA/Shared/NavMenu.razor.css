@@ -1,5 +1,7 @@
 
-
+.navbar-toggler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 .top-row {
     height: 3.5rem;
@@ -142,9 +144,14 @@ p {
 
 @media (min-width: 641px) {
     .navbar-toggler {
-		display: none;
-	}
-    
+        display: none;
+    }
+
+    .collapse {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+
     .nav-scrollable {
         /* Allow sidebar to scroll for tall menus */
         height: calc(100vh - 3.5rem);
