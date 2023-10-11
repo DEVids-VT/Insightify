@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Jobs\**" />
+    <Content Remove="Jobs\**" />
+    <EmbeddedResource Remove="Jobs\**" />
+    <None Remove="Jobs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="7.0.0" />
     <PackageReference Include="FluentValidation" Version="11.6.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.6.0" />
@@ -32,10 +39,8 @@
   <ItemGroup>
     <Folder Include="Configuration\Enums\" />
     <Folder Include="Infrastructure\Models\" />
-    <Folder Include="Jobs\" />
     <Folder Include="MappingProfiles\" />
     <Folder Include="Validators\" />
-    <Folder Include="ResponceModels\" />
     <Folder Include="Services\Contracts\" />
   </ItemGroup>
 

@@ -38,7 +38,7 @@ namespace Insighify.FinancialDataApi.Extensions
         }
         public static void AddApplicationServices(this WebApplicationBuilder builder)
         {
-            
+            builder.Services.AddControllers();   
         }
     }
 }

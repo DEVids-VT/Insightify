@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Insightify.FinancialBackgroundTasks-266b7abe-1e0e-44d1-a63c-9377d6abddae</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
+    <PackageReference Include="Insightify.Framework" Version="2.0.0" />
+    <PackageReference Include="Insightify.Framework.Fetching" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Logging" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Messaging" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Messaging.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Mongo" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.MongoDb.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NReJSON" Version="4.0.0" />
+    <PackageReference Include="Quartz" Version="3.7.0" />
+    <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.7.0" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.7.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
+  </ItemGroup>
+</Project>
