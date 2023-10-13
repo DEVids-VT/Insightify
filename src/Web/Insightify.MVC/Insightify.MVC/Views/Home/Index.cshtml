@@ -38,15 +38,25 @@
     <div class="centertext">
         <h6>@Model.CenterText</h6>
         <div class="buttons">
-            <button class="btn-style" type="submit" href="#">@Model.LogIn</button>
-            <button class="btn-style" type="submit" href="#">@Model.SignUp</button>
+             <form asp-action="Dashboard" asp-controller="Home" style="display:flex;">
+                <button class="btn-style" type="submit">@Model.LogIn</button>
+             </form>
+             <form asp-action="Dashboard" asp-controller="Home" style="display:flex;">
+                <button class="btn-style" type="submit">@Model.SignUp</button>
+            </form>
         </div>
     </div>
     <footer>
         <div class="buttons-terms">
-            <a href="#" class="footer-text"><span style="color: #ae81ce; font-size: 14px;">@Model.Terms</span></a>
+            <a onclick="openLinkInNewTab()" style="text-decoration: none; cursor: pointer;"><span style="color: #ae81ce; font-size: 14px;">@Model.Terms</span></a>
             <br>
-            <a href="#" class="footer-text"><span style="color: #ae81ce; font-size: 14px;">@Model.Policy</span></a>
+            <a onclick="openLinkInNewTab()" style="text-decoration: none; cursor: pointer;"><span style="color: #ae81ce; font-size: 14px;">@Model.Policy</span></a>
         </div>
     </footer>
 </div>
+
+<script>
+    function openLinkInNewTab() {
+        window.open('https://localhost:7131/Home/Privacy', '_blank');
+    }
+</script>

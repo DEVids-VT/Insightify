@@ -1,1 +1,42 @@
 ﻿
+.navbar {
+    width: 200px;
+    position: relative;
+    height: 100vh;
+    flex-shrink: 0;
+}
+
+nav {
+    background-color: #202123;
+    width: 200px;
+    position: fixed;
+    height: 100vh;
+}
+
+ul {
+    font-size: 24px;
+    list-style: none;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.page {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 200px);
+    flex-shrink: 0;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-main {
+    padding: 30px 50px;
+    padding-top: 80px;
+}

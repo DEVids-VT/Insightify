@@ -14,13 +14,13 @@
     display: flex;
     flex-direction: column;
     width: 30%;
-    color: white;
+    color: #111827;
     border-radius: 30px;
-    background: linear-gradient(90deg, hsla(207, 100%, 57%, 1) 0%, hsla(193, 98%, 52%, 1) 100%);
+    background: #F8F7FA;
     border: none;
     transition: ease;
     transition-duration: 1s;
-    box-shadow: 0px 44px 74px -54px #56D0FC;
+    border: 1px solid rgba(0,0,0,.1);
 }
 
     .crypto-card .top-area {
@@ -100,16 +100,14 @@
     height: 60%;
     border-radius: 30px;
     background-color: #F8F7FA;
-    box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
-    border: none;
+    border: 1px solid rgba(0,0,0,.1);
 }
 
 .change-card {
     height: 40%;
     border-radius: 30px;
     background-color: #F8F7FA;
-    box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
-    border: none;
+    border: 1px solid rgba(0,0,0,.1);
 }
 
 .market-cards {
@@ -123,16 +121,14 @@
     height: 60%;
     border-radius: 30px;
     background-color: #F8F7FA;
-    box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
-    border: none;
+    border: 1px solid rgba(0,0,0,.1);
 }
 
 .analytics-card {
     height: 40%;
     border-radius: 30px;
     background-color: #F8F7FA;
-    box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
-    border: none;
+    border: 1px solid rgba(0,0,0,.1);
 }
 
 .card {
@@ -191,16 +187,14 @@
         height: 60%;
         border-radius: 30px;
         background-color: #F8F7FA;
-        box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
-        border: none;
+        border: 1px solid rgba(0,0,0,.1);
     }
 
     .change-card {
         height: 40%;
         border-radius: 30px;
         background-color: #F8F7FA;
-        box-shadow: 0px 0px 41px 0px rgba(191,191,191,1);
-        border: none;
+        border: 1px solid rgba(0,0,0,.1);
     }
 
     .market-cards {
