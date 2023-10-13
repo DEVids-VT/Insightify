@@ -4,10 +4,10 @@ namespace Insightify.MVC.Common.LanguagePresets
 {
     public static class Homepage
     {
-        public static HomeLanguageModel BulgarianHomepage { get => Bulgarian(); }
-        public static HomeLanguageModel EnglishHomepage { get => English(); }
+        public static HomeLanguageModel Bulgarian { get => Bg(); }
+        public static HomeLanguageModel English { get => En(); }
 
-        private static HomeLanguageModel Bulgarian()
+        private static HomeLanguageModel Bg()
         {
             return new HomeLanguageModel
             {
@@ -50,7 +50,7 @@ namespace Insightify.MVC.Common.LanguagePresets
             };
         }
 
-        private static HomeLanguageModel English()
+        private static HomeLanguageModel En()
         {
             return new HomeLanguageModel
             {

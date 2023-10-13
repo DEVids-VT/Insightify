@@ -18,5 +18,60 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    display: flex;
+    background-color: #444654;
+    color: #D1D5DB;
+}
+
+
+.navbar {
+    width: 200px;
+    position: relative;
+    height: 100vh;
+    flex-shrink: 0;
+}
+
+nav {
+    background-color: #202123;
+    width: 200px;
+    position: fixed;
+    height: 100vh;
+}
+
+ul {
+    font-size: 24px;
+    list-style: none;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.page {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 200px);
+    flex-shrink: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    background-color: #343541;
+    width: 100%;
+    padding-left: 50px;
+    position:fixed;
+    z-index:1;
+}
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-main{
+    padding: 30px 50px;
+    padding-top: 80px;
 }

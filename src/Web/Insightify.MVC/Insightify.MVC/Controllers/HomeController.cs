@@ -16,29 +16,28 @@ namespace Insightify.MVC.Controllers
 
         public IActionResult Index()
         {
-            var langModel = Homepage.EnglishHomepage;
-
-            return View(langModel);
+            return View(Homepage.English);
         }
 
         [HttpPost]
         public IActionResult Index(string language)
         {
-            var langModel = new HomeLanguageModel();
+            var langModel = Homepage.English;
 
-            if (language == "bg")
+            if (language == Languages.Bg)
             {
-                langModel = Homepage.BulgarianHomepage;
-            }
-            else if (language == "en")
-            {
-                langModel = Homepage.EnglishHomepage;
+                langModel = Homepage.Bulgarian;
             }
 
             return View(langModel);
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Dashboard()
         {
             return View();
         }
