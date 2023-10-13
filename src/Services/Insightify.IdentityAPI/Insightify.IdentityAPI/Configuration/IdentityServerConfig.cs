@@ -1,5 +1,6 @@
 ﻿using Duende.IdentityServer.Models;
 using Duende.IdentityServer;
+using static System.Net.WebRequestMethods;
 
 namespace Insightify.IdentityAPI.Configuration
 {
@@ -119,6 +120,38 @@ namespace Insightify.IdentityAPI.Configuration
                         "gateway",
                         "news"
                     }
+                },
+                new Client
+                {
+                    ClientId = "mvc",
+                    ClientName = "MVC Client",
+                    ClientUri = "http://localhost:5008",
+                    ClientSecrets = new List<Secret>
+                    {
+
+                        new Secret("S0M3 MAG1C UN!C0RNS CR3AT3D TH1S S3CR3T".Sha256())
+                    },
+                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowAccessTokensViaBrowser = false,
+                    RequireConsent = false,
+                    AllowOfflineAccess = true,
+                    AlwaysIncludeUserClaimsInIdToken = true,
+                    RequirePkce = false,
+                    RedirectUris = new List<string>
+                    {
+                        $"http://localhost:5008/signin-oidc"
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        "posts",
+                        "news",
+                        "gateway",
+                    },
+                    AccessTokenLifetime = 60*60*2, // 2 hours
+                    IdentityTokenLifetime= 60*60*2 // 2 hours
                 },
             };
         }
