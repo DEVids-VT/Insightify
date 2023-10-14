@@ -38,43 +38,43 @@ namespace Insightify.IdentityAPI.Configuration
         {
             return new List<Client>()
             {
-                new Client
-                {
-                    ClientId = "js",
-                    ClientName = "Insightify SPA OpenId Client",
-                    AllowedGrantTypes = GrantTypes.Code,
-                    Enabled = true,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris = { "http://localhost:4200/callback" },
-                    RequireConsent = false,
-                    PostLogoutRedirectUris = { "http://localhost:4200" },
-                    AllowedCorsOrigins = { "http://localhost:4200" },
-                    ClientSecrets =
-                    {
-                        new Secret("angular bog".Sha256())
-                    },
-                    AllowedScopes =
-                    {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                    },
-                },
-                new Client
-                {
-                    ClientId = "blazor",
-                    AllowedGrantTypes = GrantTypes.Code,
-                    RequirePkce = true,
-                    RequireClientSecret = false,
-                    AllowedCorsOrigins = { "http://localhost:5099" },
-                    AllowedScopes =
-                    {
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile,
-                    },                    
-                    RedirectUris = { "http://localhost:5099/authentication/login-callback" },
-                    PostLogoutRedirectUris = { "http://localhost:5099/authentication/logout-callback" },
+                //new Client
+                //{
+                //    ClientId = "js",
+                //    ClientName = "Insightify SPA OpenId Client",
+                //    AllowedGrantTypes = GrantTypes.Code,
+                //    Enabled = true,
+                //    AllowAccessTokensViaBrowser = true,
+                //    RedirectUris = { $"{configuration["SpaClient"]}/callback" },
+                //    RequireConsent = false,
+                //    PostLogoutRedirectUris = { $"{configuration["SpaClient"]}" },
+                //    AllowedCorsOrigins = { $"{configuration["SpaClient"]}" },
+                //    ClientSecrets =
+                //    {
+                //        new Secret("angular bog".Sha256())
+                //    },
+                //    AllowedScopes =
+                //    {
+                //        IdentityServerConstants.StandardScopes.OpenId,
+                //        IdentityServerConstants.StandardScopes.Profile,
+                //    },
+                //},
+                //new Client
+                //{
+                //    ClientId = "blazor",
+                //    AllowedGrantTypes = GrantTypes.Code,
+                //    RequirePkce = true,
+                //    RequireClientSecret = false,
+                //    AllowedCorsOrigins = { "http://localhost:5099" },
+                //    AllowedScopes =
+                //    {
+                //        IdentityServerConstants.StandardScopes.OpenId,
+                //        IdentityServerConstants.StandardScopes.Profile,
+                //    },                    
+                //    RedirectUris = { "http://localhost:5099/authentication/login-callback" },
+                //    PostLogoutRedirectUris = { "http://localhost:5099/authentication/logout-callback" },
 
-                },
+                //},
                 new Client
                 {
                     ClientId = "postsswaggerui",
@@ -82,9 +82,9 @@ namespace Insightify.IdentityAPI.Configuration
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { $"http://localhost:5036/oauth2-redirect.html" },
+                    RedirectUris = { $"{configuration["PostsApiClient"]}/oauth2-redirect.html" },
                     //PostLogoutRedirectUris = { $"{configuration["PostsApiClient"]}/swagger/" },
-                    AllowedCorsOrigins = { "http://localhost:5036" },
+                    AllowedCorsOrigins = { $"{configuration["PostsApiClient"]}" },
                     AllowedScopes =
                     {
                         "posts"
@@ -97,9 +97,9 @@ namespace Insightify.IdentityAPI.Configuration
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { $"http://localhost:5035/swagger/oauth2-redirect.html" },
+                    RedirectUris = { $"{configuration["NewsApiClient"]}/swagger/oauth2-redirect.html" },
                     //PostLogoutRedirectUris = { $"{configuration["PostsApiClient"]}/swagger/" },
-                    AllowedCorsOrigins = { "http://localhost:5035" },
+                    AllowedCorsOrigins = { $"{configuration["NewsApiClient"]}" },
                     AllowedScopes =
                     {
                         "news"
@@ -112,9 +112,9 @@ namespace Insightify.IdentityAPI.Configuration
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { $"http://localhost:5030/oauth2-redirect.html" },
+                    RedirectUris = { $"{configuration["GatewayApiClient"]}/oauth2-redirect.html" },
                     //PostLogoutRedirectUris = { $"{configuration["PostsApiClient"]}/swagger/" },
-                    AllowedCorsOrigins = { "http://localhost:5030" },
+                    AllowedCorsOrigins = { $"{configuration["GatewayApiClient"]}" },
                     AllowedScopes =
                     {
                         "gateway",
@@ -125,7 +125,7 @@ namespace Insightify.IdentityAPI.Configuration
                 {
                     ClientId = "mvc",
                     ClientName = "MVC Client",
-                    ClientUri = "http://localhost:5008",
+                    ClientUri = $"{configuration["MVCClient"]}",
                     ClientSecrets = new List<Secret>
                     {
 
@@ -139,7 +139,7 @@ namespace Insightify.IdentityAPI.Configuration
                     RequirePkce = false,
                     RedirectUris = new List<string>
                     {
-                        $"http://localhost:5008/signin-oidc"
+                        $"{configuration["MVCClient"]}/signin-oidc"
                     },
                     AllowedScopes = new List<string>
                     {

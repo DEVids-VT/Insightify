@@ -28,6 +28,7 @@ builder.Host.UseLogging(p =>
     p.WithSeqSink(builder.Configuration.GetSection("Seq").GetValue<string>("Url")!);
 });
 builder.Services.AddCustomAuthentication(builder.Configuration);
+builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddSession();
 
 var app = builder.Build();

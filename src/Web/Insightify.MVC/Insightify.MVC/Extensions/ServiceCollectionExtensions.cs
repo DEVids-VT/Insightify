@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Insightify.MVC.Infrastructure;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Refit;
 
 namespace Insightify.MVC.Extensions
 {
@@ -32,6 +34,13 @@ namespace Insightify.MVC.Extensions
                 options.Scope.Add("news");
                 options.Scope.Add("gateway");
             });
+
+            return services;
+        }
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             return services;
         }
