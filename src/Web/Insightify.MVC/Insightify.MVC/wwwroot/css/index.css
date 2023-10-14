@@ -43,19 +43,9 @@ video {
     width: 60%;
 }
 
-.header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: left;
-    text-align: center;
-    height: 150px;
-    background-color: white;
-}
-
 .head-text {
     font-size: 50px;
-    margin: 0%;
+    margin: 60px;
     margin-left: 60px;
     color: #061121;
 }
