@@ -1,6 +1,6 @@
 ﻿
 .navbar {
-    width: 200px;
+    width: 250px;
     position: relative;
     height: 100vh;
     flex-shrink: 0;
@@ -8,7 +8,7 @@
 
 nav {
     background-color: #202123;
-    width: 200px;
+    width: 250px;
     position: fixed;
     height: 100vh;
 }
@@ -23,11 +23,10 @@ ul {
     flex-direction: row;
 }
 
-
 .page {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 200px);
+    width: calc(100% - 250px);
     flex-shrink: 0;
 }
 
@@ -39,4 +38,101 @@ ul {
 .container-main {
     padding: 30px 50px;
     padding-top: 80px;
+}
+
+.oi {
+    width: 2rem;
+    font-size: 1.1rem;
+    top: -3px;
+    color: #bec1c3;
+}
+
+.nav-item {
+    padding-bottom: 0.5rem;
+    color: black;
+}
+
+.nav-title {
+    color: gray;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 24px 16px 4px 16px;
+}
+
+.oi {
+    margin-right: 3px;
+    margin-left: 6px;
+}
+
+.profile-picture {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-picture-image {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+.activity-status {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.status-image {
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.message-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-content: center;
+}
+
+.hover {
+    cursor: pointer;
+}
+
+p {
+    margin: 0;
+}
+
+.message-element {
+    margin-left: 12px;
+    font-size: 16px;
+}
+
+.view-all-btn {
+    color: gray;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.space-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    height: 100vh;
+    padding: 15px;
+}
+
+.direct-message-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.show-all-btn {
+    cursor: pointer;
+    padding: 24px 16px 4px 16px;
+    font-size: 12px;
+    font-weight: 600;
 }
