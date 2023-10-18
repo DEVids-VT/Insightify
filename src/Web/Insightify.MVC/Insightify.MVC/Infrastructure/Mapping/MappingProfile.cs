@@ -1,4 +1,4 @@
-﻿namespace Insightify.MVC.Extensions.Mapping
+﻿namespace Insightify.MVC.Infrastructure.Mapping
 {
     using AutoMapper;
     using System;
@@ -8,7 +8,7 @@
     public class MappingProfile : Profile
     {
         public MappingProfile()
-            => this.ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+            => ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
 
         private void ApplyMappingsFromAssembly(Assembly assembly)
         {
