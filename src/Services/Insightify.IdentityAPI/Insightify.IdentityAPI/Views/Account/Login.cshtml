@@ -1,32 +1,32 @@
 ﻿@using Insightify.IdentityAPI.ViewModels;
 @model LoginInputViewModel
-
-<div class="row">
-    <div class="col-md-4 offset-md-4">
-        <section>
-            <form id="account" method="post">
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="text-center mb-3">
-                    <label asp-for="@Model.Username" class="form-label"></label>
-                    <input asp-for="@Model.Username" class="form-control" autocomplete="username" aria-required="true" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-                <div class="text-center mb-3">
-                    <label asp-for="@Model.Password" class="form-label"></label>
-                    <input asp-for="@Model.Password" type="password" class="form-control" autocomplete="current-password" aria-required="true" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label asp-for="@Model.RememberLogin"></label>
-                    <input asp-for="@Model.RememberLogin" type="checkbox"/>
-                    <span asp-validation-for="RememberLogin" class="text-danger"></span>
-                </div>
-                <div class="text-center">
-                    <button id="login-submit" value="login" name="button" type="submit" class="btn btn-info">Log in</button>
-                    <button id="cancel-submit" value="cancel" name="button" type="submit" class="btn btn-info">Cancel</button>
-                </div>
-            </form>
-        </section>
+<link href="~/css/login.css" rel="stylesheet" />
+<div class="page">
+    <div class="leftside">
+        <div class="image-container">
+            <img class="main-img" src="~/images/login.png" alt="Cool image here" />
+        </div>
+    </div>
+    <div class="rightside">
+        <h1 class="logo">INSIGHTIFY</h1>
+        <div class="login-container">
+            <h2 class="form-title">Sign In</h2>
+                <form id="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="field-container">
+                        <label asp-for="@Model.Username" class="form-label"></label>
+                        <input asp-for="@Model.Username" class="form-field" autocomplete="username" aria-required="true" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="field-container">
+                        <label asp-for="@Model.Password" class="form-label"></label>
+                    <input asp-for="@Model.Password" type="password" class="form-field" autocomplete="current-password" aria-required="true" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="field-container">
+                        <button id="login-submit" value="login" name="button" type="submit" class="btn">Sign In</button>
+                    </div>
+                </form>
+        </div>
     </div>
 </div>
