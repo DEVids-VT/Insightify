@@ -39,6 +39,11 @@ namespace Insightify.MVC.Controllers
             return View();
         }
 
+        public IActionResult Crypto()
+        {
+            return View();
+        }
+
         public IActionResult Dashboard()
         {
             return View();

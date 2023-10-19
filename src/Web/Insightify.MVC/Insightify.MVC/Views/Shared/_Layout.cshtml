@@ -10,16 +10,90 @@
     <link href="~/css/dashboard.css" rel="stylesheet" />
     <link href="~/css/layout.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Insightify.MVC.styles.css" asp-append-version="true" />
+    <link href="~/css/crypto.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar">
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
+        <nav class="space-between">
+            <section>
+                <h5 class="nav-title">Main</h5>
+                <div class="nav-item px-1 hover">
+                    <a class="nav-link fs-6 px-2">
+                        <span class="oi fa-solid fa-gauge" aria-hidden="true"></span> Dashboard
+                    </a>
+                </div>
+                <div class="nav-item px-1 hover">
+                    <a class="nav-link fs-6 px-2" href="#">
+                        <span class="oi fa-solid fa-user-group" aria-hidden="true"></span> Friends
+                    </a>
+                </div>
+                <div class="nav-item px-1 hover">
+                    <a class="nav-link fs-6 px-2">
+                        <span class="oi fa-solid fa-newspaper" aria-hidden="true"></span> News
+                    </a>
+                </div>
+                <div class="nav-item px-1 hover">
+                    <a class="nav-link fs-6 px-2" href="#">
+                        <span class="oi fa-solid fa-chart-simple" aria-hidden="true"></span> Crypto Wave
+                    </a>
+                </div>
+                <div class="nav-item px-1 hover">
+                    <a class="nav-link fs-6 px-2" href="#">
+                        <span class="oi fa-solid fa-wallet" aria-hidden="true"></span> Wallet
+                    </a>
+                </div>
+
+                <!-- Direct messages -->
+                <h5 class="nav-title">Direct Messages</h5>
+                <div class="nav-item px-3">
+                    <a style="text-decoration: none;" class="direct-message-item" href="#">
+                        <span class="profile-picture">
+                            <img class="profile-picture-image" src="~/images/navbar/patrik.png" alt="pfp">
+                            <span class="activity-status"><img class="status-image" src="~/images/navbar/green.png" alt="sts"></span>
+                        </span>
+                        <div class="message-content">
+                            <p class="message-element">
+                                Patrik
+                            </p>
+                        </div>
+                    </a>
+                    <a style="text-decoration: none;" class="direct-message-item" href="#">
+                        <span class="profile-picture">
+                            <img class="profile-picture-image" src="~/images/navbar/bob.jpeg" alt="pfp">
+                            <span class="activity-status"><img class="status-image" src="~/images/navbar/green.png" alt="sts"></span>
+                        </span>
+                        <div class="message-content">
+                            <p class="message-element">
+                                Bob
+                            </p>
+                        </div>
+                    </a>
+                    <a style="text-decoration: none;" class="direct-message-item" href="#">
+                        <span class="profile-picture">
+                            <img class="profile-picture-image" src="~/images/navbar/squid.jpg" alt="pfp">
+                            <span class="activity-status"><img class="status-image" src="~/images/navbar/green.png" alt="sts"></span>
+                        </span>
+                        <div class="message-content">
+                            <p class="message-element">
+                                Squid
+                            </p>
+                        </div>
+                    </a>
+                </div>
+                <a class="show-all-btn">Show all</a>
+            </section>
+            <section>
+                <div class="nav-item px-1 hover">
+                    <a class="nav-link fs-6 px-2">
+                        <span class="oi fa-solid fa-circle-question" aria-hidden="true"></span> Ask Insighty
+                    </a>
+                </div>
+                <div class="nav-item px-1 hover">
+                    <a class="nav-link fs-6 px-2">
+                        <span class="oi fa-solid fa-gear" aria-hidden="true"></span> Settings
+                    </a>
+                </div>
+            </section>
         </nav>
     </div>
     <div class="page">
