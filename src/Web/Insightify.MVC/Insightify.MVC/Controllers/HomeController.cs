@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Insightify.MVC.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,12 +15,14 @@ namespace Insightify.MVC.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View(Homepage.English);
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Index(string language)
         {
             var langModel = Homepage.English;
@@ -44,6 +45,8 @@ namespace Insightify.MVC.Controllers
             return View();
         }
 
+
+        [Authorize]
         public IActionResult Dashboard()
         {
             return View();
