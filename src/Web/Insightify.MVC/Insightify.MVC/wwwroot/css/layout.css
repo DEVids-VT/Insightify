@@ -136,3 +136,36 @@ p {
     font-size: 12px;
     font-weight: 600;
 }
+@media(max-width: 1041px) {
+    .container-main{
+        padding: 90px 22px;
+        padding-bottom: 0px;
+        height: fit-content;
+    }
+}
+
+@media(max-width: 641px) {
+    .container-main{
+        padding: 90px 10px;
+        padding-bottom: 0px;
+        height: fit-content;
+    }
+}
+@media(max-width: 780px) {
+    .navbar{
+        display: none;
+    }
+    .page{
+        width: 100%;
+    }
+}
+@media(max-width: 790px) {
+    .navbar{
+        position: fixed;
+        z-index: 200;
+    }
+    .page{
+        width: 100%;
+        filter: blur(2px);
+    }
+}

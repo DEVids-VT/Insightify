@@ -13,8 +13,9 @@
     <link href="~/css/crypto.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar">
+    <div class="navbar" id="navbar">
         <nav class="space-between">
+            <a class="btn-hide" id="navbar-hide"><i class="fade fa-bars"></i></a>
             <section>
                 <h5 class="nav-title">Main</h5>
                 <div class="nav-item px-1 hover">
@@ -96,9 +97,9 @@
             </section>
         </nav>
     </div>
-    <div class="page">
+    <div class="page" id="page">
         <header class="header">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Insightify.MVC</a>
+            <a class="navbar-brand" id="navbar-action"><i class="fa fa-bars"></i></a>
             <div class="justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
@@ -116,13 +117,36 @@
         <div class="container-main">
             <main role="main" class="pb-3">
                 @RenderBody()
+                <script src="https://kit.fontawesome.com/1f167bd3a1.js" crossorigin="anonymous"></script>
             </main>
         </div>
     </div>
+    <script>
+        var btnshow = document.getElementById('navbar-show');
+        var btnhide = document.getElementById('navbar-hide');
+        var navbar = document.getElementById('navbar');
+        var page = document.getElementById('page');
 
+        btnshow.addEventListener('click', function () {
+            navbar.style.display = 'block';
+            navbar.style.position = 'fixed';
+            navbar.style.zIndex = '200';
+            page.style.filter = 'blur(2px)';
+        });
+
+        btnhide.addEventListener('click', function () {
+            navbar.style.display = 'none';
+            navbar.style.position = 'relative';
+            navbar.style.zIndex = '200';
+            page.style.filter = 'blur(2px)';
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@3.6.1/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/charts.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

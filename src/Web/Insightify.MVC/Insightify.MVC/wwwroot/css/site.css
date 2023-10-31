@@ -20,7 +20,7 @@ body {
     width: 100%;
     padding-left: 50px;
     position: fixed;
-    z-index: 1;
+    z-index: 100;
     border-bottom-width: 1px;
     border-color: rgba(0,0,0,.1);
     border: 1px solid #d9d9e3;

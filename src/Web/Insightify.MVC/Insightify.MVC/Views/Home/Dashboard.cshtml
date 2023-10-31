@@ -76,3 +76,25 @@
         </section>
     </section>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var testData = [
+            { time: "2023-10-01", value: 100 },
+            { time: "2023-10-02", value: 120 },
+            { time: "2023-10-03", value: 130 },
+            { time: "2023-10-04", value: 110 },
+            { time: "2023-10-05", value: 150 },
+            { time: "2023-10-06", value: 170 },
+            { time: "2023-10-07", value: 190 },
+            { time: "2023-10-08", value: 210 },
+            { time: "2023-10-09", value: 200 },
+            { time: "2023-10-10", value: 180 },
+        ];
+        createChat(testData, 'price-card', 'Light', '400', '800');
+        createChat(testData, 'change-card', 'Light', '400', '800');
+        createChat(testData, 'status-card', 'Light', '400', '800');
+        createChat(testData, 'analytics-card', 'Light', '400', '800');
+    });
+
+</script>

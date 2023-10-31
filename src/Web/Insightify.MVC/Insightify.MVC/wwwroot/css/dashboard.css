@@ -20,7 +20,6 @@
     border: none;
     transition: ease;
     transition-duration: 1s;
-    border: 1px solid rgba(0,0,0,.1);
 }
 
     .crypto-card .top-area {
@@ -100,14 +99,12 @@
     height: 60%;
     border-radius: 30px;
     background-color: #F8F7FA;
-    border: 1px solid rgba(0,0,0,.1);
 }
 
 .change-card {
     height: 40%;
     border-radius: 30px;
     background-color: #F8F7FA;
-    border: 1px solid rgba(0,0,0,.1);
 }
 
 .market-cards {
@@ -121,33 +118,30 @@
     height: 60%;
     border-radius: 30px;
     background-color: #F8F7FA;
-    border: 1px solid rgba(0,0,0,.1);
 }
 
 .analytics-card {
     height: 40%;
     border-radius: 30px;
     background-color: #F8F7FA;
-    border: 1px solid rgba(0,0,0,.1);
 }
 
 .card {
     padding: 15px;
     margin: 20px;
+    overflow: hidden;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-@media(max-width: 641px) {
+@media(max-width: 1241px) {
+    .flexbox{
+        height: auto;
+    }
     .card {
         padding: 0px;
         margin: 5px;
     }
-
-    .flexbox {
-        height: max-content;
-    }
-
     .single-cards {
-        height: max-content;
         flex-direction: column;
     }
 
@@ -173,28 +167,26 @@
         text-align: end;
         font-size: 14px;
     }
-
-    .chart-cards {
+    .chart-cards{
         flex-direction: column;
-        height: max-content;
+        height: fit-content;
     }
 
     .price-cards {
         width: 100%;
+        flex-direction: column;
     }
 
     .price-card {
-        height: 60%;
+        height: 40vh;
         border-radius: 30px;
         background-color: #F8F7FA;
-        border: 1px solid rgba(0,0,0,.1);
     }
 
     .change-card {
-        height: 40%;
+        height: 40vh;
         border-radius: 30px;
         background-color: #F8F7FA;
-        border: 1px solid rgba(0,0,0,.1);
     }
 
     .market-cards {
@@ -202,5 +194,8 @@
         width: 100%;
         flex-direction: column;
         justify-content: space-between;
+    }
+    .status-card, .analytics-card{
+        height: 40vh;
     }
 }
