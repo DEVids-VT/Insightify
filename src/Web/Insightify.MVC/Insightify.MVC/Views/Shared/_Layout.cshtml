@@ -14,8 +14,8 @@
 </head>
 <body>
     <div class="navbar" id="navbar">
+        <a href="#" class="btn-hide hidden" id="navbar-hide"><i class="fa fa-xmark"></i></a>
         <nav class="space-between">
-            <a class="btn-hide" id="navbar-hide"><i class="fade fa-bars"></i></a>
             <section>
                 <h5 class="nav-title">Main</h5>
                 <div class="nav-item px-1 hover">
@@ -99,7 +99,7 @@
     </div>
     <div class="page" id="page">
         <header class="header">
-            <a class="navbar-brand" id="navbar-action"><i class="fa fa-bars"></i></a>
+            <a href="#" class="navbar-brand" id="navbar-show"><i class="fa fa-bars"></i></a>
             <div class="justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
@@ -127,18 +127,47 @@
         var navbar = document.getElementById('navbar');
         var page = document.getElementById('page');
 
+        function checkSize(){
+            if (window.innerWidth > 780) {
+                navbar.classList.remove('hidden');
+                navbar.classList.remove('fixed-nav');
+                page.style.filter = 'none';
+                btnhide.classList.add('hidden');
+                btnshow.classList.add('hidden');
+            }
+            else {
+                btnshow.classList.remove('hidden');
+            }
+        }
+
+        window.onload = function () {
+            checkSize();
+        }
+
+        window.addEventListener('resize', function () {
+            checkSize();
+        });
+
         btnshow.addEventListener('click', function () {
-            navbar.style.display = 'block';
-            navbar.style.position = 'fixed';
-            navbar.style.zIndex = '200';
-            page.style.filter = 'blur(2px)';
+            console.log('11111111 btnshow.addEventListener(click');
+            if (window.innerWidth <= 780) {
+                console.log('11111 window.innerWidth <= 780');
+                navbar.classList.remove('hidden');
+                navbar.classList.add('fixed-nav');
+                page.style.filter = 'blur(2px)';
+                btnhide.classList.remove('hidden');
+            }
         });
 
         btnhide.addEventListener('click', function () {
-            navbar.style.display = 'none';
-            navbar.style.position = 'relative';
-            navbar.style.zIndex = '200';
-            page.style.filter = 'blur(2px)';
+            console.log('2222222 btnshow.addEventListener(click');
+            if (window.innerWidth <= 780) {
+                console.log('2222222 window.innerWidth <= 780');
+                navbar.classList.add('hidden');
+                navbar.classList.remove('fixed-nav');
+                page.style.filter = 'none';
+                btnhide.classList.add('hidden');
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@3.6.1/dist/lightweight-charts.standalone.production.js"></script>
