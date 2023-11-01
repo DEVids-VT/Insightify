@@ -98,22 +98,28 @@
         </nav>
     </div>
     <div class="page" id="page">
-        <header class="header">
-            <a href="#" class="navbar-brand" id="navbar-show"><i class="fa fa-bars"></i></a>
-            <div class="justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Dashboard">Dashboard</a>
-                    </li>
-                </ul>
+        <header class="header d-flex justify-content-between align-items-center">
+            <div class="circle-bg" style="background-color: transparent; margin:0; width:60px;">
+                <div class="circle-bg" id="navbar-show">
+                    <a href="#" class="navbar-brand"><i class="fa fa-bars"></i></a>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="circle-bg">
+                    <a href="#" class="navbar-brand">Noti</a>
+                </div>
+                <div class="circle-bg">
+                    <a href="#" class="navbar-brand" id="img-pfp-btn"><img class="img-pfp-head" src="~/images/navbar/kur.jpg" /></a>
+                </div>
             </div>
         </header>
+        <div id="pf-menu" class="pf-view-ctr d-flex justify-content-end align-items-center hidden">
+            <div class="pf-view-pg d-flex justify-content-center align-items-center">
+                <div class="circle-bg hidden" id="pf-menu-hide">
+                    <a href="#" class="navbar-brand"><i class="fa fa-xmark"></i></a>
+                </div>
+            </div>
+        </div>
         <div class="container-main">
             <main role="main" class="pb-3">
                 @RenderBody()
@@ -126,8 +132,11 @@
         var btnhide = document.getElementById('navbar-hide');
         var navbar = document.getElementById('navbar');
         var page = document.getElementById('page');
+        var profilebtn = document.getElementById('img-pfp-btn');
+        var profilebtnHide = document.getElementById('pf-menu-hide');
+        var pfmenu = document.getElementById('pf-menu');
 
-        function checkSize(){
+        function checkSize() {
             if (window.innerWidth > 780) {
                 navbar.classList.remove('hidden');
                 navbar.classList.remove('fixed-nav');
@@ -141,11 +150,37 @@
         }
 
         window.onload = function () {
+            profilebtnHide.classList.add('hidden');
+            pfmenu.classList.add('hidden');
             checkSize();
         }
 
         window.addEventListener('resize', function () {
+            if (window.innerWidth <= 420) {
+                profilebtnHide.classList.remove('hidden');
+            }
+            else{
+                profilebtnHide.classList.add('hidden');
+            }
             checkSize();
+        });
+
+        let isShown = false;
+
+        profilebtn.addEventListener('click', function () {
+            if (isShown) {
+                pfmenu.classList.add('hidden');
+                isShown = false;
+            }
+            else {
+                pfmenu.classList.remove('hidden');
+                isShown = true;
+            }
+        });
+
+        profilebtnHide.addEventListener('click', function () {
+            pfmenu.classList.add('hidden');
+            isShown = false;
         });
 
         btnshow.addEventListener('click', function () {

@@ -1,4 +1,23 @@
-﻿
+﻿.page {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 250px);
+    flex-shrink: 0;
+}
+.header {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    width: inherit;
+    position: fixed;
+    z-index: 100;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom-width: 1px;
+    border-color: rgba(0,0,0,.1);
+    border: 1px solid #d9d9e3;
+    height: 70px;
+}
 .navbar {
     width: 250px;
     position: relative;
@@ -21,13 +40,6 @@ ul {
 .navbar-nav {
     display: flex;
     flex-direction: row;
-}
-
-.page {
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 250px);
-    flex-shrink: 0;
 }
 
 .navbar-nav {
@@ -143,8 +155,8 @@ p {
 
 .btn-hide{
     z-index: 400!important;
-    width: 30px!important;
-    height: 30px!important;
+    width: 40px!important;
+    height: 40px!important;
     justify-content: center!important;
     align-items: center!important;
     display: flex;
@@ -154,8 +166,11 @@ p {
     top: -47%!important;
     color: #202123!important;
     cursor: pointer!important;
-    border: 2px solid #202123!important;
+    border-radius: 50%!important;
     background-color: white!important;
+}
+.btn-hide:hover{
+    background-color: #d9d9e3;
 }
 
 .fixed-nav{
@@ -165,6 +180,47 @@ p {
     width: 300px!important;
 }
 
+.circle-bg{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 5px;
+}
+.circle-bg:hover{
+    background-color: #d9d9e3;
+}
+
+.navbar-brand{
+    padding: 0;
+    margin: 0;
+}
+
+.img-pfp-head{
+    width: 100%;
+    padding: 4px;
+    border-radius: 50%;
+}
+.pf-view-pg{
+    width: 400px;
+    height: inherit;
+    background-color: #e9eef6;
+    border-radius: 45px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.pf-view-ctr{
+    z-index: 300;
+    margin-top: 70px;
+    position: fixed;
+    width: inherit;
+    height: 500px;
+    padding-right: 20px;
+}
+
 @media(max-width: 1041px) {
     .container-main{
         padding: 90px 22px;
@@ -172,7 +228,24 @@ p {
         height: fit-content;
     }
 }
-
+@media(max-width: 420px) {
+    .pf-view-pg{
+        width: 420px;
+        height: 100vh;
+        background-color: #e9eef6;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .pf-view-ctr{
+        z-index: 400;
+        margin-top: 0;
+        position: fixed;
+        width: 420px;
+        height: 100vh;
+        padding-right: 0;
+    }
+}
 @media(max-width: 641px) {
     .container-main{
         padding: 90px 10px;

@@ -12,17 +12,3 @@ body {
     background-color: #ececec;
     color: #D1D5DB;
 }
-
-.header {
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    width: 100%;
-    padding-left: 50px;
-    position: fixed;
-    z-index: 100;
-    border-bottom-width: 1px;
-    border-color: rgba(0,0,0,.1);
-    border: 1px solid #d9d9e3;
-    height: 70px;
-}
