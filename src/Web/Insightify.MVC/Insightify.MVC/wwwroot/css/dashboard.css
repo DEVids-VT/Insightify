@@ -134,13 +134,15 @@
 }
 
 @media(max-width: 1241px) {
-    .flexbox{
+    .flexbox {
         height: auto;
     }
+
     .card {
         padding: 0px;
         margin: 5px;
     }
+
     .single-cards {
         flex-direction: column;
     }
@@ -167,7 +169,8 @@
         text-align: end;
         font-size: 14px;
     }
-    .chart-cards{
+
+    .chart-cards {
         flex-direction: column;
         height: fit-content;
     }
@@ -195,7 +198,8 @@
         flex-direction: column;
         justify-content: space-between;
     }
-    .status-card, .analytics-card{
+
+    .status-card, .analytics-card {
         height: 40vh;
     }
 }
