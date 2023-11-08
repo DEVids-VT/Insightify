@@ -1,4 +1,6 @@
-﻿using Insightify.MVC.Infrastructure;
+﻿using Insightify.MVC.Clients;
+using Insightify.MVC.Infrastructure;
+using Insightify.MVC.Services.Posts;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Refit;
@@ -39,9 +41,16 @@ namespace Insightify.MVC.Extensions
         }
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
+            var gatewayUrl = configuration.GetValue<string>("GatewayUrl");
+
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddScoped<IPostsService, PostsService>();
+
+            services.AddRefitClient<IPostsClient>()
+                .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
             return services;
         }
     }

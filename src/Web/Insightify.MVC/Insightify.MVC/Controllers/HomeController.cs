@@ -45,11 +45,6 @@ namespace Insightify.MVC.Controllers
             return View();
         }
 
-        public IActionResult Feed()
-        {
-            return View();
-        }
-
         public IActionResult News()
         {
             return View();
