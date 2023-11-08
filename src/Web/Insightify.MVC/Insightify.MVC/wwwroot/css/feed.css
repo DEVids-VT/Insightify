@@ -35,7 +35,8 @@
             }
 
                 .posts-container .sections-container .section-posts .post-container:hover {
-                    background-color: white;
+                    background-color: rgb(248, 247, 247);
+                    cursor: pointer;
                 }
 
                 .posts-container .sections-container .section-posts .post-container .post-header {
@@ -68,10 +69,6 @@
                                 margin-right: 10px;
                             }
 
-                            .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-image .header-img-text {
-                                
-                            }
-
                         .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-hour {
                             display: flex;
                             flex-direction: row;
@@ -80,10 +77,6 @@
 
                             .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-hour strong {
                                 margin: 5px;
-                            }
-
-                            .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-hour .headerhour-text {
-
                             }
 
                     .posts-container .sections-container .section-posts .post-container .post-header .post-header-buttons {
@@ -183,7 +176,7 @@
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                background-color: white;
+                border: 1px solid #dddddd;
                 border-radius: 25px;
                 padding: 25px;
             }
@@ -195,11 +188,19 @@
                 .posts-container .sections-container .section-voices .voices-container .account-element {
                     display: flex;
                     flex-direction: row;
-                    margin: 10px;
+                    margin-top: 20px;
+                    padding-bottom: 20px;
+                    border-bottom: 1px solid #dddddd;
+                }
+                .posts-container .sections-container .section-voices .voices-container .account-element:last-of-type{
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+                    border-bottom: none;
                 }
 
                     .posts-container .sections-container .section-voices .voices-container .account-element .account-footer-img {
                         width: 50px;
+                        height: 50px;
                         border-radius: 50%;
                         margin-right: 4px;
                     }
@@ -229,6 +230,15 @@
         width: 100%;
     }
     .posts-container .sections-container .section-voices {
-        width: 50%;
+        width: 100%;
+    }
+    .posts-container .sections-container .section-voices .voices-container{
+        width: 100%;
+        max-width: none;
+        background-color: transparent;
+    }
+    .posts-container .sections-container .section-voices .voices-container .account-element{
+        border-bottom: 1px solid #dddddd;
+        padding-bottom: 10px;
     }
 }
