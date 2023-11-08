@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using Insightify.Web.Gateway.Clients;
 using Insightify.Web.Gateway.Configuration;
 using Insightify.Web.Gateway.Services.News;
+using Insightify.Web.Gateway.Services.Posts;
 using Refit;
 
 namespace Insightify.Web.Gateway.Extensions
@@ -22,9 +23,14 @@ namespace Insightify.Web.Gateway.Extensions
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<IPostService, PostService>();
 
             services.AddRefitClient<INewsClient>()
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.News))
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+            services.AddRefitClient<IPostsClient>()
+                .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.Posts))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
             return services;
