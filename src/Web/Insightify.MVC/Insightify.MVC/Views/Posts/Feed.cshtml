@@ -1,0 +1,63 @@
+﻿@using Insightify.Framework.Pagination;
+@model Insightify.Framework.Pagination.Abstractions.IPage<PostViewModel>
+<div class="posts-container">
+    <div class="sections-container">
+        <section class="section-posts">
+            @{
+                foreach(var post in Model)
+                {
+                    <div class="post-container">
+                        <header class="post-header">
+                            <div class="post-header-info">
+                                <div class="post-header-image">
+                                    <img class="header-img-data" src="~/images/navbar/green.png" />
+                                    <h1 class="header-img-text">Author Name</h1>
+                                </div>
+                                <div class="post-header-hour">
+                                    <h1><strong>‧</strong></h1>
+                                    <h1 class="headerhour-text">2 hr. ago</h1>
+                                </div>
+                            </div>
+                            <div class="post-header-buttons">
+                                <a class="follow-btn">Follow</a>
+                                <a class="report-btn"><i class="fa fa-flag"></i></a>
+                            </div>
+                        </header>
+                        <div class="post-content">
+                            <div class="post-content-bg"></div>
+                            <h1 class="content-title">@post.Title</h1>
+                            <p class="content-text-container">
+                                @post.Description
+                            </p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="footer-buttons">
+                                <a class="footer-btn-action" href="#"><i class="fa fa-heart"></i> @post.LikeCount</a>
+                                <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> @post.CommentCount</a>
+                                <a class="footer-btn-action" href="#"><i class="fa fa-share"></i> Share</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="under-post-line"></div>
+                }
+            }
+        </section>
+        <section class="section-voices">
+            <div class="voices-container">
+                <h1 class="voices-title">Popular voices</h1>
+                @{
+                    for (int i = 0; i < 6; i++)
+                    {
+                        <div class="account-element">
+                            <img class="account-footer-img" src="~/images/navbar/kur.jpg" />
+                            <div class="image-element-content">
+                                <h1 class="image-element-content-title">r/Twitch</h1>
+                                <h2 class="image-element-content-content">1,209,283 followers</h2>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+    </div>
+</div>
