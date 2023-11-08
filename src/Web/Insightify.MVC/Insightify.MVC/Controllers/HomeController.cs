@@ -45,6 +45,10 @@ namespace Insightify.MVC.Controllers
             return View();
         }
 
+        public IActionResult Feed()
+        {
+            return View();
+        }
 
         [Authorize]
         public IActionResult Dashboard()

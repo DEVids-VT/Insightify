@@ -1,0 +1,229 @@
+﻿.posts-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .posts-container .sections-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: row;
+    }
+
+        .posts-container .sections-container .section-posts {
+            width: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+            .posts-container .sections-container .section-posts .post-container {
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                max-height: 600px;
+                width: 100%;
+                overflow: hidden;
+                margin: 10px;
+                border-radius: 30px;
+                transition: all 0.3s;
+                padding: 30px;
+            }
+
+                .posts-container .sections-container .section-posts .post-container:hover {
+                    background-color: white;
+                }
+
+                .posts-container .sections-container .section-posts .post-container .post-header {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    height: 10%;
+                }
+
+                    .posts-container .sections-container .section-posts .post-container .post-header .post-header-info {
+                        display: flex;
+                        flex-direction: row;
+                        width: 100%;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                    }
+
+                        .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-image {
+                            display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        margin: 2px;
+                        }
+
+                            .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-image .header-img-data {
+                                width: 50px;
+                                margin-right: 10px;
+                            }
+
+                            .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-image .header-img-text {
+                                
+                            }
+
+                        .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-hour {
+                            display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                        }
+
+                            .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-hour strong {
+                                margin: 5px;
+                            }
+
+                            .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-hour .headerhour-text {
+
+                            }
+
+                    .posts-container .sections-container .section-posts .post-container .post-header .post-header-buttons {
+                        display: flex;
+                        flex-direction: row;
+                    }
+
+                        .posts-container .sections-container .section-posts .post-container .post-header .post-header-buttons .follow-btn {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            border-radius: 30px;
+                            pad: 10px;
+                            background-color: #C864F7;
+                            color: white;
+                            width: 70px;
+                            height: 30px;
+                            cursor: pointer;
+                            margin: 2px;
+                        }
+
+                        .posts-container .sections-container .section-posts .post-container .post-header .post-header-buttons .report-btn {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            border-radius: 30px;
+                            pad: 10px;
+                            background-color: #C864F7;
+                            color: white;
+                            width: 30px;
+                            height: 30px;
+                            cursor: pointer;
+                            margin: 2px;
+                        }
+
+                .posts-container .sections-container .section-posts .post-container .post-content {
+                    height: 100%;
+                    overflow: hidden;
+                }
+
+                    .posts-container .sections-container .section-posts .post-container .post-content .content-title {
+                        font-weight: 600;
+                    }
+
+                    .posts-container .sections-container .section-posts .post-container .post-content .content-text-container {
+                        overflow: hidden;
+                        color: #808080;
+                        font-weight: 500;
+                    }
+
+                .posts-container .sections-container .section-posts .post-container .post-footer {
+                    margin-top: 20px;
+                    height: 10%;
+                }
+
+                    .posts-container .sections-container .section-posts .post-container .post-footer .footer-buttons {
+                        display: flex;
+                        flex-direction: row;
+                    }
+
+                        .posts-container .sections-container .section-posts .post-container .post-footer .footer-buttons .footer-btn-action {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                            border-radius: 30px;
+                            pad: 10px;
+                            background-color: #C864F7;
+                            color: white;
+                            width: 70px;
+                            height: 30px;
+                            cursor: pointer;
+                            margin: 2px;
+                        }
+
+            .posts-container .sections-container .section-posts .under-post-line {
+                border-top: 2px solid black;
+            }
+
+        .posts-container .sections-container .section-voices {
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+            .posts-container .sections-container .section-voices .voices-container {
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                background-color: white;
+                border-radius: 25px;
+                padding: 25px;
+            }
+
+                .posts-container .sections-container .section-voices .voices-container .voices-title {
+                    font-size: 20px;
+                }
+
+                .posts-container .sections-container .section-voices .voices-container .account-element {
+                    display: flex;
+                    flex-direction: row;
+                    margin: 10px;
+                }
+
+                    .posts-container .sections-container .section-voices .voices-container .account-element .account-footer-img {
+                        width: 50px;
+                        border-radius: 50%;
+                        margin-right: 4px;
+                    }
+
+                    .posts-container .sections-container .section-voices .voices-container .account-element .image-element-content {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                    }
+
+                        .posts-container .sections-container .section-voices .voices-container .account-element .image-element-content .image-element-content-title {
+                            font-size: 18px;
+                        }
+
+                        .posts-container .sections-container .section-voices .voices-container .account-element .image-element-content .image-element-content-content {
+                            font-size: 18px;
+                        }
+
+@media(max-width:1500px){
+    .posts-container .sections-container {
+        flex-direction: column-reverse;
+    }
+
+    .posts-container .sections-container .section-posts {
+        width: 100%;
+    }
+    .posts-container .sections-container .section-voices {
+        width: 50%;
+    }
+}
