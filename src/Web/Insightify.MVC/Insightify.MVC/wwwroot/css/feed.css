@@ -153,12 +153,17 @@
                             text-align: center;
                             border-radius: 30px;
                             pad: 10px;
-                            background-color: #C864F7;
                             color: white;
                             width: 70px;
                             height: 30px;
                             cursor: pointer;
                             margin: 2px;
+                            color: #808080;
+                            transition: all 0.3s;
+                        }
+                        .posts-container .sections-container .section-posts .post-container .post-footer .footer-buttons .footer-btn-action:hover {
+                            background-color: #C864F7;
+                            color: white;
                         }
 
             .posts-container .sections-container .section-posts .under-post-line {

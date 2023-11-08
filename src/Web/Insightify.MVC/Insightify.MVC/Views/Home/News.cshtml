@@ -1,0 +1,44 @@
+﻿<div class="news-container">
+    <div class="news-sections-container">
+        <section class="news-section-posts">
+            @{
+                for (int i = 0; i < 30; i++)
+                {
+                    <div class="news-container-single">
+                        <div class="news-main">
+                            <div class="news-header-hour">
+                                <h1 class="news-headerhour-title">CNBC</h1>
+                                <h1><strong>‧</strong></h1>
+                                <h1 class="news-headerhour-text">2 hours ago</h1>
+                            </div>
+                            <div class="news-content">
+                                <h1 class="news-content-title">Изтърваните шансове да станете богати. </h1>
+                            </div>
+                        </div>
+                        <div>
+                            <img class="news-image" src="~/images/navbar/patrik.png" />
+                       </div>
+                    </div>
+                    <div class="news-under-post-line"></div>
+                }
+            }
+        </section>
+        <section class="section-news">
+            <div class="side-news-container">
+                <h1 class="news-title">Popular voices</h1>
+                @{
+                    for (int i = 0; i < 6; i++)
+                    {
+                        <div class="news-element">
+                            <img class="news-footer-img" src="~/images/navbar/kur.jpg" />
+                            <div class="news-image-element-content">
+                                <h1 class="news-image-element-content-title">Microsoft</h1>
+                                <h2 class="news-image-element-content-content">1,209,283 followers</h2>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+    </div>
+</div>

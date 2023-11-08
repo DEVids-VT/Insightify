@@ -50,6 +50,11 @@ namespace Insightify.MVC.Controllers
             return View();
         }
 
+        public IActionResult News()
+        {
+            return View();
+        }
+
         [Authorize]
         public IActionResult Dashboard()
         {

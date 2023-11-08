@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/Insightify.MVC.styles.css" asp-append-version="true" />
     <link href="~/css/crypto.css" rel="stylesheet" />
     <link href="~/css/feed.css" rel="stylesheet" />
+    <link href="~/css/news.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar" id="navbar">
@@ -24,28 +25,28 @@
                 </div>
                 <h5 class="nav-title">Main</h5>
                 <div class="nav-item px-1 hover">
-                    <a class="nav-link fs-6 px-2">
+                    <a class="nav-link fs-6 px-2" asp-action="Dashboard" asp-controller="Home">
                         <span class="oi fa-solid fa-gauge" aria-hidden="true"></span> Dashboard
                     </a>
                 </div>
                 <div class="nav-item px-1 hover">
-                    <a class="nav-link fs-6 px-2" href="#">
-                        <span class="oi fa-solid fa-user-group" aria-hidden="true"></span> Friends
+                    <a class="nav-link fs-6 px-2" asp-action="Crypto" asp-controller="Home">
+                        <span class="oi fa-solid fa-user-group" aria-hidden="true"></span> Crypto
                     </a>
                 </div>
                 <div class="nav-item px-1 hover">
-                    <a class="nav-link fs-6 px-2">
+                    <a class="nav-link fs-6 px-2" asp-action="News" asp-controller="Home">
                         <span class="oi fa-solid fa-newspaper" aria-hidden="true"></span> News
                     </a>
                 </div>
                 <div class="nav-item px-1 hover">
-                    <a class="nav-link fs-6 px-2" href="#">
-                        <span class="oi fa-solid fa-chart-simple" aria-hidden="true"></span> Crypto Wave
+                    <a class="nav-link fs-6 px-2" asp-action="Feed" asp-controller="Home">
+                        <span class="oi fa-solid fa-chart-simple" aria-hidden="true"></span> Feed
                     </a>
                 </div>
                 <div class="nav-item px-1 hover">
                     <a class="nav-link fs-6 px-2" href="#">
-                        <span class="oi fa-solid fa-wallet" aria-hidden="true"></span> Wallet
+                        <span class="oi fa-solid fa-wallet" aria-hidden="true"></span> Friends
                     </a>
                 </div>
 
