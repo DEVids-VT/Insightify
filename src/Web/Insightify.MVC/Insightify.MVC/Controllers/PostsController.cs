@@ -13,8 +13,9 @@ namespace Insightify.MVC.Controllers
         {
             _postService = postService;
         }
+
         [HttpGet]
-        public async Task<IActionResult> Feed([FromQuery] string? title = null, [FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 50, bool json = false)
+        public async Task<IActionResult> Feed([FromQuery] string? title = null, [FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 50, [FromQuery] bool json = false)
         {
             //var result = await _postService.GetPosts(title, pageIndex, pageSize);
 
@@ -52,6 +53,12 @@ namespace Insightify.MVC.Controllers
             var result = new Page<PostViewModel>(postViewModelList, 1, 10, 20);
 
             return json ? Json(result) : View(result);
+        }
+
+        [HttpPost]
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }
