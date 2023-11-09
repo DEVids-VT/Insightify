@@ -155,8 +155,7 @@
                             transition: all 0.3s;
                         }
                         .posts-container .sections-container .section-posts .post-container .post-footer .footer-buttons .footer-btn-action:hover {
-                            background-color: #C864F7;
-                            color: white;
+                            color: #C864F7;
                         }
 
             .posts-container .sections-container .section-posts .under-post-line {

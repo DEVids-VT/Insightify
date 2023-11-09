@@ -12,3 +12,40 @@ body {
     background-color: #ececec;
     color: #D1D5DB;
 }
+
+.loading-bar-container-img-gray {
+    filter: grayscale(100%);
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    animation: breathe 2s infinite;
+}
+
+.loading-bar-container {
+    overflow: hidden;
+    height: 40px;
+    width: 40px;
+}
+
+.loading-bar {
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+        filter: grayscale(100%);
+    }
+
+    50% {
+        transform: scale(1.2);
+        filter: grayscale(0%);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: grayscale(100%);
+    }
+}

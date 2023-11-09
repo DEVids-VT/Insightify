@@ -2,9 +2,9 @@
 @model Insightify.Framework.Pagination.Abstractions.IPage<PostViewModel>
 <div class="posts-container">
     <div class="sections-container">
-        <section class="section-posts">
+        <section class="section-posts" id="postContainer">
             @{
-                foreach(var post in Model)
+                foreach (var post in Model)
                 {
                     <div class="post-container">
                         <header class="post-header">
@@ -61,3 +61,75 @@
         </section>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    var page = @Model.CurrentPage;
+    var pageSize = @Model.PageSize;
+    var isLoading = false;
+    var loadbar = `
+        <div class="loading-bar">
+            <div class="loading-bar-container">
+                <img class="loading-bar-container-img-gray" src="/images/logo/logo_violet_s.png" alt="loading">
+            </div>
+        </div>
+    `;
+
+    $(window).scroll(function () {
+        if (!isLoading && $(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+            isLoading = true;
+            $('#postContainer').append(loadbar);
+            $.ajax({
+                url: '@Url.Action("FeedJson", "Posts")',
+                data: { page: page + 1, pageSize: pageSize },
+                type: 'GET',
+                success: function (result) {
+                    $('.loading-bar').remove();
+                    page++;
+                    result.forEach(function (post) {
+                        var postHtml = `
+                            <div class="post-container">
+                                <header class="post-header">
+                                    <div class="post-header-info">
+                                        <div class="post-header-image">
+                                            <img class="header-img-data" src="/images/navbar/green.png" />
+                                            <h1 class="header-img-text">Author</h1>
+                                        </div>
+                                        <div class="post-header-hour">
+                                            <h1><strong>‧</strong></h1>
+                                            <h1 class="headerhour-text">2 hr. ago</h1>
+                                        </div>
+                                    </div>
+                                    <div class="post-header-buttons">
+                                        <a class="follow-btn">Follow</a>
+                                        <a class="report-btn"><i class="fa fa-flag"></i></a>
+                                    </div>
+                                </header>
+                                <div class="post-content">
+                                    <div class="post-content-bg"></div>
+                                    <h1 class="content-title">${post.title}</h1>
+                                    <p class="content-text-container">
+                                        ${post.description}
+                                    </p>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="footer-buttons">
+                                        <a class="footer-btn-action" href="#"><i class="fa fa-heart"></i> ${post.likeCount}</a>
+                                        <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> ${post.commentCount}</a>
+                                        <a class="footer-btn-action" href="#"><i class="fa fa-share"></i> Share</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="under-post-line"></div>`;
+
+                        $('#postContainer').append(postHtml);
+                    });
+                },
+                complete: function () {
+                    isLoading = false;
+                    $('.loading-bar').remove();
+                }
+            });
+        }
+    });
+</script>

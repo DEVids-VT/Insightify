@@ -16,10 +16,15 @@
     width: 30%;
     color: #111827;
     border-radius: 30px;
-    background: #F8F7FA;
-    border: none;
+    background: transparent;
+    border: 1px solid #dddddd;
     transition: ease;
-    transition-duration: 1s;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+.crypto-card:hover{
+    background: #F8F7FA;
+    border: 1px solid #F8F7FA;
 }
 
     .crypto-card .top-area {
@@ -130,7 +135,6 @@
     padding: 15px;
     margin: 20px;
     overflow: hidden;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 @media(max-width: 1241px) {

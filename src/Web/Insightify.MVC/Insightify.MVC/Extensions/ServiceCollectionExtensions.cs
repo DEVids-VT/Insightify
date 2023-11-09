@@ -41,7 +41,7 @@ namespace Insightify.MVC.Extensions
         }
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var gatewayUrl = configuration.GetValue<string>("GatewayUrl");
+            var gatewayUrl = configuration.GetValue<string>("GatewayUrl") ?? "http://localhost";
 
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
