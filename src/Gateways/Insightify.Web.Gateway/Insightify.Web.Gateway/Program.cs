@@ -1,4 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
+using Azure.Core;
+using FluentValidation;
 using Insightify.Framework;
 using Insightify.Framework.Automapper;
 using Insightify.Framework.HealthChecks;
@@ -51,7 +54,8 @@ builder.Services.AddControllers(options =>
 
 builder.Services
     .AddApplicationServices(builder.Configuration)
-    .AddCustomAuthentication(builder.Configuration);
+    .AddCustomAuthentication(builder.Configuration)
+    .AddValidatorsFromAssembly(Assembly.Load(Namespace), ServiceLifetime.Scoped);
 
 builder.Host.UseLogging(p =>
 {

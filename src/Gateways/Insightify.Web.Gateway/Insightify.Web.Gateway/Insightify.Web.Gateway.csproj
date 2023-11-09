@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.8.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
     <PackageReference Include="Insightify.Framework" Version="2.0.0" />
     <PackageReference Include="Insightify.Framework.Logging" Version="1.0.0" />
     <PackageReference Include="Insightify.Framework.Pagination" Version="1.0.0" />

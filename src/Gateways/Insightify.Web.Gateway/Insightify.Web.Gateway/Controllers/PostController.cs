@@ -1,4 +1,6 @@
-﻿using Insightify.Web.Gateway.Services.News;
+﻿using Insightify.Web.Gateway.Models;
+using Insightify.Web.Gateway.Models.Posts;
+using Insightify.Web.Gateway.Services.News;
 using Insightify.Web.Gateway.Services.Posts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,5 +22,14 @@ namespace Insightify.Web.Gateway.Controllers
             var result = await _postService.GetPosts(title, pageIndex, pageSize);
             return result != null ? Ok(result) : NotFound();
         }
+
+        [HttpPost]
+        [Route("create")]
+        public async Task<IActionResult> Create([FromBody] CreatePostInputModel post)
+        {
+            var response = await _postService.CreatePost(post);
+            return Ok(response);
+        }
+
     }
 }
