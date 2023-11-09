@@ -142,6 +142,25 @@ p {
 .direct-message-item {
     display: flex;
     flex-direction: row;
+    color: #bec1c3;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+.direct-message-item:hover {
+    color: rgb(121, 120, 120);
+    border-radius: 20px;
+    background-color: rgb(238, 218, 255);
+}
+
+.nav-link{
+    color: #bec1c3;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+.nav-link:hover{
+    color: rgb(121, 120, 120);
+    border-radius: 20px;
+    background-color: rgb(238, 218, 255);
 }
 
 .show-all-btn {

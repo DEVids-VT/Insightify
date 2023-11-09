@@ -12,7 +12,6 @@ body {
     background-color: #ececec;
     color: #D1D5DB;
 }
-
 .loading-bar-container-img-gray {
     filter: grayscale(100%);
     width: 40px;

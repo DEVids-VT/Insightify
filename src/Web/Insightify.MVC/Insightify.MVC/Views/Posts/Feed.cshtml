@@ -80,8 +80,8 @@
             isLoading = true;
             $('#postContainer').append(loadbar);
             $.ajax({
-                url: '@Url.Action("FeedJson", "Posts")',
-                data: { page: page + 1, pageSize: pageSize },
+                url: '@Url.Action("Feed", "Posts")',
+                data: { page: page + 1, pageSize: pageSize, json: true },
                 type: 'GET',
                 success: function (result) {
                     $('.loading-bar').remove();
