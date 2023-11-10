@@ -1,0 +1,136 @@
+﻿
+/* Style for the main container */
+.cerate-post-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 20px;
+}
+
+/* Style for the create post section */
+.create-post-section {
+    width: 60%;
+    margin: 10px;
+}
+
+.create-post-title-container {
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    border-bottom: 1px solid #dddddd;
+    font-size: 24px;
+}
+
+.post-content-container{
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.post-content-navigation-top {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+}
+
+.naligation-item {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    width: 33.3%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.naligation-item:first-child{
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    color: #333;
+}
+.naligation-item:first-child:hover{
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    color: #333;
+}
+.naligation-item:nth-of-type(2){
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+    color: #333;
+}
+.naligation-item:nth-of-type(2):hover{
+    border-right: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    color: #333;
+}
+.naligation-item:last-child{
+    border-left: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    color: #333;
+}
+.naligation-item:last-child:hover{
+    border-left: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    color: #333;
+}
+
+.navigation-item-icon {
+    margin-right: 5px;
+}
+
+.post-content {
+    padding: 10px;
+}
+
+.post-content-input-title,
+.post-content-input-description {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.post-content-image-container {
+    margin-bottom: 10px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+}
+
+.bottom-btns-post {
+    margin-top: 10px;
+}
+
+.post-content-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    text-decoration: none;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Style for the profile display section */
+.create-post-profile-display-section {
+    width: 35%;
+    margin: 10px;
+}
+
+.profile-display-section-top,
+.profile-display-section-bottom {
+    margin-bottom: 20px;
+    background-color: white;
+    width: 100%;
+    height: 30vh;
+}

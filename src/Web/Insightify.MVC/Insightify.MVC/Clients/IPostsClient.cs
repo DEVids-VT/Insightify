@@ -6,6 +6,6 @@ namespace Insightify.MVC.Clients
     public interface IPostsClient
     {
         [Get("/post/all")]
-        Task<ApiResponse<List<PostResponseModel>>> Posts([Query] string? title = null, [Query] int pageIndex = 1, [Query] int pageSize = 50);
+        Task<ApiResponse<List<PostsResponseModel>>> Posts([Query] string? title = null, [Query] int pageIndex = 1, [Query] int pageSize = 50);
     }
 }

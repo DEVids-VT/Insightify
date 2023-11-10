@@ -3,7 +3,7 @@ using Insightify.MVC.Infrastructure.Mapping;
 
 namespace Insightify.MVC.Models
 {
-    public class PostViewModel : IMapFrom<PostResponseModel>
+    public class PostViewModel : IMapFrom<PostsResponseModel>
     {
         public int Id { get; set; }
         public string Title { get; set; } = default!;

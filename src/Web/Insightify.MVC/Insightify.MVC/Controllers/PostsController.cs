@@ -2,6 +2,7 @@
 using Insightify.MVC.Models;
 using Insightify.MVC.Services.Posts;
 using Microsoft.AspNetCore.Mvc;
+using Refit;
 using System.Text;
 
 namespace Insightify.MVC.Controllers
@@ -55,8 +56,14 @@ namespace Insightify.MVC.Controllers
             return json ? Json(result) : View(result);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create([FromForm] PostDataModel postData)
         {
             return View();
         }

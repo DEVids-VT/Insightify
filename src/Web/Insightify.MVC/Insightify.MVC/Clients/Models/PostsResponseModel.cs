@@ -1,6 +1,6 @@
 ﻿namespace Insightify.MVC.Clients.Models
 {
-    public class PostResponseModel
+    public class PostsResponseModel
     { 
         public int Id { get; set; }
         public string Title { get; set; } = default!;
