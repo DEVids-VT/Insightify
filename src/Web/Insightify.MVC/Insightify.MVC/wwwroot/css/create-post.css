@@ -29,7 +29,7 @@
     padding: 20px; /* Added padding for spacing */
 }
 
-.post-content-navigation-top{
+.post-content-navigation-top {
     display: flex;
     flex-direction: row;
 }
@@ -123,11 +123,156 @@
     border-radius: 10px; /* Rounded corners */
 }
 
-@media(max-width:1300px){
-    .create-post-profile-display-section{
+@media(max-width:1300px) {
+    .create-post-profile-display-section {
         display: none;
     }
-    .create-post-section{
+
+    .create-post-section {
         width: 100%;
     }
 }
+
+.uploaded-image-file{
+    width: 150px;
+}
+
+.post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    max-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    margin: 10px;
+    border-radius: 30px;
+    transition: all 0.3s;
+    padding: 30px;
+    border-bottom: 1px solid #dddddd;
+}
+
+    .post-container:hover {
+        background-color: rgb(248, 247, 247);
+        cursor: pointer;
+        border-bottom: 1px solid rgb(248, 247, 247);
+    }
+
+    .post-container .post-header {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 10%;
+    }
+
+        .post-container .post-header .post-header-info {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+            .post-container .post-header .post-header-info .post-header-image {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                margin: 2px;
+            }
+
+                .post-container .post-header .post-header-info .post-header-image .header-img-data {
+                    width: 50px;
+                    margin-right: 10px;
+                }
+
+            .post-container .post-header .post-header-info .post-header-hour {
+                display: flex;
+                flex-direction: row;
+                width: 100%;
+            }
+
+                .post-container .post-header .post-header-info .post-header-hour strong {
+                    margin: 5px;
+                }
+
+        .post-container .post-header .post-header-buttons {
+            display: flex;
+            flex-direction: row;
+        }
+
+            .post-container .post-header .post-header-buttons .follow-btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                border-radius: 30px;
+                pad: 10px;
+                background-color: #C864F7;
+                color: white;
+                width: 70px;
+                height: 30px;
+                cursor: pointer;
+                margin: 2px;
+            }
+
+            .post-container .post-header .post-header-buttons .report-btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                border-radius: 30px;
+                pad: 10px;
+                background-color: #C864F7;
+                color: white;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+                margin: 2px;
+            }
+
+    .post-container .post-content {
+        height: 100%;
+        overflow: hidden;
+    }
+
+        .post-container .post-content .content-title {
+            font-weight: 600;
+        }
+
+        .post-container .post-content .content-text-container {
+            overflow: hidden;
+            color: #808080;
+            font-weight: 500;
+        }
+
+    .post-container .post-footer {
+        margin-top: 20px;
+        height: 10%;
+    }
+
+        .post-container .post-footer .footer-buttons {
+            display: flex;
+            flex-direction: row;
+        }
+
+            .post-container .post-footer .footer-buttons .footer-btn-action {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                border-radius: 30px;
+                pad: 10px;
+                color: white;
+                width: 70px;
+                height: 30px;
+                cursor: pointer;
+                margin: 2px;
+                color: #808080;
+                transition: all 0.3s;
+            }
+
+                .post-container .post-footer .footer-buttons .footer-btn-action:hover {
+                    color: #C864F7;
+                }

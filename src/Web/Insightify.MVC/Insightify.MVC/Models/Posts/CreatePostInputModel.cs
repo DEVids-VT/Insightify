@@ -1,6 +1,6 @@
-﻿namespace Insightify.MVC.Models
+﻿namespace Insightify.MVC.Models.Posts
 {
-    public class PostDataModel
+    public class CreatePostInputModel
     {
         public string Title { get; set; }
         public string Description { get; set; }

@@ -1,5 +1,5 @@
 ﻿using Insightify.Framework.Pagination;
-using Insightify.MVC.Models;
+using Insightify.MVC.Models.Posts;
 using Insightify.MVC.Services.Posts;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
@@ -63,7 +63,7 @@ namespace Insightify.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromForm] PostDataModel postData)
+        public IActionResult Create([FromForm] CreatePostInputModel postData)
         {
             return View();
         }

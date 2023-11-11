@@ -17,7 +17,7 @@
             </div>
             <div class="post-content" id="text-content">
                 <input id="postTitle" class="post-content-input-title" type="text" placeholder="Post title" />
-                <input id="postDescription" class="post-content-input-description" type="text" placeholder="Post description" />
+                <textarea id="postDescription" class="post-content-input-description" rows="5" ></textarea>
                 <div class="bottom-btns-post">
                     <a class="post-content-btn hidden">Previous</a>
                     <a class="post-content-btn" id="text-display-image">Next</a>
@@ -33,6 +33,9 @@
                 </div>
             </div>
             <div class="post-content hidden" id="preview-content">
+                <div class="dynamic-content" id="dynamic-content">
+
+                </div>
                 <div class="bottom-btns-post">
                     <a class="post-content-btn" id="preview-display-image">Previous</a>
                     <a class="post-content-btn" id="submitBtn">Submit</a>
@@ -49,86 +52,6 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#submitBtn').click(function () {
-            var title = document.getElementById('postTitle').value;
-            var description = document.getElementById('postDescription').value;
-            var imageData = document.getElementById('image').files[0];
-
-            var formData = new FormData();
-            formData.append('Title', title);
-            formData.append('Description', description);
-            formData.append('Image', imageData);
-
-            $.ajax({
-                url: '/posts/create',
-                type: 'POST',
-                processData: false, 
-                contentType: false,
-                data: formData,
-                success: function (data) {
-                    console.log(data);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var textContent = document.getElementById('text-content');
-        var imageContent = document.getElementById('image-content');
-        var previewContent = document.getElementById('preview-content');
-
-        var btnPost = document.getElementById('btn-post');
-        var btnImage = document.getElementById('btn-image');
-        var btnPreview = document.getElementById('btn-preview');
-        var btnSubmit = document.getElementById('submit');
-
-        var textDisplayImage = document.getElementById('text-display-image');
-        var displayText = document.getElementById('display-text');
-        var displayPreview = document.getElementById('display-preview');
-        var previewDisplayImage = document.getElementById('preview-display-image');
-
-        function showContent(content) {
-            textContent.classList.add('hidden');
-            imageContent.classList.add('hidden');
-            previewContent.classList.add('hidden');
-
-            content.classList.remove('hidden');
-        }
-
-        showContent(textContent);
-
-        btnPost.addEventListener('click', function () {
-            showContent(textContent);
-        });
-
-        btnImage.addEventListener('click', function () {
-            showContent(imageContent);
-        });
-
-        btnPreview.addEventListener('click', function () {
-            showContent(previewContent);
-        });
-
-        textDisplayImage.addEventListener('click', function () {
-            showContent(imageContent);
-        });
-
-        displayText.addEventListener('click', function () {
-            showContent(textContent);
-        });
-
-        displayPreview.addEventListener('click', function () {
-            showContent(previewContent);
-        });
-
-        previewDisplayImage.addEventListener('click', function () {
-            showContent(imageContent);
-        });
-    });
-</script>
+<script src="~/js/posts/createpostajax.js"></script>
+<script src="~/js/posts/dynamicbuttons.js"></script>
+<script src="~/js/posts/dynamicpagedisplay.js"></script>
