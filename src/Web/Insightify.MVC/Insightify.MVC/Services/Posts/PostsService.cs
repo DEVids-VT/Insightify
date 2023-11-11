@@ -27,37 +27,13 @@ namespace Insightify.MVC.Services.Posts
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Client-ID", "41519381aee37da");
-
         }
 
-        public async Task<CreatePostResponceModel> CreatePost(CreatePostInputModel model)
+        public async Task<CreatePostResponseModel> CreatePost(CreatePostInputModel model)
         {
-            using var formContent = new MultipartFormDataContent();
-            using var imageStream = model.Image.OpenReadStream();
-            using var streamContent = new StreamContent(imageStream);
-            streamContent.Headers.ContentType = new MediaTypeHeaderValue(model.Image.ContentType);
+            var imageUrl = await UploadImageToImgur(model.Image);
 
-            formContent.Add(streamContent, "image", model.Image.FileName);
-
-            var response = await _httpClient.PostAsync("https://api.imgur.com/3/upload", formContent);
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonResponse = JObject.Parse(responseContent);
-                var imageUrl = jsonResponse["data"]["link"].ToString();
-
-                var result = await _postClient.Create(new PostModel 
-                { 
-                    Description = model.Description, 
-                    Title = model.Title, 
-                    ImageUrl = imageUrl 
-                });
-
-                return result.Content;
-            }
-
-            throw new ArgumentException();
+            return await CreatePostWithImageUrl(model, imageUrl);
         }
 
         public async Task<IPage<PostViewModel>> GetPosts(string? title = null, int pageIndex = 1, int pageSize = 50)
@@ -82,6 +58,40 @@ namespace Insightify.MVC.Services.Posts
                 parsedHeaders["CurrentPage"],
                 parsedHeaders["PageSize"],
                 parsedHeaders["TotalCount"]);
+        }
+
+        private async Task<string> UploadImageToImgur(IFormFile imageFile)
+        {
+            using var formContent = new MultipartFormDataContent();
+            using var imageStream = imageFile.OpenReadStream();
+            using var streamContent = new StreamContent(imageStream);
+            streamContent.Headers.ContentType = new MediaTypeHeaderValue(imageFile.ContentType);
+
+            formContent.Add(streamContent, "image", imageFile.FileName);
+
+            var response = await _httpClient.PostAsync("https://api.imgur.com/3/upload", formContent);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"Image upload failed with status code: {response.StatusCode}");
+            }
+
+            var jsonResponse = JObject.Parse(responseContent);
+            return jsonResponse["data"]["link"].ToString();
+        }
+
+        private async Task<CreatePostResponseModel> CreatePostWithImageUrl(CreatePostInputModel model, string imageUrl)
+        {
+            var postModel = new PostModel
+            {
+                Description = model.Description,
+                Title = model.Title,
+                ImageUrl = imageUrl
+            };
+
+            var result = await _postClient.Create(postModel);
+            return result.Content!;
         }
     }
 }

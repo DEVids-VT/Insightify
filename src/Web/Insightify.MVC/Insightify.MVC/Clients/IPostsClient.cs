@@ -11,6 +11,6 @@ namespace Insightify.MVC.Clients
         Task<ApiResponse<List<PostsResponseModel>>> Posts([Query] string? title = null, [Query] int pageIndex = 1, [Query] int pageSize = 50);
 
         [Get("/post/create")]
-        Task<ApiResponse<CreatePostResponceModel>> Create([FromBody] PostModel post);
+        Task<ApiResponse<CreatePostResponseModel>> Create([FromBody] PostModel post);
     }
 }

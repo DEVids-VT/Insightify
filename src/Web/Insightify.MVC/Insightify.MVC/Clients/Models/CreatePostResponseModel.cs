@@ -1,6 +1,6 @@
 ﻿namespace Insightify.MVC.Clients.Models
 {
-    public class CreatePostResponceModel
+    public class CreatePostResponseModel
     {
          public int PostId { get; set; }
     }
