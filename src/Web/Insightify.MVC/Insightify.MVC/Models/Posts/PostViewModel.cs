@@ -1,7 +1,7 @@
 ﻿using Insightify.MVC.Clients.Models;
 using Insightify.MVC.Infrastructure.Mapping;
 
-namespace Insightify.MVC.Models
+namespace Insightify.MVC.Models.Posts
 {
     public class PostViewModel : IMapFrom<PostsResponseModel>
     {

@@ -5,7 +5,7 @@ using Insightify.Framework.Pagination.Headers;
 using Insightify.MVC.Clients;
 using Insightify.MVC.Infrastructure.Exceptions;
 using Insightify.MVC.Infrastructure.Pagination;
-using Insightify.MVC.Models;
+using Insightify.MVC.Models.Posts;
 
 namespace Insightify.MVC.Services.Posts
 {
@@ -18,6 +18,11 @@ namespace Insightify.MVC.Services.Posts
         {
             _postClient = postClient;
             _mapper = mapper;
+        }
+
+        public Task<CreatePostOutputModel> CreatePost(CreatePostInputModel model)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IPage<PostViewModel>> GetPosts(string? title = null, int pageIndex = 1, int pageSize = 50)

@@ -1,6 +1,7 @@
-﻿@    using Insightify.Framework.Pagination;
-    using Insightify.MVC.Models.Posts;
-@model Insightify.Framework.Pagination.Abstractions.IPage<PostViewModel>
+﻿@using Insightify.Framework.Pagination.Abstractions;
+@using Insightify.MVC.Models.Posts;
+@model IPage<PostViewModel>
+
 <div class="posts-container">
     <div class="sections-container">
         <section class="section-posts" id="postContainer">
