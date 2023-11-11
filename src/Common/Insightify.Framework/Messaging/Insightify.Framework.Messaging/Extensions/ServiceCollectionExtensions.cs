@@ -72,11 +72,10 @@ namespace Insightify.Framework.Messaging.Extensions
                         {
                             foreach (var consumerType in endpointConfig.ConsumerTypes)
                             {
-                                e.Consumer(consumerType, type => Activator.CreateInstance(type));
+                                e.ConfigureConsumer(p, consumerType);
                             }
                         });
                     }
-
                 });
             });
         }

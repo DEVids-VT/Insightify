@@ -18,6 +18,7 @@ using Newtonsoft.Json.Serialization;
 using Polly;
 using System.Reflection;
 using Insightify.Framework.Messaging.Extensions;
+using Insightify.NotificationsAPI.Consumer;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseLogging(cfg =>
@@ -60,7 +61,8 @@ builder.Services.AddCoreServices(coreBuilder =>
     coreBuilder.AddRabbitMQ(p =>
     {
         p.WithConnectionString("rabbitmq://localhost:5672");
-        p.ConsumerAssemblies.Add(assembly);
+        p.ScanAssemblyForConsumers(assembly);
+        p.AddEndpointConfiguration("notificationEvent", typeof(EventConsumer));
     });
 });
 
