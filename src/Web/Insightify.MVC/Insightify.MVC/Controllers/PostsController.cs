@@ -63,9 +63,11 @@ namespace Insightify.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromForm] CreatePostInputModel postData)
+        public async Task<IActionResult> Create([FromForm] CreatePostInputModel postData)
         {
-            return View();
+            var model = await _postService.CreatePost(postData);
+
+            return Json(model);
         }
     }
 }

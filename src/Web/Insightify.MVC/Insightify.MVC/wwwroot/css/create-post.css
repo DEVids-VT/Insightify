@@ -134,7 +134,9 @@
 }
 
 .uploaded-image-file{
-    width: 150px;
+    width: 250px;
+    border-radius: 10px;
+    margin: 10px;
 }
 
 .post-container {
