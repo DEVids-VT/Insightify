@@ -17,12 +17,11 @@ namespace Insightify.NotificationsAPI.Models
         [BsonRequired]
         [MinLength(Validation.Notification.DescriptionMinLength)]
         [MaxLength(Validation.Notification.DescriptionMaxLength)]
-        public string Description { get; init; }
+        public string Summary { get; init; }
 
         public string Source { get; init; }
 
-        [BsonRequired]
-        public DateTime SentDate { get; init; }
+        [BsonRequired] public DateTime SentDate { get; init; } = DateTime.UtcNow;
 
         public DateTime? ReadAt { get; init; }
 

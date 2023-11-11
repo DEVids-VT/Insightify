@@ -28,7 +28,7 @@ namespace Insightify.NewsBackgroundTasks.Jobs
             _logger.LogInformation("Fetching articles");
 
             var response = await _fetcher.FetchDataAsync<LiveNewsResponseModel>(UrlsConfig.LiveNewsOperations.GetLiveNews( DateTime.Now, NewsSort.popularity, "business"));
-            var topArticle = response.Data.First();
+            var topArticle = response.Data.Last();
             response.Data.ForEach(article => _newsService.Add(article));
             NotificationEvent @event = new()
             {

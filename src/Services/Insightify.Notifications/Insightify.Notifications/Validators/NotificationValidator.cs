@@ -12,7 +12,7 @@ namespace Insightify.NotificationsAPI.Validators
                 .MinimumLength(Validation.Notification.TitleMinLength)
                 .MaximumLength(Validation.Notification.TitleMaxLength)
                 .NotEmpty();
-            RuleFor(p => p.Description)
+            RuleFor(p => p.Summary)
                 .MinimumLength(Validation.Notification.DescriptionMinLength)
                 .MaximumLength(Validation.Notification.DescriptionMaxLength)
                 .NotEmpty();

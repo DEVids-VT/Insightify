@@ -362,3 +362,49 @@ h1 {
         width: calc(100% - 250px);
     }
 }
+
+.notification-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    max-width: 500px;
+    z-index: 50;
+}
+
+.notification-image img {
+    width: 200px;
+    border-radius: 12px;
+    margin-right: 10px;
+}
+
+.notification-content {
+    flex-grow: 1;
+}
+
+.notification-title {
+    margin: 0;
+    font-size: 1em;
+    color: darkgray;
+    font-weight: 500;
+}
+
+.notification-summary {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #333;
+    max-height: 60px;
+    overflow: hidden;
+    max-width: 300px;
+}
+
+.notification-date {
+    font-size: 0.8em;
+    color: #666;
+}
