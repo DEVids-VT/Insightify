@@ -40,8 +40,8 @@ function updatePreview() {
                <header class="post-header">
                    <div class="post-header-info">
                        <div class="post-header-image">
-                           <img class="header-img-data" src="/images/navbar/green.png" />
-                           <h1 class="header-img-text">Author</h1>
+                           <img class="header-img-data" src="/images/navbar/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg" />
+                           <h1 class="header-img-text">David Petkov</h1>
                        </div>
                        <div class="post-header-hour">
                            <h1><strong>‧</strong></h1>
