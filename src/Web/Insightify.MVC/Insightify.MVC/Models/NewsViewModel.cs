@@ -3,7 +3,7 @@ using Insightify.MVC.Infrastructure.Mapping;
 
 namespace Insightify.MVC.Models
 {
-    public class NewsViewModel : IMapFrom<NewsResponceModel>
+    public class NewsViewModel : IMapFrom<NewsResponseModel>
     {
         public string Author { get; set; }
         public string Title { get; set; }
@@ -11,6 +11,7 @@ namespace Insightify.MVC.Models
         public string Url { get; set; }
         public string Source { get; set; }
         public string Country { get; set; }
+        public string? Image { get; set; }
         public DateTime PublishedAt { get; set; }
         public string Id { get; set; } = default!;
         public int RowVersion { get; set; }

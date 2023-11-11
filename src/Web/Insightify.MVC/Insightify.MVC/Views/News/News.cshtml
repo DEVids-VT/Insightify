@@ -7,7 +7,7 @@
             @{
                 foreach (var item in Model)
                 {
-                    <div class="news-container-single">
+                    <div onclick="window.open('@item.Url', '_blank');" class="news-container-single">
                         <div class="news-main">
                             <div class="news-header-hour">
                                 <h1 class="news-headerhour-title">@item.Author</h1>
@@ -18,9 +18,13 @@
                                 <h1 class="news-content-title">@item.Description</h1>
                             </div>
                         </div>
-                        <div>
-                            <img class="news-image" src="~/images/camera_lense_0.jpeg" />
-                       </div>
+
+                        @if (item.Image != null)
+                        {
+                            <div>
+                                <img class="news-image" src="@item.Image" />
+                            </div>
+                        }
                     </div>
                     <div class="news-under-post-line"></div>
                 }
@@ -54,12 +58,12 @@
     var newsPageSize = @Model.PageSize;
     var isNewsLoading = false;
     var newsLoadbar = `
-            <div class="loading-bar">
-                <div class="loading-bar-container">
-                    <img class="loading-bar-container-img-gray" src="/images/logo/logo_violet_s.png" alt="loading">
+                <div class="loading-bar">
+                    <div class="loading-bar-container">
+                        <img class="loading-bar-container-img-gray" src="/images/logo/logo_violet_s.png" alt="loading">
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
 
     $(window).scroll(function () {
         if (!isNewsLoading && $(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
@@ -75,22 +79,22 @@
                     newsPage++;
                     result.forEach(function (item) {
                         var newsHtml = `
-                                <div class="news-container-single">
-                                    <div class="news-main">
-                                        <div class="news-header-hour">
-                                            <h1 class="news-headerhour-title">${item.author}</h1>
-                                            <h1><strong>‧</strong></h1>
-                                            <h1 class="news-headerhour-text">${item.createdDateTime}</h1>
+                                    <div class="news-container-single">
+                                        <div class="news-main">
+                                            <div class="news-header-hour">
+                                                <h1 class="news-headerhour-title">${item.author}</h1>
+                                                <h1><strong>‧</strong></h1>
+                                                <h1 class="news-headerhour-text">${item.createdDateTime}</h1>
+                                            </div>
+                                            <div class="news-content">
+                                                <h1 class="news-content-title">${item.description}</h1>
+                                            </div>
                                         </div>
-                                        <div class="news-content">
-                                            <h1 class="news-content-title">${item.description}</h1>
-                                        </div>
+                                        <div>
+                                            <img class="news-image" src="/images/camera_lense_0.jpeg" />
+                                       </div>
                                     </div>
-                                    <div>
-                                        <img class="news-image" src="/images/camera_lense_0.jpeg" />
-                                   </div>
-                                </div>
-                                <div class="news-under-post-line"></div>`;
+                                    <div class="news-under-post-line"></div>`;
 
                         $('.news-section-posts').append(newsHtml);
                     });

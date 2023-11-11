@@ -196,8 +196,8 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $(window).scroll(function() {
+        $(document).ready(function () {
+            $(window).scroll(function () {
                 var scroll = $(window).scrollTop();
                 var header = $('#header');
                 var initialColor = '#ececec';
@@ -357,9 +357,36 @@
     <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@3.6.1/dist/lightweight-charts.standalone.production.js"></script>
     <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/charts.js"></script>
+    <script src="signalr/hubs"></script>
+    <script>
+        $(document).ready(function() {
+            try {
+                var hubConnection = new signalR.HubConnectionBuilder()
+                    .withUrl('http://localhost:5121/notificationhub')
+                    .configureLogging(signalR.LogLevel.Information)
+                    .build();
+                console.log('HubConnection built');
+            } catch (e) {
+                console.error('Error while creating HubConnection:', e);
+            }
+            hubConnection.on('receiveMessage', function(message) {
+                // Display the message in a popup
+                alert(message); // Or use a custom modal dialog
+            });
+            hubConnection.start()
+                .then(() => {
+                    console.log('SignalR connection started.');
+                })
+                .catch(err => {
+                    console.error('Error while starting SignalR connection:', err);
+                });
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

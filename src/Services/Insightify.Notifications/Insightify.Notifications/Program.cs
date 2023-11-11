@@ -17,6 +17,7 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Polly;
 using System.Reflection;
+using Insightify.Framework.Messaging.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseLogging(cfg =>
@@ -55,6 +56,11 @@ builder.Services.AddCoreServices(coreBuilder =>
     coreBuilder.AddHealthChecks(p =>
     {
         p.AddMongoDb(mongoSettings.Url);
+    });
+    coreBuilder.AddRabbitMQ(p =>
+    {
+        p.WithConnectionString("rabbitmq://localhost:5672");
+        p.ConsumerAssemblies.Add(assembly);
     });
 });
 

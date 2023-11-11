@@ -66,6 +66,17 @@ namespace Insightify.Framework.Messaging.Extensions
                         h.PublisherConfirmation = true;
                     });
 
+                    foreach (var endpointConfig in config.Endpoints)
+                    {
+                        cfg.ReceiveEndpoint(endpointConfig.QueueName, e =>
+                        {
+                            foreach (var consumerType in endpointConfig.ConsumerTypes)
+                            {
+                                e.Consumer(consumerType, type => Activator.CreateInstance(type));
+                            }
+                        });
+                    }
+
                 });
             });
         }

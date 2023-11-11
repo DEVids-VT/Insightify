@@ -18,7 +18,7 @@ namespace Insightify.NotificationsAPI.Consumer
         private readonly INotificationService _notificationService;
         private readonly IValidator<Notification> _validator;
 
-        public EventConsumer(IMapper mapper, ILogger logger, INotificationService notificationService, IValidator<Notification> validator)
+        public EventConsumer(IMapper mapper, ILogger<EventConsumer> logger, INotificationService notificationService, IValidator<Notification> validator)
         {
             _mapper = mapper;
             _logger = logger;

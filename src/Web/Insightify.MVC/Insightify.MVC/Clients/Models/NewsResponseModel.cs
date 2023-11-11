@@ -1,6 +1,6 @@
 ﻿namespace Insightify.MVC.Clients.Models
 {
-    public class NewsResponceModel
+    public class NewsResponseModel
     {
         public string Author { get; set; }
         public string Title { get; set; }
@@ -8,6 +8,7 @@
         public string Url { get; set; }
         public string Source { get; set; }
         public string Country { get; set; }
+        public string? Image { get; set; }
         public DateTime PublishedAt { get; set; }
         public string Id { get; set; } = default!;
         public int RowVersion { get; set; }

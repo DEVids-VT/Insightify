@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Insightify.NotificationsAPI
 {
-    [Authorize]
+    [AllowAnonymous]
     public class NotificationHub : Hub
     {
         public override async Task OnConnectedAsync()
