@@ -1,0 +1,26 @@
+﻿<div id="chat-box" class="chat-box-main-container d-flex flex-column hidden">
+    <header class="chat-box-header d-flex justify-content-center align-items-center flex-row">
+        <a href="#" class="hide-chatbox" id="chat-box-hide"><i class="fa fa-xmark"></i></a>
+    </header>
+    <div class="chat-box-messages-container d-flex justify-content-start flex-column">
+        <div class="message-begining d-flex align-items-center justify-content-center">
+            <p>This is the begining of your conversation!</p>
+        </div>
+        @{
+            for (int i = 0; i < 40; i++)
+            {
+                <div class="chat-message-element d-flex align-items-end justify-content-end">
+                    <p class="chat-message-content message-owner">Hello I am David! @i</p>
+                </div>
+                <div class="chat-message-element d-flex align-items-start justify-content-start">
+                    <p class="chat-message-content">Hello I am David too! @i</p>
+                </div>
+            }
+        }
+    </div>
+    <footer class="chat-box-footer">
+        <div class="chat-box-container">
+            <input class="chat-box-input" placeholder="message" />
+        </div>
+    </footer>
+</div>

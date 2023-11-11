@@ -18,7 +18,5 @@ namespace Insightify.Web.Gateway.Models
         public DateTime CreatedDateTime { get; set; }
         public DateTime UpdatedDateTime { get; set; }
         public bool IsDeleted { get; set; }
-
     }
-
 }
