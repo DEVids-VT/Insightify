@@ -1,4 +1,12 @@
-﻿<!DOCTYpE html>
+﻿@using Microsoft.AspNetCore.Authentication
+@* @inject IHttpContextAccessor HttpContextAccessor
+ *@@{
+    // const string ACCESS_TOKEN = "access_token";
+
+    // var token = HttpContextAccessor.HttpContext
+    //     .GetTokenAsync(ACCESS_TOKEN);
+}
+<!DOCTYpE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -46,14 +54,21 @@
         $(document).ready(function() {
             try {
                 var hubConnection = new signalR.HubConnectionBuilder()
-                    .withUrl('http://localhost:5121/notificationhub')
+                    .withUrl('http://localhost:5121/notificationhub',
+                        {
+                            queryParams: { "groupName": "notifications" }
+                        })
                     .configureLogging(signalR.LogLevel.Information)
+                    .withHubProtocol(new signalR.JsonHubProtocol({
+                        // Set the maximum receive message size (in bytes)
+                        maximumReceiveMessageSize: 1048576 // Example size: 1MB
+                    }))
                     .build();
                 console.log('HubConnection built');
             } catch (e) {
                 console.error('Error while creating HubConnection:', e);
             }
-            hubConnection.on('receiveMessage', function(message) {
+            hubConnection.on('ReceiveNotification', function (message) {
                 // Display the message in a popup
                 alert(message); // Or use a custom modal dialog
             });

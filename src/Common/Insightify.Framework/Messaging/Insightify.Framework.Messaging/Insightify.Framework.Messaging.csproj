@@ -7,7 +7,7 @@
   </PropertyGroup>
 	<PropertyGroup>
 		<PackageId>Insightify.Framework.Messaging</PackageId>
-		<Version>1.0.1</Version>
+		<Version>1.0.2</Version>
 		<Authors>Insightify</Authors>
 		<Description>Messaging Logic for the Insighfity.Project</Description>
 	</PropertyGroup>
