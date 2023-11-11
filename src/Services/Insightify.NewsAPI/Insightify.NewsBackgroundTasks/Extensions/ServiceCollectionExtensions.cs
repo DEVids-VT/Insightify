@@ -37,7 +37,8 @@ namespace Insightify.NewsBackgroundTasks.Extensions
                 qz.AddTrigger(opts => opts
                     .ForJob(jobKey)
                     .WithIdentity("FetchNewsJob-trigger")
-                    .WithCronSchedule("0 0 8 * * ?")
+                    .StartNow()
+                    //.WithCronSchedule("0 0 8 * * ?")
                 );
             });
             builder.Services.AddQuartzHostedService(qz => qz.WaitForJobsToComplete = true);

@@ -1,8 +1,8 @@
 ﻿using Insightify.Framework.Fetching.Interfaces;
 using Insightify.Framework.Messaging.Abstractions.Interfaces;
+using Insightify.Framework.Messaging.Events;
 using Insightify.NewsBackgroundTasks.Configuration;
 using Insightify.NewsBackgroundTasks.Configuration.Enums;
-using Insightify.NewsBackgroundTasks.Events;
 using Insightify.NewsBackgroundTasks.ResponceModels.LiveNews;
 using Insightify.NewsBackgroundTasks.Services.Contracts;
 using MassTransit;

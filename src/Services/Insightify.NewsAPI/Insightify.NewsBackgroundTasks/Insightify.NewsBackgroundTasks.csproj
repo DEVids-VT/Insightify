@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="7.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="7.1.0" />
     <PackageReference Include="AspNetCore.HealthChecks.UI.InMemory.Storage" Version="7.0.0" />
@@ -20,8 +24,8 @@
     <PackageReference Include="Insightify.Framework" Version="2.0.0" />
     <PackageReference Include="Insightify.Framework.Fetching" Version="1.0.0" />
     <PackageReference Include="Insightify.Framework.Logging" Version="1.0.0" />
-    <PackageReference Include="Insightify.Framework.Messaging" Version="1.0.0" />
-    <PackageReference Include="Insightify.Framework.Messaging.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Insightify.Framework.Messaging" Version="1.0.2" />
+    <PackageReference Include="Insightify.Framework.Messaging.Abstractions" Version="1.0.2" />
     <PackageReference Include="Insightify.Framework.Mongo" Version="1.0.0" />
     <PackageReference Include="Insightify.Framework.MongoDb.Abstractions" Version="1.0.0" />
     <PackageReference Include="MassTransit" Version="8.0.16" />

@@ -12,6 +12,7 @@ namespace Insightify.Web.Gateway.Models
         public string Url { get; set; }
         public string Source { get; set; }
         public string Country { get; set; }
+        public string? Image { get; set; }
         public DateTime PublishedAt { get; set; }
         public string Id { get; set; } = default!;
         public int RowVersion { get; set; }

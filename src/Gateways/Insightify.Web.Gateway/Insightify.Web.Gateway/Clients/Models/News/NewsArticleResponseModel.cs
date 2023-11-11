@@ -10,6 +10,7 @@
         public string? Url { get; set; }
         public string? Source { get; set; }
         public string? Country { get; set; }
+        public string? Image { get; set; }
         public DateTime PublishedAt { get; set; }
         public int RowVersion { get; set; }
         public DateTime CreatedDateTime { get; set; }
