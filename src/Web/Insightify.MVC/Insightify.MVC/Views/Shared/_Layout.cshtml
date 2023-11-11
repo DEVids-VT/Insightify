@@ -34,15 +34,8 @@
         <div class="container-main">
             <main id="main" role="main" class="pb-3">
                 @RenderBody()
-                <div id="notification-popup" class="notification-popup">
-                    @* <div class="notification-image">
-                        <img src="https://i.imgur.com/eEaUm20.jpeg" alt="Notification Image">
-                    </div>
-                    <div class="notification-content">
-                        <h4 class="notification-title">Title uwu</h4>
-                        <p class="notification-summary">Aaaaaaaaaaaa aaaaaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaa</p>
-                        <span class="notification-date">12/12/2323</span>
-                    </div> *@
+                <button id="kys">aaaaaaaaa</button>
+                <div id="notification-popup" class="notification-popup hidden">
                 </div>
                 <script src="https://kit.fontawesome.com/1f167bd3a1.js" crossorigin="anonymous"></script>
             </main>
@@ -60,6 +53,31 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/charts.js"></script>
     <script src="signalr/hubs"></script>
+    <script>
+        var kys = document.getElementById('kys');
+        var notificationPopup = document.getElementById('notification-popup');
+        var a = true;
+        kys.addEventListener('click', function () {
+            if(a){
+                notificationPopup.innerHTML = `
+                    <div class="notification-image">
+                        <img style="width: 120px;" src="https://i.pinimg.com/564x/61/55/d2/6155d25c52539f37933789c9808dcb83.jpg" alt = "Image here." />
+                    </div>
+                    <div class="notification-content">
+                        <h4 class="notification-title">message.title</h4>
+                        <p class="notification-summary">message.summary</p>
+                        <span class="notification-date">message.sentDate</span>
+                    </div>`;
+                a = false;
+                notificationPopup.classList.remove('hidden');
+            }
+            else{
+                notificationPopup.innerHTML = '';
+                notificationPopup.classList.add('hidden');
+                a = true;
+            }
+        });
+    </script>
     <script>
         $(document).ready(function () {
             try {
@@ -82,10 +100,11 @@
                 var jsonString = JSON.stringify(message);
                 console.log(jsonString);
                 var notificationPopup = document.getElementById('notification-popup');
+                notificationPopup.classList.remove('hidden');
                 notificationPopup.innerHTML = `
                             <div class="notification-image">
 
-                                ${message.imageUrl ? `<img src="${message.imageUrl}" alt="Image here.">` : '<img style="width: 120px;" src="https://i.pinimg.com/564x/61/55/d2/6155d25c52539f37933789c9808dcb83.jpg" alt = "Image here." >'}
+                                ${message.imageUrl ? `<img src="${message.imageUrl}" alt="Image here." />` : '<img style="width: 120px;" src="https://i.pinimg.com/564x/61/55/d2/6155d25c52539f37933789c9808dcb83.jpg" alt = "Image here." />'}
                             </div>
                            <div class="notification-content">
                                 <h4 class="notification-title">${message.title}</h4>
@@ -94,6 +113,7 @@
                             </div>`;
                 setTimeout(() => {
                     notificationPopup.innerHTML = '';
+                    notificationPopup.classList.add('hidden');
                 }, 5000);
 
             });

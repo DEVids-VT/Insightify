@@ -363,12 +363,17 @@ h1 {
     }
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; transform: translatex(20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
 .notification-popup {
     position: fixed;
     bottom: 20px;
     right: 20px;
     background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 20px;
     overflow: hidden;
     display: flex;
@@ -376,8 +381,9 @@ h1 {
     padding: 10px;
     max-width: 500px;
     z-index: 50;
+    transition: visibility 0s linear 0.5s, opacity 0.5s linear;
+    animation: fadeIn 0.5s ease-out;
 }
-
 .notification-image img {
     width: 200px;
     border-radius: 12px;
