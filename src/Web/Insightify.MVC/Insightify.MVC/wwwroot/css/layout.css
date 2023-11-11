@@ -148,8 +148,8 @@ p {
 }
 .direct-message-item:hover {
     color: rgb(121, 120, 120);
-    border-radius: 20px;
-    background-color: rgb(238, 218, 255);
+    border-radius: 10px;
+    background-color: #f0f0f0;
 }
 
 .nav-link{
@@ -159,8 +159,8 @@ p {
 }
 .nav-link:hover{
     color: rgb(121, 120, 120);
-    border-radius: 20px;
-    background-color: rgb(238, 218, 255);
+    border-radius: 10px;
+    background-color: #f0f0f0;
 }
 
 .show-all-btn {

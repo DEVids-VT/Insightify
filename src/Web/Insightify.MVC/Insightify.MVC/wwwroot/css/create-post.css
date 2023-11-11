@@ -1,5 +1,4 @@
-﻿
-/* Style for the main container */
+﻿/* General container styles */
 .cerate-post-container {
     display: flex;
     justify-content: center;
@@ -7,121 +6,109 @@
     margin: 20px;
 }
 
-/* Style for the create post section */
+/* Main post creation section */
 .create-post-section {
     width: 60%;
     margin: 10px;
 }
 
 .create-post-title-container {
-    color: #fff;
-    padding: 10px;
+    color: #333; /* Changed for better readability */
+    padding: 20px; /* Increased padding */
     border-radius: 10px;
-    border-bottom: 1px solid #dddddd;
-    font-size: 24px;
+    border-bottom: 2px solid #eaeaea; /* Subtle border */
+    background-color: #f9f9f9; /* Light background */
+    font-size: 28px; /* Larger font */
+    font-weight: 500; /* Semi-bold */
 }
 
-.post-content-container{
+.post-content-container {
     margin-top: 20px;
     background-color: white;
     border-radius: 10px;
+    padding: 20px; /* Added padding for spacing */
 }
 
-.post-content-navigation-top {
+.post-content-navigation-top{
     display: flex;
-    justify-content: space-between;
-    overflow: hidden;
-    border-radius: 10px 10px 0 0;
+    flex-direction: row;
 }
 
+/* Navigation items */
 .naligation-item {
     text-decoration: none;
     color: #333;
     display: flex;
-    align-items: center;
     width: 33.3%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     text-align: center;
     transition: all 0.3s;
     cursor: pointer;
-}
-.naligation-item:first-child{
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    color: #333;
-}
-.naligation-item:first-child:hover{
-    border-right: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-    color: #333;
-}
-.naligation-item:nth-of-type(2){
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-    color: #333;
-}
-.naligation-item:nth-of-type(2):hover{
-    border-right: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-    border-left: 1px solid #dddddd;
-    color: #333;
-}
-.naligation-item:last-child{
-    border-left: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    color: #333;
-}
-.naligation-item:last-child:hover{
-    border-left: 1px solid #dddddd;
-    border-bottom: 1px solid #dddddd;
-    color: #333;
+    padding: 15px 0; /* Increased padding */
 }
 
+    .naligation-item:hover {
+        background-color: #f0f0f0; /* Subtle hover effect */
+        border-radius: 10px;
+        color: #000; /* Darken text on hover */
+    }
+
+/* Icons */
 .navigation-item-icon {
     margin-right: 5px;
 }
 
+/* Content styling */
 .post-content {
-    padding: 10px;
+    padding: 15px;
 }
 
 .post-content-input-title,
 .post-content-input-description {
     width: 100%;
     margin-bottom: 10px;
-    padding: 5px;
+    padding: 10px; /* Increased padding */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Larger font size */
 }
 
+/* Image upload container */
 .post-content-image-container {
     margin-bottom: 10px;
     height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #dddddd;
+    border: 1px dashed #ddd; /* Dashed border for upload area */
     border-radius: 10px;
+    background-color: #fafafa; /* Light background */
 }
 
+/* Buttons */
 .bottom-btns-post {
-    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end; /* Align buttons to right */
+    gap: 10px; /* Space between buttons */
 }
 
 .post-content-btn {
-    display: inline-block;
-    padding: 8px 16px;
-    margin-right: 10px;
+    padding: 10px 20px;
     text-decoration: none;
-    background-color: #333;
+    background-color: #007bff; /* Primary button color */
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+    border: none; /* Remove border */
+    transition: background-color 0.3s; /* Smooth transition */
 }
 
-/* Style for the profile display section */
+    .post-content-btn:hover {
+        background-color: #0056b3; /* Darken on hover */
+    }
+
+/* Profile display section */
 .create-post-profile-display-section {
     width: 35%;
     margin: 10px;
@@ -133,4 +120,14 @@
     background-color: white;
     width: 100%;
     height: 30vh;
+    border-radius: 10px; /* Rounded corners */
+}
+
+@media(max-width:1300px){
+    .create-post-profile-display-section{
+        display: none;
+    }
+    .create-post-section{
+        width: 100%;
+    }
 }
