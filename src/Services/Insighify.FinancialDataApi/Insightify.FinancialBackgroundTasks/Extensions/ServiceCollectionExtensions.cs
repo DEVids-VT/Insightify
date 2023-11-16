@@ -33,7 +33,7 @@ namespace Insightify.FinancialBackgroundTasks.Extensions
             services.AddQuartz(qz =>
             {
                 var jobKey = new JobKey("BitcoinMarketChart");
-                qz.AddJob<BitcoinMarketChartJob>(opts =>
+                qz.AddJob<MarketChartsJob>(opts =>
                 {
                     opts.WithIdentity(jobKey);
                 });
