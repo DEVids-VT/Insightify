@@ -40,17 +40,6 @@ namespace Insightify.MVC.Controllers
             return View();
         }
 
-        public IActionResult Crypto()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public IActionResult Dashboard()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() 
             => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

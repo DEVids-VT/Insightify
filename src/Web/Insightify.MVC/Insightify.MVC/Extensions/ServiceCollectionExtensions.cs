@@ -1,5 +1,6 @@
 ﻿using Insightify.MVC.Clients;
 using Insightify.MVC.Infrastructure;
+using Insightify.MVC.Services.FinancialData;
 using Insightify.MVC.Services.News;
 using Insightify.MVC.Services.Posts;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -49,11 +50,15 @@ namespace Insightify.MVC.Extensions
 
             services.AddScoped<IPostsService, PostsService>();
             services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<IFinancialDataService, FinancialDataService>();
 
             services.AddRefitClient<IPostsClient>()
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
             services.AddRefitClient<INewsClient>()
+                .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+            services.AddRefitClient<IFinancialDataClient>()
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
