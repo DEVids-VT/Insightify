@@ -111,10 +111,47 @@ namespace Insightify.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> DashboardJson([FromQuery] string currency)
         {
-            var model = await _financialDataService.Chart(currency);
-            var data = await _financialDataService.Currency(currency);
+            //var model = await _financialDataService.Chart(currency);
+            //var data = await _financialDataService.Currency(currency);
+            var rand = new Random();
+            return Json(new
+            {
+                model = new Web.Gateway.Models.FinancialData.MarketChartModel
+                {
+                    Prices = new List<Models.FinancialData.MarketDataModels.MarketValue>
+                    {
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = rand.Next() }
+                    },
+                    TotalVolumes = new List<Models.FinancialData.MarketDataModels.MarketValue>
+                    {
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = rand.Next() }
+                    },
+                    MarketCaps = new List<Models.FinancialData.MarketDataModels.MarketValue>
+                    {
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = rand.Next() },
+                        new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = rand.Next() }
+                    }
 
-            return Json(new { model = model, data = data });
+                },
+                data = new Models.FinancialData.DashboardCurrencyModel
+                {
+                    CurrentPrice = 123,
+                    Image = "",
+                    Name = "bitcoin",
+                    PriceChange = 123
+                }
+            });
         }
     }
 }
