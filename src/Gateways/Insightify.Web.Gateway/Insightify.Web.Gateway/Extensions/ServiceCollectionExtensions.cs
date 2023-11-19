@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Insightify.Web.Gateway.Clients;
 using Insightify.Web.Gateway.Configuration;
+using Insightify.Web.Gateway.Services.FinancialData;
 using Insightify.Web.Gateway.Services.News;
 using Insightify.Web.Gateway.Services.Posts;
 using Refit;
@@ -24,6 +25,7 @@ namespace Insightify.Web.Gateway.Extensions
 
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IPostService, PostService>();
+            services.AddScoped<IFinancialDataService, FinancialDataService>();
 
             services.AddRefitClient<INewsClient>()
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.News))
@@ -31,6 +33,9 @@ namespace Insightify.Web.Gateway.Extensions
 
             services.AddRefitClient<IPostsClient>()
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.Posts))
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+            services.AddRefitClient<IFinancialDataClient>()
+                .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.FinancialData))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
             return services;

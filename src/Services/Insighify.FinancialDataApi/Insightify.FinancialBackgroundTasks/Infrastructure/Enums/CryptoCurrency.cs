@@ -10,7 +10,6 @@ namespace Insightify.FinancialBackgroundTasks.Infrastructure.Enums
     {
         Bitcoin,
         Ethereum,
-        XRP,
         Cardano,
         BinanceCoin,
         Tether,

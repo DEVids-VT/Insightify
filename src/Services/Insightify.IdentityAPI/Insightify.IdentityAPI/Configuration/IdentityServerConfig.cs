@@ -12,6 +12,7 @@ namespace Insightify.IdentityAPI.Configuration
             {
                 new ApiResource("posts", "Posts Service"),
                 new ApiResource("news", "News Service"),
+                new ApiResource("financialdata", "Financial Data Service"),
                 new ApiResource("gateway", "Web Gateway"),
             };
         }
@@ -21,6 +22,7 @@ namespace Insightify.IdentityAPI.Configuration
             return new List<ApiScope>()
             {
                 new ApiScope("posts", "Posts Service"),
+                new ApiScope("financialdata", "Financial Data Service"),
                 new ApiScope("news", "News Service"),
                 new ApiScope("gateway", "Web Gateway"),
             };
@@ -88,6 +90,21 @@ namespace Insightify.IdentityAPI.Configuration
                     AllowedScopes =
                     {
                         "posts"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "financialdataswaggerui",
+                    ClientName = "Financial Data Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"{configuration["FinancialDataApiClient"]}/swagger/oauth2-redirect.html" },
+                    //PostLogoutRedirectUris = { $"{configuration["PostsApiClient"]}/swagger/" },
+                    AllowedCorsOrigins = { $"{configuration["FinancialDataApiClient"]}" },
+                    AllowedScopes =
+                    {
+                        "financialdata"
                     }
                 },
                 new Client

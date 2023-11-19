@@ -1,16 +1,13 @@
 using FluentValidation;
-using Insigghtify.Framework.Mongo.Extensions;
 using Insighify.FinancialDataApi.Extensions;
 using Insightify.Framework;
 using Insightify.Framework.Automapper;
-using Insightify.Framework.Fetching.Extensions;
 using Insightify.Framework.HealthChecks;
 using Insightify.Framework.MongoDb.Abstractions.Configuration;
 using Insightify.Framework.Pagination.Headers;
 using Insightify.Framework.Swagger;
 using Insightify.Framework.Swagger.Settings;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using MongoDB.Bson;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Serilog;
@@ -28,38 +25,21 @@ builder.Services.AddCoreServices(coreBuilder =>
 {
     var assembly = typeof(Program).Assembly;
 
-    coreBuilder.AddMongoDatabase(p =>
-    {
-        p.WithConnectionString(mongoDbSettings.Url);
-        p.WithDatabaseName(mongoDbSettings.Database);
-        p.WithSoftDeletes(o =>
-        {
-            o.Enabled(mongoDbSettings.SoftDeleteEnabled);
-            o.HardDeleteAfter(TimeSpan.FromDays(mongoDbSettings.SoftDeleteRetentionInDays));
-        });
-        p.RepresentEnumValuesAs(BsonType.String);
-        p.WithIgnoreIfDefaultConvention(false);
-        p.WithIgnoreIfNullConvention(true);
-    });
     coreBuilder.AddAutomapper(assembly);
     coreBuilder.AddHealthChecks(p =>
     {
-        p.AddMongoDb(mongoDbSettings!.Url);
     });
     coreBuilder.AddSwagger(p =>
     {
         p.LoadSettingsFrom(swaggerSettings);
         p.LoadSecuritySettingsFrom(oAuthSettings);
     });
-    /*    coreBuilder.AddApiFetcher(p =>
-        {
-            var key = builder.Configuration.GetSection("LiveNewsApi").GetValue<string>("Key")!;
-            var url = builder.Configuration.GetSection("LiveNewsApi").GetValue<string>("Url")!;
-            p.WithName("LiveNewsApi");
-            p.WithApiKey(key, "access_key");
-            p.WithBaseUrl(url);
-        });*/
+    
 });
+builder.Services.AddCustomAuthentication(builder.Configuration);
+var redisConString = builder.Configuration.GetConnectionString("Redis");
+
+builder.Services.AddRedis(redisConString);
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<PaginationHeadersFilter>();
@@ -84,6 +64,8 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseSwagger(swaggerSettings!);
+app.MapControllers();
+
 
 app.MapHealthChecks("/hc", new HealthCheckOptions()
 {

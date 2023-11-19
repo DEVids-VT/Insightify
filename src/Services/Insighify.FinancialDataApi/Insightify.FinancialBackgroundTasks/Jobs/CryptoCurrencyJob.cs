@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Insightify.FinancialBackgroundTasks.Extensions;
+﻿using Insightify.FinancialBackgroundTasks.Extensions;
 using Insightify.FinancialBackgroundTasks.Infrastructure.Enums;
 using Insightify.FinancialBackgroundTasks.Models;
 using Insightify.Framework.Fetching.Interfaces;
@@ -15,13 +10,13 @@ using StackExchange.Redis;
 
 namespace Insightify.FinancialBackgroundTasks.Jobs
 {
-    public class MarketChartsJob : IJob
+    internal class CryptoCurrencyJob : IJob
     {
         private readonly IApiFetcher _fetcher;
         private readonly ILogger _logger;
         private readonly IMessagePublisher _publisher;
         private readonly IDatabase _redis;
-        public MarketChartsJob(IApiFetcher fetcher, ILogger<MarketChartsJob> logger, IMessagePublisher publisher, IDatabase redis)
+        public CryptoCurrencyJob(IApiFetcher fetcher, ILogger<MarketChartsJob> logger, IMessagePublisher publisher, IDatabase redis)
         {
             _fetcher = fetcher;
             _logger = logger;
@@ -35,14 +30,21 @@ namespace Insightify.FinancialBackgroundTasks.Jobs
             {
                 var queryParams = new Dictionary<string, string>()
                 {
-                    { "vs_currency", "usd" },
-                    { "days", "1" }
+                    { "tickers", "false" },
                 };
+                var apiEndpoint = $"/api/v3/coins/{currency.GetID()}";
+                try
+                {
+                    var response =
+                        await _fetcher.FetchDataWithQueryAsync<CryptoCurrencyModel>(apiEndpoint, queryParams);
+                    _redis.JsonSet($"{currency.GetID()}", JsonConvert.SerializeObject(response));
 
-                //var apiEndpoint = $"/api/v3/coins/{currency.GetID()}/market_chart";
-                //var response = await _fetcher.FetchDataWithQueryAsync<MarketChartModel>(apiEndpoint, queryParams);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
 
-                //_redis.JsonSet($"{currency.GetID()}:market_chart", JsonConvert.SerializeObject(response));
             }
         }
     }

@@ -1,32 +1,49 @@
-﻿using Insighify.FinancialDataApi.Configuration;
-using Insighify.FinancialDataApi.ResponceModels.Crypto;
+﻿using Insighify.FinancialDataApi.Infrastructure.Enums;
+using Insighify.FinancialDataApi.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace Insighify.FinancialDataApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class CryptoDataController : ControllerBase
     {
-        [HttpGet("/historicalData")]
-        public async Task<IActionResult> GetHistoricalData(string id, string currency, string days, string interval, string precision)
+        private readonly ICryptoDataService _cryptoDataService;
+        public CryptoDataController(ICryptoDataService cryptoDataService)
         {
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(UrlsConfig.CryptoCoinsOpperations.GetHistoricalDataByCoinId(id, currency, days, interval, precision));
+            _cryptoDataService = cryptoDataService;
+        }
+        [HttpGet]
+        [Route("/{currency}")]
+        public async Task<IActionResult> GetCryptoCurrency(string currency)
+        {
 
-                if (response.IsSuccessStatusCode)
-                {
-                    string jsonResponse = await response.Content.ReadAsStringAsync();
-                    var coinHistory = JsonConvert.DeserializeObject<CoinHistory>(jsonResponse);
-                    return Ok(coinHistory);
-                }
-                else
-                {
-                    throw new Exception($"Failed to fetch data. Status code: {response.StatusCode}");
-                }
+            var hasParsed = Enum.TryParse(currency, true, out CryptoCurrency enumCurrency);
+            if (!hasParsed)
+            {
+                return BadRequest();
             }
+            var coin= await _cryptoDataService.GetCryptoCurrencyAsync(enumCurrency);
+            return Ok(coin);
+        }
+        [HttpGet]
+        [Route("/{currency}/chart")]
+        public async Task<IActionResult> GetMarketChart(string currency)
+        {
+
+            var hasParsed = Enum.TryParse(currency, true, out CryptoCurrency enumCurrency);
+            if (!hasParsed)
+            {
+                return BadRequest();
+            }
+            var chart = await _cryptoDataService.GetMarketChartAsync(enumCurrency);
+            return Ok(chart);
+        }
+        [HttpGet]
+        [Route("/all")]
+        public async Task<IActionResult> GetAllCurrencies()
+        {
+            var currencies = await _cryptoDataService.GetAllCurrenciesAsync();
+            return Ok(currencies);
         }
     }
 }
