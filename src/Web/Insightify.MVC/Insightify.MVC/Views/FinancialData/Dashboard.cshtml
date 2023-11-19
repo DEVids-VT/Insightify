@@ -46,19 +46,34 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     @{
-        var values = new StringBuilder();
-        values.AppendLine("[");
-        foreach (var item in Model.ChartData.Prices)
+        var jsonDataPrices = Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.ChartData.Prices.Select(item => new
         {
-            values.AppendLine($"{{ time: {item.Timestamp}, value: {item.Value} }},");
-        }
-        values.AppendLine("]");
+            time = DateTimeOffset.FromUnixTimeSeconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd"),
+            value = item.Value
+        }));
+        var jsonDataMarket = Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.ChartData.MarketCaps.Select(item => new
+        {
+            time = DateTimeOffset.FromUnixTimeSeconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd"),
+            value = item.Value
+        }));
+        var jsonDataTotalVolumes = Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.ChartData.TotalVolumes.Select(item => new
+        {
+            time = DateTimeOffset.FromUnixTimeSeconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd"),
+            value = item.Value
+        }));
+
     }
-            var testData = @values.ToString();
-        createChat(testData, 'price-card', 'Light', '400', '800');
-        createChat(testData, 'change-card', 'Light', '400', '800');
-        createChat(testData, 'status-card', 'Light', '400', '800');
-        createChat(testData, 'analytics-card', 'Light', '400', '800');
+        var dataPrices = @Html.Raw(jsonDataPrices);
+        var dataTotalVolumes = @Html.Raw(jsonDataTotalVolumes);
+        var dataMarket = @Html.Raw(jsonDataMarket);
+        createChat(dataPrices, 'price-card', 'Light', '400', '800');
+        createChat(dataTotalVolumes, 'change-card', 'Light', '400', '800');
+        createChat(dataMarket, 'status-card', 'Light', '400', '800');
+        createChat(dataPrices, 'analytics-card', 'Light', '400', '800');
     });
+
 
 </script>
