@@ -47,12 +47,43 @@ namespace Insightify.MVC.Services.FinancialData
             return currencyResponce.Content;
         }
 
-        public async Task<DashboardModel> DashboardCurrency(string currency)
+        public async Task<DashboardModel> Dashboard()
         {
-            var chart = await Chart(currency);
-            var currencyData = await Currency(currency);
+            var chart = await Chart("bitcoin");
+            var btc = await Currency("bitcoin");
+            var data = new List<DashboardCurrencyModel>
+            {
+                new DashboardCurrencyModel
+                {
+                    Name = btc.Name, 
+                    CurrentPrice = double.Parse(btc.MarketData.CurrentPrice.Usd.Value.ToString()), 
+                    Image = btc.Image.Large, 
+                    PriceChange = btc.MarketData.PriceChangePercentage24h.Value
+                },
+                new DashboardCurrencyModel
+                {
+                    Name = btc.Name,
+                    CurrentPrice = double.Parse(btc.MarketData.CurrentPrice.Usd.Value.ToString()),
+                    Image = btc.Image.Large,
+                    PriceChange = btc.MarketData.PriceChangePercentage24h.Value
+                },
+                new DashboardCurrencyModel
+                {
+                    Name = btc.Name,
+                    CurrentPrice = double.Parse(btc.MarketData.CurrentPrice.Usd.Value.ToString()),
+                    Image = btc.Image.Large,
+                    PriceChange = btc.MarketData.PriceChangePercentage24h.Value
+                },
+                new DashboardCurrencyModel
+                {
+                    Name = btc.Name,
+                    CurrentPrice = double.Parse(btc.MarketData.CurrentPrice.Usd.Value.ToString()),
+                    Image = btc.Image.Large,
+                    PriceChange = btc.MarketData.PriceChangePercentage24h.Value
+                }
+            };
 
-            return new DashboardModel { ChartData = chart, Currency = currencyData };
+            return new DashboardModel { ChartData = chart, Currencies = data };
         }
 
         public async Task<IPage<CryptoCurrencyModel>> GetAllCurrencies(string? title = null, int pageIndex = 1, int pageSize = 50)

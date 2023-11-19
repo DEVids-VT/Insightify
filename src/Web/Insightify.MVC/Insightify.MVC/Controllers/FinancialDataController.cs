@@ -41,7 +41,7 @@ namespace Insightify.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> Dashboard()
         {
-            var model = await _financialDataService.DashboardCurrency("bitcoin");
+            var model = await _financialDataService.Dashboard();
 
             return View(model);
         }
@@ -49,9 +49,10 @@ namespace Insightify.MVC.Controllers
         [HttpGet]
         public async Task<IActionResult> DashboardJson([FromQuery] string currency)
         {
-            var model = await _financialDataService.DashboardCurrency(currency);
+            var model = await _financialDataService.Chart(currency);
+            var data = await _financialDataService.Currency(currency);
 
-            return Json(model);
+            return Json(new { model = model, data = data });
         }
     }
 }

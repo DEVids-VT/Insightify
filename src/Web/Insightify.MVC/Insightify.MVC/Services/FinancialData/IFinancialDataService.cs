@@ -10,6 +10,6 @@ namespace Insightify.MVC.Services.FinancialData
         Task<IPage<CryptoCurrencyModel>> GetAllCurrencies(string? title = null, int pageIndex = 1, int pageSize = 50);
         Task<CryptoCurrencyModel> Currency(string currency);
         Task<MarketChartModel> Chart(string currency);
-        Task<DashboardModel> DashboardCurrency(string currency);
+        Task<DashboardModel> Dashboard();
     }
 }

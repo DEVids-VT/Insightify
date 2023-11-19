@@ -1,65 +1,31 @@
-﻿<div class="flexbox">
+﻿@using Insightify.Framework.Pagination;
+@using Insightify.MVC.Models.FinancialData;
+@using Insightify.Web.Gateway.Models.FinancialData;
+@using System.Text;
+@model DashboardModel
+
+<div class="flexbox">
     <section class="single-cards">
-        <div class="crypto-card card">
-            <div class="top-area">
-                <div class="image-container">
-                    <img src="/images/crypto/bitcoin.png" />
+        @{
+            foreach (var item in Model.Currencies)
+            {
+                <div class="crypto-card card">
+                    <div class="top-area">
+                        <div class="image-container">
+                            <img src="@item.Image" />
+                        </div>
+                        <button>Details</button>
+                    </div>
+                    <div class="bottom-area">
+                        <h5>@item.Name</h5>
+                        <div class="price-holder">
+                            <h4>@item.CurrentPrice</h4>
+                            <h7>@item.PriceChange</h7>
+                        </div>
+                    </div>
                 </div>
-                <button>Details</button>
-            </div>
-            <div class="bottom-area">
-                <h5>Bitcoin</h5>
-                <div class="price-holder">
-                    <h4>$48,789.50</h4>
-                    <h7>-0.58$ ></h7>
-                </div>
-            </div>
-        </div>
-        <div class="crypto-card card">
-            <div class="top-area">
-                <div class="image-container">
-                    <img src="/images/crypto/ethereum.png" />
-                </div>
-                <button>Details</button>
-            </div>
-            <div class="bottom-area">
-                <h5>Ethereum</h5>
-                <div class="price-holder">
-                    <h4>$48,789.50</h4>
-                    <h7>-0.58$ ></h7>
-                </div>
-            </div>
-        </div>
-        <div class="crypto-card card">
-            <div class="top-area">
-                <div class="image-container">
-                    <img src="/images/crypto/solana.png" />
-                </div>
-                <button>Details</button>
-            </div>
-            <div class="bottom-area">
-                <h5>Solana</h5>
-                <div class="price-holder">
-                    <h4>$48,789.50</h4>
-                    <h7>-0.58$ ></h7>
-                </div>
-            </div>
-        </div>
-        <div class="crypto-card card">
-            <div class="top-area">
-                <div class="image-container">
-                    <img src="/images/crypto/stellar.png" />
-                </div>
-                <button>Details</button>
-            </div>
-            <div class="bottom-area">
-                <h5>Stellar</h5>
-                <div class="price-holder">
-                    <h4>$48,789.50</h4>
-                    <h7>-0.58$ ></h7>
-                </div>
-            </div>
-        </div>
+            }
+        }
     </section>
     <section class="chart-cards">
         <section class="price-cards">
@@ -79,18 +45,16 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        var testData = [
-            { time: "2023-10-01", value: 100 },
-            { time: "2023-10-02", value: 120 },
-            { time: "2023-10-03", value: 130 },
-            { time: "2023-10-04", value: 110 },
-            { time: "2023-10-05", value: 150 },
-            { time: "2023-10-06", value: 170 },
-            { time: "2023-10-07", value: 190 },
-            { time: "2023-10-08", value: 210 },
-            { time: "2023-10-09", value: 200 },
-            { time: "2023-10-10", value: 180 },
-        ];
+    @{
+        var values = new StringBuilder();
+        values.AppendLine("[");
+        foreach (var item in Model.ChartData.Prices)
+        {
+            values.AppendLine($"{{ time: {item.Timestamp}, value: {item.Value} }},");
+        }
+        values.AppendLine("]");
+    }
+            var testData = @values.ToString();
         createChat(testData, 'price-card', 'Light', '400', '800');
         createChat(testData, 'change-card', 'Light', '400', '800');
         createChat(testData, 'status-card', 'Light', '400', '800');
