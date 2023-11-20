@@ -20,4 +20,7 @@
 		<PackageReference Include="Refit" Version="7.0.0" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\js\financialData\" />
+	</ItemGroup>
 </Project>

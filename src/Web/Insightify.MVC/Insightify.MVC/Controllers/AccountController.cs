@@ -32,5 +32,28 @@ namespace Insightify.MVC.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        public IActionResult Profile()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChangeUsername(string username)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChangeProfilePicture(IFormFile image)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ChangeEmail(string email)
+        {
+            return View();
+        }
     }
 }

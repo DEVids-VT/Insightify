@@ -1,38 +1,39 @@
-﻿<section class="top">
+﻿@using Insightify.Web.Gateway.Models.FinancialData;
+@model CryptoCurrencyModel
+
+<section class="top">
     <div class="info">
         <img class="image" src="/images/navbar/bitcoin.png" />
         <div class="basic-info">
             <p class="title">Name</p>
-            <h1 class="name">BitCoin</h1>
-            <h2 class="price">26000 USD</h2>
+            <h1 class="name">@Model.Name</h1>
+            <h2 class="price">@Model.MarketData.CurrentPrice.Usd USD</h2>
         </div>
     </div>
     <div class="data">
         <div class="market-cap">
             <p class="name">Market Cap</p>
-            <p class="value">507212634614.3793</p>
+            <p class="value">@Model.MarketData.MarketCap.Usd</p>
         </div>
         <div class="day-vol">
-            <p class="name">24h Volume</p>
-            <p class="value">7866014689.824344</p>
+            <p class="name">24h High</p>
+            <p class="value">@Model.MarketData.High24h.Usd</p>
         </div>
         <div class="day-change">
             <p class="name">24h Change</p>
-
-            <p class="value">-0.14</p>
+            <p class="value">@Model.MarketData.MarketCapChange24h</p>
         </div>
         <div class="day-change">
-            <p class="name">24h Change</p>
-
-            <p class="value">-0.14</p>
+            <p class="name">24h Low</p>
+            <p class="value">@Model.MarketData.Low24h.Usd</p>
         </div>
     </div>
 </section>
 <section class="links">
-    <a class="link-item">GitHub <i class="fa-solid fa-link"></i></a>
-    <a class="link-item">Website <i class="fa-solid fa-link"></i></a>
-    <a class="link-item">Community <i class="fa-solid fa-link"></i></a>
-    <a class="link-item">Whitepaper <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.ReposUrl.Github">GitHub <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.OfficialForumUrl">Website <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.SubredditUrl">Community <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.Homepage">Homepage <i class="fa-solid fa-link"></i></a>
 
 </section>
 <section class="chart">
@@ -40,14 +41,14 @@
         <a class="chart-nav-item">Price</a>
         <a class="chart-nav-item">Market Cap</a>
     </div>
-    <div class="chart-container">
+    <div class="chart-container" id="chart-container">
     </div>
 </section>
 <section class="news">
     <div class="news-header">
         <h3 class="title">Related news articles</h3>
     </div>
-    <div class="news-container">
+    <div class="news-container" id="news-container">
         <div class="card">
             <img class="img" src="https://placehold.co/600x400" />
             <div class="content">
@@ -58,45 +59,14 @@
                 <h4 class="heading">A very exciting title</h4>
                 <p class="description">A good long and informative description.</p>
             </div>
-
-        </div>
-        <div class="card">
-            <img class="img" src="https://placehold.co/600x400" />
-            <div class="content">
-                <div class="info">
-                    <p class="author">Author</p>
-                    <p class="timestamp">12/10/2023</p>
-                </div>
-                <h4 class="heading">A very exciting title</h4>
-                <p class="description">A good long and informative description.</p>
-            </div>
-
-        </div>
-        <div class="card">
-            <img class="img" src="https://placehold.co/600x400" />
-            <div class="content">
-                <div class="info">
-                    <p class="author">Author</p>
-                    <p class="timestamp">12/10/2023</p>
-                </div>
-                <h4 class="heading">A very exciting title</h4>
-                <p class="description">A good long and informative description.</p>
-            </div>
-
-        </div>
-        <div class="card">
-            <img class="img" src="https://placehold.co/600x400" />
-            <div class="content">
-                <div class="info">
-                    <p class="author">Author</p>
-                    <p class="timestamp">12/10/2023</p>
-                </div>
-                <h4 class="heading">A very exciting title</h4>
-                <p class="description">A good long and informative description.</p>
-            </div>
-
         </div>
     </div>
 </section>
-<section class="posts">
+<section class="posts" id="posts-container">
 </section>
+<script>
+    loadChart(@Model.Id);
+</script>
+<script src="~/js/financialdata/newsloadajax.js"></script>
+<script src="~/js/financialdata/postsloadajax.js"></script>
+<script src="~/js/financialdata/createchartajax.js"></script>
