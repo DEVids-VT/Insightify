@@ -92,16 +92,17 @@
         fetch(`/FinancialData/DashboardJson?currency=${currencyName}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data.model.prices.map(item => item.timestamp));
                 const formattedPrices = data.model.prices.map(item => ({
-                    time: new Date(item.timestamp * 1000).toISOString().split('T')[0],
+                    time: item.timestamp,
                     value: item.value
                 }));
                 const formattedMarketCaps = data.model.marketCaps.map(item => ({
-                    time: new Date(item.timestamp * 1000).toISOString().split('T')[0],
+                    time: new Date(item.timestamp).toISOString(),
                     value: item.value
                 }));
                 const formattedTotalVolumes = data.model.totalVolumes.map(item => ({
-                    time: new Date(item.timestamp * 1000).toISOString().split('T')[0],
+                    time: new Date(item.timestamp).toISOString(),
                     value: item.value
                 }));
 
@@ -132,19 +133,19 @@
         var jsonDataPrices = Newtonsoft.Json.JsonConvert.SerializeObject(
         Model.ChartData.Prices.Select(item => new
         {
-            time = DateTimeOffset.FromUnixTimeSeconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd"),
+            time = DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd hh:mm"),
             value = item.Value
         }));
         var jsonDataMarket = Newtonsoft.Json.JsonConvert.SerializeObject(
         Model.ChartData.MarketCaps.Select(item => new
         {
-            time = DateTimeOffset.FromUnixTimeSeconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd"),
+            time = DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd hh:mm"),
             value = item.Value
         }));
         var jsonDataTotalVolumes = Newtonsoft.Json.JsonConvert.SerializeObject(
         Model.ChartData.TotalVolumes.Select(item => new
         {
-            time = DateTimeOffset.FromUnixTimeSeconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd"),
+            time = DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd hh:mm"),
             value = item.Value
         }));
 

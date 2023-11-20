@@ -1,5 +1,4 @@
-﻿using Insightify.MVC.Models.FinancialData.MarketDataModels;
-
+﻿
 namespace Insightify.Web.Gateway.Models.FinancialData
 {
     public class CryptoCurrencyOutputModel

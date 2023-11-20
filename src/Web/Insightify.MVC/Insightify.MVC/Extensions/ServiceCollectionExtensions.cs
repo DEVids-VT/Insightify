@@ -52,13 +52,22 @@ namespace Insightify.MVC.Extensions
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IFinancialDataService, FinancialDataService>();
 
-            services.AddRefitClient<IPostsClient>()
+            services.AddRefitClient<IPostsClient>(new RefitSettings()
+                {
+                    ContentSerializer = new NewtonsoftJsonContentSerializer()
+                })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-            services.AddRefitClient<INewsClient>()
+            services.AddRefitClient<INewsClient>(new RefitSettings()
+                {
+                    ContentSerializer = new NewtonsoftJsonContentSerializer()
+                })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-            services.AddRefitClient<IFinancialDataClient>()
+            services.AddRefitClient<IFinancialDataClient>(new RefitSettings()
+                {
+                    ContentSerializer = new NewtonsoftJsonContentSerializer()
+                })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 

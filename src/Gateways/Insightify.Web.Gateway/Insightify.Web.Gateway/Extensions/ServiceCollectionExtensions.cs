@@ -5,7 +5,9 @@ using Insightify.Web.Gateway.Configuration;
 using Insightify.Web.Gateway.Services.FinancialData;
 using Insightify.Web.Gateway.Services.News;
 using Insightify.Web.Gateway.Services.Posts;
+using Newtonsoft.Json;
 using Refit;
+
 
 namespace Insightify.Web.Gateway.Extensions
 {
@@ -26,15 +28,25 @@ namespace Insightify.Web.Gateway.Extensions
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IPostService, PostService>();
             services.AddScoped<IFinancialDataService, FinancialDataService>();
+            
 
-            services.AddRefitClient<INewsClient>()
+            services.AddRefitClient<INewsClient>(new RefitSettings()
+                {
+                    ContentSerializer = new NewtonsoftJsonContentSerializer()
+                })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.News))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
-            services.AddRefitClient<IPostsClient>()
+            services.AddRefitClient<IPostsClient>(new RefitSettings()
+                {
+                    ContentSerializer = new NewtonsoftJsonContentSerializer()
+                })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.Posts))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-            services.AddRefitClient<IFinancialDataClient>()
+            services.AddRefitClient<IFinancialDataClient>(new RefitSettings()
+                {
+                    ContentSerializer = new NewtonsoftJsonContentSerializer()
+                })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.FinancialData))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
