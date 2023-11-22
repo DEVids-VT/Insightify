@@ -7,7 +7,7 @@ namespace Insightify.MVC.Services.FinancialData
 {
     public interface IFinancialDataService
     {
-        Task<IPage<CryptoCurrencyModel>> GetAllCurrencies(string? title = null, int pageIndex = 1, int pageSize = 50);
+        Task<IEnumerable<CryptoCurrencyModel>> GetAllCurrencies();
         Task<CryptoCurrencyModel> Currency(string currency);
         Task<MarketChartModel> Chart(string currency);
         Task<DashboardModel> Dashboard();
