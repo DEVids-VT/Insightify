@@ -1,0 +1,58 @@
+﻿<div class="cerate-post-container">
+    <section class="create-post-section">
+        <div class="create-post-title-container">
+            <h1>Create a post</h1>
+        </div>
+        <div class="post-content-container">
+            <div class="post-content-navigation-top">
+                <a class="naligation-item" id="btn-post">
+                    <i class="navigation-item-icon fa fa-list-ul"></i> Post
+                </a>
+                <a class="naligation-item" id="btn-image">
+                    <i class="navigation-item-icon fa fa-image"></i> Image
+                </a>
+                <a class="naligation-item" id="btn-preview">
+                    <i class="navigation-item-icon fa fa-magnifying-glass"></i> Preview
+                </a>
+            </div>
+            <div class="post-content" id="text-content">
+                <input id="postTitle" class="post-content-input-title" type="text" placeholder="Post title" />
+                <textarea id="postDescription" class="post-content-input-description" rows="5" ></textarea>
+                <div class="bottom-btns-post">
+                    <a class="post-content-btn hidden">Previous</a>
+                    <a class="post-content-btn" id="text-display-image">Next</a>
+                </div>
+            </div>
+            <div class="post-content hidden" id="image-content">
+                <div class="post-content-image-container">
+                    <input class="post-content-input-file" type="file" id="image" accept="image/*">
+                </div>
+                <div class="bottom-btns-post">
+                    <a class="post-content-btn" id="display-text">Previous</a>
+                    <a class="post-content-btn" id="display-preview">Next</a>
+                </div>
+            </div>
+            <div class="post-content hidden" id="preview-content">
+                <div class="dynamic-content" id="dynamic-content">
+
+                </div>
+                <div class="bottom-btns-post">
+                    <a class="post-content-btn" id="preview-display-image">Previous</a>
+                    <a class="post-content-btn" id="submitBtn">Submit</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="create-post-profile-display-section">
+        <div class="profile-display-section-top">
+
+        </div>
+        <div class="profile-display-section-bottom">
+        </div>
+    </section>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="~/js/posts/createpostajax.js"></script>
+<script src="~/js/posts/dynamicbuttons.js"></script>
+<script src="~/js/posts/dynamicpagedisplay.js"></script>

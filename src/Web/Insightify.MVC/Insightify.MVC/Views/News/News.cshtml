@@ -1,0 +1,109 @@
+﻿@using Insightify.Framework.Pagination;
+@model Insightify.Framework.Pagination.Abstractions.IPage<NewsViewModel>
+
+<div class="news-container">
+    <div class="news-sections-container">
+        <section class="news-section-posts">
+            @{
+                foreach (var item in Model)
+                {
+                    <div onclick="window.open('@item.Url', '_blank');" class="news-container-single">
+                        <div class="news-main">
+                            <div class="news-header-hour">
+                                <h1 class="news-headerhour-title">@item.Author</h1>
+                                <h1><strong>‧</strong></h1>
+                                <h1 class="news-headerhour-text">@item.CreatedDateTime</h1>
+                            </div>
+                            <div class="news-content">
+                                <h1 class="news-content-title">@item.Description</h1>
+                            </div>
+                        </div>
+
+                        @if (item.Image != null)
+                        {
+                            <div>
+                                <img class="news-image" src="@item.Image" />
+                            </div>
+                        }
+                    </div>
+                    <div class="news-under-post-line"></div>
+                }
+            }
+        </section>
+        <section class="section-news">
+            <div class="side-news-container">
+                <div class="d-flex align-items-start" style="width: 90%;">
+                    <h1 class="news-title">Popular voices</h1>
+                </div>
+                @{
+                    for (int i = 0; i < 6; i++)
+                    {
+                        <div class="news-element">
+                            <img class="news-footer-img" src="~/images/navbar/squid.jpg" />
+                            <div class="news-image-element-content">
+                                <h1 class="news-image-element-content-title">Microsoft</h1>
+                                <h2 class="news-image-element-content-content">1,209,283 followers</h2>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    var newsPage = @Model.CurrentPage;
+    var newsPageSize = @Model.PageSize;
+    var isNewsLoading = false;
+    var newsLoadbar = `
+                <div class="loading-bar">
+                    <div class="loading-bar-container">
+                        <img class="loading-bar-container-img-gray" src="/images/logo/logo_violet_s.png" alt="loading">
+                    </div>
+                </div>
+            `;
+
+    $(window).scroll(function () {
+        if (!isNewsLoading && $(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+            isNewsLoading = true;
+            $('.news-section-posts').append(newsLoadbar);
+            $.ajax({
+                url: '@Url.Action("News", "News")',
+                data: { page: newsPage + 1, pageSize: newsPageSize, json: true },
+                type: 'GET',
+                success: function (result) {
+                    console.log(result);
+                    $('.loading-bar').remove();
+                    newsPage++;
+                    result.forEach(function (item) {
+                        var newsHtml = `
+                                    <div class="news-container-single">
+                                        <div class="news-main">
+                                            <div class="news-header-hour">
+                                                <h1 class="news-headerhour-title">${item.author}</h1>
+                                                <h1><strong>‧</strong></h1>
+                                                <h1 class="news-headerhour-text">${item.createdDateTime}</h1>
+                                            </div>
+                                            <div class="news-content">
+                                                <h1 class="news-content-title">${item.description}</h1>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <img class="news-image" src="/images/camera_lense_0.jpeg" />
+                                       </div>
+                                    </div>
+                                    <div class="news-under-post-line"></div>`;
+
+                        $('.news-section-posts').append(newsHtml);
+                    });
+                },
+                complete: function () {
+                    isNewsLoading = false;
+                    $('.loading-bar').remove();
+                }
+            });
+        }
+    });
+</script>

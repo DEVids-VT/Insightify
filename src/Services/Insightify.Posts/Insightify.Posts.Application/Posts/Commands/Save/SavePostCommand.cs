@@ -31,6 +31,11 @@ namespace Insightify.Posts.Application.Posts.Commands.Save
                     return false;
                 }
 
+                if (post.Saves.Any(p => p.UserId == currentUser.UserId))
+                {
+                    return "Already saved.";
+                }
+
                 post.AddSave(currentUser.UserId, DateTime.UtcNow);
                 await this.postRepository.Save(post, cancellationToken);
                 return true;

@@ -2,11 +2,11 @@
 using RabbitMQ.Client;
 using System.Text;
 using MassTransit;
-using Insightify.NotificationsAPI.Events;
 using AutoMapper;
 using Insightify.NotificationsAPI.Models;
 using Insightify.NotificationsAPI.Services;
 using FluentValidation;
+using Insightify.Framework.Messaging.Events;
 using Insightify.NotificationsAPI.Validators;
 
 namespace Insightify.NotificationsAPI.Consumer
@@ -18,7 +18,7 @@ namespace Insightify.NotificationsAPI.Consumer
         private readonly INotificationService _notificationService;
         private readonly IValidator<Notification> _validator;
 
-        public EventConsumer(IMapper mapper, ILogger logger, INotificationService notificationService, IValidator<Notification> validator)
+        public EventConsumer(IMapper mapper, ILogger<EventConsumer> logger, INotificationService notificationService, IValidator<Notification> validator)
         {
             _mapper = mapper;
             _logger = logger;
@@ -31,14 +31,14 @@ namespace Insightify.NotificationsAPI.Consumer
             _logger.LogInformation($"Consuming event with message Id {0}", context.Message.Id);
 
             var notification = _mapper.Map<Notification>(context.Message);
+            await _notificationService.SendNotificaiton(notification);
 
-            if (_validator.Validate(notification).IsValid)
-            {
-                await _notificationService.StoreNotification(notification);
+            //if (_validator.Validate(notification).IsValid)
+            //{
+            //    await _notificationService.StoreNotification(notification);
 
-                await _notificationService.SendNotificaiton(notification);
-            }
-            else _logger.LogInformation($"Consumed event with message Id {0} was not valid", context.Message.Id);
+            //}
+            //else _logger.LogInformation($"Consumed event with message Id {0} was not valid", context.Message.Id);
         }
     }
 }

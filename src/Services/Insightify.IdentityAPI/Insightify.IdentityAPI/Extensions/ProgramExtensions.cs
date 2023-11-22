@@ -3,7 +3,9 @@ using Insightify.IdentityAPI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
+using Duende.IdentityServer.Models;
 using Insightify.IdentityAPI.Configuration;
+using Insightify.IdentityAPI.EmailSending;
 using Serilog;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
@@ -40,6 +42,7 @@ namespace Insightify.IdentityAPI.Extensions
         }
         public static void AddCustomMvc(this WebApplicationBuilder builder)
         {
+            builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddControllers();
@@ -59,7 +62,12 @@ namespace Insightify.IdentityAPI.Extensions
         }
         public static void AddCustomIdentity(this WebApplicationBuilder builder)
         {
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(cfg =>
+                {
+                    cfg.Password.RequireUppercase = false;
+                    cfg.User.RequireUniqueEmail = true;
+                    cfg.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddEntityFrameworkStores<IdentityApiDbContext>()
                 .AddDefaultTokenProviders();
         }
@@ -92,7 +100,7 @@ namespace Insightify.IdentityAPI.Extensions
         {
             var identityServerBuilder = builder.Services.AddIdentityServer(options =>
             {
-                options.UserInteraction.LoginUrl = "/Account/Login";
+                options.UserInteraction.LoginUrl = "/login";
 
                 options.IssuerUri = "http://localhost:5001";
                 options.Authentication.CookieLifetime = TimeSpan.FromHours(2);
@@ -108,6 +116,12 @@ namespace Insightify.IdentityAPI.Extensions
 
             //remove for production
             identityServerBuilder.AddDeveloperSigningCredential();
+        }
+
+        public static void AddEmailSending(this WebApplicationBuilder builder)
+        {
+            builder.Services.Configure<EmailSendingSettings>(builder.Configuration.GetSection("EmailSending"));
+            builder.Services.AddTransient<IMailSender, MailSender>();
         }
     }
 }

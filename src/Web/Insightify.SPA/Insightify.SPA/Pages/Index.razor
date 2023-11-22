@@ -1,0 +1,56 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Authorization;
+@layout HomeLayout
+@attribute [AllowAnonymous]
+
+<header id="sticky-header">
+    <h3>INSIGHTIFY</h3>
+    <a id="hidden" href="#">Sign in</a>
+</header>
+<div style="height: 500px;">
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="/videos/crypto.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="holder-text">
+        <div style="width: 670px;">
+            <h2 class="video-text">The World’s <span>Leading</span></h2>
+            <h2 class="video-text">Cryptocurrency Platform</h2>
+            <h4 class="video-text">Buy Bitcoin, Ethereum, and all your favourite crypto</h4>
+            <ul>
+                <li><i class="fa fa-circle-check" style="color: #147AD0; margin-right: 4px;"></i>Trusted by more than <span>80M</span> users world-wide</li>
+                <li><i class="fa fa-circle-check" style="color: #147AD0; margin-right: 4px;"></i>Leader in regulatory ><span>compliance and security</span> certifications</li>
+                <li><i class="fa fa-circle-check" style="color: #147AD0; margin-right: 4px;"></i>The industry’s most comprehensive insurance coverage and <span>verified proof</span> of reserves</li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="section-width">
+        <section>
+            <div class="left">
+                <div class="big item">
+                    <h5><span>Recurring Buy</span></h5>
+                    <h5>Grow your portfolio automatically with daily, weekly, or monthly trades.</h5>
+                    <!--<img src="https://crypto.com/__assets/static/recurring-buy-84d43a9e3d7cc0459af94e6b63fc130c.webp" alt="">-->
+                </div>
+                <div class="small item">
+                    <h5><span>Buy crypto</span></h5>
+                    <h5>Trade BTC, ETH, and other crypto easily via bank transfer.</h5>
+                </div>
+            </div>
+            <div class="right">
+                <div class="small item">
+                    <h5><span>On-chain Staking</span></h5>
+                    <h5>Generate passive income by helping to secure blockchains.</h5>
+                </div>
+                <div class="big item">
+                    <h5><span>Price Alerts</span></h5>
+                    <h5>Be notified on BTC, ETH, XRP prices, and more.</h5>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>

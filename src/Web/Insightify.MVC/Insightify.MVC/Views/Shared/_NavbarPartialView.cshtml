@@ -1,0 +1,87 @@
+﻿<div class="navbar" id="navbar">
+    <a href="#" class="btn-hide hidden" id="navbar-hide"><i class="fa fa-xmark"></i></a>
+    <nav class="space-between">
+        <section>
+            <div class="d-flex justify-content-center align-items-center">
+                <img class="logo-img-navbar" src="~/images/logo/logo_violet.png" />
+            </div>
+            <h5 class="nav-title">Main</h5>
+            <div class="nav-item px-1 hover">
+                <a class="nav-link fs-6 px-2" asp-action="Dashboard" asp-controller="FinancialData">
+                    <span class="oi fa-solid fa-gauge" aria-hidden="true"></span> Dashboard
+                </a>
+            </div>
+            <div class="nav-item px-1 hover">
+                <a class="nav-link fs-6 px-2" asp-action="Currency" asp-controller="FinancialData">
+                    <span class="oi fa-solid fa-user-group" aria-hidden="true"></span> Crypto
+                </a>
+            </div>
+            <div class="nav-item px-1 hover">
+                <a class="nav-link fs-6 px-2" asp-action="News" asp-controller="News">
+                    <span class="oi fa-solid fa-newspaper" aria-hidden="true"></span> News
+                </a>
+            </div>
+            <div class="nav-item px-1 hover">
+                <a class="nav-link fs-6 px-2" asp-action="Feed" asp-controller="Posts">
+                    <span class="oi fa-solid fa-chart-simple" aria-hidden="true"></span> Feed
+                </a>
+            </div>
+            <div class="nav-item px-1 hover">
+                <a class="nav-link fs-6 px-2" href="#">
+                    <span class="oi fa-solid fa-wallet" aria-hidden="true"></span> Friends
+                </a>
+            </div>
+
+            <!-- Direct messages -->
+            <h5 class="nav-title">Direct Messages</h5>
+            <div class="nav-item px-3">
+                <a style="text-decoration: none;" class="direct-message-item" href="#">
+                    <span class="profile-picture">
+                        <img class="profile-picture-image" src="~/images/navbar/patrik.png" alt="pfp">
+                        <span class="activity-status"><img class="status-image" src="~/images/navbar/green.png" alt="sts"></span>
+                    </span>
+                    <div id="patrik" class="message-content">
+                        <p class="message-element">
+                            patrik
+                        </p>
+                    </div>
+                </a>
+                <a style="text-decoration: none;" class="direct-message-item" href="#">
+                    <span class="profile-picture">
+                        <img class="profile-picture-image" src="~/images/navbar/bob.jpeg" alt="pfp">
+                        <span class="activity-status"><img class="status-image" src="~/images/navbar/green.png" alt="sts"></span>
+                    </span>
+                    <div class="message-content">
+                        <p class="message-element">
+                            Bob
+                        </p>
+                    </div>
+                </a>
+                <a style="text-decoration: none;" class="direct-message-item" href="#">
+                    <span class="profile-picture">
+                        <img class="profile-picture-image" src="~/images/navbar/squid.jpg" alt="pfp">
+                        <span class="activity-status"><img class="status-image" src="~/images/navbar/green.png" alt="sts"></span>
+                    </span>
+                    <div class="message-content">
+                        <p class="message-element">
+                            Squid
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <a class="show-all-btn">Show all</a>
+        </section>
+        <section>
+            <div class="nav-item px-1 hover">
+                <a class="nav-link fs-6 px-2">
+                    <span class="oi fa-solid fa-circle-question" aria-hidden="true"></span> Ask Insighty
+                </a>
+            </div>
+            <div class="nav-item px-1 hover">
+                <a class="nav-link fs-6 px-2">
+                    <span class="oi fa-solid fa-gear" aria-hidden="true"></span> Settings
+                </a>
+            </div>
+        </section>
+    </nav>
+</div>

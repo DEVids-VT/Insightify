@@ -1,0 +1,162 @@
+﻿@using Insightify.Framework.Pagination;
+@using Insightify.MVC.Models.FinancialData;
+@using Insightify.Web.Gateway.Models.FinancialData;
+@using System.Text;
+@model DashboardModel
+
+<div class="flexbox">
+    <section class="single-cards">
+        @{
+            <a class="crypto-card card" id="bitcoin">
+                <div class="top-area">
+                    <div class="image-container">
+                        <img src="@Model.Currencies[0].Image" />
+                    </div>
+                </div>
+                <div class="bottom-area">
+                    <h5>@Model.Currencies[0].Name</h5>
+                    <div class="price-holder">
+                        <h4>@Model.Currencies[0].CurrentPrice</h4>
+                        <h7>@Model.Currencies[0].PriceChange</h7>
+                    </div>
+                </div>
+            </a>
+            <a class="crypto-card card" id="eth">
+                <div class="top-area">
+                    <div class="image-container">
+                        <img src="@Model.Currencies[1].Image" />
+                    </div>
+                </div>
+                <div class="bottom-area">
+                    <h5>@Model.Currencies[1].Name</h5>
+                    <div class="price-holder">
+                        <h4>@Model.Currencies[1].CurrentPrice</h4>
+                        <h7>@Model.Currencies[1].PriceChange</h7>
+                    </div>
+                </div>
+            </a>
+            <a class="crypto-card card" id="dodgecoin">
+                <div class="top-area">
+                    <div class="image-container">
+                        <img src="@Model.Currencies[2].Image" />
+                    </div>
+                </div>
+                <div class="bottom-area">
+                    <h5>@Model.Currencies[2].Name</h5>
+                    <div class="price-holder">
+                        <h4>@Model.Currencies[2].CurrentPrice</h4>
+                        <h7>@Model.Currencies[2].PriceChange</h7>
+                    </div>
+                </div>
+            </a>
+            <a class="crypto-card card" id="othercoin">
+                <div class="top-area">
+                    <div class="image-container">
+                        <img src="@Model.Currencies[3].Image" />
+                    </div>
+                </div>
+                <div class="bottom-area">
+                    <h5>@Model.Currencies[3].Name</h5>
+                    <div class="price-holder">
+                        <h4>@Model.Currencies[3].CurrentPrice</h4>
+                        <h7>@Model.Currencies[3].PriceChange</h7>
+                    </div>
+                </div>
+            </a>
+        }
+    </section>
+    <section class="chart-cards">
+        <section class="price-cards">
+            <div id="price-card" class="price-card card">
+            </div>
+            <div id="change-card" class="change-card card">
+            </div>
+        </section>
+        <section class="market-cards">
+            <div id="status-card" class="status-card card">
+            </div>
+            <div id="analytics-card" class="analytics-card card">
+            </div>
+        </section>
+    </section>
+</div>
+<script>
+    document.querySelectorAll('.crypto-card').forEach(card => {
+        card.addEventListener('click', function () {
+            const currencyName = this.id;
+            updateChartData(currencyName);
+            console.log(currencyName);
+        });
+    });
+    function updateChartData(currencyName) {
+        fetch(`/FinancialData/DashboardJson?currency=${currencyName}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.model.prices.map(item => item.timestamp));
+                const formattedPrices = data.model.prices.map(item => ({
+                    time: item.timestamp,
+                    value: item.value
+                }));
+                const formattedMarketCaps = data.model.marketCaps.map(item => ({
+                    time: new Date(item.timestamp).toISOString(),
+                    value: item.value
+                }));
+                const formattedTotalVolumes = data.model.totalVolumes.map(item => ({
+                    time: new Date(item.timestamp).toISOString(),
+                    value: item.value
+                }));
+
+                updateCharts(formattedPrices, formattedMarketCaps, formattedTotalVolumes);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    function updateCharts(prices, marketCaps, totalVolumes) {
+        clearCards();
+        createChat(prices, 'price-card', 'Light', '400', '800');
+        createChat(marketCaps, 'status-card', 'Light', '400', '800');
+        createChat(totalVolumes, 'change-card', 'Light', '400', '800');
+        createChat(prices, 'analytics-card', 'Light', '400', '800');
+    }
+
+    function clearCards() {
+        document.getElementById('price-card').innerHTML = '';
+        document.getElementById('status-card').innerHTML = '';
+        document.getElementById('change-card').innerHTML = '';
+        document.getElementById('analytics-card').innerHTML = '';
+    }
+
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    @{
+        var jsonDataPrices = Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.ChartData.Prices.Select(item => new
+        {
+            time = item.Timestamp / 1000,
+            value = item.Value
+        }));
+        var jsonDataMarket = Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.ChartData.MarketCaps.Select(item => new
+        {
+            time = item.Timestamp / 1000,
+            value = item.Value
+        }));
+        var jsonDataTotalVolumes = Newtonsoft.Json.JsonConvert.SerializeObject(
+        Model.ChartData.TotalVolumes.Select(item => new
+        {
+            time = item.Timestamp / 1000,
+            value = item.Value
+        }));
+    }
+        var dataPrices = @Html.Raw(jsonDataPrices);
+        var dataTotalVolumes = @Html.Raw(jsonDataTotalVolumes);
+        var dataMarket = @Html.Raw(jsonDataMarket);
+        createChat(dataPrices, 'price-card', 'Light', '400', '800');
+        createChat(dataTotalVolumes, 'change-card', 'Light', '400', '800');
+        createChat(dataMarket, 'status-card', 'Light', '400', '800');
+        createChat(dataPrices, 'analytics-card', 'Light', '400', '800');
+    });
+
+
+</script>

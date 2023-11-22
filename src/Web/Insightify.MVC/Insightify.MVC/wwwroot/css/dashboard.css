@@ -1,0 +1,209 @@
+﻿div .flexbox {
+    display: flex;
+    flex-direction: column;
+}
+
+.single-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 10%;
+}
+
+.crypto-card {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    color: #111827;
+    border-radius: 30px;
+    background: transparent;
+    border: 1px solid #dddddd;
+    transition: ease;
+    transition-duration: 0.3s;
+    cursor: pointer;
+}
+.crypto-card:hover{
+    background: #F8F7FA;
+    border: 1px solid #F8F7FA;
+}
+
+    .crypto-card .top-area {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        height: 50%;
+        padding: 25px;
+    }
+
+.top-area button {
+    border: none;
+    height: 30px;
+    color: beige;
+    border-radius: 20%;
+    background-color: transparent;
+}
+
+    .top-area button:hover {
+        color: white;
+    }
+
+.top-area .image-container {
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .25);
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+}
+
+.image-container img {
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+}
+
+.crypto-card .bottom-area {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    padding: 25px;
+}
+
+.bottom-area .price-holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bottom-area h4 {
+    width: 50%;
+}
+
+.bottom-area h7 {
+    width: 50%;
+    text-align: end;
+}
+
+.chart-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 80vh;
+}
+
+.price-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+    border: none;
+}
+
+.price-card {
+    height: 60%;
+    border-radius: 30px;
+    background-color: #F8F7FA;
+}
+
+.change-card {
+    height: 40%;
+    border-radius: 30px;
+    background-color: #F8F7FA;
+}
+
+.market-cards {
+    display: flex;
+    width: 40%;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.status-card {
+    height: 60%;
+    border-radius: 30px;
+    background-color: #F8F7FA;
+}
+
+.analytics-card {
+    height: 40%;
+    border-radius: 30px;
+    background-color: #F8F7FA;
+}
+
+.card {
+    padding: 15px;
+    margin: 20px;
+    overflow: hidden;
+}
+
+@media(max-width: 1241px) {
+    .flexbox {
+        height: auto;
+    }
+
+    .card {
+        padding: 0px;
+        margin: 5px;
+    }
+
+    .single-cards {
+        flex-direction: column;
+    }
+
+    .crypto-card {
+        width: inherit;
+        height: 200px;
+        padding: 5px;
+    }
+
+    .bottom-area .price-holder {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .bottom-area h4 {
+        width: 50%;
+        font-size: 16px;
+    }
+
+    .bottom-area h7 {
+        width: 50%;
+        text-align: end;
+        font-size: 14px;
+    }
+
+    .chart-cards {
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .price-cards {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .price-card {
+        height: 40vh;
+        border-radius: 30px;
+        background-color: #F8F7FA;
+    }
+
+    .change-card {
+        height: 40vh;
+        border-radius: 30px;
+        background-color: #F8F7FA;
+    }
+
+    .market-cards {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .status-card, .analytics-card {
+        height: 40vh;
+    }
+}

@@ -7,7 +7,7 @@
   </PropertyGroup>
 	<PropertyGroup>
 		<PackageId>Insightify.Framework.Messaging.Abstractions</PackageId>
-		<Version>1.0.0</Version>
+		<Version>1.0.2</Version>
 		<Authors>Insightify</Authors>
 		<Description>Messaging Abstractions Logic for the Insighfity.Project</Description>
 	</PropertyGroup>

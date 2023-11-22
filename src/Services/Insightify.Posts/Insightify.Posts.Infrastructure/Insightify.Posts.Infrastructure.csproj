@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Insightify.Posts.Application\Insightify.Posts.Application.csproj" />
     <ProjectReference Include="..\Insightify.Posts.Domain\Insightify.Posts.Domain.csproj" />
-    <ProjectReference Include="..\Insightify.Posts.Domain\Insightify.Posts.Domain\Insightify.Posts.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

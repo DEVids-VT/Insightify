@@ -1,0 +1,283 @@
+﻿.top {
+    background-color: white;
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: row;
+    height: 240px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+}
+
+    .top .info {
+        height: 100%;
+        width: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 24px;
+    }
+
+        .top .info .basic-info {
+        }
+
+            .top .info .basic-info .name {
+                color: black;
+            }
+
+            .top .info .basic-info .price {
+                font-size: 24px;
+                font-weight: 400;
+                color: darkgray;
+            }
+
+            .top .info .basic-info .title {
+                color: darkgray;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+        .top .info .image {
+            display: block;
+            height: 156px;
+            width: 156px;
+        }
+
+    .top .data {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        align-items: center;
+        justify-content: space-between;
+        width: 50%;
+        padding: 0 24px;
+        flex-wrap: wrap;
+    }
+
+        .top .data .market-cap {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: start;
+            gap: 15%;
+            height: 40%;
+        }
+
+            .top .data .market-cap .name {
+                color: gray;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .top .data .market-cap .value {
+                font-size: 20px;
+                font-weight: 500;
+                margin: 0;
+                color: darkgray;
+            }
+
+        .top .data .day-vol {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: start;
+            height: 40%;
+            gap: 15%;
+        }
+
+            .top .data .day-vol .name {
+                color: gray;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .top .data .day-vol .value {
+                font-size: 20px;
+                font-weight: 500;
+                color: darkgray;
+            }
+
+        .top .data .day-change {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: start;
+            height: 40%;
+            gap: 15%;
+        }
+
+            .top .data .day-change .name {
+                color: gray;
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .top .data .day-change .value {
+                font-size: 20px;
+                font-weight: 500;
+                color: darkgray;
+            }
+
+.links {
+    margin-top: 24px;
+    background-color: white;
+    height: 64px;
+    width: fit-content;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18px;
+}
+
+    .links .link-item {
+        text-decoration: none;
+        color: black;
+        border-radius: 16px;
+        padding: 6px 12px;
+        font-size: 18px;
+    }
+
+        .links .link-item:hover {
+            background-color: #ecdff5;
+            color: #ad5adc;
+        }
+
+.chart {
+    width: 100%;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+    .chart .chart-nav {
+        border-bottom: 3px solid white;
+        display: flex;
+        gap: 32px;
+        padding: 24px 24px 0 24px;
+    }
+
+        .chart .chart-nav .chart-nav-item {
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            font-weight: 400;
+            height: 100%;
+        }
+
+            .chart .chart-nav .chart-nav-item:hover {
+                color: #ad5adc;
+                box-shadow: 0 3px 0 0 #ad5adc; /* Mimics a 2px border on all sides */
+            }
+
+    .chart .chart-container {
+        width: 100%;
+        height: 500px;
+        background-color: white;
+        border-radius: 12px;
+    }
+
+.news {
+    width: 100%;
+    margin-top: 24px;
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+}
+    .news .news-header {
+        height: 10%;
+        border-bottom: 3px solid white;
+        display: flex;
+        gap: 32px;
+        align-items: end;
+        padding: 24px 24px 0 24px;
+    }
+    .news .news-header .title {
+        color:black;
+        font-size: 26px;
+        margin: 0;
+    }
+    .news .news-container {
+        height: 70%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+        .news .news-container .card {
+            display: flex;
+            flex-direction: column;
+            width: 384px;
+            border: none;
+            border-radius: 18px;
+            margin-bottom: 18px;
+        }
+
+            .news .news-container .card .img {
+                display: block;
+                object-fit: contain;
+                border-radius: 18px;
+            }
+
+            .news .news-container .card .content {
+                padding: 24px;
+            }
+
+                .news .news-container .card .content .info {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                .news .news-container .card .content .heading {
+                    font-size: 22px;
+                }
+
+                .news .news-container .card .content .description {
+                    font-size: 12px;
+                }
+
+
+@media (max-width: 800px) {
+    .news .news-container {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+    }
+        .news .news-container .card {
+            
+            width: 330px;
+            
+        }
+
+    .top {
+       
+        flex-direction: column;
+        height: 500px;;
+    }
+        .top .info {
+            width: 100%;
+            padding: 0;
+        }
+
+        .top .data {
+            width: 100%;
+            padding: 0;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: start;
+        }
+
+    .links {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        height: 110px;
+        padding: 18px;
+    }
+}

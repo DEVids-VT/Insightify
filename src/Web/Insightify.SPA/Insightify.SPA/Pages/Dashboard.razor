@@ -1,0 +1,82 @@
+﻿@page "/dashboard"
+@using Microsoft.AspNetCore.Authorization;
+@attribute [AllowAnonymous]
+
+<div class="flexbox">
+    <section class="single-cards">
+        <div class="crypto-card card">
+            <div class="top-area">
+                <div class="image-container">
+                    <img src="/images/crypto/bitcoin.png" />
+                </div>
+                <button>Details</button>
+            </div>
+            <div class="bottom-area">
+                <h5>Bitcoin</h5>
+                <div class="price-holder">
+                    <h4>$48,789.50</h4>
+                    <h7>-0.58$ ></h7>
+                </div>
+            </div>
+        </div>
+        <div class="crypto-card card">
+            <div class="top-area">
+                <div class="image-container">
+                    <img src="/images/crypto/ethereum.png" />
+                </div>
+                <button>Details</button>
+            </div>
+            <div class="bottom-area">
+                <h5>Ethereum</h5>
+                <div class="price-holder">
+                    <h4>$48,789.50</h4>
+                    <h7>-0.58$ ></h7>
+                </div>
+            </div>
+        </div>
+        <div class="crypto-card card">
+            <div class="top-area">
+                <div class="image-container">
+                    <img src="/images/crypto/solana.png" />
+                </div>
+                <button>Details</button>
+            </div>
+            <div class="bottom-area">
+                <h5>Solana</h5>
+                <div class="price-holder">
+                    <h4>$48,789.50</h4>
+                    <h7>-0.58$ ></h7>
+                </div>
+            </div>
+        </div>
+        <div class="crypto-card card">
+            <div class="top-area">
+                <div class="image-container">
+                    <img src="/images/crypto/stellar.png" />
+                </div>
+                <button>Details</button>
+            </div>
+            <div class="bottom-area">
+                <h5>Stellar</h5>
+                <div class="price-holder">
+                    <h4>$48,789.50</h4>
+                    <h7>-0.58$ ></h7>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="chart-cards">
+        <section class="price-cards">
+            <div id="price-card" class="price-card card">
+            </div>
+            <div id="change-card" class="change-card card">
+            </div>
+        </section>
+        <section class="market-cards">
+            <div id="status-card" class="status-card card">
+            </div>
+            <div id="analytics-card" class="analytics-card card">
+            </div>
+        </section>
+    </section>
+</div>

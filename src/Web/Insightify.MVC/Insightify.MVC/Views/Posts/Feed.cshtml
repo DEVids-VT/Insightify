@@ -1,0 +1,138 @@
+﻿@using Insightify.Framework.Pagination.Abstractions;
+@using Insightify.MVC.Models.Posts;
+@model IPage<PostViewModel>
+
+<div class="posts-container">
+    <div class="sections-container">
+        <section class="section-posts" id="postContainer">
+            @{
+                foreach (var post in Model)
+                {
+                    <div class="post-container">
+                        <header class="post-header">
+                            <div class="post-header-info">
+                                <div class="post-header-image">
+                                    <img class="header-img-data" src="~/images/navbar/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg" />
+                                    <h1 class="header-img-text">David Petkov</h1>
+                                </div>
+                                <div class="post-header-hour">
+                                    <h1><strong>‧</strong></h1>
+                                    <h1 class="headerhour-text">2 hr. ago</h1>
+                                </div>
+                            </div>
+                            <div class="post-header-buttons">
+                                <a class="follow-btn">Follow</a>
+                                <a class="report-btn"><i class="fa fa-flag"></i></a>
+                            </div>
+                        </header>
+                        <div class="post-content">
+                            <div class="post-content-bg"></div>
+                            <h1 class="content-title">@post.Title</h1>
+                            <p class="content-text-container">
+                                @post.Description
+                            </p>
+                        </div>
+                        <div class="post-footer">
+                            <div class="footer-buttons">
+                                <a class="footer-btn-action" href="#"><i class="fa fa-heart"></i> @post.LikeCount</a>
+                                <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> @post.CommentCount</a>
+                                <a class="footer-btn-action" href="#"><i class="fa fa-share"></i> Share</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="under-post-line"></div>
+                }
+            }
+        </section>
+        <section class="section-voices">
+            <div class="voices-container">
+                <h1 class="voices-title">Popular voices</h1>
+                @{
+                    for (int i = 0; i < 6; i++)
+                    {
+                        <div class="account-element">
+                            <img class="account-footer-img" src="~/images/navbar/patrik.png" />
+                            <div class="image-element-content">
+                                <h1 class="image-element-content-title">r/Twitch</h1>
+                                <h2 class="image-element-content-content">1,209,283 followers</h2>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    var page = @Model.CurrentPage;
+    var pageSize = @Model.PageSize;
+    var isLoading = false;
+    var loadbar = `
+        <div class="loading-bar">
+            <div class="loading-bar-container">
+                <img class="loading-bar-container-img-gray" src="/images/logo/logo_violet_s.png" alt="loading">
+            </div>
+        </div>
+    `;
+
+    $(window).scroll(function () {
+        if (!isLoading && $(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+            isLoading = true;
+            $('#postContainer').append(loadbar);
+            $.ajax({
+                url: '@Url.Action("Feed", "Posts")',
+                data: { page: page + 1, pageSize: pageSize, json: true },
+                type: 'GET',
+                success: function (result) {
+                    $('.loading-bar').remove();
+                    page++;
+                    result.forEach(function (post) {
+                        var postHtml = `
+                            <div class="post-container">
+                                <header class="post-header">
+                                    <div class="post-header-info">
+                                        <div class="post-header-image">
+                                                <img class="header-img-data" src="/images/navbar/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg" />
+                                            <h1 class="header-img-text">David Petkov</h1>
+                                                <img class="uploaded-image-file" src="${post.imageUrl}" alt="Image" />
+                                        </div>
+                                        <div class="post-header-hour">
+                                            <h1><strong>‧</strong></h1>
+                                            <h1 class="headerhour-text">2 hr. ago</h1>
+                                        </div>
+                                    </div>
+                                    <div class="post-header-buttons">
+                                        <a class="follow-btn">Follow</a>
+                                        <a class="report-btn"><i class="fa fa-flag"></i></a>
+                                    </div>
+                                </header>
+                                <div class="post-content">
+                                    <div class="post-content-bg"></div>
+                                    <h1 class="content-title">${post.title}</h1>
+                                    <p class="content-text-container">
+                                        ${post.description}
+                                    </p>
+                                </div>
+                                <div class="post-footer">
+                                    <div class="footer-buttons">
+                                        <a class="footer-btn-action" href="#"><i class="fa fa-heart"></i> ${post.likeCount}</a>
+                                        <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> ${post.commentCount}</a>
+                                        <a class="footer-btn-action" href="#"><i class="fa fa-share"></i> Share</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="under-post-line"></div>`;
+
+                        $('#postContainer').append(postHtml);
+                    });
+                },
+                complete: function () {
+                    isLoading = false;
+                    $('.loading-bar').remove();
+                }
+            });
+        }
+    });
+</script>

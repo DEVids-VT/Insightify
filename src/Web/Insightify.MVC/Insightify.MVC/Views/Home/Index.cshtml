@@ -1,0 +1,62 @@
+﻿@model HomeLanguageModel
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="leftside">
+    <div class="header" id="sticky-header">
+        <h3 class="head-text">INSIGHTIFY</h3>
+    </div>
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="~/videos/crypto.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="content-center">
+        <div class="holder-text">
+            <h2 class="video-text">@Model.VideoText.Title <span>@Model.VideoText.Highlight</span></h2>
+            <h2 class="video-text">@Model.VideoText.Subtitle</h2>
+            <h4 class="video-text">@Model.Subtitle</h4>
+            <ul style="width: 60%;">
+                @foreach (var item in Model.Ul)
+                {
+                    <li><i class="fa fa-circle-check" style="color: #9856c6; margin-right: 4px;"></i>@item.Text <span>@item.Highlight</span> @item.Description</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="rightside">
+    <aside>
+        <form asp-action="Index" asp-controller="Home" asp-route-language="@Model.LanguageProp" style="display:flex;" class="lang-form">
+            <button class="language-switch" type="submit"><img class="flag-img" style="width: 60px;" src="@Model.LanguageImg" alt="bg-flag"></button>
+            <h2 class="lang-text">@Model.Language</h2>
+        </form>
+    </aside>
+    <h3 class="media-header">INSIGHTIFY</h3>
+    <div class="centertext">
+        <h6>@Model.CenterText</h6>
+        <div class="buttons">
+             <form asp-action="SignIn" asp-controller="Account" style="display:flex;">
+                <button class="btn-style" type="submit">@Model.LogIn</button>
+             </form>
+             <form asp-action="Dashboard" asp-controller="Home" style="display:flex;">
+                <button class="btn-style" type="submit">@Model.SignUp</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <div class="buttons-terms">
+            <a onclick="openLinkInNewTab()" style="text-decoration: none; cursor: pointer;"><span style="color: #ae81ce; font-size: 14px;">@Model.Terms</span></a>
+            <br>
+            <a onclick="openLinkInNewTab()" style="text-decoration: none; cursor: pointer;"><span style="color: #ae81ce; font-size: 14px;">@Model.Policy</span></a>
+        </div>
+    </footer>
+</div>
+
+<script>
+    function openLinkInNewTab() {
+        window.open('https://localhost:7131/Home/Privacy', '_blank');
+    }
+</script>

@@ -1,0 +1,88 @@
+﻿@using Insightify.Web.Gateway.Models.FinancialData;
+@model CryptoCurrencyModel
+
+<section class="top">
+    <div class="info">
+        <img class="image" src="/images/navbar/bitcoin.png" />
+        <div class="basic-info">
+            <p class="title">Name</p>
+            <h1 class="name">@Model.Name</h1>
+            <h2 class="price">@Model.MarketData.CurrentPrice.Usd USD</h2>
+        </div>
+    </div>
+    <div class="data">
+        <div class="market-cap">
+            <p class="name">Market Cap</p>
+            <p class="value">@Model.MarketData.MarketCap.Usd</p>
+        </div>
+        <div class="day-vol">
+            <p class="name">24h High</p>
+            <p class="value">@Model.MarketData.High24h.Usd</p>
+        </div>
+        <div class="day-change">
+            <p class="name">24h Change</p>
+            <p class="value">@Model.MarketData.MarketCapChange24h</p>
+        </div>
+        <div class="day-change">
+            <p class="name">24h Low</p>
+            <p class="value">@Model.MarketData.Low24h.Usd</p>
+        </div>
+    </div>
+</section>
+<section class="links">
+    <a class="link-item" href="@Model.Links.ReposUrl.Github.First()">GitHub <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.OfficialForumUrl.First()">Website <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.SubredditUrl">Community <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.Homepage.First()">Homepage <i class="fa-solid fa-link"></i></a>
+
+</section>
+<section class="chart">
+    <div class="chart-nav">
+        <a class="chart-nav-item">Price</a>
+        <a class="chart-nav-item">Market Cap</a>
+    </div>
+    <div class="chart-container" id="chart-container">
+    </div>
+</section>
+<section class="news">
+    <div class="news-header">
+        <h3 class="title">Related news articles</h3>
+    </div>
+    <div class="news-container" id="news-container">
+        <div class="card">
+            <img class="img" src="https://placehold.co/600x400" />
+            <div class="content">
+                <div class="info">
+                    <p class="author">Author</p>
+                    <p class="timestamp">12/10/2023</p>
+                </div>
+                <h4 class="heading">A very exciting title</h4>
+                <p class="description">A good long and informative description.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="posts" id="posts-container">
+</section>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/financialData/chart',
+            data: { currency: `@Model.Id` },
+            type: 'GET',
+            success: function (result) {
+                const formattedPrices = result.model.prices.map(item => ({
+                    time: item.timestamp / 1000,
+                    value: item.value
+                }));
+                createChat(formattedPrices, 'chart-container', 'Light', '400', '800');
+            }
+        });
+    });
+</script>
+
+<script src="~/js/charts.js"></script>
+<script src="~/js/financialdata/newsloadajax.js"></script>
+<script src="~/js/financialdata/postsloadajax.js"></script>

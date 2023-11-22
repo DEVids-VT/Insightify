@@ -11,19 +11,23 @@
             
             <div class="text-center mb-3">
                 <label asp-for="@Model.Email">Email</label>
-                <input class="form-control " autocomplete="username" aria-required="true" asp-for="@Model.Email" />
+                <input class="form-control " autocomplete="email" aria-required="true" asp-for="@Model.Email" />
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>
             </div>
             <div class="text-center mb-3">
                 <label asp-for="@Model.Username">Username</label>
                 <input class="form-control " autocomplete="username" aria-required="true" asp-for="@Model.Username" />
+                <span asp-validation-for="@Model.Username" class="text-danger"></span>
             </div>
             <div class="text-center mb-3">
                 <label asp-for="@Model.Password">Password</label>
                 <input class="form-control" type="password" autocomplete="new-password" aria-required="true" asp-for="@Model.Password" />
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>
             </div>
             <div class="text-center mb-3">
                 <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
                 <input class="form-control" type="password" autocomplete="new-password" aria-required="true" asp-for="@Model.ConfirmPassword" />
+                <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="text-center">
                 <button id="registerSubmit" type="submit" class="btn btn-info m-2">Register</button>
@@ -31,3 +35,6 @@
         </form>
     </div>
 </div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

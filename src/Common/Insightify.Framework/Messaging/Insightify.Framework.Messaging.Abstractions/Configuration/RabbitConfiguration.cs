@@ -13,6 +13,7 @@ namespace Insightify.Framework.Messaging.Abstractions.Configuration
         public string? ConnectionString { get; set; }
         public List<Assembly> ConsumerAssemblies { get; } = new();
         public List<Type> Consumers { get; } = new();
+        public List<EndpointConfiguration> Endpoints { get; } = new List<EndpointConfiguration>();
 
         /// <summary>
         /// This property determines how long `Publish()` or `Send()` should block the
@@ -37,6 +38,21 @@ namespace Insightify.Framework.Messaging.Abstractions.Configuration
         public void ScanAssemblyForConsumers(Assembly assembly) => this.ConsumerAssemblies.Add(assembly);
 
         public void WithConsumer(Type consumerType) => this.Consumers.Add(consumerType);
+
+        public void AddEndpointConfiguration(string queueName, params Type[] consumerTypes)
+        {
+            var endpoint = Endpoints.FirstOrDefault(e => e.QueueName == queueName);
+            if (endpoint == null)
+            {
+                endpoint = new EndpointConfiguration(queueName);
+                Endpoints.Add(endpoint);
+            }
+
+            foreach (var consumerType in consumerTypes)
+            {
+                endpoint.AddConsumer(consumerType);
+            }
+        }
 
     }
 }

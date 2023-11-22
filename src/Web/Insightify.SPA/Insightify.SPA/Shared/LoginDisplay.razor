@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+
+<AuthorizeView>
+    <Authorized>
+        <div class="auth-menu">
+            <a class="account-menu">
+                <img class="profile-picture" src="images/patrik.png"/>
+                <p class="username">@context.User.Identity?.Name</p>
+                <button class="dropdown-btn" @onclick="OpenCloseDropdown"><i class="fa-solid fa-caret-down"></i></button>
+            </a>
+            <a class="top-row-item"><i class="fa-regular fa-bell"></i></a>
+            <div class="dropdown" style="@(isDropdownVisible ? "display:block" : "display:none")">
+                <div class="dropdown-content">
+                    <a class="item">Logout</a>
+                    <a class="item">Logout</a>
+                    <a class="item">Logout</a>
+                    <a class="item">Logout</a>
+                </div>
+            </div>
+        </div>
+        
+    </Authorized>
+    <NotAuthorized>
+        <div class="not-authorized-register">
+            <a class="not-authorized-button" href="authentication/login">Register</a>
+        </div>
+        <div class="not-authorized-login">
+            <a class="not-authorized-button" href="authentication/login">Log in</a>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+    private void BeginLogOut()
+    {
+        Navigation.NavigateToLogout("authentication/logout");
+    }
+}

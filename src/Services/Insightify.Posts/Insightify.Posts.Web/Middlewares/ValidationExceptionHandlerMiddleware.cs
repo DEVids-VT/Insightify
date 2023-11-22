@@ -46,9 +46,9 @@
                     code = HttpStatusCode.BadRequest;
                     result = SerializeObject(new[] { "Invalid request." });
                     break;
-                //case NotFoundException _:
-                //    code = HttpStatusCode.NotFound;
-                //    break;
+                case NotFoundException _:
+                    code = HttpStatusCode.NotFound;
+                    break;
             }
 
             context.Response.ContentType = "application/json";

@@ -31,6 +31,10 @@ namespace Insightify.Posts.Application.Posts.Commands.Like
                 {
                     return false;
                 }
+                if (post.Likes.Any(p => p.UserId == currentUser.UserId))
+                {
+                    return "Already liked.";
+                }
 
                 post.AddLike(currentUser.UserId, DateTime.UtcNow);
                 await this.postRepository.Save(post, cancellationToken);

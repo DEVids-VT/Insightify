@@ -1,0 +1,94 @@
+﻿.crypto-market-title-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.crypto-market-title {
+    color: #181818;
+    font-size: 70px;
+    font-weight: 600;
+    margin-top: 100px;
+    margin-bottom: 130px;
+}
+
+.table-div {
+    width: 100%;
+    overflow-x: auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    border-radius: 10px;
+}
+
+/* Table Styles */
+.table-container {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.thead-item-container {
+    border-radius: 10px;
+    background-color: #ffffff; /* Darker shade for better contrast */
+}
+
+.tr-item-head th {
+    text-align: left;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    color: #979797;
+    font-weight: 500;
+    height: 50px;
+}
+.thead-item:hover{
+    background-color: #F0F3FA;
+}
+.tr-item td {
+    text-align: left;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    color: #757575;
+}
+
+/* First Column Styling */
+.td-item:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 20px; /* More space for the first column */
+}
+.tr-item:hover{
+    background-color: #F0F3FA;
+
+}
+.table-item-img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.currency-id, .currency-name {
+    margin: 0;
+}
+
+/* Last Column Styling */
+.td-item:last-child {
+    padding-right: 20px; /* More space for the last column */
+}
+
+/* Hover Effects */
+.td-item:first-child:hover {
+    background-color: #3b65c9;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+    .td-item, .thead-item {
+        display: block;
+        width: 100%;
+    }
+
+    .td-item {
+        text-align: center;
+        padding: 10px 0;
+    }
+}
