@@ -7,7 +7,7 @@ namespace Insightify.MVC.Clients
     public interface IFinancialDataClient
     {
         [Get("/all")]
-        Task<ApiResponse<List<CryptoCurrencyModel>>> AllCurrencies(string? title = null, int pageIndex = 1, int pageSize = 50);
+        Task<ApiResponse<List<CryptoCurrencyModel>>> AllCurrencies();
 
         [Get("/{currency}")]
         Task<ApiResponse<CryptoCurrencyModel>> Currency([FromRoute] string currency);

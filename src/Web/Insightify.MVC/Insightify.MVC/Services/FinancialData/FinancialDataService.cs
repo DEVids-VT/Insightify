@@ -86,28 +86,19 @@ namespace Insightify.MVC.Services.FinancialData
             return new DashboardModel { ChartData = chart, Currencies = data };
         }
 
-        public async Task<IPage<CryptoCurrencyModel>> GetAllCurrencies(string? title = null, int pageIndex = 1, int pageSize = 50)
+        public async Task<IEnumerable<CryptoCurrencyModel>> GetAllCurrencies()
         {
-            var financialDataResponce = await _financialDataClient.AllCurrencies(title, pageIndex, pageSize);
+            var financialDataResponce = await _financialDataClient.AllCurrencies();
 
-            var paginationHeaders =
-                financialDataResponce.Headers.TryGetValues(PaginationHeaderNames.PaginationHeaderName.ToLower(),
-                    out IEnumerable<string>? headers);
-
-            var parsedHeaders = HeaderHelpers.ParseHeader(headers?.ToList()[0]);
             var data = financialDataResponce.Content;
 
-            if (data == null || parsedHeaders == null)
+            if (data == null)
             {
                 throw new NotFoundException();
             }
 
             var dataOut = _mapper.Map<List<CryptoCurrencyModel>>(data);
-            return new Page<CryptoCurrencyModel>(
-                dataOut,
-                parsedHeaders["CurrentPage"],
-                parsedHeaders["PageSize"],
-                parsedHeaders["TotalCount"]);
+            return dataOut;
         }
     }
 }

@@ -30,10 +30,10 @@
     </div>
 </section>
 <section class="links">
-    <a class="link-item" href="@Model.Links.ReposUrl.Github">GitHub <i class="fa-solid fa-link"></i></a>
-    <a class="link-item" href="@Model.Links.OfficialForumUrl">Website <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.ReposUrl.Github.First()">GitHub <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.OfficialForumUrl.First()">Website <i class="fa-solid fa-link"></i></a>
     <a class="link-item" href="@Model.Links.SubredditUrl">Community <i class="fa-solid fa-link"></i></a>
-    <a class="link-item" href="@Model.Links.Homepage">Homepage <i class="fa-solid fa-link"></i></a>
+    <a class="link-item" href="@Model.Links.Homepage.First()">Homepage <i class="fa-solid fa-link"></i></a>
 
 </section>
 <section class="chart">
@@ -64,9 +64,25 @@
 </section>
 <section class="posts" id="posts-container">
 </section>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
-    loadChart(@Model.Id);
+    $(document).ready(function () {
+        $.ajax({
+            url: '/financialData/chart',
+            data: { currency: `@Model.Id` },
+            type: 'GET',
+            success: function (result) {
+                const formattedPrices = result.model.prices.map(item => ({
+                    time: item.timestamp / 1000,
+                    value: item.value
+                }));
+                createChat(formattedPrices, 'chart-container', 'Light', '400', '800');
+            }
+        });
+    });
 </script>
+
+<script src="~/js/charts.js"></script>
 <script src="~/js/financialdata/newsloadajax.js"></script>
 <script src="~/js/financialdata/postsloadajax.js"></script>
-<script src="~/js/financialdata/createchartajax.js"></script>
