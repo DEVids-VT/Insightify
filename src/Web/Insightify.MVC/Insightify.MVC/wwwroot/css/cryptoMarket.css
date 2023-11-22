@@ -28,7 +28,7 @@
 
 .thead-item-container {
     border-radius: 10px;
-    background-color: #ffffff; /* Darker shade for better contrast */
+    background-color: #ffffff;
 }
 
 .tr-item-head th {
@@ -54,7 +54,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding-left: 20px; /* More space for the first column */
+    padding-left: 20px;
 }
 .tr-item:hover{
     background-color: #F0F3FA;
@@ -72,7 +72,7 @@
 
 /* Last Column Styling */
 .td-item:last-child {
-    padding-right: 20px; /* More space for the last column */
+    padding-right: 20px;
 }
 
 /* Hover Effects */
