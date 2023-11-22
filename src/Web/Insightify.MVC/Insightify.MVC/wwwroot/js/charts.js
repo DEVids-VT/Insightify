@@ -8,8 +8,10 @@ function createChat (chartData, elementId, theme, height, width) {
 		rightPriceScale: {
 			borderVisible: false,
 		},
+		priceScale: {
+			mode: LightweightCharts.PriceScaleMode.Logarithmic,
+		},
 		timeScale: {
-			borderVisible: false,
 			timeVisible: true,
 			secondsVisible: false,
 		},
@@ -23,17 +25,6 @@ function createChat (chartData, elementId, theme, height, width) {
 		lineColor: 'rgba(33, 150, 243, 1)',
 		lineWidth: 2,
 	});
-
-  //  function convertDate(inputFormat) {
-  //      var dt = new Date(inputFormat);
-  //      var year = dt.getFullYear();
-  //      var month = (dt.getMonth() + 1).toString().padStart(2, '0');
-  //      var day = dt.getDate().toString().padStart(2, '0');
-  //      var hours = dt.getHours().toString().padStart(2, '0');
-		//var minutes = dt.getMinutes().toString().padStart(2, '0');
-  //      console.log(`${year}-${month}-${day} ${hours}:${minutes}`);
-  //      return `${year}-${month}-${day} ${hours}:${minutes}:00`;
-  //  }
 
 	var processedData = chartData.map(d => ({ time: d.time, value: d.value }));
     console.log(chartData.map(d => d.time));

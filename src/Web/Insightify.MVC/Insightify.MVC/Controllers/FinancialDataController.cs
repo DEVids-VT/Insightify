@@ -14,15 +14,55 @@ namespace Insightify.MVC.Controllers
             _financialDataService = financialDataService;
         }
 
-        [HttpGet]
+        [HttpGet("marketdata")]
         public async Task<IActionResult> AllCurrencies()
         {
             var model = await _financialDataService.GetAllCurrencies();
-
+            //var dataOut = new List<CryptoCurrencyModel>
+            //{
+            //    new CryptoCurrencyModel
+            //    {
+            //        Id = "btc",
+            //        Name = "bitcoin",
+            //        Image = new Image
+            //        {
+            //            Small = "/images/camera_lense_0.jpeg"
+            //        },
+            //        MarketCapRank = 1,
+            //        MarketData = new MarketData
+            //        {
+            //            CurrentPrice = new CurrentPrice
+            //            {
+            //                Usd = 200
+            //            },
+            //            MarketCapChange24h = 20,
+            //            MarketCap = new MarketCap
+            //            {
+            //                Usd = 2000
+            //            },
+            //            TotalVolume = new TotalVolume
+            //            {
+            //                Usd = 10
+            //            },
+            //            CirculatingSupply = 200
+            //        },
+            //        Categories = new List<string>
+            //        {
+            //            "sdadsaasdadsasdadsasd"
+            //        }
+            //    }
+            //};
+            //
+            //var model = new Page<CryptoCurrencyModel>(
+            //    dataOut,
+            //    1,
+            //    20,
+            //    40);
+            //
             return View(model);
         }
 
-        [HttpGet]
+        [HttpGet("currency/{currency}")]
         public async Task<IActionResult> Currency(string currency)
         {
             var model = await _financialDataService.Currency(currency);
@@ -38,7 +78,7 @@ namespace Insightify.MVC.Controllers
             return Json(model);
         }
 
-        [HttpGet]
+        [HttpGet("dashboard")]
         public async Task<IActionResult> Dashboard()
         {
             var model = await _financialDataService.Dashboard();
@@ -46,31 +86,22 @@ namespace Insightify.MVC.Controllers
             //{
             //    ChartData = new Web.Gateway.Models.FinancialData.MarketChartModel
             //    {
-            //        Prices = new List<Models.FinancialData.MarketDataModels.MarketValue>
+            //        Prices = new List<MarketValue>
             //        {
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = 129 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = 135 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = 140 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = 145 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = 150 }
+            //            new MarketValue { Timestamp = 1355314320000, Value = 129 },
+            //            new MarketValue { Timestamp = 1355314620000, Value = 135 },
             //        },
-            //        TotalVolumes = new List<Models.FinancialData.MarketDataModels.MarketValue>
+            //        TotalVolumes = new List<MarketValue>
             //        {
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = 200 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = 205 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = 210 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = 215 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = 220 }
+            //            new MarketValue { Timestamp = 1355314320000, Value = 129 },
+            //            new MarketValue { Timestamp = 1355314620000, Value = 135 },
             //        },
-            //        MarketCaps = new List<Models.FinancialData.MarketDataModels.MarketValue>
+            //        MarketCaps = new List<  MarketValue>
             //        {
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = 300 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = 310 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = 320 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = 330 },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = 340 }
+            //            new MarketValue { Timestamp = 1355314320000, Value = 129 },
+            //            new MarketValue { Timestamp = 1355314620000, Value = 135 },
             //        }
-
+            //
             //    },
             //    Currencies = new List<Models.FinancialData.DashboardCurrencyModel>
             //    {
@@ -123,31 +154,31 @@ namespace Insightify.MVC.Controllers
             //{
             //    model = new Web.Gateway.Models.FinancialData.MarketChartModel
             //    {
-            //        Prices = new List<Models.FinancialData.MarketDataModels.MarketValue>
+            //        Prices = new List<MarketValue>
             //        {
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = rand.Next() }
-            //        },
-            //        TotalVolumes = new List<Models.FinancialData.MarketDataModels.MarketValue>
-            //        {
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = rand.Next() }
-            //        },
-            //        MarketCaps = new List<Models.FinancialData.MarketDataModels.MarketValue>
-            //        {
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630425600, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630512000, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630598400, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630684800, Value = rand.Next() },
-            //            new Models.FinancialData.MarketDataModels.MarketValue { Timestamp = 1630771200, Value = rand.Next() }
+            //            new MarketValue { Timestamp = 163042560000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163051200000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163059840000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163068480000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163077120000, Value = rand.Next() }
+            //        },                                          
+            //        TotalVolumes = new List<MarketValue>        
+            //        {                                           
+            //            new MarketValue { Timestamp = 163042560000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163051200000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163059840000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163068480000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163077120000, Value = rand.Next() }
+            //        },                                          
+            //        MarketCaps = new List<MarketValue>          
+            //        {                                           
+            //            new MarketValue { Timestamp = 163042560000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163051200000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163059840000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163068480000, Value = rand.Next() },
+            //            new MarketValue { Timestamp = 163077120000, Value = rand.Next() }
             //        }
-
+            //
             //    },
             //    data = new Models.FinancialData.DashboardCurrencyModel
             //    {

@@ -133,22 +133,21 @@
         var jsonDataPrices = Newtonsoft.Json.JsonConvert.SerializeObject(
         Model.ChartData.Prices.Select(item => new
         {
-            time = DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd hh:mm"),
+            time = item.Timestamp / 1000,
             value = item.Value
         }));
         var jsonDataMarket = Newtonsoft.Json.JsonConvert.SerializeObject(
         Model.ChartData.MarketCaps.Select(item => new
         {
-            time = DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd hh:mm"),
+            time = item.Timestamp / 1000,
             value = item.Value
         }));
         var jsonDataTotalVolumes = Newtonsoft.Json.JsonConvert.SerializeObject(
         Model.ChartData.TotalVolumes.Select(item => new
         {
-            time = DateTimeOffset.FromUnixTimeMilliseconds(item.Timestamp).DateTime.ToString("yyyy-MM-dd hh:mm"),
+            time = item.Timestamp / 1000,
             value = item.Value
         }));
-
     }
         var dataPrices = @Html.Raw(jsonDataPrices);
         var dataTotalVolumes = @Html.Raw(jsonDataTotalVolumes);
