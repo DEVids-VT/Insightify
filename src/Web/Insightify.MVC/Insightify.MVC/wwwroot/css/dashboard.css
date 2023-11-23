@@ -16,14 +16,16 @@
     width: 30%;
     color: #111827;
     border-radius: 30px;
-    background: transparent;
-    
     transition: ease;
     transition-duration: 0.3s;
     cursor: pointer;
+    transition: all 0.3s;
+    color: rgb(75, 75, 75);
 }
+
 .crypto-card:hover{
-    background: #F8F7FA;
+    background: linear-gradient(144deg, rgba(185,203,255,1) 0%, rgba(166,230,255,1) 100%);
+    color: rgb(75, 75, 75);
 }
 
     .crypto-card .top-area {
@@ -86,49 +88,51 @@
 
 .chart-cards {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: 80vh;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 50px;
 }
 
 .price-cards {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 60%;
+    width: 100%;
     border: none;
 }
 
 .price-card {
-    height: 60%;
+    height: 100%;
     background-color: white;
+    border: none;
 }
 
 .change-card {
-    height: 40%;
-    background-color: #F8F7FA;
+    height: 100%;
+    border: none;
 }
 
 .market-cards {
     display: flex;
-    width: 40%;
+    width: 100%;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .status-card {
-    height: 60%;
+    height: 100%;
+    border: none;
 }
 
 .analytics-card {
-    height: 40%;
+    height: 100%;
+    border: none;
 }
 
 .card {
     padding: 15px;
     margin: 20px;
     overflow: hidden;
-    border: none;
 }
 
 @media(max-width: 1241px) {
@@ -171,22 +175,20 @@
     .chart-cards {
         flex-direction: column;
         height: fit-content;
+        margin: 10px;
     }
 
     .price-cards {
         width: 100%;
         flex-direction: column;
+        margin: 10px;
     }
 
     .price-card {
-        height: 40vh;
-        border-radius: 30px;
         background-color: #F8F7FA;
     }
 
     .change-card {
-        height: 40vh;
-        border-radius: 30px;
         background-color: #F8F7FA;
     }
 
@@ -197,7 +199,7 @@
         justify-content: space-between;
     }
 
-    .status-card, .analytics-card {
-        height: 40vh;
+    .chart-cards{
+        padding: 0 0px;
     }
 }

@@ -3,15 +3,13 @@ $(document).ready(function () {
         var scroll = $(window).scrollTop();
         var header = $('#header');
         var initialColor = '#ffffff';
-        var darkerColor = '#ffffff';
-        var borderBottom = '1px solid #dddddd';
-        var borderInitial = 'none';
+        var darkerColor = '#dddddd';
+        var borderInitial = '1px solid white';
 
         if (scroll > 50) {
-            //var ratio = (scroll - 50) / 150;
-            //var newColor = blendColors(initialColor, darkerColor, ratio);
-            //header.css('background-color', newColor);
-            header.css('border-bottom', borderBottom);
+            var ratio = (scroll - 50) / 150;
+            var newColor = '1px solid' + blendColors(initialColor, darkerColor, ratio);
+            header.css('border-bottom', newColor);
         } else {
             header.css('border-bottom', borderInitial);
         }
