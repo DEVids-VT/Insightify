@@ -51,6 +51,9 @@ namespace Insightify.MVC.Services.FinancialData
         {
             var chart = await Chart("bitcoin");
             var btc = await Currency("bitcoin");
+            var eth = await Currency("ethereum");
+            var bcc = await Currency("binancecoin");
+            var sol = await Currency("solana");
             var data = new List<DashboardCurrencyModel>
             {
                 new DashboardCurrencyModel
@@ -62,24 +65,24 @@ namespace Insightify.MVC.Services.FinancialData
                 },
                 new DashboardCurrencyModel
                 {
-                    Name = btc.Name,
-                    CurrentPrice = double.Parse(btc.MarketData.CurrentPrice.Usd.Value.ToString()),
-                    Image = btc.Image.Large,
-                    PriceChange = btc.MarketData.PriceChangePercentage24h.Value
+                    Name = eth.Name,
+                    CurrentPrice = double.Parse(eth.MarketData.CurrentPrice.Usd.Value.ToString()),
+                    Image = eth.Image.Large,
+                    PriceChange = eth.MarketData.PriceChangePercentage24h.Value
                 },
                 new DashboardCurrencyModel
                 {
-                    Name = btc.Name,
-                    CurrentPrice = double.Parse(btc.MarketData.CurrentPrice.Usd.Value.ToString()),
-                    Image = btc.Image.Large,
-                    PriceChange = btc.MarketData.PriceChangePercentage24h.Value
+                    Name = bcc.Name,
+                    CurrentPrice = double.Parse(bcc.MarketData.CurrentPrice.Usd.Value.ToString()),
+                    Image = bcc.Image.Large,
+                    PriceChange = bcc.MarketData.PriceChangePercentage24h.Value
                 },
                 new DashboardCurrencyModel
                 {
-                    Name = btc.Name,
-                    CurrentPrice = double.Parse(btc.MarketData.CurrentPrice.Usd.Value.ToString()),
-                    Image = btc.Image.Large,
-                    PriceChange = btc.MarketData.PriceChangePercentage24h.Value
+                    Name = sol.Name,
+                    CurrentPrice = double.Parse(sol.MarketData.CurrentPrice.Usd.Value.ToString()),
+                    Image = sol.Image.Large,
+                    PriceChange = sol.MarketData.PriceChangePercentage24h.Value
                 }
             };
 

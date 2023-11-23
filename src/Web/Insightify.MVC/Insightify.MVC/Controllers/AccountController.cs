@@ -28,8 +28,8 @@ namespace Insightify.MVC.Controllers
             {
                 ViewData["access_token"] = token;
             }
-            
-            return Ok();
+
+            return RedirectToAction("Dashboard", "FinancialData");
         }
 
         [HttpGet]

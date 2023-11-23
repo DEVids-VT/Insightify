@@ -3,7 +3,7 @@
 
 <section class="top">
     <div class="info">
-        <img class="image" src="/images/navbar/bitcoin.png" />
+        <img class="image" src="@Model.Image.Large" />
         <div class="basic-info">
             <p class="title">Name</p>
             <h1 class="name">@Model.Name</h1>
@@ -49,7 +49,7 @@
         <h3 class="title">Related news articles</h3>
     </div>
     <div class="news-container" id="news-container">
-        <div class="card">
+        <@* div class="card">
             <img class="img" src="https://placehold.co/600x400" />
             <div class="content">
                 <div class="info">
@@ -59,7 +59,7 @@
                 <h4 class="heading">A very exciting title</h4>
                 <p class="description">A good long and informative description.</p>
             </div>
-        </div>
+        </div> *@
     </div>
 </section>
 <section class="posts" id="posts-container">
@@ -73,7 +73,7 @@
             data: { currency: `@Model.Id` },
             type: 'GET',
             success: function (result) {
-                const formattedPrices = result.model.prices.map(item => ({
+                const formattedPrices = result.prices.map(item => ({
                     time: item.timestamp / 1000,
                     value: item.value
                 }));
@@ -84,5 +84,5 @@
 </script>
 
 <script src="~/js/charts.js"></script>
-<script src="~/js/financialdata/newsloadajax.js"></script>
-<script src="~/js/financialdata/postsloadajax.js"></script>
+ <script src="~/js/financialdata/newsloadajax.js"></script>
+ <script src="~/js/financialdata/postsloadajax.js"></script>

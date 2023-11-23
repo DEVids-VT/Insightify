@@ -65,10 +65,7 @@ function createChat (chartData, elementId, theme, height, width) {
 	const lightTheme = {
 		chart: {
 			layout: {
-				background: {
-					type: 'solid',
-					color: '#F8F7FA',
-				},
+				
 				lineColor: '#2B2B43',
 				textColor: '#191919',
 			},
@@ -80,7 +77,7 @@ function createChat (chartData, elementId, theme, height, width) {
 					visible: false,
 				},
 				horzLines: {
-					color: '#f0f3fa',
+					visible: false
 				},
 			},
 		},

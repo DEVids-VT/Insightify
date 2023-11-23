@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </a>
-            <a class="crypto-card card" id="eth">
+            <a class="crypto-card card" id="ethereum">
                 <div class="top-area">
                     <div class="image-container">
                         <img src="@Model.Currencies[1].Image" />
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </a>
-            <a class="crypto-card card" id="dodgecoin">
+            <a class="crypto-card card" id="binancecoin">
                 <div class="top-area">
                     <div class="image-container">
                         <img src="@Model.Currencies[2].Image" />
@@ -49,7 +49,7 @@
                     </div>
                 </div>
             </a>
-            <a class="crypto-card card" id="othercoin">
+            <a class="crypto-card card" id="solana">
                 <div class="top-area">
                     <div class="image-container">
                         <img src="@Model.Currencies[3].Image" />
@@ -98,11 +98,11 @@
                     value: item.value
                 }));
                 const formattedMarketCaps = data.model.marketCaps.map(item => ({
-                    time: new Date(item.timestamp).toISOString(),
+                    time: item.timestamp,
                     value: item.value
                 }));
                 const formattedTotalVolumes = data.model.totalVolumes.map(item => ({
-                    time: new Date(item.timestamp).toISOString(),
+                    time: item.timestamp,
                     value: item.value
                 }));
 

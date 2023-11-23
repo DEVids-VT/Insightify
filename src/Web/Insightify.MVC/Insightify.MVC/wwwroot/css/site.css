@@ -9,7 +9,7 @@ html {
 
 body {
     display: flex;
-    background-color: #ececec;
+    background-color: white;
     color: #D1D5DB;
 }
 .loading-bar-container-img-gray {

@@ -17,14 +17,13 @@
     color: #111827;
     border-radius: 30px;
     background: transparent;
-    border: 1px solid #dddddd;
+    
     transition: ease;
     transition-duration: 0.3s;
     cursor: pointer;
 }
 .crypto-card:hover{
     background: #F8F7FA;
-    border: 1px solid #F8F7FA;
 }
 
     .crypto-card .top-area {
@@ -102,13 +101,11 @@
 
 .price-card {
     height: 60%;
-    border-radius: 30px;
-    background-color: #F8F7FA;
+    background-color: white;
 }
 
 .change-card {
     height: 40%;
-    border-radius: 30px;
     background-color: #F8F7FA;
 }
 
@@ -121,20 +118,17 @@
 
 .status-card {
     height: 60%;
-    border-radius: 30px;
-    background-color: #F8F7FA;
 }
 
 .analytics-card {
     height: 40%;
-    border-radius: 30px;
-    background-color: #F8F7FA;
 }
 
 .card {
     padding: 15px;
     margin: 20px;
     overflow: hidden;
+    border: none;
 }
 
 @media(max-width: 1241px) {

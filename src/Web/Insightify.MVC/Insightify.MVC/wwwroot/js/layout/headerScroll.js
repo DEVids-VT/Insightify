@@ -2,15 +2,18 @@ $(document).ready(function () {
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
         var header = $('#header');
-        var initialColor = '#ececec';
+        var initialColor = '#ffffff';
         var darkerColor = '#ffffff';
+        var borderBottom = '1px solid #dddddd';
+        var borderInitial = 'none';
 
         if (scroll > 50) {
-            var ratio = (scroll - 50) / 150;
-            var newColor = blendColors(initialColor, darkerColor, ratio);
-            header.css('background-color', newColor);
+            //var ratio = (scroll - 50) / 150;
+            //var newColor = blendColors(initialColor, darkerColor, ratio);
+            //header.css('background-color', newColor);
+            header.css('border-bottom', borderBottom);
         } else {
-            header.css('background-color', initialColor);
+            header.css('border-bottom', borderInitial);
         }
     });
 
