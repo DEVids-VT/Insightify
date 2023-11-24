@@ -31,7 +31,7 @@ namespace Insightify.MVC.Services.Posts
 
         public async Task<CreatePostResponseModel> CreatePost(CreatePostInputModel model)
         {
-            var imageUrl = await UploadImageToImgur(model.Image);
+            var imageUrl = await UploadImage.ToImgur(model.Image, _httpClient);
 
             return await CreatePostWithImageUrl(model, imageUrl);
         }
@@ -58,27 +58,6 @@ namespace Insightify.MVC.Services.Posts
                 parsedHeaders["CurrentPage"],
                 parsedHeaders["PageSize"],
                 parsedHeaders["TotalCount"]);
-        }
-
-        private async Task<string> UploadImageToImgur(IFormFile imageFile)
-        {
-            using var formContent = new MultipartFormDataContent();
-            using var imageStream = imageFile.OpenReadStream();
-            using var streamContent = new StreamContent(imageStream);
-            streamContent.Headers.ContentType = new MediaTypeHeaderValue(imageFile.ContentType);
-
-            formContent.Add(streamContent, "image", imageFile.FileName);
-
-            var response = await _httpClient.PostAsync("https://api.imgur.com/3/upload", formContent);
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Image upload failed with status code: {response.StatusCode}");
-            }
-
-            var jsonResponse = JObject.Parse(responseContent);
-            return jsonResponse["data"]["link"].ToString();
         }
 
         private async Task<CreatePostResponseModel> CreatePostWithImageUrl(CreatePostInputModel model, string imageUrl)

@@ -4,6 +4,7 @@ using Insightify.IdentityAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Insightify.IdentityAPI.Migrations
 {
     [DbContext(typeof(IdentityApiDbContext))]
-    partial class IdentityApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231124130535_ProfilePictureForUser")]
+    partial class ProfilePictureForUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

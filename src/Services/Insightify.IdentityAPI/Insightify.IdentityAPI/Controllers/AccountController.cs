@@ -206,6 +206,6 @@ namespace Insightify.IdentityAPI.Controllers
             return RedirectToAction("Login", "Account");
         }
 
-
+            
     }
 }

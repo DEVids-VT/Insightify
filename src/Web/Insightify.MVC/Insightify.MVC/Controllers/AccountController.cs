@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Insightify.MVC.Services;
+using Insightify.Web.Gateway.Clients;
+using Insightify.Web.Gateway.Clients.Models.Users;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +12,14 @@ namespace Insightify.MVC.Controllers
     public class AccountController : Controller
     {
         private readonly ILogger<AccountController> _logger;
+        private readonly IAccountClient _accountClient;
+        private readonly HttpClient _client;
 
-        public AccountController(ILogger<AccountController> logger)
+        public AccountController(ILogger<AccountController> logger, IAccountClient accountClient, HttpClient client)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger;
+            _accountClient = accountClient;
+            _client = client;
         }
 
         [Authorize(AuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)]
@@ -32,28 +39,24 @@ namespace Insightify.MVC.Controllers
             return RedirectToAction("Dashboard", "FinancialData");
         }
 
-        [HttpGet]
         public IActionResult Profile()
         {
             return View();
         }
 
-        [HttpPost]
-        public IActionResult ChangeUsername(string username)
+        [HttpPut]
+        public async Task<IActionResult> EditProfile(ApplicationUser user, IFormFile? image)
         {
-            return View();
-        }
+            if(image != null)
+            {
+                var url = await UploadImage.ToImgur(image, _client);
+                user.ProfilePicture = url;
+            }
+            user.Id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        [HttpPost]
-        public IActionResult ChangeProfilePicture(IFormFile image)
-        {
-            return View();
-        }
+            var result = await _accountClient.EditProfile(user);
 
-        [HttpPost]
-        public IActionResult ChangeEmail(string email)
-        {
-            return View();
+            return Json(result);
         }
     }
 }

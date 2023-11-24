@@ -1,4 +1,5 @@
-﻿<div class="main-content">
+﻿
+<div class="main-content">
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
@@ -6,6 +7,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-3 order-lg-2">
                             <div class="card-profile-image d-flex justify-content-center align-items-center align-text-center">
+                                <input type="file" id="input-image" />
                                 <img style="width: 215px;" src="https://demos.creative-tim.com/argon-dashboard/assets-old/img/theme/team-4.jpg" class="rounded-circle">
                             </div>
                         </div>
@@ -86,29 +88,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group focused">
-                                                <label class="form-control-label" for="input-first-name">First name</label>
-                                                <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Lucky">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group focused">
-                                                <label class="form-control-label" for="input-last-name">Last name</label>
-                                                <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <hr class="my-4">
-                                <h6 class="heading-small text-muted mb-4">About me</h6>
-                                <div class="pl-lg-4">
-                                    <div class="form-group focused">
-                                        <label>About Me</label>
-                                        <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-                                    </div>
-                                </div>
+                                <button type="submit" id="editProfile">Edit</button>
                             </form>
                         </div>
                     </div>
@@ -163,3 +144,36 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#editProfile').on('click', function (event) {
+            event.preventDefault();
+
+            var formData = new FormData();
+            formData.append('Username', $('#input-username').val());
+            formData.append('Email', $('#input-email').val());
+
+            var imageFile = $('#input-image')[0].files[0];
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+            $.ajax({
+                url: '/Account/EditProfile',
+                type: 'PUT',
+                data: formData,
+                processData: false, 
+                contentType: false, 
+                success: function (response) {
+                    // Handle success
+                    console.log('Success:', response);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>
