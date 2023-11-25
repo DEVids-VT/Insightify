@@ -9,6 +9,10 @@ Insightify
 
 A microservice architecture based application designed to provide a comprehensive suite of cryptocurrency-related services.
 
+## Application Diagram
+
+![image](https://cdn.discordapp.com/attachments/916963422707527700/1177967457990885446/Screenshot_2023-11-25_at_15.42.02.png?ex=65746eaf&is=6561f9af&hm=60218e6df2d93ac0989992e14caca47a0ac21822daef5a5b70b2cb8e83dc0bcd&)
+
 ## Introduction
 
 Insightify is not merely a crypto application with basic functionalities; it represents a comprehensive prototype for advanced application architectures. This documentation outlines the technological innovations and architectural complexities that define Insightify, emphasizing its role as a benchmark for sophisticated system designs.
@@ -75,5 +79,5 @@ Insightify stands as a testament to the potential of modern application architec
 
 ## Contributors
 
-* [Your Name](https://github.com/yourname)
-* [Another Contributor Name](https://github.com/anothercontributorname)
+* [David Petkov](https://github.com/dpS1lence)
+* [David Hristov](https://github.com/ImSk1)
