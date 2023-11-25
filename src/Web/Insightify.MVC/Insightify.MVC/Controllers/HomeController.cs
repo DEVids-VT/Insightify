@@ -18,6 +18,10 @@ namespace Insightify.MVC.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("Dashboard", "FinancialData");
+            }
             return View(Homepage.English);
         }
 
