@@ -8,7 +8,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
             
-            
+            <input type="hidden" asp-for="@Model.ReturnUrl" value="@Model.ReturnUrl"/>
             <div class="text-center mb-3">
                 <label asp-for="@Model.Email">Email</label>
                 <input class="form-control " autocomplete="email" aria-required="true" asp-for="@Model.Email" />

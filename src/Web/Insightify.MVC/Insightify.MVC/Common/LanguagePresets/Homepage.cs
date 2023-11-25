@@ -40,8 +40,7 @@ namespace Insightify.MVC.Common.LanguagePresets
                         }
                     },
                 CenterText = "Първи стъпки",
-                LogIn = "Вход",
-                SignUp = "Регистрация",
+                GetStarted = "Вход",
                 Policy = "Политика за поверителност",
                 Terms = "Условия за ползване",
                 Language = "ENGLISH",
@@ -83,8 +82,7 @@ namespace Insightify.MVC.Common.LanguagePresets
                     }
                 },
                 CenterText = "Get started",
-                LogIn = "Log in",
-                SignUp = "Sign up",
+                GetStarted = "Join Us",
                 Policy = "Privacy policy",
                 Terms = "Terms of use",
                 Language = "БЪЛГАРСКИ",

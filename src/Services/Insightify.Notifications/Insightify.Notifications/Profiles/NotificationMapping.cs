@@ -9,7 +9,8 @@ namespace Insightify.NotificationsAPI.Profiles
     {
         public NotificationMapping()
         {
-            CreateMap<NotificationEvent, Notification>();
+            CreateMap<NotificationEvent, Notification>()
+                .ForMember(a => a.Id, b => b.Ignore());
         }
     }
 }

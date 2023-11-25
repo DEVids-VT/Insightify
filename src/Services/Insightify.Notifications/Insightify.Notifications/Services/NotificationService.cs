@@ -25,8 +25,15 @@ namespace Insightify.NotificationsAPI.Services
         public async Task StoreNotification(Notification notification)
         {
             _logger.LogInformation("Storing notification {0}", notification.Title);
+            try
+            {
+                await _repo.InsertAsync(notification);
 
-            await _repo.InsertAsync(notification);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public async Task SendNotificaiton(Notification notification)
