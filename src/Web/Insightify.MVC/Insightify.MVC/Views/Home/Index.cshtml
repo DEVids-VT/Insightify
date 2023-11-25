@@ -39,11 +39,8 @@
         <h6>@Model.CenterText</h6>
         <div class="buttons">
              <form asp-action="SignIn" asp-controller="Account" style="display:flex;">
-                <button class="btn-style" type="submit">@Model.LogIn</button>
+                <button class="btn-style" type="submit">@Model.GetStarted</button>
              </form>
-             <form asp-action="Dashboard" asp-controller="Home" style="display:flex;">
-                <button class="btn-style" type="submit">@Model.SignUp</button>
-            </form>
         </div>
     </div>
     <footer>

@@ -4,6 +4,6 @@ namespace Insightify.IdentityAPI.Models
 {
     public class ApplicationUser : IdentityUser 
     {
-        public string ProfilePicture { get; set; } = default!;
+        public string? ProfilePicture { get; set; }
     }
 }

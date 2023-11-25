@@ -28,6 +28,8 @@
                         <div class="post-content">
                             <div class="post-content-bg"></div>
                             <h1 class="content-title">@post.Title</h1>
+                            <img class="uploaded-image-file" src="@post.ImageUrl" alt="Image" />
+
                             <p class="content-text-container">
                                 @post.Description
                             </p>
@@ -83,11 +85,12 @@
             $('#postContainer').append(loadbar);
             $.ajax({
                 url: '@Url.Action("Feed", "Posts")',
-                data: { page: page + 1, pageSize: pageSize, json: true },
+                data: { pageIndex: page + 1, pageSize: pageSize, json: true },
                 type: 'GET',
                 success: function (result) {
                     $('.loading-bar').remove();
                     page++;
+                    console.log(page);
                     result.forEach(function (post) {
                         var postHtml = `
                             <div class="post-container">
@@ -96,7 +99,6 @@
                                         <div class="post-header-image">
                                                 <img class="header-img-data" src="/images/navbar/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg" />
                                             <h1 class="header-img-text">David Petkov</h1>
-                                                <img class="uploaded-image-file" src="${post.imageUrl}" alt="Image" />
                                         </div>
                                         <div class="post-header-hour">
                                             <h1><strong>‧</strong></h1>
@@ -111,6 +113,7 @@
                                 <div class="post-content">
                                     <div class="post-content-bg"></div>
                                     <h1 class="content-title">${post.title}</h1>
+                                    <img class="uploaded-image-file" src="${post.imageUrl}" alt="Image" />
                                     <p class="content-text-container">
                                         ${post.description}
                                     </p>

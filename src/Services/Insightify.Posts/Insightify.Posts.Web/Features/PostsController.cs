@@ -22,7 +22,6 @@ namespace Insightify.Posts.Web.Features
         #region Queries
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<IPage<PostOutputModel>>> Search([FromQuery] SearchPostsQuery postsQuery)
             => await this.Send(postsQuery);
 
@@ -31,15 +30,12 @@ namespace Insightify.Posts.Web.Features
             => await this.Send(postsQuery);
 
         [HttpGet("{postId}/likes")]
-        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<LikeOutputModel>>> Likes([FromRoute] int postId)
             => await this.Send(new LikeQuery() { Id = postId });
         [HttpGet("{postId}/saves")]
-        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<SaveOutputModel>>> Saves([FromRoute] int postId)
             => await this.Send(new SaveQuery() { Id = postId });
         [HttpGet("{postId}/comments")]
-        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CommentOutputModel>>> Comments([FromRoute] int postId)
             => await this.Send(new CommentQuery() { Id = postId });
 

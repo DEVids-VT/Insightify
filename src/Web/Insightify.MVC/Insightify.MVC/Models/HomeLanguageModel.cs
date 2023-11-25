@@ -6,8 +6,7 @@
         public string Subtitle { get; set; }
         public List<ListElement> Ul { get; set; }
         public string CenterText { get; set; }
-        public string LogIn { get; set; }
-        public string SignUp { get; set; }
+        public string GetStarted { get; set; }
         public string Terms { get; set; }
         public string Policy { get; set; }
         public string Language { get; set; }
