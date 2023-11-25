@@ -296,7 +296,6 @@ h1 {
 .chat-box-main-container {
     position: fixed;
     height: 100vh;
-    background-color: black;
     z-index: 500;
     right: calc(100% - 850px);
     width: 600px;
