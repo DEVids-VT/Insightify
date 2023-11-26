@@ -37,51 +37,50 @@ function initializeNavbar() {
     });
 }
 
-// Function to initialize profile menu interactions
-function initializeProfileMenu() {
-    var profilebtn = document.getElementById('img-pfp-btn');
-    var profilebtnHide = document.getElementById('pf-menu-hide');
-    var pfmenu = document.getElementById('pf-menu');
-
-    let isShown = false;
-
-    profilebtn.addEventListener('click', function () {
-        if (isShown) {
-            pfmenu.classList.add('hidden');
-            isShown = false;
-        } else {
-            pfmenu.classList.remove('hidden');
-            isShown = true;
-        }
-    });
-
-    profilebtnHide.addEventListener('click', function () {
-        pfmenu.classList.add('hidden');
-        isShown = false;
-    });
-}
-
-// Function to initialize notification menu interactions
-function initializeNotificationsMenu() {
+function initializeMenus() {
     var notificationsMenu = document.getElementById('notifications-menu');
     var notificationsMenuHide = document.getElementById('notifications-menu-hide');
     var notificationsBtn = document.getElementById('notifications-btn');
 
-    let isShown = false;
+    var profilebtn = document.getElementById('img-pfp-btn');
+    var profilebtnHide = document.getElementById('pf-menu-hide');
+    var pfmenu = document.getElementById('pf-menu');
+
+    let isShownP = false;
+    let isShownN = false;
 
     notificationsBtn.addEventListener('click', function () {
-        if (isShown) {
+        if (isShownN) {
             notificationsMenu.classList.add('hidden');
-            isShown = false;
+            isShownN = false;
         } else {
             notificationsMenu.classList.remove('hidden');
-            isShown = true;
+            pfmenu.classList.add('hidden');
+            isShownN = true;
+            isShownP = false;
         }
     });
 
     notificationsMenuHide.addEventListener('click', function () {
         notificationsMenu.classList.add('hidden');
-        isShown = false;
+        isShownN = false;
+    });
+
+    profilebtn.addEventListener('click', function () {
+        if (isShownP) {
+            pfmenu.classList.add('hidden');
+            isShownP = false;
+        } else {
+            pfmenu.classList.remove('hidden');
+            notificationsMenu.classList.add('hidden');
+            isShownP = true;
+            isShownN = false;
+        }
+    });
+
+    profilebtnHide.addEventListener('click', function () {
+        pfmenu.classList.add('hidden');
+        isShownP = false;
     });
 }
 
@@ -131,8 +130,7 @@ function adjustProfileAndNotificationsMenuVisibility() {
 function initialize() {
     initializeChatBox();
     initializeNavbar();
-    initializeProfileMenu();
-    initializeNotificationsMenu();
+    initializeMenus();
     handleWindowResize();
     checkSize();
 }
