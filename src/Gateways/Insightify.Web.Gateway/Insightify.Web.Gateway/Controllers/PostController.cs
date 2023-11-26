@@ -31,5 +31,47 @@ namespace Insightify.Web.Gateway.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        [Route("{postId}/like")]
+        public async Task<IActionResult> Like([FromRoute] int postId)
+        {
+            await _postService.LikePost(postId);
+            return Ok();
+        }
+        [HttpPost]
+        [Route("{postId}/dislike")]
+        public async Task<IActionResult> Dislike([FromRoute] int postId)
+        {
+            await _postService.DislikePost(postId);
+            return Ok();
+        }
+        [HttpPost]
+        [Route("{postId}/save")]
+        public async Task<IActionResult> Save([FromRoute] int postId)
+        {
+            await _postService.SavePost(postId);
+            return Ok();
+        }
+        [HttpPost]
+        [Route("{postId}/unsave")]
+        public async Task<IActionResult> Unsave([FromRoute] int postId)
+        {
+            await _postService.UnsavePost(postId);
+            return Ok();
+        }
+        //[HttpPost]
+        //[Route("comment")]
+        //public async Task<IActionResult> Comment([FromBody] int postId, string content)
+        //{
+        //    await _postService.CommentOnPost(postId, content);
+        //    return Ok();
+        //}
+        //[HttpPost]
+        //[Route("uncomment")]
+        //public async Task<IActionResult> Uncomment([FromBody] int commentId, int postId)
+        //{
+        //    await _postService.RemoveCommentOnPost(commentId, postId);
+        //    return Ok();
+        //}
     }
 }

@@ -72,5 +72,32 @@ namespace Insightify.Web.Gateway.Services.Posts
 
             return response;
         }
+
+        public async Task LikePost(int postId)
+        {
+            await _postClient.Like(postId);
+        }
+        public async Task DislikePost(int postId)
+        {
+            await _postClient.Dislike(postId);
+        }
+        public async Task SavePost(int postId)
+        {
+            await _postClient.Save(postId);
+        }
+        public async Task UnsavePost(int postId)
+        {
+            await _postClient.Unsave(postId);
+        }
+
+        //public async Task CommentOnPost(int postId, string content)
+        //{
+        //    await _postClient.Comment(postId, content);
+        //}
+        //public async Task RemoveCommentOnPost(int commentId, int postId)
+        //{
+        //    await _postClient.RemoveComment(commentId, commentId);
+        //}
+
     }
 }
