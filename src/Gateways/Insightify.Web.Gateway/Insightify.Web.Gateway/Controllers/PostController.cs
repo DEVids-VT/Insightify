@@ -35,8 +35,15 @@ namespace Insightify.Web.Gateway.Controllers
         [Route("{postId}/like")]
         public async Task<IActionResult> Like([FromRoute] int postId)
         {
-            await _postService.LikePost(postId);
-            return Ok();
+            var likeCount = await _postService.LikePost(postId);
+            return Ok(likeCount);
+        }
+        [HttpGet]
+        [Route("{postId}/likes")]
+        public async Task<IActionResult> Likes([FromRoute] int postId)
+        {
+            var likes = await _postService.Likes(postId);
+            return Ok(likes);
         }
     }
 }

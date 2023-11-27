@@ -20,10 +20,10 @@
                                     <h1 class="headerhour-text">2 hr. ago</h1>
                                 </div>
                             </div>
-                            <div class="post-header-buttons">
+                            @*<div class="post-header-buttons">
                                 <a class="follow-btn">Follow</a>
                                 <a class="report-btn"><i class="fa fa-flag"></i></a>
-                            </div>
+                            </div>*@
                         </header>
                         <div class="post-content">
                             <div class="post-content-bg"></div>
@@ -36,7 +36,7 @@
                         </div>
                         <div class="post-footer">
                             <div class="footer-buttons">
-                                <a class="footer-btn-action" href="#"><i class="fa fa-heart"></i> @post.LikeCount</a>
+                                <a data-post-id="@post.Id" class="like-btn footer-btn-action" href="#"><i class="fa fa-heart"></i>  @post.LikeCount</a>
                                 <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> @post.CommentCount</a>
                                 <a class="footer-btn-action" href="#"><i class="fa fa-share"></i> Share</a>
                             </div>
@@ -67,6 +67,31 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '.like-btn', function(e) {
+        e.preventDefault();
+        var postId = $(this).data('post-id');
+        likePost(postId, $(this));
+    });
+
+    function likePost(postId, btnElement) {
+        $.ajax({
+            url: '/Posts/Like', // Your server endpoint for liking a post
+            type: 'POST',
+            data: { postId: postId },
+            success: function(response) {
+                console.log(response);
+                // Update the like count based on the response
+                btnElement.html('<i class="fa fa-heart"></i> ' + response);
+            },
+            error: function() {
+                // Handle errors (optional)
+                alert('Error liking post.');
+            }
+        });
+    }
+
+</script>
 <script>
     var page = @Model.CurrentPage;
     var pageSize = @Model.PageSize;

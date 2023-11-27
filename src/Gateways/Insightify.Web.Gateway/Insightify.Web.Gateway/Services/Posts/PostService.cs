@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation;
-using IdentityModel.OidcClient;
 using Insightify.Framework.Pagination;
 using Insightify.Framework.Pagination.Abstractions;
 using Insightify.Framework.Pagination.Headers;
@@ -10,8 +9,6 @@ using Insightify.Web.Gateway.Infrastructure.Exceptions;
 using Insightify.Web.Gateway.Infrastructure.Pagination;
 using Insightify.Web.Gateway.Models;
 using Insightify.Web.Gateway.Models.Posts;
-using k8s.KubeConfigModels;
-using Serilog.Sinks.Http.Private.Time;
 using System.Security.Claims;
 
 namespace Insightify.Web.Gateway.Services.Posts
@@ -77,17 +74,30 @@ namespace Insightify.Web.Gateway.Services.Posts
             return response;
         }
 
-        public async Task LikePost(int postId)
+        public async Task<int> LikePost(int postId)
         {
             var response = await _postClient.Likes(postId);
             var likes = response.Content;
-            var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userId = _httpContextAccessor.HttpContext.User.Claims
+                .FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
             if (likes.Any(l => l.UserId == userId))
             {
-                _postClient.Dislike(postId);
-                return;
+                await _postClient.Dislike(postId);
             }
-            _postClient.Like(postId);
+            else
+            {
+                await _postClient.Like(postId);
+            }
+            var likeCount = (await _postClient.Likes(postId)).Content.Count;
+            return likeCount;
+        }
+
+        public async Task<IEnumerable<LikeOutputModel>> Likes(int postId)
+        {
+            var response = await _postClient.Likes(postId);
+            var likes = response.Content;
+            var likesOut = _mapper.Map<List<LikeOutputModel>>(likes);
+            return likesOut;
         }
     }
 }

@@ -69,5 +69,12 @@ namespace Insightify.MVC.Controllers
 
             return Json(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Like(int postId)
+        {
+            var likeCount = await _postService.LikePost(postId);
+            return Ok(likeCount);
+        }
     }
 }

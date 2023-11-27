@@ -60,6 +60,20 @@ namespace Insightify.MVC.Services.Posts
                 parsedHeaders["TotalCount"]);
         }
 
+        public async Task<int> LikePost(int postId)
+        {
+           var likeCount = await _postClient.Like(postId);
+           return likeCount;
+        }
+
+        public async Task<IEnumerable<LikeViewModel>> Likes(int postId)
+        {
+            var response = await _postClient.Likes(postId);
+            var likes = response.Content;
+            var likesView = _mapper.Map<List<LikeViewModel>>(likes);
+            return likesView;
+        }
+
         private async Task<CreatePostResponseModel> CreatePostWithImageUrl(CreatePostInputModel model, string imageUrl)
         {
             var postModel = new PostModel

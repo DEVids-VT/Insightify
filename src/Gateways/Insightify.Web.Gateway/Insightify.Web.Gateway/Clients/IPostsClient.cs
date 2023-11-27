@@ -20,11 +20,5 @@ namespace Insightify.Web.Gateway.Clients
         Task Like(int postId);
         [Post("/posts/{postId}/dislike")]
         Task Dislike(int postId);
-
-        [Post("/posts/{postId}/save")]
-        Task Save(int postId);
-        [Post("/posts/{postId}/unsave")]
-        Task Unsave(int postId);
-
     }
 }
