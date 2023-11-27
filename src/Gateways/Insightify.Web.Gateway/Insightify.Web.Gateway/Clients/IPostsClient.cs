@@ -13,6 +13,9 @@ namespace Insightify.Web.Gateway.Clients
         [Post("/posts/create")]
         Task<ApiResponse<CreatePostResponseModel>> Create([Body] CreatePostRequestModel post);
 
+        [Get("/posts/{postId}/likes")]
+        Task<ApiResponse<List<LikeResponseModel>>> Likes(int postId);
+
         [Post("/posts/{postId}/like")]
         Task Like(int postId);
         [Post("/posts/{postId}/dislike")]
@@ -22,12 +25,6 @@ namespace Insightify.Web.Gateway.Clients
         Task Save(int postId);
         [Post("/posts/{postId}/unsave")]
         Task Unsave(int postId);
-
-        //[Post("/posts/comment")]
-        //Task Comment([Body] int id, [Body] string content);
-
-        //[Post("/posts/uncomment")]
-        //Task RemoveComment([Body] int id, [Body] int postId);
 
     }
 }

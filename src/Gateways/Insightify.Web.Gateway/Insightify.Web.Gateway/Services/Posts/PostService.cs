@@ -10,7 +10,9 @@ using Insightify.Web.Gateway.Infrastructure.Exceptions;
 using Insightify.Web.Gateway.Infrastructure.Pagination;
 using Insightify.Web.Gateway.Models;
 using Insightify.Web.Gateway.Models.Posts;
+using k8s.KubeConfigModels;
 using Serilog.Sinks.Http.Private.Time;
+using System.Security.Claims;
 
 namespace Insightify.Web.Gateway.Services.Posts
 {
@@ -20,13 +22,15 @@ namespace Insightify.Web.Gateway.Services.Posts
         private readonly IMapper _mapper;
         private readonly IValidator<CreatePostInputModel> _createPostValidator;
         private readonly ILogger _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PostService(IPostsClient postClient, IMapper mapper, IValidator<CreatePostInputModel> validator, ILogger<PostService> logger)
+        public PostService(IPostsClient postClient, IMapper mapper, IValidator<CreatePostInputModel> validator, ILogger<PostService> logger, IHttpContextAccessor httpContextAccessor)
         {
             _postClient = postClient;
             _mapper = mapper;
             _createPostValidator = validator;
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IPage<PostOutputModel>> GetPosts(string? title = null, int pageIndex = 1, int pageSize = 50)
@@ -75,29 +79,15 @@ namespace Insightify.Web.Gateway.Services.Posts
 
         public async Task LikePost(int postId)
         {
-            await _postClient.Like(postId);
+            var response = await _postClient.Likes(postId);
+            var likes = response.Content;
+            var userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (likes.Any(l => l.UserId == userId))
+            {
+                _postClient.Dislike(postId);
+                return;
+            }
+            _postClient.Like(postId);
         }
-        public async Task DislikePost(int postId)
-        {
-            await _postClient.Dislike(postId);
-        }
-        public async Task SavePost(int postId)
-        {
-            await _postClient.Save(postId);
-        }
-        public async Task UnsavePost(int postId)
-        {
-            await _postClient.Unsave(postId);
-        }
-
-        //public async Task CommentOnPost(int postId, string content)
-        //{
-        //    await _postClient.Comment(postId, content);
-        //}
-        //public async Task RemoveCommentOnPost(int commentId, int postId)
-        //{
-        //    await _postClient.RemoveComment(commentId, commentId);
-        //}
-
     }
 }
