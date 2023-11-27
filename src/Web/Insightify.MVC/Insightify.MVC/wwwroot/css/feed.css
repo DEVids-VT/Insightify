@@ -69,6 +69,7 @@
                             .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-image .header-img-data {
                                 width: 50px;
                                 margin-right: 10px;
+                                border-radius:50px;
                             }
 
                         .posts-container .sections-container .section-posts .post-container .post-header .post-header-info .post-header-hour {

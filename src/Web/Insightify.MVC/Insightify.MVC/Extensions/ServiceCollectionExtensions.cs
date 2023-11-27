@@ -3,6 +3,7 @@ using Insightify.MVC.Infrastructure;
 using Insightify.MVC.Services.FinancialData;
 using Insightify.MVC.Services.News;
 using Insightify.MVC.Services.Posts;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Refit;
@@ -37,6 +38,9 @@ namespace Insightify.MVC.Extensions
                 options.Scope.Add("posts");
                 options.Scope.Add("news");
                 options.Scope.Add("gateway");
+                options.ClaimActions.MapJsonKey("profile_picture", "profile_picture");
+                options.ClaimActions.MapJsonKey("email", "email");
+                options.ClaimActions.MapJsonKey("username", "username");
             });
 
             return services;

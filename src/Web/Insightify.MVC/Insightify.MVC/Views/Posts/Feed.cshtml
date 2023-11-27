@@ -17,13 +17,11 @@
                                 </div>
                                 <div class="post-header-hour">
                                     <h1><strong>‧</strong></h1>
-                                    <h1 class="headerhour-text">2 hr. ago</h1>
                                 </div>
                             </div>
-                            @*<div class="post-header-buttons">
-                                <a class="follow-btn">Follow</a>
-                                <a class="report-btn"><i class="fa fa-flag"></i></a>
-                            </div>*@
+                            <div class="post-header-buttons">
+                                <a class="follow-btn">@((new Random()).Next(2, 24)) hours ago</a>
+                            </div>
                         </header>
                         <div class="post-content">
                             <div class="post-content-bg"></div>
@@ -38,7 +36,6 @@
                             <div class="footer-buttons">
                                 <a data-post-id="@post.Id" class="like-btn footer-btn-action" href="#"><i class="fa fa-heart"></i>  @post.LikeCount</a>
                                 <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> @post.CommentCount</a>
-                                <a class="footer-btn-action" href="#"><i class="fa fa-share"></i> Share</a>
                             </div>
                         </div>
                     </div>

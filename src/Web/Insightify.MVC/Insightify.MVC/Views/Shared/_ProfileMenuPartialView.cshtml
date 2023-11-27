@@ -1,16 +1,24 @@
-﻿<div id="pf-menu" class="pf-view-ctr d-flex justify-content-end align-items-start hidden">
+﻿@using System.Security.Claims;
+<div id="pf-menu" class="pf-view-ctr d-flex justify-content-end align-items-start hidden">
     <div class="pf-view-pg d-flex justify-content-center align-items-center flex-column">
         <div class="circle-bg hidden" id="pf-menu-hide">
             <a href="#" class="navbar-brand"><i class="fa fa-xmark"></i></a>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <h3>davidpetkov2006@gmail.com</h3>
+            <h3>@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value</h3>
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <img class="img-pfp-menu" src="~/images/navbar/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg" />
+            @if (User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value != null)
+            {
+                <img class="img-pfp-menu" src="@User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value" alt="Image here." />
+            }
+            else
+            {
+                <img class="img-pfp-menu" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here." />
+            }
         </div>
         <div class="d-flex justify-content-center align-items-center">
-            <h1>Welcome back, David</h1>
+            <h1>Welcome back, @User.Claims.FirstOrDefault(c => c.Type == "username")?.Value</h1>
         </div>
         <div class="d-flex justify-content-center align-items-center">
             <a class="pfp-menu-btn" href="http://localhost:5001/profile">Manage Profile</a>

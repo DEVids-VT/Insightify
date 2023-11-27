@@ -24,8 +24,13 @@ namespace Insightify.IdentityAPI.Services.AccountSettings
             {
                 if (user.ProfilePicture != null)
                 {
-                    var url = await UploadToImgur(user.ProfilePicture, _httpClient);
-                    foundUser.ProfilePicture = url;
+                    try
+                    {
+                        var url = await UploadToImgur(user.ProfilePicture, _httpClient);
+
+                        foundUser.ProfilePicture = url;
+                    }
+                    catch(Exception ex) { }
                 }
                 else
                 {

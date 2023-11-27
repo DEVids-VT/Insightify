@@ -96,7 +96,7 @@
 .post-content-btn {
     padding: 10px 20px;
     text-decoration: none;
-    background-color: #007bff; /* Primary button color */
+    background-color: #a523f4; /* Primary button color */
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
@@ -105,7 +105,8 @@
 }
 
     .post-content-btn:hover {
-        background-color: #0056b3; /* Darken on hover */
+        background-color: #5423d0; /* Darken on hover */
+        color:#fff;
     }
 
 /* Profile display section */
@@ -187,6 +188,7 @@
                 .post-container .post-header .post-header-info .post-header-image .header-img-data {
                     width: 50px;
                     margin-right: 10px;
+                    border-radius:50px;
                 }
 
             .post-container .post-header .post-header-info .post-header-hour {
@@ -210,10 +212,10 @@
                 align-items: center;
                 text-align: center;
                 border-radius: 30px;
-                pad: 10px;
+                padding: 10px;
                 background-color: #C864F7;
                 color: white;
-                width: 70px;
+                width: 140px;
                 height: 30px;
                 cursor: pointer;
                 margin: 2px;

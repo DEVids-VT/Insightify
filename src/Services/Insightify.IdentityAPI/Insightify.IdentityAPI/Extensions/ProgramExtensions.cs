@@ -9,6 +9,7 @@ using Insightify.IdentityAPI.EmailSending;
 using Serilog;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Insightify.IdentityAPI.Services.AccountSettings;
+using Duende.IdentityServer.Services;
 
 namespace Insightify.IdentityAPI.Extensions
 {
@@ -115,6 +116,7 @@ namespace Insightify.IdentityAPI.Extensions
             .AddInMemoryClients(IdentityServerConfig.GetClients(builder.Configuration))
             .AddAspNetIdentity<ApplicationUser>();
 
+            identityServerBuilder.Services.AddTransient<IProfileService, CustomProfileService>();
             //remove for production
             identityServerBuilder.AddDeveloperSigningCredential();
         }
