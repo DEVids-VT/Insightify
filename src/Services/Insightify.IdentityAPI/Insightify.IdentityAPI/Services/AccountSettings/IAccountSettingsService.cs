@@ -5,6 +5,6 @@ namespace Insightify.IdentityAPI.Services.AccountSettings
 {
     public interface IAccountSettingsService
     {
-        public Task<ApplicationUserEditModel> EditProfile(ApplicationUserEditModel user);
+        public Task EditProfile(ApplicationUserEditModel user, string uId);
     }
 }

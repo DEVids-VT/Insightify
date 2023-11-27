@@ -18,11 +18,13 @@ namespace Insightify.IdentityAPI.Controllers
 
         [HttpPut]
         [Route("/editProfile")]
-        public async Task<IActionResult> EditProfile(ApplicationUserEditModel user)
+        public async Task<IActionResult> EditProfile([FromForm] ApplicationUserEditModel user)
         {
-            var result = await _accountSettingsService.EditProfile(user);
+            var userId = User.Identities.First().Claims.First().Value;
 
-            return Ok(result);
+            await _accountSettingsService.EditProfile(user, userId);
+
+            return Ok();
         }
     }
 }

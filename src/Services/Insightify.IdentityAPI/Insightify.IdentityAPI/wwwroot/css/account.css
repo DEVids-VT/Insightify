@@ -1,0 +1,128 @@
+﻿.main-content {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-section {
+    width: 90%;
+    min-width: 100px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    max-width: 700px;
+}
+
+.card-image {
+    text-align: center;
+}
+
+.rounded-img {
+    border-radius: 50%;
+    width: 215px;
+    margin: 10px;
+}
+
+.card-info h3, .card-info p {
+    text-align: center;
+}
+
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.account-form h6 {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+.button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-file-upload {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
+    .btn-file-upload:hover {
+        background-color: #0056b3;
+    }
+
+.insightify-embed {
+    border-radius: 25px;
+    background-color: white;
+    padding: 5px 5px;
+    margin: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    transition: all 0.3s;
+}
+
+    .insightify-embed:hover {
+        background-color: aliceblue;
+        cursor: pointer;
+    }
+
+.insightify-return-btn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-size: 25px;
+    text-decoration:none;
+    color:black;
+}
+
+.insightify-embed-img {
+    width: 50px;
+}

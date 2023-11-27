@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Text;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
@@ -203,9 +204,21 @@ namespace Insightify.IdentityAPI.Controllers
 
             TempData["StatusMessage"] = result.Succeeded ? "Thank you for confirming your email." : "An error occurred while trying to confirm your email";
 
-            return RedirectToAction("Login", "Account", new { returnUrl = returnUrl});
+            return RedirectToAction("Login", "Account", new { returnUrl = returnUrl });
         }
 
-            
+        [HttpGet]
+        [Route("profile")]
+        [Authorize]
+
+        public async Task<IActionResult> Profile()
+        {
+            var userdsa = User;
+            var userId = User.Identities.First().Claims.First().Value;
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+            return View(user);
+        }
     }
 }
