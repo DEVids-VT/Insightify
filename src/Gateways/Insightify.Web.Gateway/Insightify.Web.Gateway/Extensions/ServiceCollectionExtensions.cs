@@ -7,7 +7,6 @@ using Insightify.Web.Gateway.Services.News;
 using Insightify.Web.Gateway.Services.Posts;
 using Newtonsoft.Json;
 using Refit;
-using Insightify.Web.Gateway.Services.Accounts;
 
 namespace Insightify.Web.Gateway.Extensions
 {
@@ -27,7 +26,6 @@ namespace Insightify.Web.Gateway.Extensions
 
             services.AddScoped<INewsService, NewsService>();
             services.AddScoped<IPostService, PostService>();
-            services.AddScoped<IAccoundtSettingsService, AccountSettingsService>();
             services.AddScoped<IFinancialDataService, FinancialDataService>();
             
 
@@ -50,14 +48,6 @@ namespace Insightify.Web.Gateway.Extensions
                 })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.FinancialData))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-
-            services.AddRefitClient<IAccountClient>(new RefitSettings()
-            {
-                ContentSerializer = new NewtonsoftJsonContentSerializer()
-            })
-                .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.Account))
-                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-
             return services;
         }
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)

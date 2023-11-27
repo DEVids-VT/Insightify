@@ -3,7 +3,6 @@ using Insightify.MVC.Infrastructure;
 using Insightify.MVC.Services.FinancialData;
 using Insightify.MVC.Services.News;
 using Insightify.MVC.Services.Posts;
-using Insightify.Web.Gateway.Clients;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Refit;
@@ -69,13 +68,6 @@ namespace Insightify.MVC.Extensions
                 {
                     ContentSerializer = new NewtonsoftJsonContentSerializer()
                 })
-                .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
-                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-
-            services.AddRefitClient<IAccountClient>(new RefitSettings()
-            {
-                ContentSerializer = new NewtonsoftJsonContentSerializer()
-            })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 

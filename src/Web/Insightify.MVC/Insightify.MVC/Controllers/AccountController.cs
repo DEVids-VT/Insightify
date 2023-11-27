@@ -1,6 +1,4 @@
 ﻿using Insightify.MVC.Services;
-using Insightify.Web.Gateway.Clients;
-using Insightify.Web.Gateway.Clients.Models.Users;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
@@ -12,14 +10,10 @@ namespace Insightify.MVC.Controllers
     public class AccountController : Controller
     {
         private readonly ILogger<AccountController> _logger;
-        private readonly IAccountClient _accountClient;
-        private readonly HttpClient _client;
 
-        public AccountController(ILogger<AccountController> logger, IAccountClient accountClient, HttpClient client)
+        public AccountController(ILogger<AccountController> logger)
         {
             _logger = logger;
-            _accountClient = accountClient;
-            _client = client;
         }
 
         [Authorize(AuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)]
@@ -37,26 +31,6 @@ namespace Insightify.MVC.Controllers
             }
 
             return RedirectToAction("Dashboard", "FinancialData");
-        }
-
-        public IActionResult Profile()
-        {
-            return View();
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> EditProfile(ApplicationUser user, IFormFile? image)
-        {
-            if(image != null)
-            {
-                var url = await UploadImage.ToImgur(image, _client);
-                user.ProfilePicture = url;
-            }
-            user.Id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            var result = await _accountClient.EditProfile(user);
-
-            return Json(result);
         }
     }
 }
