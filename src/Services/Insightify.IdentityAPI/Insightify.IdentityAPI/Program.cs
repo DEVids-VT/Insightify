@@ -10,6 +10,8 @@ using System.Reflection;
 var appName = "Identity.API";
 var builder = WebApplication.CreateBuilder(args);
 
+System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
 // Add services to the container.
 
 builder.Services.AddValidatorsFromAssembly(Assembly.Load(Namespace), ServiceLifetime.Scoped);

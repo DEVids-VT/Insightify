@@ -1,21 +1,118 @@
-version: '3.4'
+version: '3.7'
 
 services:
+  redis:
+    image: redislabs/rejson:latest
+    ports:
+      - "6379:6379"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2017-latest
+    image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=Ins1ghtSxrvxr153
+      SA_PASSWORD: "SQLSxrvxr123$"
+      ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
-  identityapi:
-    image: sk1es/insightify.identityapi
-    
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - PORT=5001
-      - CONNECTION_STRING=Server=sqlserver,1433;Database=Insightify.IdentityApi;User Id=sa;Password=Ins1ghtSxrvxr153; TrustServerCertificate=True;
+
+  rabbitmq:
+    image: rabbitmq:3-management
     ports:
-      - "5001:5001"
+      - "5672:5672"
+      - "15672:15672"
+
+  # financialapi:
+  #   image: [your-dockerhub]/financialapi
+  #   environment:
+  #     Redis__ConnectionString: "redis:6379"
+  #     RabbitMQ__ConnectionString: "rabbitmq://rabbitmq:5672"
+  #   depends_on:
+  #     - redis
+  #     - rabbitmq
+
+  # financialbgtasks:
+  #   image: [your-dockerhub]/financialbgtasks
+  #   environment:
+  #     Redis__ConnectionString: "redis:6379"
+  #     RabbitMQ__ConnectionString: "rabbitmq://rabbitmq:5672"
+  #   depends_on:
+  #     - redis
+  #     - rabbitmq
+
+  # newsapi:
+  #   image: [your-dockerhub]/newsapi
+  #   environment:
+  #     Mongo__Url: "mongodb://mongo:27017"
+  #     Rabbit__Url: "rabbitmq://rabbitmq"
+  #   depends_on:
+  #     - mongo
+  #     - rabbitmq
+
+  # newsbgtasks:
+  #   image: [your-dockerhub]/newsbgtasks
+  #   environment:
+  #     Mongo__Url: "mongodb://mongo:27017"
+  #   depends_on:
+  #     - mongo
+
+  # notifications:
+  #   image: [your-dockerhub]/notifications
+  #   environment:
+  #     Mongo__Url: "mongodb://mongo:27017"
+  #   depends_on:
+  #     - mongo
+
+  mvc:
+    image: sk1es/insightify.mvc:v3
+    environment:
+      IdentityUrl: "http://identityserver:5001"
+    ports:
+      - "5008:80"
+    depends_on:
+      - gateway
+      - identityserver
+
+  gateway:
+    image: sk1es/insightify.gateway
+    environment:
+      FinancialApiUrl: "http://financialapi:5002"
+      FinancialBgTasksUrl: "http://financialbgtasks:5003"
+      NewsApiUrl: "http://newsapi:5004"
+      NewsBgTasksUrl: "http://newsbgtasks:5005"
+      PostsUrl: "http://posts:5006"
+      NotificationsUrl: "http://notifications:5007"
+      IdentityApiUrl: "http://identityapi:5001"
+    ports:
+      - "5030:80"
+    depends_on:
+      # - financialapi
+      # - financialbgtasks
+      # - newsapi
+      # - newsbgtasks
+      - posts
+      # - notifications
+      - identityserver
+
+  posts:
+    image: sk1es/insightify.posts
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=PostsV1;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
+      IdentityApi: "http://identityserver:5001"
+    ports:
+    - "5036:80"
+    depends_on:
+      - sqlserver
+      - identityserver
+
+  identityserver:
+    image: sk1es/insightify.identityserver:v5
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=IdentityApi;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
+    ports:
+    - "5001:5001"
     depends_on:
       - sqlserver

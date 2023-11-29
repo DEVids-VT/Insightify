@@ -11,7 +11,7 @@
         </div>
         <div class="circle-bg">
             <a href="#" class="navbar-brand" id="img-pfp-btn">
-                @if (User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value != null)
+                @if (!string.IsNullOrEmpty(User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value))
                 {
                     <img class="img-pfp-head" src="@User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value" alt="Image here." />
                 }

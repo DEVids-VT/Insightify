@@ -14,6 +14,8 @@ namespace Insightify.IdentityAPI.Services.AccountSettings
         {
             _userManager = userManager;
             _httpClient = httpClient;
+            _httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Client-ID", "41519381aee37da");
         }
 
         public async Task EditProfile(ApplicationUserEditModel user, string uId)

@@ -23,7 +23,7 @@ namespace Insightify.IdentityAPI.Configuration
 
             var claims = new List<Claim>
             {
-                new Claim("profile_picture", user.ProfilePicture ?? string.Empty),
+                new Claim("profile_picture", user.ProfilePicture ?? "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg"),
                 new Claim("email", user.Email ?? string.Empty),
                 new Claim("username", user.UserName ?? string.Empty),
             };
