@@ -40,7 +40,7 @@ namespace Insightify.IdentityAPI.Extensions
             var envConnection = builder.Configuration.GetValue<string>("CONNECTION_STRING");
 
             builder.Services.AddDbContext<IdentityApiDbContext>(
-                options => options.UseSqlServer(!string.IsNullOrEmpty(envConnection) ? envConnection : builder.Configuration.GetConnectionString("DefaultConnection")));
+                options => options.UseSqlServer(!string.IsNullOrEmpty(envConnection) ? envConnection : builder.Configuration.GetConnectionString("DockerConnection")));
         }
         public static void AddCustomMvc(this WebApplicationBuilder builder)
         {

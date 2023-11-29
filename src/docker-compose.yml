@@ -67,9 +67,9 @@ services:
   #     - mongo
 
   mvc:
-    image: sk1es/insightify.mvc:v3
+    image: dps1lence/insightify.mvc:v1
     environment:
-      IdentityUrl: "http://identityserver:5001"
+      IdentityUrl: "http://localhost:5001"
     ports:
       - "5008:80"
     depends_on:
@@ -85,7 +85,7 @@ services:
       NewsBgTasksUrl: "http://newsbgtasks:5005"
       PostsUrl: "http://posts:5006"
       NotificationsUrl: "http://notifications:5007"
-      IdentityApiUrl: "http://identityapi:5001"
+      IdentityApiUrl: "http://identityserver:5001"
     ports:
       - "5030:80"
     depends_on:
@@ -109,10 +109,10 @@ services:
       - identityserver
 
   identityserver:
-    image: sk1es/insightify.identityserver:v5
+    image: dps1lence/insightify.identityserver:v1
     environment:
-      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=IdentityApi;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
+      ConnectionStrings__DockerConnection: "Server=sqlserver,1433;Database=IdentityApi;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
     ports:
-    - "5001:5001"
+      - "5001:80"
     depends_on:
       - sqlserver

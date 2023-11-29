@@ -24,8 +24,30 @@ namespace Insightify.MVC.Extensions
             .AddCookie(setup => setup.ExpireTimeSpan = TimeSpan.FromMinutes(60))
             .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
             {
+                options.Events = new OpenIdConnectEvents
+                {
+                    OnRedirectToIdentityProvider = context =>
+                    {
+                        var request = context.Request;
+                        var baseUrl = request.Scheme + "://" + request.Host.Value;
+
+                        if (request.Host.Host.Equals("mvc", StringComparison.OrdinalIgnoreCase))
+                        {
+                            baseUrl = "http://identityserver:80";
+                        }
+                        else
+                        {
+                            baseUrl = "http://localhost:5001";
+                        }
+
+                        context.ProtocolMessage.IssuerAddress = baseUrl + "/connect/authorize";
+                        context.Options.Authority = baseUrl;
+                        context.ProtocolMessage.RedirectUri = baseUrl + "/signin-oidc";
+
+                        return Task.CompletedTask;
+                    }
+                };
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.Authority = identityUrl.ToString();
                 //options.SignedOutRedirectUri = callBackUrl.ToString();
                 options.ClientId = "mvc";
                 options.ClientSecret = "S0M3 MAG1C UN!C0RNS CR3AT3D TH1S S3CR3T";
@@ -57,21 +79,21 @@ namespace Insightify.MVC.Extensions
             services.AddScoped<IFinancialDataService, FinancialDataService>();
 
             services.AddRefitClient<IPostsClient>(new RefitSettings()
-                {
-                    ContentSerializer = new NewtonsoftJsonContentSerializer()
-                })
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer()
+            })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
             services.AddRefitClient<INewsClient>(new RefitSettings()
-                {
-                    ContentSerializer = new NewtonsoftJsonContentSerializer()
-                })
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer()
+            })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
             services.AddRefitClient<IFinancialDataClient>(new RefitSettings()
-                {
-                    ContentSerializer = new NewtonsoftJsonContentSerializer()
-                })
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer()
+            })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
