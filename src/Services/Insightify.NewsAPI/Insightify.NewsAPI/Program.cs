@@ -24,6 +24,7 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 
 
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddEnvironmentVariables();
 var swaggerSettings = builder.Configuration.GetSection("Swagger").Get<SwaggerSettings>();
 
 

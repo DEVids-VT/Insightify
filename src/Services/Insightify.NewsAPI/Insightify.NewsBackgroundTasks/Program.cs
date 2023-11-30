@@ -22,7 +22,9 @@ Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddCustomConfiguration();
+//builder.AddCustomConfiguration();
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddCoreServices(coreBuilder =>
 {
     var assembly = typeof(Program).Assembly;
@@ -62,7 +64,8 @@ builder.Services.AddCoreServices(coreBuilder =>
     });
     coreBuilder.AddRabbitMQ(p =>
     {
-        p.WithConnectionString("rabbitmq://localhost:5672");
+		var url = builder.Configuration.GetSection("Rabbit").GetValue<string>("Url")!;
+		p.WithConnectionString(url);
     });
 
 });

@@ -40,7 +40,7 @@ services:
       - redis
 
   financialbgtasks:
-    image: sk1es/insightify.financialdatabackgroundtasks:v3
+    image: dps1lence/insightify.financialbackgroundtasks
     environment:
       ConnectionStrings__Redis: "redis:6379"
     depends_on:
@@ -48,7 +48,7 @@ services:
       - rabbitmq
 
   newsapi:
-      image: dps1lence/insightify.news:v2
+      image: dps1lence/insightify.news:v4
       environment:
         Mongo__Url: "mongodb://mongo:27017"
         IdentityUrl: "http://identityserver:5001"
@@ -60,10 +60,10 @@ services:
         - identityserver
 
   newsbgtasks:
-    image: dps1lence/insightify.newsbackgroundtasks
+    image: dps1lence/insightify.newsbackgroundtasks:v4
     environment:
       Mongo__Url: "mongodb://mongo:27017"
-      Rabbit__Url: "rabbitmq://rabbitmq"
+      Rabbit__Url: "rabbitmq://rabbitmq:5672"
     depends_on:
       - mongo
       - rabbitmq
