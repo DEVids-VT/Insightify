@@ -67,9 +67,10 @@ services:
   #     - mongo
 
   mvc:
-    image: sk1es/insightify.mvc:v3
+    image: sk1es/insightify.mvc:v6
     environment:
       IdentityUrl: "http://identityserver:5001"
+      GatewayUrl: "http://gateway:5030"
     ports:
       - "5008:80"
     depends_on:
@@ -77,17 +78,14 @@ services:
       - identityserver
 
   gateway:
-    image: sk1es/insightify.gateway
+    image: sk1es/insightify.gateway:v4
     environment:
-      FinancialApiUrl: "http://financialapi:5002"
-      FinancialBgTasksUrl: "http://financialbgtasks:5003"
-      NewsApiUrl: "http://newsapi:5004"
-      NewsBgTasksUrl: "http://newsbgtasks:5005"
-      PostsUrl: "http://posts:5006"
-      NotificationsUrl: "http://notifications:5007"
-      IdentityApiUrl: "http://identityapi:5001"
+      ServiceEndpoints__FinancialData: "http://financialapi:5002"
+      ServiceEndpoints__News: "http://newsapi:5004"
+      ServiceEndpoints__Posts: "http://posts:5036"
+      IdentityUrl: "http://identityserver:5001"
     ports:
-      - "5030:80"
+      - "5030:5030"
     depends_on:
       # - financialapi
       # - financialbgtasks
@@ -101,15 +99,16 @@ services:
     image: sk1es/insightify.posts
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=PostsV1;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
-      IdentityApi: "http://identityserver:5001"
+      IdentityUrl: "http://identityserver:5001"
+      ASPNETCORE_URLS: http://+:5036
     ports:
-    - "5036:80"
+    - "5036:5036"
     depends_on:
       - sqlserver
       - identityserver
 
   identityserver:
-    image: sk1es/insightify.identityserver:v5
+    image: sk1es/insightify.identityserver:v6
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=IdentityApi;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
     ports:

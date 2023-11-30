@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Reflection;
 using Azure.Core;
 using FluentValidation;
@@ -12,6 +13,8 @@ using Insightify.Framework.Swagger.Settings;
 using Insightify.Web.Gateway.Extensions;
 using Insightify.Web.Gateway.Middlewares;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.IdentityModel.Logging;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
@@ -21,8 +24,14 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions
     ApplicationName = typeof(Program).Assembly.FullName,
     ContentRootPath = Directory.GetCurrentDirectory()
 });
+IdentityModelEventSource.ShowPII = true;
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+builder.WebHost.UseKestrel(options =>
+{
+    options.Listen(IPAddress.Any, 5030,
+        listenOptions => { listenOptions.Protocols = HttpProtocols.Http1AndHttp2; });
+});
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).AddEnvironmentVariables();
 var swaggerSettings = builder.Configuration.GetSection("Swagger").Get<SwaggerSettings>();
 
 builder.Services.AddCoreServices(coreBuilder =>

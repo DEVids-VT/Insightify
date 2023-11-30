@@ -44,7 +44,7 @@ namespace Insightify.MVC.Common.LanguagePresets
                 Policy = "Политика за поверителност",
                 Terms = "Условия за ползване",
                 Language = "ENGLISH",
-                LanguageImg = "/images/Flag_of_the_United_Kingdom.svg.png",
+                LanguageImg = "/images/flag_of_the_united_kingdom.svg.png",
                 LanguageProp = "en"
             };
         }

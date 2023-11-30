@@ -6,6 +6,7 @@ using Insightify.MVC.Services.Posts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Refit;
 
 namespace Insightify.MVC.Extensions
@@ -26,6 +27,7 @@ namespace Insightify.MVC.Extensions
             {
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.Authority = identityUrl.ToString();
+                
                 //options.SignedOutRedirectUri = callBackUrl.ToString();
                 options.ClientId = "mvc";
                 options.ClientSecret = "S0M3 MAG1C UN!C0RNS CR3AT3D TH1S S3CR3T";
@@ -41,6 +43,23 @@ namespace Insightify.MVC.Extensions
                 options.ClaimActions.MapJsonKey("profile_picture", "profile_picture");
                 options.ClaimActions.MapJsonKey("email", "email");
                 options.ClaimActions.MapJsonKey("username", "username");
+
+                options.Events = new OpenIdConnectEvents
+                {
+                    OnRedirectToIdentityProvider = context =>
+                    {
+                        // Determine if the request is for the /connect/authorize endpoint
+                        if (context.ProtocolMessage.RequestType == OpenIdConnectRequestType.Authentication)
+                        {
+                            // Replace the internal URL with the external URL
+                            var externalIdentityUrl = "http://localhost:5001";
+                            context.ProtocolMessage.IssuerAddress = externalIdentityUrl + context.ProtocolMessage.IssuerAddress.Substring(context.Options.Authority.Length);
+                        }
+
+                        return Task.CompletedTask;
+                    },
+                    // Other event handlers if needed...
+                };
             });
 
             return services;

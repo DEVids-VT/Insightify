@@ -24,7 +24,4 @@
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
 		<PackageReference Include="Refit.Newtonsoft.Json" Version="7.0.0" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="wwwroot\js\financialData\" />
-	</ItemGroup>
 </Project>
