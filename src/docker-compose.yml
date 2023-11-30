@@ -25,49 +25,50 @@ services:
       - "5672:5672"
       - "15672:15672"
 
-   financialapi:
-     image: [your-dockerhub]/financialapi
-     environment:
-       IdentityUrl: "http://identityserver:5001"
-       Mongo__Url: "mongodb://mongo:27017"
-       ASPNETCORE_URLS: http://+:5037
+  financialapi:
+    image: sk1es/insightify.financialdataapi
+    environment:
+      IdentityUrl: "http://identityserver:5001"
+      Mongo__Url: "mongodb://mongo:27017"
+      ASPNETCORE_URLS: http://+:5037
+      ConnectionStrings__Redis: "redis:6379"
     ports:
       - "5037:5037"
-     depends_on:
-       - mongo
-       - identityserver
+    depends_on:
+      - mongo
+      - identityserver
+      - redis
 
   financialbgtasks:
-    image: [your-dockerhub]/financialbgtasks
+    image: sk1es/insightify.financialdatabackgroundtasks:v3
     environment:
       ConnectionStrings__Redis: "redis:6379"
-      ConnectionStrings__RabbitMQ: "rabbitmq://rabbitmq:5672"
     depends_on:
       - redis
       - rabbitmq
 
-  newsapi:
-    image: [your-dockerhub]/newsapi
-    environment:
-      Mongo__Url: "mongodb://mongo:27017"
-      Rabbit__Url: "rabbitmq://rabbitmq"
-      IdentityUrl: "http://identityserver:5001"
-      ASPNETCORE_URLS: http://+:5035
-    ports:
-      - "5035:5035"
-    depends_on:
-      - mongo
-      - rabbitmq
-      - identityserver
+  # newsapi:
+  #   image: [your-dockerhub]/newsapi
+  #   environment:
+  #     Mongo__Url: "mongodb://mongo:27017"
+  #     Rabbit__Url: "rabbitmq://rabbitmq"
+  #     IdentityUrl: "http://identityserver:5001"
+  #     ASPNETCORE_URLS: http://+:5035
+  #   ports:
+  #     - "5035:5035"
+  #   depends_on:
+  #     - mongo
+  #     - rabbitmq
+  #     - identityserver
 
-  newsbgtasks:
-    image: [your-dockerhub]/newsbgtasks
-    environment:
-      Mongo__Url: "mongodb://mongo:27017"
-      Rabbit__Url: "rabbitmq://rabbitmq"
-    depends_on:
-      - mongo
-      - rabbitmq
+  # newsbgtasks:
+  #   image: [your-dockerhub]/newsbgtasks
+  #   environment:
+  #     Mongo__Url: "mongodb://mongo:27017"
+  #     Rabbit__Url: "rabbitmq://rabbitmq"
+  #   depends_on:
+  #     - mongo
+  #     - rabbitmq
 
   notifications:
     image: dps1lence/insightify.notifications
@@ -80,7 +81,7 @@ services:
       - mongo
 
   mvc:
-    image: sk1es/insightify.mvc:v6
+    image: sk1es/insightify.mvc:v7
     environment:
       IdentityUrl: "http://identityserver:5001"
       GatewayUrl: "http://gateway:5030"
@@ -100,10 +101,10 @@ services:
     ports:
       - "5030:5030"
     depends_on:
-      - financialapi
+      # - financialapi
       - financialbgtasks
-      - newsapi
-      - newsbgtasks
+      # - newsapi
+      # - newsbgtasks
       - posts
       - identityserver
 
