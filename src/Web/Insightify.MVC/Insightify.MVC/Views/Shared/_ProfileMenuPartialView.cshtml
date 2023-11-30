@@ -1,4 +1,6 @@
 ﻿@using System.Security.Claims;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 <div id="pf-menu" class="pf-view-ctr d-flex justify-content-end align-items-start hidden">
     <div class="pf-view-pg d-flex justify-content-center align-items-center flex-column">
         <div class="circle-bg hidden" id="pf-menu-hide">
@@ -28,7 +30,7 @@
                 @*<a class="pfp-menu-actions-btn" href="#">Manage profile</a>
                 <a class="pfp-menu-actions-btn" href="#">Friend Requests</a>
                 <a class="pfp-menu-actions-btn" href="#">Neshto drugo</a>*@
-                <a class="pfp-menu-actions-btn" href="#">Log out</a>
+                <a href="@Url.Action("Signout", "Account")" class="pfp-menu-actions-btn">Log out</a>
             </div>
         </div>
     </div>

@@ -39,10 +39,10 @@ namespace Insightify.FinancialBackgroundTasks.Jobs
                     { "days", "1" }
                 };
 
-                //var apiEndpoint = $"/api/v3/coins/{currency.GetID()}/market_chart";
-                //var response = await _fetcher.FetchDataWithQueryAsync<MarketChartModel>(apiEndpoint, queryParams);
+                var apiEndpoint = $"/api/v3/coins/{currency.GetID()}/market_chart";
+                var response = await _fetcher.FetchDataWithQueryAsync<MarketChartModel>(apiEndpoint, queryParams);
 
-                //_redis.JsonSet($"{currency.GetID()}:market_chart", JsonConvert.SerializeObject(response));
+                _redis.JsonSet($"{currency.GetID()}:market_chart", JsonConvert.SerializeObject(response));
             }
         }
     }

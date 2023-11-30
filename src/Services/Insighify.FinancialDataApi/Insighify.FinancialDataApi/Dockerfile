@@ -6,7 +6,7 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Insighify.FinancialDataApi.csproj", "Insighify.FinancialDataApi/"]
+COPY ["Insighify.FinancialDataApi/Insighify.FinancialDataApi.csproj", "Insighify.FinancialDataApi/"]
 RUN dotnet restore "Insighify.FinancialDataApi/Insighify.FinancialDataApi.csproj"
 COPY . .
 WORKDIR "/src/Insighify.FinancialDataApi"
