@@ -5,8 +5,8 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Insighify.FinancialDataApi/Insightify.FinancialBackgroundTasks/Insightify.FinancialBackgroundTasks.csproj", "Insighify.FinancialDataApi/Insightify.FinancialBackgroundTasks/"]
-RUN dotnet restore "Insighify.FinancialDataApi/Insightify.FinancialBackgroundTasks/Insightify.FinancialBackgroundTasks.csproj"
+COPY ["Insightify.FinancialBackgroundTasks.csproj", "Insightify.FinancialBackgroundTasks/"]
+RUN dotnet restore "Insightify.FinancialBackgroundTasks/Insightify.FinancialBackgroundTasks.csproj"
 COPY . .
 WORKDIR "/src/Insighify.FinancialDataApi/Insightify.FinancialBackgroundTasks"
 RUN dotnet build "Insightify.FinancialBackgroundTasks.csproj" -c Release -o /app/build

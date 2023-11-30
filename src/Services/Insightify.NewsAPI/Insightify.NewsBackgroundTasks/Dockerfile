@@ -5,7 +5,7 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Insightify.NewsBackgroundTasks/Insightify.NewsBackgroundTasks.csproj", "Insightify.NewsBackgroundTasks/"]
+COPY ["Insightify.NewsBackgroundTasks.csproj", "Insightify.NewsBackgroundTasks/"]
 RUN dotnet restore "Insightify.NewsBackgroundTasks/Insightify.NewsBackgroundTasks.csproj"
 COPY . .
 WORKDIR "/src/Insightify.NewsBackgroundTasks"
