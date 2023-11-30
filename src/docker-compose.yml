@@ -47,28 +47,28 @@ services:
       - redis
       - rabbitmq
 
-  # newsapi:
-  #   image: [your-dockerhub]/newsapi
-  #   environment:
-  #     Mongo__Url: "mongodb://mongo:27017"
-  #     Rabbit__Url: "rabbitmq://rabbitmq"
-  #     IdentityUrl: "http://identityserver:5001"
-  #     ASPNETCORE_URLS: http://+:5035
-  #   ports:
-  #     - "5035:5035"
-  #   depends_on:
-  #     - mongo
-  #     - rabbitmq
-  #     - identityserver
+  newsapi:
+      image: dps1lence/insightify.news
+      environment:
+        Mongo__Url: "mongodb://mongo:27017"
+        Rabbit__Url: "rabbitmq://rabbitmq"
+        IdentityUrl: "http://identityserver:5001"
+        ASPNETCORE_URLS: http://+:5035
+      ports:
+        - "5035:5035"
+      depends_on:
+        - mongo
+        - rabbitmq
+        - identityserver
 
-  # newsbgtasks:
-  #   image: [your-dockerhub]/newsbgtasks
-  #   environment:
-  #     Mongo__Url: "mongodb://mongo:27017"
-  #     Rabbit__Url: "rabbitmq://rabbitmq"
-  #   depends_on:
-  #     - mongo
-  #     - rabbitmq
+  newsbgtasks:
+    image: dps1lence/insightify.newsbackgroundtasks
+    environment:
+      Mongo__Url: "mongodb://mongo:27017"
+      Rabbit__Url: "rabbitmq://rabbitmq"
+    depends_on:
+      - mongo
+      - rabbitmq
 
   notifications:
     image: dps1lence/insightify.notifications
@@ -101,10 +101,10 @@ services:
     ports:
       - "5030:5030"
     depends_on:
-      # - financialapi
+      - financialapi
       - financialbgtasks
-      # - newsapi
-      # - newsbgtasks
+      - newsapi
+      - newsbgtasks
       - posts
       - identityserver
 
