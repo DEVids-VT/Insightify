@@ -48,17 +48,15 @@ services:
       - rabbitmq
 
   newsapi:
-      image: dps1lence/insightify.news
+      image: dps1lence/insightify.news:v2
       environment:
         Mongo__Url: "mongodb://mongo:27017"
-        Rabbit__Url: "rabbitmq://rabbitmq"
         IdentityUrl: "http://identityserver:5001"
         ASPNETCORE_URLS: http://+:5035
       ports:
         - "5035:5035"
       depends_on:
         - mongo
-        - rabbitmq
         - identityserver
 
   newsbgtasks:
