@@ -1,3 +1,10 @@
+## Документация - https://docs.google.com/document/d/1NjeFYPxt5oMPi8bHT2r4SwGVtekb-i65saT_wCqwGmo/edit?usp=sharing
+
+
+## Презентация - https://www.canva.com/design/DAF1w3Tk-5E/XLHH4a8usN1CZHlWDAcWFQ/edit?utm_content=DAF1w3Tk-5E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+
+
 ![image](https://github.com/DEVids-VT/Insightify/assets/68961310/309d29ff-fc81-4f08-9233-49d7f22bf271)
 # Crypto Microservice Application
 
