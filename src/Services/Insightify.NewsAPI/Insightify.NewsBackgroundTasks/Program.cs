@@ -18,6 +18,8 @@ using System.Reflection;
 
 var appName = "Insightify.NewsBackgroundTasks";
 
+Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddCustomConfiguration();

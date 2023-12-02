@@ -32,13 +32,8 @@ namespace Insightify.NotificationsAPI.Consumer
 
             var notification = _mapper.Map<Notification>(context.Message);
             await _notificationService.SendNotificaiton(notification);
-
-            //if (_validator.Validate(notification).IsValid)
-            //{
-            //    await _notificationService.StoreNotification(notification);
-
-            //}
-            //else _logger.LogInformation($"Consumed event with message Id {0} was not valid", context.Message.Id);
+            await _notificationService.StoreNotification(notification);
+            _logger.LogInformation($"Consumed event with message Id {0} was not valid", context.Message.Id);
         }
     }
 }

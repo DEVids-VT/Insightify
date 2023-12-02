@@ -16,12 +16,12 @@
                 <div class="bottom-area">
                     <h5>@Model.Currencies[0].Name</h5>
                     <div class="price-holder">
-                        <h4>@Model.Currencies[0].CurrentPrice</h4>
+                        <h4>@Model.Currencies[0].CurrentPrice USD</h4>
                         <h7>@Model.Currencies[0].PriceChange</h7>
                     </div>
                 </div>
             </a>
-            <a class="crypto-card card" id="eth">
+            <a class="crypto-card card" id="ethereum">
                 <div class="top-area">
                     <div class="image-container">
                         <img src="@Model.Currencies[1].Image" />
@@ -30,12 +30,12 @@
                 <div class="bottom-area">
                     <h5>@Model.Currencies[1].Name</h5>
                     <div class="price-holder">
-                        <h4>@Model.Currencies[1].CurrentPrice</h4>
+                        <h4>@Model.Currencies[1].CurrentPrice USD</h4>
                         <h7>@Model.Currencies[1].PriceChange</h7>
                     </div>
                 </div>
             </a>
-            <a class="crypto-card card" id="dodgecoin">
+            <a class="crypto-card card" id="binancecoin">
                 <div class="top-area">
                     <div class="image-container">
                         <img src="@Model.Currencies[2].Image" />
@@ -44,12 +44,12 @@
                 <div class="bottom-area">
                     <h5>@Model.Currencies[2].Name</h5>
                     <div class="price-holder">
-                        <h4>@Model.Currencies[2].CurrentPrice</h4>
+                        <h4>@Model.Currencies[2].CurrentPrice USD</h4>
                         <h7>@Model.Currencies[2].PriceChange</h7>
                     </div>
                 </div>
             </a>
-            <a class="crypto-card card" id="othercoin">
+            <a class="crypto-card card" id="solana">
                 <div class="top-area">
                     <div class="image-container">
                         <img src="@Model.Currencies[3].Image" />
@@ -58,7 +58,7 @@
                 <div class="bottom-area">
                     <h5>@Model.Currencies[3].Name</h5>
                     <div class="price-holder">
-                        <h4>@Model.Currencies[3].CurrentPrice</h4>
+                        <h4>@Model.Currencies[3].CurrentPrice USD</h4>
                         <h7>@Model.Currencies[3].PriceChange</h7>
                     </div>
                 </div>
@@ -98,11 +98,11 @@
                     value: item.value
                 }));
                 const formattedMarketCaps = data.model.marketCaps.map(item => ({
-                    time: new Date(item.timestamp).toISOString(),
+                    time: item.timestamp,
                     value: item.value
                 }));
                 const formattedTotalVolumes = data.model.totalVolumes.map(item => ({
-                    time: new Date(item.timestamp).toISOString(),
+                    time: item.timestamp,
                     value: item.value
                 }));
 
@@ -152,10 +152,10 @@
         var dataPrices = @Html.Raw(jsonDataPrices);
         var dataTotalVolumes = @Html.Raw(jsonDataTotalVolumes);
         var dataMarket = @Html.Raw(jsonDataMarket);
-        createChat(dataPrices, 'price-card', 'Light', '400', '800');
-        createChat(dataTotalVolumes, 'change-card', 'Light', '400', '800');
-        createChat(dataMarket, 'status-card', 'Light', '400', '800');
-        createChat(dataPrices, 'analytics-card', 'Light', '400', '800');
+        createChat(dataPrices, 'price-card', 'Light', '600', '800');
+        createChat(dataTotalVolumes, 'change-card', 'Light', '600', '800');
+        createChat(dataMarket, 'status-card', 'Light', '600', '800');
+        createChat(dataPrices, 'analytics-card', 'Light', '600', '800');
     });
 
 

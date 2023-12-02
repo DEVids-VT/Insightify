@@ -10,7 +10,16 @@
             <a href="#" class="navbar-brand" id="notifications-btn"><i class="fa fa-bell"></i></a>
         </div>
         <div class="circle-bg">
-            <a href="#" class="navbar-brand" id="img-pfp-btn"><img class="img-pfp-head" src="~/images/navbar/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg" /></a>
+            <a href="#" class="navbar-brand" id="img-pfp-btn">
+                @if (!string.IsNullOrEmpty(User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value))
+                {
+                    <img class="img-pfp-head" src="@User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value" alt="Image here." />
+                }
+                else
+                {
+                    <img class="img-pfp-head" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here." />
+                }
+            </a>
         </div>
     </div>
 </header>

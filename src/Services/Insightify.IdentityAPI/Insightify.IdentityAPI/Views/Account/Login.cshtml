@@ -26,6 +26,7 @@
                     <div class="field-container">
                         <button id="login-submit" value="login" name="button" type="submit" class="btn">Sign In</button>
                     </div>
+                    <a asp-route-returnUrl="@ViewData["ReturnUrl"]" asp-action="Register" asp-controller="Account">Sign Up Instead</a>
                 </form>
         </div>
     </div>

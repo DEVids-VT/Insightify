@@ -8,7 +8,6 @@ using Insightify.Web.Gateway.Services.Posts;
 using Newtonsoft.Json;
 using Refit;
 
-
 namespace Insightify.Web.Gateway.Extensions
 {
     [ExcludeFromCodeCoverage]
@@ -49,7 +48,6 @@ namespace Insightify.Web.Gateway.Extensions
                 })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.FinancialData))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
-
             return services;
         }
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)

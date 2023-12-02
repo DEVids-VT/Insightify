@@ -2,15 +2,16 @@ $(document).ready(function () {
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
         var header = $('#header');
-        var initialColor = '#ececec';
-        var darkerColor = '#ffffff';
+        var initialColor = '#ffffff';
+        var darkerColor = '#dddddd';
+        var borderInitial = '1px solid white';
 
         if (scroll > 50) {
             var ratio = (scroll - 50) / 150;
-            var newColor = blendColors(initialColor, darkerColor, ratio);
-            header.css('background-color', newColor);
+            var newColor = '1px solid' + blendColors(initialColor, darkerColor, ratio);
+            header.css('border-bottom', newColor);
         } else {
-            header.css('background-color', initialColor);
+            header.css('border-bottom', borderInitial);
         }
     });
 

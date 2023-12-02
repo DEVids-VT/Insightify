@@ -17,7 +17,7 @@
             </div>
             <div class="post-content" id="text-content">
                 <input id="postTitle" class="post-content-input-title" type="text" placeholder="Post title" />
-                <textarea id="postDescription" class="post-content-input-description" rows="5" ></textarea>
+                <textarea id="postDescription" class="post-content-input-description" rows="5"></textarea>
                 <div class="bottom-btns-post">
                     <a class="post-content-btn hidden">Previous</a>
                     <a class="post-content-btn" id="text-display-image">Next</a>
@@ -34,7 +34,6 @@
             </div>
             <div class="post-content hidden" id="preview-content">
                 <div class="dynamic-content" id="dynamic-content">
-
                 </div>
                 <div class="bottom-btns-post">
                     <a class="post-content-btn" id="preview-display-image">Previous</a>
@@ -45,7 +44,15 @@
     </section>
     <section class="create-post-profile-display-section">
         <div class="profile-display-section-top">
-
+            @if (User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value != null)
+            {
+                <img class="img-pfp-head" src="@User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value" alt="Image here." />
+            }
+            else
+            {
+                <img class="img-pfp-head" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here." />
+            }
+            <a class="post-content-btn" href="http://localhost:5001/profile">Edit Profile</a>
         </div>
         <div class="profile-display-section-bottom">
         </div>
@@ -53,6 +60,93 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="~/js/posts/createpostajax.js"></script>
-<script src="~/js/posts/dynamicbuttons.js"></script>
-<script src="~/js/posts/dynamicpagedisplay.js"></script>
+<script src="~/js/posts/create_post_ajax.js"></script>
+<script src="~/js/posts/dynamic_buttons.js"></script>
+<script>
+    @{
+        var imgUrl = "";
+        var username = User.Claims.FirstOrDefault(c => c.Type == "username")?.Value;
+        if (User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value != null)
+        {
+            imgUrl = User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value;
+        }
+        else
+        {
+            imgUrl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg";
+        }
+    }
+
+    var displayPreview = document.getElementById('display-preview');
+    var btnPreview = document.getElementById('btn-preview');
+
+    var imageUrl = '';
+    var titleData = '';
+    var descriptionData = '';
+
+    document.getElementById('image').addEventListener('change', function (event) {
+        var file = event.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                imageUrl = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            updatePreview();
+        }
+    });
+
+    document.getElementById('postTitle').addEventListener('change', function (event) {
+        titleData = event.target.value;
+    });
+
+    document.getElementById('postDescription').addEventListener('change', function (event) {
+        descriptionData = event.target.value;
+    });
+
+    displayPreview.addEventListener('click', function () {
+        updatePreview();
+    });
+
+    btnPreview.addEventListener('click', function () {
+        updatePreview();
+    });
+
+    function updatePreview() {
+        let cont = document.getElementById('dynamic-content');
+        let previewHtml = `
+                        <div class="post-container">
+                       <header class="post-header">
+                           <div class="post-header-info">
+                               <div class="post-header-image">
+                                   <img class="header-img-data" src="@imgUrl" />
+                                       <h1 class="header-img-text">@username</h1>
+                               </div>
+                               <div class="post-header-hour">
+                                   <h1><strong>‧</strong></h1>
+                               </div>
+                           </div>
+                           <div class="post-header-buttons">
+                               <a class="follow-btn">1 minute ago</a>
+                           </div>
+                       </header>
+                       <div class="post-content">
+                           <div class="post-content-bg"></div>
+                               <h1 class="content-title">${titleData}</h1>
+                                   <img class="uploaded-image-file" src="${imageUrl}" alt="Uploaded Image" />
+                           <p class="content-text-container">
+                                   ${descriptionData}
+                           </p>
+                       </div>
+                       <div class="post-footer">
+                           <div class="footer-buttons">
+                               <a class="footer-btn-action" href="#"><i class="fa fa-heart"></i> 0</a>
+                               <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> 0</a>
+                               <a class="footer-btn-action" href="#"><i class="fa fa-share"></i> Share</a>
+                           </div>
+                       </div>
+                   </div>
+                        `;
+
+        cont.innerHTML = previewHtml;
+    }
+</script>

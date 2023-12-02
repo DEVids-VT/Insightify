@@ -2,10 +2,6 @@
 @using Insightify.Web.Gateway.Models.FinancialData;
 @model IEnumerable<CryptoCurrencyModel>
 
-<div class="crypto-market-title-container">
-    <h1 class="crypto-market-title">Crypto market</h1>
-</div>
-
 @if (Model != null && Model.Any())
 {
     <div class="table-div">
@@ -28,12 +24,12 @@
                     <tr class="tr-item">
                         <td class="td-item">
                             <img class="table-item-img" src="@item.Image.Small" alt="@item.Name image" />
-                            <h2 class="currency-id">@item.Id</h2>
+                            <h2 class="currency-id">@item.Symbol</h2>
                             <h2 class="currency-name">@item.Name</h2>
                         </td>
                         <td class="td-item">@item.MarketCapRank</td>
                         <td class="td-item">@item.MarketData.CurrentPrice.Usd</td>
-                        <td class="td-item">@item.MarketData.MarketCapChange24h</td>
+                        <td class="td-item">@item.MarketData.PriceChange24h</td>
                         <td class="td-item">@item.MarketData.MarketCap.Usd</td>
                         <td class="td-item">@item.MarketData.TotalVolume.Usd</td>
                         <td class="td-item">@item.MarketData.CirculatingSupply</td>

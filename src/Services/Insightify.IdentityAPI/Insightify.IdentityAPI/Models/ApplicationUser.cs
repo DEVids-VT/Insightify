@@ -2,5 +2,8 @@
 
 namespace Insightify.IdentityAPI.Models
 {
-    public class ApplicationUser : IdentityUser {}
+    public class ApplicationUser : IdentityUser 
+    {
+        public string? ProfilePicture { get; set; }
+    }
 }

@@ -8,5 +8,7 @@ namespace Insightify.Web.Gateway.Services.Posts
     {
         Task<IPage<PostOutputModel>> GetPosts(string? title = null, int pageIndex = 1, int pageSize = 50);
         Task<CreatePostOutputModel> CreatePost(CreatePostInputModel post);
+        Task<int> LikePost(int postId);
+        Task<IEnumerable<LikeOutputModel>> Likes(int postId);
     }
 }

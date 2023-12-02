@@ -5,10 +5,19 @@ using Insightify.IdentityAPI.Middleware;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
 using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using System.Reflection;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var appName = "Identity.API";
 var builder = WebApplication.CreateBuilder(args);
+
+System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+builder.WebHost.UseKestrel(options =>
+{
+    options.Listen(IPAddress.Any, 5001,
+        listenOptions => { listenOptions.Protocols = HttpProtocols.Http1AndHttp2; });
+});
 
 // Add services to the container.
 

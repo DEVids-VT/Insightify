@@ -5,12 +5,16 @@ using Insightify.Framework.Logging;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using System.Diagnostics.CodeAnalysis;
 using Insightify.MVC.Extensions;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions
 {
     Args = args,
     ApplicationName = typeof(Program).Assembly.FullName,
 });
+System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12;
+
+IdentityModelEventSource.ShowPII = true;
 
 builder.Services.AddCoreServices(builder =>
 {

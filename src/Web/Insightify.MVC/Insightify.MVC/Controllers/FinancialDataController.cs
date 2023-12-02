@@ -1,4 +1,5 @@
 ﻿using Insightify.MVC.Services.FinancialData;
+using Insightify.Web.Gateway.Models.FinancialData;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace Insightify.MVC.Controllers
         public async Task<IActionResult> AllCurrencies()
         {
             var model = await _financialDataService.GetAllCurrencies();
-            //var dataOut = new List<CryptoCurrencyModel>
+            //var model = new List<CryptoCurrencyModel>
             //{
             //    new CryptoCurrencyModel
             //    {
@@ -52,13 +53,7 @@ namespace Insightify.MVC.Controllers
             //        }
             //    }
             //};
-            //
-            //var model = new Page<CryptoCurrencyModel>(
-            //    dataOut,
-            //    1,
-            //    20,
-            //    40);
-            //
+
             return View(model);
         }
 
@@ -101,7 +96,7 @@ namespace Insightify.MVC.Controllers
             //            new MarketValue { Timestamp = 1355314320000, Value = 129 },
             //            new MarketValue { Timestamp = 1355314620000, Value = 135 },
             //        }
-            //
+
             //    },
             //    Currencies = new List<Models.FinancialData.DashboardCurrencyModel>
             //    {
@@ -178,7 +173,7 @@ namespace Insightify.MVC.Controllers
             //            new MarketValue { Timestamp = 163068480000, Value = rand.Next() },
             //            new MarketValue { Timestamp = 163077120000, Value = rand.Next() }
             //        }
-            //
+
             //    },
             //    data = new Models.FinancialData.DashboardCurrencyModel
             //    {

@@ -31,7 +31,7 @@ namespace Insightify.MVC.Services.Posts
 
         public async Task<CreatePostResponseModel> CreatePost(CreatePostInputModel model)
         {
-            var imageUrl = await UploadImageToImgur(model.Image);
+            var imageUrl = await UploadImage.ToImgur(model.Image, _httpClient);
 
             return await CreatePostWithImageUrl(model, imageUrl);
         }
@@ -60,25 +60,18 @@ namespace Insightify.MVC.Services.Posts
                 parsedHeaders["TotalCount"]);
         }
 
-        private async Task<string> UploadImageToImgur(IFormFile imageFile)
+        public async Task<int> LikePost(int postId)
         {
-            using var formContent = new MultipartFormDataContent();
-            using var imageStream = imageFile.OpenReadStream();
-            using var streamContent = new StreamContent(imageStream);
-            streamContent.Headers.ContentType = new MediaTypeHeaderValue(imageFile.ContentType);
+           var likeCount = await _postClient.Like(postId);
+           return likeCount;
+        }
 
-            formContent.Add(streamContent, "image", imageFile.FileName);
-
-            var response = await _httpClient.PostAsync("https://api.imgur.com/3/upload", formContent);
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new HttpRequestException($"Image upload failed with status code: {response.StatusCode}");
-            }
-
-            var jsonResponse = JObject.Parse(responseContent);
-            return jsonResponse["data"]["link"].ToString();
+        public async Task<IEnumerable<LikeViewModel>> Likes(int postId)
+        {
+            var response = await _postClient.Likes(postId);
+            var likes = response.Content;
+            var likesView = _mapper.Map<List<LikeViewModel>>(likes);
+            return likesView;
         }
 
         private async Task<CreatePostResponseModel> CreatePostWithImageUrl(CreatePostInputModel model, string imageUrl)

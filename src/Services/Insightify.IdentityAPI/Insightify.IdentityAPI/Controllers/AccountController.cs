@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Claims;
+using System.Text;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 
@@ -135,14 +136,14 @@ namespace Insightify.IdentityAPI.Controllers
         [HttpGet]
         [Route("register")]
 
-        public IActionResult Register()
+        public IActionResult Register(string returnUrl)
         {
             if (User?.Identity?.IsAuthenticated ?? false)
             {
                 return RedirectToAction("~/");
             }
 
-            var model = new RegisterInputViewModel();
+            var model = new RegisterInputViewModel() {ReturnUrl = returnUrl};
 
             return View(model);
         }
@@ -173,12 +174,12 @@ namespace Insightify.IdentityAPI.Controllers
 
                 var token =  WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-                string callbackUrl = Url.Action("ConfirmEmail", "Account", new { user.Id, token }, Request.Scheme)!;
+                string callbackUrl = Url.Action("ConfirmEmail", "Account", new { user.Id, token, returnUrl = model.ReturnUrl }, Request.Scheme)!;
 
                 await _mailSender.SendEmailAsync(new EmailMessage(){ To = model.Email, Subject = "Email Confirmation for Insightify", Content = callbackUrl });
 
                 _logger.LogInformation("Succesfully registered new user with username: {0}", model.Username);
-                return RedirectToAction(nameof(AccountController.Login), "Account");
+                return RedirectToAction(nameof(AccountController.Login), "Account", new{ returnUrl = model.ReturnUrl } );
             }
 
             foreach (var item in resultValidation.Errors)
@@ -191,11 +192,11 @@ namespace Insightify.IdentityAPI.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string? id, string? token)
+        public async Task<IActionResult> ConfirmEmail(string? id, string? token, string returnUrl)
         {
             if (id == null || token == null)
             {
-                return RedirectToAction(nameof(AccountController.Login), "Account");
+                return RedirectToAction(nameof(AccountController.Login), "Account", new { returnUrl = returnUrl});
             }
             var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
 
@@ -203,9 +204,21 @@ namespace Insightify.IdentityAPI.Controllers
 
             TempData["StatusMessage"] = result.Succeeded ? "Thank you for confirming your email." : "An error occurred while trying to confirm your email";
 
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Login", "Account", new { returnUrl = returnUrl });
         }
 
+        [HttpGet]
+        [Route("profile")]
+        [Authorize]
 
+        public async Task<IActionResult> Profile()
+        {
+            var userdsa = User;
+            var userId = User.Identities.First().Claims.First().Value;
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+            return View(user);
+        }
     }
 }

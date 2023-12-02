@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using Insightify.MVC.Services;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +14,7 @@ namespace Insightify.MVC.Controllers
 
         public AccountController(ILogger<AccountController> logger)
         {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _logger = logger;
         }
 
         [Authorize(AuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)]
@@ -28,32 +30,15 @@ namespace Insightify.MVC.Controllers
             {
                 ViewData["access_token"] = token;
             }
-            
-            return Ok();
-        }
 
-        [HttpGet]
-        public IActionResult Profile()
-        {
-            return View();
+            return RedirectToAction("Dashboard", "FinancialData");
         }
-
-        [HttpPost]
-        public IActionResult ChangeUsername(string username)
+        public async Task<IActionResult> Signout()
         {
-            return View();
-        }
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
 
-        [HttpPost]
-        public IActionResult ChangeProfilePicture(IFormFile image)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult ChangeEmail(string email)
-        {
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

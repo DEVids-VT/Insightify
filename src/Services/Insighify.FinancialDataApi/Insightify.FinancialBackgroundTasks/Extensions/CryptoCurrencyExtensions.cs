@@ -10,7 +10,6 @@ namespace Insightify.FinancialBackgroundTasks.Extensions
             {
                 CryptoCurrency.Bitcoin => "bitcoin",
                 CryptoCurrency.Ethereum => "ethereum",
-                CryptoCurrency.XRP => "ripple",
                 CryptoCurrency.Cardano => "cardano",
                 CryptoCurrency.BinanceCoin => "binancecoin",
                 CryptoCurrency.Tether => "tether",

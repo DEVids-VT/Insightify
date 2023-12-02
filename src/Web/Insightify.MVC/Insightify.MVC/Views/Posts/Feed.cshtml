@@ -17,26 +17,25 @@
                                 </div>
                                 <div class="post-header-hour">
                                     <h1><strong>‧</strong></h1>
-                                    <h1 class="headerhour-text">2 hr. ago</h1>
                                 </div>
                             </div>
                             <div class="post-header-buttons">
-                                <a class="follow-btn">Follow</a>
-                                <a class="report-btn"><i class="fa fa-flag"></i></a>
+                                <a class="follow-btn">@((new Random()).Next(2, 24)) hours ago</a>
                             </div>
                         </header>
                         <div class="post-content">
                             <div class="post-content-bg"></div>
                             <h1 class="content-title">@post.Title</h1>
+                            <img class="uploaded-image-file" src="@post.ImageUrl" alt="Image" />
+
                             <p class="content-text-container">
                                 @post.Description
                             </p>
                         </div>
                         <div class="post-footer">
                             <div class="footer-buttons">
-                                <a class="footer-btn-action" href="#"><i class="fa fa-heart"></i> @post.LikeCount</a>
+                                <a data-post-id="@post.Id" class="like-btn footer-btn-action" href="#"><i class="fa fa-heart"></i>  @post.LikeCount</a>
                                 <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> @post.CommentCount</a>
-                                <a class="footer-btn-action" href="#"><i class="fa fa-share"></i> Share</a>
                             </div>
                         </div>
                     </div>
@@ -66,6 +65,31 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    $(document).on('click', '.like-btn', function(e) {
+        e.preventDefault();
+        var postId = $(this).data('post-id');
+        likePost(postId, $(this));
+    });
+
+    function likePost(postId, btnElement) {
+        $.ajax({
+            url: '/Posts/Like', // Your server endpoint for liking a post
+            type: 'POST',
+            data: { postId: postId },
+            success: function(response) {
+                console.log(response);
+                // Update the like count based on the response
+                btnElement.html('<i class="fa fa-heart"></i> ' + response);
+            },
+            error: function() {
+                // Handle errors (optional)
+                alert('Error liking post.');
+            }
+        });
+    }
+
+</script>
+<script>
     var page = @Model.CurrentPage;
     var pageSize = @Model.PageSize;
     var isLoading = false;
@@ -83,11 +107,12 @@
             $('#postContainer').append(loadbar);
             $.ajax({
                 url: '@Url.Action("Feed", "Posts")',
-                data: { page: page + 1, pageSize: pageSize, json: true },
+                data: { pageIndex: page + 1, pageSize: pageSize, json: true },
                 type: 'GET',
                 success: function (result) {
                     $('.loading-bar').remove();
                     page++;
+                    console.log(page);
                     result.forEach(function (post) {
                         var postHtml = `
                             <div class="post-container">
@@ -96,7 +121,6 @@
                                         <div class="post-header-image">
                                                 <img class="header-img-data" src="/images/navbar/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg" />
                                             <h1 class="header-img-text">David Petkov</h1>
-                                                <img class="uploaded-image-file" src="${post.imageUrl}" alt="Image" />
                                         </div>
                                         <div class="post-header-hour">
                                             <h1><strong>‧</strong></h1>
@@ -111,6 +135,7 @@
                                 <div class="post-content">
                                     <div class="post-content-bg"></div>
                                     <h1 class="content-title">${post.title}</h1>
+                                    <img class="uploaded-image-file" src="${post.imageUrl}" alt="Image" />
                                     <p class="content-text-container">
                                         ${post.description}
                                     </p>

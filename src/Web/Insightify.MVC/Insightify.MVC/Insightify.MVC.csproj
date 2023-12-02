@@ -4,6 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>8fd69846-024f-46fb-97f1-967a03c5c102</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,11 +19,9 @@
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.12" />
 		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.13" />
 		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.12" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
 		<PackageReference Include="Refit" Version="7.0.0" />
 		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
 		<PackageReference Include="Refit.Newtonsoft.Json" Version="7.0.0" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="wwwroot\js\financialData\" />
 	</ItemGroup>
 </Project>
