@@ -1,7 +1,5 @@
-## Документация - https://docs.google.com/document/d/1NjeFYPxt5oMPi8bHT2r4SwGVtekb-i65saT_wCqwGmo/edit?usp=sharing
 
-
-## Презентация - https://www.canva.com/design/DAF1w3Tk-5E/XLHH4a8usN1CZHlWDAcWFQ/edit?utm_content=DAF1w3Tk-5E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+##[Presentation](https://www.canva.com/design/DAF1w3Tk-5E/XLHH4a8usN1CZHlWDAcWFQ/edit?utm_content=DAF1w3Tk-5E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 
 
