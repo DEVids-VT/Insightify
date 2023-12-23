@@ -14,6 +14,10 @@ Insightify
 
 A microservice architecture based application designed to provide a comprehensive suite of cryptocurrency-related services.
 
+## Awards 🏅
+
+ - 🥇 1st Place - НЕТИТ "Джон Атанасов" 2023 г. Разпределени Приложения 
+
 ## Application Diagram
 
 ![image](https://cdn.discordapp.com/attachments/916963422707527700/1177967457990885446/Screenshot_2023-11-25_at_15.42.02.png?ex=65746eaf&is=6561f9af&hm=60218e6df2d93ac0989992e14caca47a0ac21822daef5a5b70b2cb8e83dc0bcd&)
