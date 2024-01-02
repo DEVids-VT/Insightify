@@ -26,5 +26,14 @@ namespace Insightify.IdentityAPI.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("/profile/{uId}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Profile(string uId)
+        {
+            var user = await _accountSettingsService.Profile(uId);
+            return Ok(user);
+        }
     }
 }

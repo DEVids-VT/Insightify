@@ -23,9 +23,11 @@
                 {
                     <tr class="tr-item">
                         <td class="td-item">
-                            <img class="table-item-img" src="@item.Image.Small" alt="@item.Name image" />
-                            <h2 class="currency-id">@item.Symbol</h2>
-                            <h2 class="currency-name">@item.Name</h2>
+                            <a asp-action="Currency" asp-controller="FinancialData" asp-route-currency="@item.Id">
+                                <img class="table-item-img" src="@item.Image.Small" alt="@item.Name image" />
+                                <h2 class="currency-id">@item.Symbol</h2>
+                                <h2 class="currency-name">@item.Name</h2>
+                            </a>
                         </td>
                         <td class="td-item">@item.MarketCapRank</td>
                         <td class="td-item">@item.MarketData.CurrentPrice.Usd</td>

@@ -1,4 +1,4 @@
-﻿using Insightify.MVC.Services;
+﻿using Insightify.MVC.Clients;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

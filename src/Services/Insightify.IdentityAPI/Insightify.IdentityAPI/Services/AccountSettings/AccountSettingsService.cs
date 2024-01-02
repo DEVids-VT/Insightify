@@ -49,6 +49,26 @@ namespace Insightify.IdentityAPI.Services.AccountSettings
                 await _userManager.UpdateAsync(foundUser);
             }
         }
+
+        public async Task<UserProfileModel> Profile(string uId)
+        {
+            var profile = await _userManager.FindByIdAsync(uId);
+
+            if (profile != null)
+            {
+                return new UserProfileModel
+                {
+                    Username = profile.UserName!,
+                    Img = profile.ProfilePicture!
+                };
+            }
+
+            return new UserProfileModel
+            {
+                Username = "s1lence"
+            };
+        }
+
         private async Task<string> UploadToImgur(IFormFile imageFile, HttpClient _httpClient)
         {
             using var formContent = new MultipartFormDataContent();

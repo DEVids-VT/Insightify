@@ -48,6 +48,13 @@ namespace Insightify.Web.Gateway.Extensions
                 })
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.FinancialData))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+            services.AddRefitClient<IProfilesClient>(new RefitSettings()
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer()
+            })
+                .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(serviceEndpoints.Account))
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
             return services;
         }
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
