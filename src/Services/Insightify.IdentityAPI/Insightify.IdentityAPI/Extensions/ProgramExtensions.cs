@@ -8,6 +8,8 @@ using Insightify.IdentityAPI.Configuration;
 using Insightify.IdentityAPI.EmailSending;
 using Serilog;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Insightify.IdentityAPI.Services.AccountSettings;
+using Duende.IdentityServer.Services;
 
 namespace Insightify.IdentityAPI.Extensions
 {
@@ -27,7 +29,7 @@ namespace Insightify.IdentityAPI.Extensions
         }
         public static void AddCustomApplicationServices(this WebApplicationBuilder builder)
         {
-
+            builder.Services.AddScoped<IAccountSettingsService, AccountSettingsService>();
         }
         public static void AddCustomAuthentication(this WebApplicationBuilder builder)
         {
@@ -114,6 +116,7 @@ namespace Insightify.IdentityAPI.Extensions
             .AddInMemoryClients(IdentityServerConfig.GetClients(builder.Configuration))
             .AddAspNetIdentity<ApplicationUser>();
 
+            identityServerBuilder.Services.AddTransient<IProfileService, CustomProfileService>();
             //remove for production
             identityServerBuilder.AddDeveloperSigningCredential();
         }

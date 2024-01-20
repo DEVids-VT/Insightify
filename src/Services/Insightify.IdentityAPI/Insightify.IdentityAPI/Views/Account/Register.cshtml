@@ -1,38 +1,47 @@
 ﻿@using Insightify.IdentityAPI.ViewModels;
 @model RegisterInputViewModel
 
-<div class="row">
-    <div class="col-md-4 offset-md-4">
-        <form id="registerForm" method="post">
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            
-            
-            <div class="text-center mb-3">
-                <label asp-for="@Model.Email">Email</label>
-                <input class="form-control " autocomplete="email" aria-required="true" asp-for="@Model.Email" />
-                <span asp-validation-for="@Model.Email" class="text-danger"></span>
-            </div>
-            <div class="text-center mb-3">
-                <label asp-for="@Model.Username">Username</label>
-                <input class="form-control " autocomplete="username" aria-required="true" asp-for="@Model.Username" />
-                <span asp-validation-for="@Model.Username" class="text-danger"></span>
-            </div>
-            <div class="text-center mb-3">
-                <label asp-for="@Model.Password">Password</label>
-                <input class="form-control" type="password" autocomplete="new-password" aria-required="true" asp-for="@Model.Password" />
-                <span asp-validation-for="@Model.Password" class="text-danger"></span>
-            </div>
-            <div class="text-center mb-3">
-                <label asp-for="@Model.ConfirmPassword">Confirm Password</label>
-                <input class="form-control" type="password" autocomplete="new-password" aria-required="true" asp-for="@Model.ConfirmPassword" />
-                <span asp-validation-for="@Model.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="text-center">
-                <button id="registerSubmit" type="submit" class="btn btn-info m-2">Register</button>
-            </div>
-        </form>
+<link href="~/css/login.css" rel="stylesheet" />
+<div class="page">
+    <div class="leftside">
+        <div class="image-container">
+            <img class="main-img" src="~/images/login.png" alt="Cool image here" />
+        </div>
+    </div>
+    <div class="rightside">
+        <h1 class="logo">INSIGHTIFY</h1>
+        <div class="login-container">
+            <h2 class="form-title">Sign Up</h2>
+            <form id="account" method="post" asp-action="Register" asp-controller="Account">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="@Model.ReturnUrl" value="@Model.ReturnUrl"/>
+
+                <div class="field-container">
+                    <label asp-for="@Model.Email" class="form-label"></label>
+                    <input asp-for="@Model.Email" class="form-field" autocomplete="email" aria-required="true" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="field-container">
+                    <label asp-for="@Model.Username" class="form-label"></label>
+                    <input asp-for="@Model.Username" class="form-field" autocomplete="username" aria-required="true" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="field-container">
+                    <label asp-for="@Model.Password" class="form-label"></label>
+                    <input asp-for="@Model.Password" type="password" class="form-field" autocomplete="current-password" aria-required="true" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="field-container">
+                    <label asp-for="@Model.ConfirmPassword" class="form-label"></label>
+                    <input asp-for="@Model.ConfirmPassword" type="password" class="form-field" aria-required="true" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="field-container">
+                    <button id="login-submit" value="login" name="button" type="submit" class="btn">Sign Up</button>
+                </div>
+                <a asp-route-returnUrl="@ViewData["ReturnUrl"]" asp-action="Login" asp-controller="Account">Log In Instead</a>
+            </form>
+        </div>
     </div>
 </div>
 @section Scripts {

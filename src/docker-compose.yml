@@ -1,21 +1,132 @@
-version: '3.4'
+version: '3.7'
 
 services:
+  redis:
+    image: redislabs/rejson:latest
+    ports:
+      - "6379:6379"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
   sqlserver:
-    image: mcr.microsoft.com/mssql/server:2017-latest
+    image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=Ins1ghtSxrvxr153
+      SA_PASSWORD: "SQLSxrvxr123$"
+      ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
-  identityapi:
-    image: sk1es/insightify.identityapi
-    
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - PORT=5001
-      - CONNECTION_STRING=Server=sqlserver,1433;Database=Insightify.IdentityApi;User Id=sa;Password=Ins1ghtSxrvxr153; TrustServerCertificate=True;
+
+  rabbitmq:
+    image: rabbitmq:3-management
     ports:
-      - "5001:5001"
+      - "5672:5672"
+      - "15672:15672"
+
+  financialapi:
+    image: sk1es/insightify.financialdataapi
+    environment:
+      IdentityUrl: "http://identityserver:5001"
+      Mongo__Url: "mongodb://mongo:27017"
+      ASPNETCORE_URLS: http://+:5037
+      ConnectionStrings__Redis: "redis:6379"
+    ports:
+      - "5037:5037"
+    depends_on:
+      - mongo
+      - identityserver
+      - redis
+
+  financialbgtasks:
+    image: sk1es/insightify.financialdatabackgroundtasks:v3
+    environment:
+      ConnectionStrings__Redis: "redis:6379"
+      ConnectionStrings__RabbitMQ: "amqp://rabbitmq:5672"
+    depends_on:
+      - redis
+      - rabbitmq
+
+  newsapi:
+      image: dps1lence/insightify.news:v4
+      environment:
+        Mongo__Url: "mongodb://mongo:27017"
+        IdentityUrl: "http://identityserver:5001"
+        ASPNETCORE_URLS: http://+:5035
+      ports:
+        - "5035:5035"
+      depends_on:
+        - mongo
+        - identityserver
+
+  newsbgtasks:
+    image: dps1lence/insightify.newsbackgroundtasks:v4
+    environment:
+      Mongo__Url: "mongodb://mongo:27017"
+      Rabbit__Url: "amqp://rabbitmq:5672"
+    depends_on:
+      - mongo
+      - rabbitmq
+
+  notifications:
+    image: dps1lence/insightify.notifications:v4
+    environment:
+      Mongo__Url: "mongodb://mongo:27017"
+      ASPNETCORE_URLS: http://+:5121
+      Rabbit__Url: "amqp://rabbitmq:5672"
+    ports:
+      - "5121:5121"
+    depends_on:
+      - mongo
+
+  mvc:
+    image: dps1lence/insightify.mvc:v3
+    environment:
+      IdentityUrl: "http://identityserver:5001"
+      GatewayUrl: "http://gateway:5030"
+      SignalRHubUrl: "http://notifications:5121/notificationhub"
+    ports:
+      - "5008:80"
+    depends_on:
+      - gateway
+      - identityserver
+
+  gateway:
+    image: dps1lence/insightify.webgateway
+    environment:
+      ServiceEndpoints__FinancialData: "http://financialapi:5037"
+      ServiceEndpoints__News: "http://newsapi:5035"
+      ServiceEndpoints__Posts: "http://posts:5036"
+      ServiceEndpoints__Account: "http://identityserver:5001"
+      IdentityUrl: "http://identityserver:5001"
+    ports:
+      - "5030:5030"
+    depends_on:
+      - financialapi
+      - financialbgtasks
+      - newsapi
+      - newsbgtasks
+      - posts
+      - identityserver
+
+  posts:
+    image: sk1es/insightify.posts
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=PostsV1;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
+      IdentityUrl: "http://identityserver:5001"
+      ASPNETCORE_URLS: http://+:5036
+    ports:
+    - "5036:5036"
+    depends_on:
+      - sqlserver
+      - identityserver
+
+  identityserver:
+    image: dps1lence/insightify.identity:v2
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=IdentityApi;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
+    ports:
+    - "5001:5001"
     depends_on:
       - sqlserver

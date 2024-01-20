@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>8fd69846-024f-46fb-97f1-967a03c5c102</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\index.css" />
+  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Insightify.Framework" Version="2.0.0" />
+		<PackageReference Include="Insightify.Framework.Logging" Version="1.0.0" />
+		<PackageReference Include="Insightify.Framework.Pagination" Version="1.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.12" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="7.0.12" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.13" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.12" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
+		<PackageReference Include="Refit" Version="7.0.0" />
+		<PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
+		<PackageReference Include="Refit.Newtonsoft.Json" Version="7.0.0" />
+	</ItemGroup>
+</Project>

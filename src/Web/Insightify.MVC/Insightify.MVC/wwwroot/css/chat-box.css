@@ -1,0 +1,122 @@
+﻿.chat-box-main-container {
+    position: fixed;
+    height: 100vh;
+    z-index: 200;
+    right: calc(100% - 850px);
+    width: 600px;
+}
+
+.chat-box-header {
+    height: 60px;
+    width: inherit;
+    background-color: white;
+    position: fixed;
+    z-index: 300;
+    border-right: 1px solid #cfcfcf;
+    border-left: 1px solid #cfcfcf;
+    border-bottom: 1px solid #cfcfcf;
+    filter: blur(5px);
+}
+
+.chat-message-element {
+    margin: 5px;
+}
+
+.chat-message-content {
+    background-color: #cfcfcf;
+    color: #5c5c5c;
+    max-width: 300px;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 18px
+}
+
+.chat-box-footer {
+    height: 60px;
+    width: inherit;
+    background-color: gray;
+    position: fixed;
+    z-index: 300;
+    display: flex;
+    top: calc(100% - 60px);
+}
+
+.chat-box-messages-container {
+    margin-top: 60px;
+    width: inherit;
+    height: fit-content;
+    background-color: white;
+    margin-bottom: 60px;
+    scrollbar-width: none;
+    padding: 0 20px;
+    border-right: 1px solid #cfcfcf;
+    border-left: 1px solid #cfcfcf;
+    filter: blur(5px);
+}
+
+.message-begining {
+    font-size: 20px;
+    margin: 100px 0;
+}
+
+.hide-chatbox {
+    font-size: 25px;
+    color: white;
+}
+
+.message-owner {
+    background-color: #c6b4e2;
+}
+
+.chat-box-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: white;
+    align-items: center;
+    border-right: 1px solid #cfcfcf;
+    border-top: 1px solid #cfcfcf;
+    border-left: 1px solid #cfcfcf;
+    filter: blur(5px);
+}
+
+.chat-box-input {
+    background-color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    width: 400px;
+}
+.fa-xmark{
+    color: black;
+}
+.comming-soon{
+    position: fixed;
+    z-index: 9999;
+display: flex;
+flex-direction: column;
+width: 400px;
+margin-left: 5%;
+top: 30%;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+.comming-soon-message{
+color: black;
+font-weight: 600;
+font-size: 30px;
+margin-top: 050px;
+}
+
+@media(max-width:850px) {
+    .chat-box-main-container {
+        position: fixed;
+        height: 100vh;
+        z-index: 800;
+        right: 0;
+        width: 100%;
+    }
+}

@@ -1,0 +1,24 @@
+﻿<header id="header" class="header d-flex justify-content-between align-items-center">
+    <div class="circle-bg" style="background-color: transparent; margin:0; width:60px;">
+        <div class="circle-bg" id="navbar-show">
+            <a href="#" class="navbar-brand"><i class="fa fa-bars"></i></a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="circle-bg">
+            <a href="#" class="navbar-brand" id="notifications-btn"><i class="fa fa-bell"></i></a>
+        </div>
+        <div class="circle-bg">
+            <a href="#" class="navbar-brand" id="img-pfp-btn">
+                @if (!string.IsNullOrEmpty(User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value))
+                {
+                    <img class="img-pfp-head" src="@User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value" alt="Image here." />
+                }
+                else
+                {
+                    <img class="img-pfp-head" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here." />
+                }
+            </a>
+        </div>
+    </div>
+</header>

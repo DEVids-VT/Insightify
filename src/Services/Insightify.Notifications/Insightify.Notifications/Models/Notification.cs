@@ -9,26 +9,26 @@ namespace Insightify.NotificationsAPI.Models
     [CollectionName("notifications")]
     public class Notification : MongoEntity
     {
-        [BsonRequired]
-        [MinLength(Validation.Notification.TitleMinLength)]
-        [MaxLength(Validation.Notification.TitleMaxLength)]
-        public string Title { get; init; }
+        //[BsonRequired]
+        //[MinLength(Validation.Notification.TitleMinLength)]
+        //[MaxLength(Validation.Notification.TitleMaxLength)]
+        public string? Title { get; init; }
 
-        [BsonRequired]
-        [MinLength(Validation.Notification.DescriptionMinLength)]
-        [MaxLength(Validation.Notification.DescriptionMaxLength)]
-        public string Description { get; init; }
+        //[BsonRequired]
+        //[MinLength(Validation.Notification.DescriptionMinLength)]
+        //[MaxLength(Validation.Notification.DescriptionMaxLength)]
+        public string? Summary { get; init; }
 
-        public string Source { get; init; }
+        public string? Source { get; init; }
 
-        [BsonRequired]
-        public DateTime SentDate { get; init; }
+        //[BsonRequired] 
+        public DateTime? SentDate { get; init; } = DateTime.UtcNow;
 
         public DateTime? ReadAt { get; init; }
 
         [BsonIgnore]
         public bool IsRead => ReadAt.HasValue;
 
-        public string ImageUrl { get; init; }
+        public string? ImageUrl { get; init; }
     }
 }

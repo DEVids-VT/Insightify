@@ -25,5 +25,7 @@ namespace Insightify.IdentityAPI.ViewModels
         [DataType(DataType.Password)]
         [Compare(nameof(Password))]
         public string ConfirmPassword { get; set; } = null!;
+
+        public string ReturnUrl { get; set; } = default!;
     }
 }

@@ -1,0 +1,50 @@
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    display: flex;
+    background-color: white;
+    color: #D1D5DB;
+}
+.loading-bar-container-img-gray {
+    filter: grayscale(100%);
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    animation: breathe 2s infinite;
+}
+
+.loading-bar-container {
+    overflow: hidden;
+    height: 40px;
+    width: 40px;
+}
+
+.loading-bar {
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+        filter: grayscale(100%);
+    }
+
+    50% {
+        transform: scale(1.2);
+        filter: grayscale(0%);
+    }
+
+    100% {
+        transform: scale(1);
+        filter: grayscale(100%);
+    }
+}

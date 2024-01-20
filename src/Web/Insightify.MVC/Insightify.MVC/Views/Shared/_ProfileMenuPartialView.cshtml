@@ -1,0 +1,38 @@
+﻿@using System.Security.Claims;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div id="pf-menu" class="pf-view-ctr d-flex justify-content-end align-items-start hidden">
+    <div class="pf-view-pg d-flex justify-content-center align-items-center flex-column">
+        <div class="circle-bg hidden" id="pf-menu-hide">
+            <a href="#" class="navbar-brand"><i class="fa fa-xmark"></i></a>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <h3>@User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value</h3>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            @if (User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value != null)
+            {
+                <img class="img-pfp-menu" src="@User.Claims.FirstOrDefault(c => c.Type == "profile_picture")?.Value" alt="Image here." />
+            }
+            else
+            {
+                <img class="img-pfp-menu" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here." />
+            }
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <h1>Welcome back, @User.Claims.FirstOrDefault(c => c.Type == "username")?.Value</h1>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <a class="pfp-menu-btn" href="http://localhost:5001/profile">Manage Profile</a>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="pfp-menu-actions-container d-flex justify-content-center align-items-center flex-column">
+                @*<a class="pfp-menu-actions-btn" href="#">Manage profile</a>
+                <a class="pfp-menu-actions-btn" href="#">Friend Requests</a>
+                <a class="pfp-menu-actions-btn" href="#">Neshto drugo</a>*@
+                <a class="pfp-menu-actions-btn" href="@Url.Action("Create", "Posts")">Create post</a>
+                <a href="@Url.Action("Signout", "Account")" class="pfp-menu-actions-btn">Log out</a>
+            </div>
+        </div>
+    </div>
+</div>

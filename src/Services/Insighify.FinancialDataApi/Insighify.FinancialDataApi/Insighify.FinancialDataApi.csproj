@@ -4,12 +4,21 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Configuration\Enums\**" />
+    <Compile Remove="Infrastructure\Models\**" />
     <Compile Remove="Jobs\**" />
+    <Content Remove="Configuration\Enums\**" />
+    <Content Remove="Infrastructure\Models\**" />
     <Content Remove="Jobs\**" />
+    <EmbeddedResource Remove="Configuration\Enums\**" />
+    <EmbeddedResource Remove="Infrastructure\Models\**" />
     <EmbeddedResource Remove="Jobs\**" />
+    <None Remove="Configuration\Enums\**" />
+    <None Remove="Infrastructure\Models\**" />
     <None Remove="Jobs\**" />
   </ItemGroup>
 
@@ -28,20 +37,20 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="7.0.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.18.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
+    <PackageReference Include="NReJSON" Version="4.0.0" />
     <PackageReference Include="Quartz" Version="3.7.0" />
     <PackageReference Include="Quartz.Extensions.DependencyInjection" Version="3.7.0" />
     <PackageReference Include="Quartz.Extensions.Hosting" Version="3.7.0" />
     <PackageReference Include="Quartz.Jobs" Version="3.7.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\Enums\" />
-    <Folder Include="Infrastructure\Models\" />
     <Folder Include="MappingProfiles\" />
     <Folder Include="Validators\" />
-    <Folder Include="Services\Contracts\" />
   </ItemGroup>
 
 </Project>

@@ -13,18 +13,13 @@ namespace Insightify.FinancialBackgroundTasks.Infrastructure
     {
         public override bool CanConvert(Type objectType)
         {
-            return (objectType == typeof(CryptoDataModel));
+            return (objectType == typeof(MarketValue));
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-            JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             JArray array = JArray.Load(reader);
-            return new CryptoDataModel
-            {
-                MarketCap = array[0].ToObject<ulong>(),
-                Price = array[1].ToObject<decimal>()
-            };
+            return new MarketValue { Timestamp = array[0].ToObject<long>(), Value = array[1].ToObject<decimal>() };
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

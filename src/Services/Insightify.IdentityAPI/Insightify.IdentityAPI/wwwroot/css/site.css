@@ -1,5 +1,6 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    font-family: 'Onest', sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -18,5 +19,22 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+img {
+    display: block;
+}
+.container-main {
+    height:100%;
+}
+main {
+    height:100vh;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
 }

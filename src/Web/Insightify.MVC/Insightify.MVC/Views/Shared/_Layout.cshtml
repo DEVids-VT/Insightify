@@ -1,0 +1,100 @@
+﻿@using Microsoft.AspNetCore.Authentication
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+
+<!DOCTYpE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Insightify.MVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+    <link href="~/css/dashboard.css" rel="stylesheet" />
+    <link href="~/css/layout.css" rel="stylesheet" />
+    <link href="~/css/chat-box.css" rel="stylesheet" />
+    <link href="~/css/crypto.css" rel="stylesheet" />
+    <link href="~/css/feed.css" rel="stylesheet" />
+    <link href="~/css/create-post.css" rel="stylesheet" />
+    <link href="~/css/cryptomarket.css" rel="stylesheet" />
+</head>
+<body>
+    <partial name="_NavbarPartialView" />
+    <partial name="_ChatPartialView" />
+    <div class="page" id="page">
+        <partial name="_HeaderPartialView" />
+        <partial name="_ProfileMenuPartialView" />
+        <partial name="_NotificationsPartialView" />
+        <div class="container-main">
+            <main id="main" role="main" class="pb-3">
+                @RenderBody()
+                <div id="notification-popup" class="notification-popup hidden">
+                </div>
+                <script src="https://kit.fontawesome.com/1f167bd3a1.js" crossorigin="anonymous"></script>
+            </main>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/js/layout/header_scroll.js"></script>
+    <script src="~/js/layout/layout_actions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lightweight-charts@3.6.1/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/charts.js"></script>
+    <script src="signalr/hubs"></script>
+    <script>
+        $(document).ready(function () {
+            try {
+                var hubUrl = '@Configuration["SignalRHubUrl"]';
+                var hubConnection = new signalR.HubConnectionBuilder()
+                    .withUrl(hubUrl,
+                        {
+                            queryParams: { "groupName": "notifications" }
+                        })
+                    .configureLogging(signalR.LogLevel.Information)
+                    .withHubProtocol(new signalR.JsonHubProtocol({
+                        // Set the maximum receive message size (in bytes)
+                        maximumReceiveMessageSize: 1048576 // Example size: 1MB
+                    }))
+                    .build();
+                console.log('HubConnection built');
+            } catch (e) {
+                console.error('Error while creating HubConnection:', e);
+            }
+            hubConnection.on('ReceiveNotification', function (message) {
+                var jsonString = JSON.stringify(message);
+                console.log(jsonString);
+                var notificationPopup = document.getElementById('notification-popup');
+                notificationPopup.classList.remove('hidden');
+                notificationPopup.innerHTML = `
+                            <div class="notification-image">
+
+                                ${message.imageUrl ? `<img src="${message.imageUrl}" alt="Image here." />` : '<img style="width: 120px;" src="https://i.pinimg.com/564x/61/55/d2/6155d25c52539f37933789c9808dcb83.jpg" alt = "Image here." />'}
+                            </div>
+                           <div class="notification-content">
+                                <h4 class="notification-title">${message.title}</h4>
+                                <p class="notification-summary">${message.summary}</p>
+                                <span class="notification-date">${message.sentDate}</span>
+                            </div>`;
+                setTimeout(() => {
+                    notificationPopup.innerHTML = '';
+                    notificationPopup.classList.add('hidden');
+                }, 5000);
+
+            });
+            hubConnection.start()
+                .then(() => {
+                    console.log('SignalR connection started.');
+                })
+                .catch(err => {
+                    console.error('Error while starting SignalR connection:', err);
+                });
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

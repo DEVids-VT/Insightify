@@ -32,15 +32,28 @@ namespace Insightify.FinancialBackgroundTasks.Extensions
         {
             services.AddQuartz(qz =>
             {
-                var jobKey = new JobKey("BitcoinMarketChart");
-                qz.AddJob<BitcoinMarketChartJob>(opts =>
+                var marketChartsJobKey = new JobKey("MarketCharts");
+                qz.AddJob<MarketChartsJob>(opts =>
                 {
-                    opts.WithIdentity(jobKey);
+                    opts.WithIdentity(marketChartsJobKey);
                 });
 
                 qz.AddTrigger(opts => opts
-                    .ForJob(jobKey)
-                    .WithIdentity("FetchNewsJob-trigger")
+                    .ForJob(marketChartsJobKey)
+                    .WithIdentity("FetchCharts-trigger")
+                    .StartNow()
+                    .WithSimpleSchedule(s => s.WithIntervalInMinutes(1))
+                );
+
+                var cryptoCurrencyJobKey = new JobKey("CryptoCurrencies");
+                qz.AddJob<CryptoCurrencyJob>(opts =>
+                {
+                    opts.WithIdentity(cryptoCurrencyJobKey);
+                });
+
+                qz.AddTrigger(opts => opts
+                    .ForJob(cryptoCurrencyJobKey)
+                    .WithIdentity("FetchCurrencies-trigger")
                     .StartNow()
                     .WithSimpleSchedule(s => s.WithIntervalInMinutes(1))
                 );

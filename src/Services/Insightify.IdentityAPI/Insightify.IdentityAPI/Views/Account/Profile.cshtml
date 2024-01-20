@@ -1,0 +1,174 @@
+﻿@model ApplicationUser
+@{
+    var name = Model.Email.Split("@").First().ToCharArray();
+    var distributor = Model.Email.Split("@").Last();
+
+    for (int i = 3; i < name.Length - 3; i++)
+    {
+        name[i] = '*';
+    }
+    var email = string.Join("", name) + "@" + distributor;
+}
+<style>
+    #editProfile {
+        display: none;
+    }
+
+    .btn-cancel {
+        background-color: red;
+    }
+</style>
+
+<div class="main-content">
+    <div class="header-container">
+        <img class="insightify-embed-img" src="~/images/logo_violet_s.png" />
+        <div class="insightify-embed">
+            <a href="http://localhost:5008/" class="insightify-return-btn">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+        </div>
+        <div></div>
+    </div>
+    <div class="profile-card">
+        <div class="card-image">
+            @if (Model.ProfilePicture != null)
+            {
+                <img class="rounded-img" id="pfp" src="@Model.ProfilePicture" alt="Image here." />
+            }
+            else
+            {
+                <img class="rounded-img" id="pfp" style="width: 120px;" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here." />
+            }
+            <input type="file" id="input-image" style="display: none;" />
+            <label for="input-image" class="btn-file-upload">
+                <i class="fa fa-upload"></i> Change image
+            </label>
+        </div>
+        <div class="card-info">
+            <h3 id="upper-username">@Model.UserName</h3>
+        </div>
+    </div>
+    <div class="account-section">
+        <div class="account-header">
+            <h3>My account</h3>
+            <button class="btn-primary">Edit data</button>
+        </div>
+        <div class="account-form">
+            <h6>User information</h6>
+            <div class="form-group">
+                <label for="input-username">Username</label>
+                <input type="text" id="input-username" placeholder="@Model.UserName" readonly>
+            </div>
+            <div class="form-group">
+                <label for="input-email">Email address</label>
+                <input type="email" id="input-email" placeholder="@email" readonly>
+            </div>
+            <button class="button" id="editProfile">Update</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var isEditing = false;
+
+        $('.btn-primary').on('click', function (event) {
+            event.preventDefault();
+            if (!isEditing) {
+                $('#input-username').prop('readonly', false);
+                $('#input-email').prop('readonly', false);
+                $('#editProfile').show();
+                $(this).addClass('btn-cancel').text('Cancel');
+                isEditing = true;
+            } else {
+                $('#input-username').prop('readonly', true);
+                $('#input-email').prop('readonly', true);
+                $('#editProfile').hide();
+                $(this).removeClass('btn-cancel').text('Edit data');
+                isEditing = false;
+            }
+        });
+
+        $('#editProfile').on('click', function (event) {
+            event.preventDefault();
+            var newUsername = $('#input-username').val();
+            var newEmail = $('#input-email').val();
+
+            if (newUsername) {
+                $('#input-username').attr('placeholder', newUsername);
+            }
+            if (newEmail) {
+                $('#input-email').attr('placeholder', newEmail);
+            }
+
+            $('#input-username').prop('readonly', true);
+            $('#input-email').prop('readonly', true);
+
+            $(this).hide();
+            $('.btn-cancel').removeClass('btn-cancel').text('Edit data');
+            isEditing = false;
+        });
+    });
+</script>
+
+<script>
+
+    document.getElementById('input-image').addEventListener('change', function (e) {
+        var file = e.target.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('pfp').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        var formData = new FormData();
+        formData.append('ProfilePicture', file);
+        $.ajax({
+            url: '/editProfile',
+            type: 'PUT',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log('Success:', response);
+            },
+            error: function (xhr, status, error) {
+                console.log('Error:', error);
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#editProfile').on('click', function (event) {
+            event.preventDefault();
+
+            var formData = new FormData();
+            formData.append('Username', $('#input-username').val());
+            formData.append('Email', $('#input-email').val());
+
+            document.getElementById('upper-username').innerText = $('#input-username').val();
+
+            var imageFile = $('#input-image')[0].files[0];
+            if (imageFile) {
+                formData.append('image', imageFile);
+            }
+
+            $.ajax({
+                url: '/editProfile',
+                type: 'PUT',
+                data: formData,
+                processData: false, 
+                contentType: false, 
+                success: function (response) {
+                    console.log('Success:', response);
+                },
+                error: function (xhr, status, error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>

@@ -1,5 +1,8 @@
 ﻿using Quartz;
 using System.Diagnostics.CodeAnalysis;
+using Insighify.FinancialDataApi.Services;
+using Insighify.FinancialDataApi.Services.Contracts;
+using StackExchange.Redis;
 
 namespace Insighify.FinancialDataApi.Extensions
 {
@@ -17,28 +20,44 @@ namespace Insighify.FinancialDataApi.Extensions
             builder.Configuration.AddConfiguration(configBuilder.Build()).Build();
         }
 
-        public static void AddQuartzNET(this WebApplicationBuilder builder)
-        {
-            builder.Services.AddQuartz(qz =>
-            {
-                qz.UseMicrosoftDependencyInjectionJobFactory();
-                var jobKey = new JobKey("FetchNewsJob");
-                /*qz.AddJob<T>(opts =>
-                {
-                    opts.WithIdentity(jobKey);
-                });*/
-
-                qz.AddTrigger(opts => opts
-                    .ForJob(jobKey)
-                    .WithIdentity("FetchNewsJob-trigger")
-                    .WithCronSchedule("0 0 8 * * ?")
-                );
-            });
-            builder.Services.AddQuartzHostedService(qz => qz.WaitForJobsToComplete = true);
-        }
         public static void AddApplicationServices(this WebApplicationBuilder builder)
         {
-            builder.Services.AddControllers();   
+            builder.Services.AddScoped<ICryptoDataService, CryptoDataService>();
+        }
+        public static IServiceCollection AddRedis(this IServiceCollection services, string? connectionString)
+        {
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                throw new ArgumentException("Invalid Redis connection string.", nameof(connectionString));
+            }
+
+            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(connectionString));
+            services.AddTransient<IDatabase>(provider =>
+            {
+                var multiplexer = provider.GetRequiredService<IConnectionMultiplexer>();
+                return multiplexer.GetDatabase();
+            });
+
+            return services;
+        }
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            var identityUrl = configuration.GetValue<string>("IdentityUrl");
+
+            services.AddAuthentication("Bearer").AddJwtBearer(options => {
+                options.Authority = identityUrl;
+                options.RequireHttpsMetadata = false;
+                options.Audience = "financialdata";
+                options.TokenValidationParameters.ValidateAudience = false;
+            });
+            services.AddAuthorization(options => {
+                options.AddPolicy("ApiScope", policy => {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("scope", "financialdata");
+                });
+            });
+
+            return services;
         }
     }
 }

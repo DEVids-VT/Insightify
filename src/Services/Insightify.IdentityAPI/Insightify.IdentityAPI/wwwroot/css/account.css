@@ -1,0 +1,150 @@
+﻿.main-content {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-section {
+    width: 90%;
+    min-width: 100px;
+    margin: 20px;
+    border-radius: 25px;
+    padding: 15px;
+    max-width: 700px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.card-image {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.rounded-img {
+    border-radius: 50%;
+    width: 215px;
+    margin: 10px;
+}
+
+.card-info h3, .card-info p {
+    text-align: center;
+}
+
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.btn-primary {
+    background-color: #b649f3;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+}
+
+.account-form h6 {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 15px;
+    }
+
+.button {
+    background-color: #b649f3;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.btn-file-upload {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #b649f3;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin: 10px;
+}
+
+    .btn-file-upload:hover {
+        background-color: #5038ee;
+    }
+
+.insightify-embed {
+    border-radius: 25px;
+    background-color: white;
+    padding: 5px 5px;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    margin-top: 30px;
+    margin-right: 120px;
+    transition: all 0.3s;
+}
+
+    .insightify-embed:hover {
+        cursor: pointer;
+    }
+.fa-arrow-left{
+    transition: all 0.3s;
+}
+.fa-arrow-left:hover {
+    color: #b649f3;
+}
+
+.insightify-return-btn {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-size: 25px;
+    text-decoration:none;
+    color:black;
+}
+
+.insightify-embed-img {
+    width: 60px;
+    margin: 20px;
+}
+
+.header-container{
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+}
