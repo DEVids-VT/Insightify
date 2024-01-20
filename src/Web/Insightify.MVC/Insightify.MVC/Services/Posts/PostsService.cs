@@ -17,12 +17,14 @@ namespace Insightify.MVC.Services.Posts
     public class PostsService : IPostsService
     {
         private readonly IPostsClient _postClient;
+        private readonly IProfilesClient _profilesClient;
         private readonly IMapper _mapper;
         private readonly HttpClient _httpClient;
 
-        public PostsService(IPostsClient postClient, IMapper mapper, HttpClient httpClient)
+        public PostsService(IPostsClient postClient, IProfilesClient profilesClient, IMapper mapper, HttpClient httpClient)
         {
             _postClient = postClient;
+            _profilesClient = profilesClient;
             _mapper = mapper;
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Authorization =
@@ -53,6 +55,18 @@ namespace Insightify.MVC.Services.Posts
             }
 
             var postsOut = _mapper.Map<List<PostViewModel>>(posts);
+
+            foreach (var post in postsOut)
+            {
+                var user = await _profilesClient.Profile(post.AuthorId);
+
+                if(user != null && user.Content != null)
+                {
+                    post.UserImg = user.Content.Img;
+                    post.Username = user.Content.Username;
+                }
+            }
+
             return new Page<PostViewModel>(
                 postsOut,
                 parsedHeaders["CurrentPage"],

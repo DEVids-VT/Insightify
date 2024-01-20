@@ -13,5 +13,7 @@ namespace Insightify.MVC.Models.Posts
         public int LikeCount { get; set; }
         public int SaveCount { get; set; }
         public int CommentCount { get; set; }
+        public string? Username { get; set; }
+        public string? UserImg { get; set; }
     }
 }

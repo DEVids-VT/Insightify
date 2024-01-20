@@ -94,6 +94,14 @@ namespace Insightify.MVC.Extensions
                 .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
                 .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
 
+            services.AddRefitClient<IProfilesClient>(new RefitSettings()
+            {
+                ContentSerializer = new NewtonsoftJsonContentSerializer()
+            })
+                .ConfigureHttpClient(cfg => cfg.BaseAddress = new Uri(gatewayUrl))
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+
+
             return services;
         }
     }

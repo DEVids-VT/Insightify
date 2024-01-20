@@ -12,15 +12,22 @@
                         <header class="post-header">
                             <div class="post-header-info">
                                 <div class="post-header-image">
-                                    <img class="header-img-data" src="~/images/navbar/shadow-boy-white-eyes-unique-cool-pfp-nft-13yuypusuweug9xn.jpg" />
-                                    <h1 class="header-img-text">David Petkov</h1>
+                                    @if (post.UserImg != null)
+                                    {
+                                        <img class="header-img-data" src="@post.UserImg" />
+                                    }
+                                    else
+                                    {
+                                        <img class="header-img-data" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here." />
+                                    }
+                                    <h1 class="header-img-text">@post.Username</h1>
                                 </div>
                                 <div class="post-header-hour">
                                     <h1><strong>‧</strong></h1>
                                 </div>
                             </div>
                             <div class="post-header-buttons">
-                                <a class="follow-btn">@((new Random()).Next(2, 24)) hours ago</a>
+                                <a class="follow-btn">1 hour ago</a>
                             </div>
                         </header>
                         <div class="post-content">
@@ -35,7 +42,6 @@
                         <div class="post-footer">
                             <div class="footer-buttons">
                                 <a data-post-id="@post.Id" class="like-btn footer-btn-action" href="#"><i class="fa fa-heart"></i>  @post.LikeCount</a>
-                                <a class="footer-btn-action" href="#"><i class="fa fa-comment"></i> @post.CommentCount</a>
                             </div>
                         </div>
                     </div>

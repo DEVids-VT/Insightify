@@ -1,11 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Authentication
-@* @inject IHttpContextAccessor HttpContextAccessor
- *@@{
-    // const string ACCESS_TOKEN = "access_token";
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
-    // var token = HttpContextAccessor.HttpContext
-    //     .GetTokenAsync(ACCESS_TOKEN);
-}
 <!DOCTYpE html>
 <html lang="en">
 <head>
@@ -54,8 +49,9 @@
     <script>
         $(document).ready(function () {
             try {
+                var hubUrl = '@Configuration["SignalRHubUrl"]';
                 var hubConnection = new signalR.HubConnectionBuilder()
-                    .withUrl('http://localhost:5121/notificationhub',
+                    .withUrl(hubUrl,
                         {
                             queryParams: { "groupName": "notifications" }
                         })

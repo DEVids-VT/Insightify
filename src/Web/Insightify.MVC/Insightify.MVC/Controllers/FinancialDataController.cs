@@ -96,7 +96,7 @@ namespace Insightify.MVC.Controllers
             //            new MarketValue { Timestamp = 1355314320000, Value = 129 },
             //            new MarketValue { Timestamp = 1355314620000, Value = 135 },
             //        }
-
+            //
             //    },
             //    Currencies = new List<Models.FinancialData.DashboardCurrencyModel>
             //    {
@@ -173,7 +173,7 @@ namespace Insightify.MVC.Controllers
             //            new MarketValue { Timestamp = 163068480000, Value = rand.Next() },
             //            new MarketValue { Timestamp = 163077120000, Value = rand.Next() }
             //        }
-
+            //
             //    },
             //    data = new Models.FinancialData.DashboardCurrencyModel
             //    {
