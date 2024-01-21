@@ -25,11 +25,11 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Restore dependencies
-      run: dotnet restore src/Services/Insightify.Notifications/Insightify.Notifications/Insightify.Notifications.csproj
+      run: dotnet restore src/Services/Insightify.Notifications/Insightify.Notifications/Insightify.NotificationsAPI.csproj
     - name: Build
-      run: dotnet build src/Services/Insightify.Notifications/Insightify.Notifications/Insightify.Notifications.csproj --no-restore
+      run: dotnet build src/Services/Insightify.Notifications/Insightify.Notifications/Insightify.NotificationsAPI.csproj --no-restore
     - name: Test
-      run: dotnet test src/Services/Insightify.Notifications/Insightify.Notifications/Insightify.Notifications.csproj --no-build --verbosity normal
+      run: dotnet test src/Services/Insightify.Notifications/Insightify.Notifications/Insightify.NotificationsAPI.csproj --no-build --verbosity normal
       
   push_to_registry:
     name: Push Docker image to Docker Hub
@@ -50,8 +50,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: src/Services/Notifications
-          file: src/Services/Notifications/Dockerfile
+          context: src/Services/Insightify.Notifications
+          file: src/Services/Insightify.Notifications/Dockerfile
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/insightify.notifications
 
