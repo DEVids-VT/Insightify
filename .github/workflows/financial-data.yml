@@ -48,8 +48,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: src/Services/Insighify.FinancialDataApi/Insighify.FinancialDataApi
+          context: src/Services/Insighify.FinancialDataApi/
           file: src/Services/Insighify.FinancialDataApi/Insighify.FinancialDataApi/Dockerfile
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/insighify.financialdata
+          tags: ${{secrets.DOCKER_USERNAME}}/insightify.financialdata
 
