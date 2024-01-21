@@ -53,5 +53,5 @@ jobs:
           context: src/Gateways/Insightify.Web.Gateway
           file: src/Gateways/Insightify.Web.Gateway/Dockerfile
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/insightify.identity
+          tags: ${{secrets.DOCKER_USERNAME}}/insightify.gateway
 
