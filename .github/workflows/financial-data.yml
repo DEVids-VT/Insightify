@@ -7,11 +7,11 @@ on:
   push:
     branches: [ "develop" ]
     paths: 
-      - 'src/Services/Insighify.FinancialDataApi/**'
+      - 'src/Services/Insighify.FinancialDataApi/Insighify.FinancialDataApi/**'
   pull_request:
     branches: [ "develop" ]
     paths: 
-      - 'src/Services/Insighify.FinancialDataApi/**'
+      - 'src/Services/Insighify.FinancialDataApi/Insighify.FinancialDataApi/**'
 
 jobs:
   build:
