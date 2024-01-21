@@ -6,6 +6,8 @@ name: Dockerize Insightify.FinancialDataBackgroundTasks
 on:
   push:
     branches: [ "develop" ]
+    paths: 
+      - 'src/Services/Insighify.FinancialDataApi/**'
   pull_request:
     branches: [ "develop" ]
     paths: 
