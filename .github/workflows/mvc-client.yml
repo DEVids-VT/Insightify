@@ -1,15 +1,17 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: Dockerize Insightify.Identity
+name: Dockerize Insightify.MVC
 
 on:
   push:
     branches: [ "develop" ]
+    paths: 
+      - 'src/Web/Insightify.MVC/**'
   pull_request:
     branches: [ "develop" ]
     paths: 
-      - 'src/Services/Insightify.IdentityAPI/**'
+      - 'src/Web/Insightify.MVC/**'
 
 jobs:
   build:
@@ -23,18 +25,18 @@ jobs:
       with:
         dotnet-version: 7.0.x
     - name: Restore dependencies
-      run: dotnet restore src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI/Insightify.IdentityAPI.csproj
+      run: dotnet restore src/Web/Insightify.MVC/Insightify.MVC/Insightify.MVC.csproj
     - name: Build
-      run: dotnet build src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI/Insightify.IdentityAPI.csproj --no-restore
+      run: dotnet build src/Web/Insightify.MVC/Insightify.MVC/Insightify.MVC.csproj --no-restore
     - name: Test
-      run: dotnet test src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI/Insightify.IdentityAPI.csproj --no-build --verbosity normal
+      run: dotnet test src/Web/Insightify.MVC/Insightify.MVC/Insightify.MVC.csproj --no-build --verbosity normal
       
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     needs: build
     env:
-      working-directory: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI
+      working-directory: src/Web/Insightify.MVC/Insightify.MVC
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
@@ -48,8 +50,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI
-          file: src/Services/Insightify.IdentityAPI/Insightify.IdentityAPI/Dockerfile
+          context: src/Web/Insightify.MVC/Insightify.MVC
+          file: src/Web/Insightify.MVC/Insightify.MVC/Dockerfile
           push: true
-          tags: ${{secrets.DOCKER_USERNAME}}/insightify.identity
+          tags: ${{secrets.DOCKER_USERNAME}}/insightify.mvc
 
