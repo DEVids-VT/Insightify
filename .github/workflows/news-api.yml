@@ -1,0 +1,57 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Dockerize Insightify.NewsAPI
+
+on:
+  push:
+    branches: [ "develop" ]
+    paths: 
+      - 'src/Services/Insightify.NewsAPI/Insightify.NewsAPI/**'
+  pull_request:
+    branches: [ "develop" ]
+    paths: 
+      - 'src/Services/Insightify.NewsAPI/Insightify.NewsAPI/**'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore src/Services/Insightify.NewsAPI/Insightify.NewsAPI/Insightify.NewsAPI.csproj
+    - name: Build
+      run: dotnet build src/Services/Insightify.NewsAPI/Insightify.NewsAPI/Insightify.NewsAPI.csproj --no-restore
+    - name: Test
+      run: dotnet test src/Services/Insightify.NewsAPI/Insightify.NewsAPI/Insightify.NewsAPI.csproj --no-build --verbosity normal
+      
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      working-directory: src/Services/Insightify.NewsAPI/Insightify.NewsAPI
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{secrets.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: src/Services/Insightify.NewsAPI
+          file: src/Services/Insightify.NewsAPI/Insightify.NewsAPI/Dockerfile
+          push: true
+          tags: ${{secrets.DOCKER_USERNAME}}/insightify.newsapi
+
