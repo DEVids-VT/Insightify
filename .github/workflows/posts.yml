@@ -49,7 +49,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: src/Services/Insightify.Posts
-          file:src/Services/Insightify.Posts/Dockerfile
+          file: src/Services/Insightify.Posts/Dockerfile
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/insightify.posts
 
