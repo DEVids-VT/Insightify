@@ -6,6 +6,8 @@ name: Dokerize Insightify.Posts
 on:
   push:
     branches: [ "develop" ]
+    paths: 
+      - 'src/Services/Insightify.Posts/**'
   pull_request:
     branches: [ "develop" ]
     paths: 
