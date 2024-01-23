@@ -56,6 +56,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"DEVids-VT_Insightify" /o:"devids-vt" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build Insightify.sln &&
+          dotnet build Insightify.sln
           dotnet dotcover test Insightify.sln --no-build --dcOutput=coverage/dotCover.html --dcReportType=HTML
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
