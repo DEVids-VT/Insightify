@@ -47,7 +47,6 @@ jobs:
           dotnet-version: 7.0.x
 
       - name: Restore .NET dependencies
-        working-directory: src
         run: dotnet restore
         
       - name: Build and analyze
