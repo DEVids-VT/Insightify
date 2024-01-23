@@ -45,6 +45,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
+          
+      - name: Install dotCover
+        run: dotnet tool install --global JetBrains.dotCover.GlobalTool
         
       - name: Build and analyze
         env:
@@ -53,5 +56,6 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"DEVids-VT_Insightify" /o:"devids-vt" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build Insightify.sln
+          dotnet build Insightify.sln &&
+          dotnet dotcover test Insightify.sln --no-build --dcOutput=coverage/dotCover.html --dcReportType=HTML
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
