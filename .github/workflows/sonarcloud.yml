@@ -45,12 +45,6 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 7.0.x
-          
-      - name: Restore .NET tools
-        working-directory: src
-        run: |
-          dotnet tool restore &&
-          dotnet workload install aspire
 
       - name: Restore .NET dependencies
         working-directory: src
