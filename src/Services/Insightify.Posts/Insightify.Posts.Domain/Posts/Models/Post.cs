@@ -27,12 +27,14 @@
             this.likes = new HashSet<Like>();
             this.saves = new HashSet<Save>();
             this.comments = new HashSet<Comment>();
+            this.UploadDate = DateTime.UtcNow;
         }
 
         public string Title { get; private set; }
         public string? ImageUrl { get; private set; }
         public string AuthorId { get; }
         public string Description { get; private set; }
+        public DateTime UploadDate { get; }
 
         public IReadOnlyCollection<Like> Likes => likes.ToList().AsReadOnly();
         public IReadOnlyCollection<Save> Saves => saves.ToList().AsReadOnly();
