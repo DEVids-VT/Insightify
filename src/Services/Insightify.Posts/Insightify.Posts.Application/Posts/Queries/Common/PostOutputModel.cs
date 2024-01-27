@@ -15,6 +15,7 @@ namespace Insightify.Posts.Application.Posts.Queries.Common
         public string Title { get; set; } = default!;
         public string Description { get; set; } = default!;
         public string AuthorId { get; set; } = default!;
+        public DateTime UploadDate { get; set; }
         public string? ImageUrl { get; set; }
         public int LikeCount { get; set; }
         public int SaveCount { get; set; }
