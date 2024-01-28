@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Insightify.Posts.Application.Common.Gateways;
 using Insightify.Posts.Application.Posts.Commands.Common;
 using Insightify.Posts.Domain.Posts.Factories;
+using Insightify.Posts.Domain.Posts.Models;
 using Insightify.Posts.Domain.Posts.Repositories;
 using MediatR;
 
@@ -30,11 +31,18 @@ namespace Insightify.Posts.Application.Posts.Commands.Create
             public async Task<CreatePostOutputModel> Handle(CreatePostCommand request, CancellationToken cancellationToken)
             {
                 var factory = request.ImageUrl != null ? postFactory.WithImageUrl(request.ImageUrl) : postFactory;
+                var tags = new HashSet<Tag>();
+
+                foreach (var tag in request.Tags)
+                {
+                    tags.Add(await postRepository.GetOrCreateTag(tag, cancellationToken));
+                }
 
                 var post = factory
                     .WithTitle(request.Title)
                     .WithDescription(request.Description)
                     .WithAuthor(currentUser.UserId)
+                    .WithTags(tags)
                     .Build();
 
                 await this.postRepository.Save(post, cancellationToken);

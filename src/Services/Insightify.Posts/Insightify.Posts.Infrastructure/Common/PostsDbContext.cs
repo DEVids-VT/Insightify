@@ -19,6 +19,7 @@ namespace Insightify.Posts.Infrastructure.Common
         public DbSet<Like> Likes { get; set; } = default!;
         public DbSet<Comment> Comments { get; set; } = default!;
         public DbSet<Save> Saves { get; set; } = default!;
+        public DbSet<Tag> Tags { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

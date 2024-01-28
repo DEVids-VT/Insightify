@@ -1,4 +1,6 @@
-﻿namespace Insightify.Posts.Domain.Posts.Factories
+﻿using Insightify.Posts.Domain.Posts.Models;
+
+namespace Insightify.Posts.Domain.Posts.Factories
 {
     using FluentAssertions;
     using Insightify.Posts.Domain.Posts.Exceptions;
@@ -65,6 +67,7 @@
                 .WithDescription("TestDescription")
                 .WithAuthor("TestAuthorId")
                 .WithImageUrl("http://test.image.url")
+                .WithTags(new List<Tag>())
                 .Build();
 
             // Assert

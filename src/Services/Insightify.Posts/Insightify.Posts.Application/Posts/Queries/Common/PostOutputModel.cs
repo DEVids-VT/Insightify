@@ -20,11 +20,13 @@ namespace Insightify.Posts.Application.Posts.Queries.Common
         public int LikeCount { get; set; }
         public int SaveCount { get; set; }
         public int CommentCount { get; set; }
+        public IEnumerable<string> Tags { get; set; } = new HashSet<string>();
 
         public virtual void Mapping(Profile mapper)
             => mapper.CreateMap<Post, PostOutputModel>()
                 .ForMember(p => p.LikeCount, cfg => cfg.MapFrom(p => p.TotalLikes))
                 .ForMember(p => p.SaveCount, cfg => cfg.MapFrom(p => p.TotalSaves))
-                .ForMember(p => p.CommentCount, cfg => cfg.MapFrom(p => p.TotalComments));
+                .ForMember(p => p.CommentCount, cfg => cfg.MapFrom(p => p.TotalComments))
+                .ForMember(p => p.Tags, cfg => cfg.MapFrom(p => p.Tags.Select(t => t.Name)));
     }
 }
