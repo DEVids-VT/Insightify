@@ -27,5 +27,11 @@ namespace Insightify.Posts.Domain.Posts
             public const int MinContentLength = 10;
             public const int MaxContentLength = 200;
         }
+        public class Tag
+        {
+
+            public const int MinTagLength = 2;
+            public const int MaxTagLength = 20;
+        }
     }
 }

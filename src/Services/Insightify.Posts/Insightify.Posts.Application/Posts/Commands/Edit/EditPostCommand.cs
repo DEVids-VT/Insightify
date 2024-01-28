@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Insightify.Posts.Application.Common;
 using Insightify.Posts.Application.Common.Gateways;
+using Insightify.Posts.Domain.Posts.Models;
 using Insightify.Posts.Domain.Posts.Repositories;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces;
 
@@ -37,7 +38,14 @@ namespace Insightify.Posts.Application.Posts.Commands.Edit
 
                 var post = await this.postRepository.Find(request.Id, cancellationToken);
 
-                post.UpdateTitle(request.Title).UpdateDescription(request.Description);
+                var tags = new HashSet<Tag>();
+
+                foreach (var tag in request.Tags)
+                {
+                    tags.Add(await postRepository.GetOrCreateTag(tag, cancellationToken));
+                }
+
+                post.UpdateTitle(request.Title).UpdateDescription(request.Description).UpdateTags(tags);
                 if (request.ImageUrl != null)
                 {
                     post.UpdateImageUrl(request.ImageUrl);

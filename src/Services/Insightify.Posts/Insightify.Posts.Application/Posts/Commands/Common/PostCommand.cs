@@ -13,5 +13,7 @@ namespace Insightify.Posts.Application.Posts.Commands.Common
         public string Title { get; set; } = default!;
         public string Description { get; set; } = default!;
         public string? ImageUrl { get; set; }
+
+        public IEnumerable<string> Tags { get; set; } = new HashSet<string>();
     }
 }
