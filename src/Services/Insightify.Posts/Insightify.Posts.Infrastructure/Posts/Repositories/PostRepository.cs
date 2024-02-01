@@ -114,7 +114,7 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             var postsQuery = this.GetPostsQuery(postSpecification).ToList();
 
             var posts = postsQuery
-                .Skip(pageNumber * pageSize)
+                .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 

@@ -10,5 +10,7 @@
         public int LikeCount { get; set; }
         public int SaveCount { get; set; }
         public int CommentCount { get; set; }
+        public DateTime UploadDate { get; set; }
+        public IEnumerable<string> Tags { get; set; }
     }
 }

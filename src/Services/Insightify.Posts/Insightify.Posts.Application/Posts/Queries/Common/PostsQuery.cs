@@ -13,7 +13,7 @@ namespace Insightify.Posts.Application.Posts.Queries.Common
     public abstract class PostsQuery
     {
         public string? Title { get; set; }
-        public int Page { get; set; } = 0;
+        public int Page { get; set; } = 1;
         public int PageSize { get; set; } = 10;
 
         public abstract class PostsQueryHandler
