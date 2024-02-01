@@ -10,5 +10,7 @@
         public int LikeCount { get; set; }
         public int SaveCount { get; set; }
         public int CommentCount { get; set; }
+        public string UploadDate { get; set; }
+        public IEnumerable<string> Tags { get; set; } = new HashSet<string>();
     }
 }
