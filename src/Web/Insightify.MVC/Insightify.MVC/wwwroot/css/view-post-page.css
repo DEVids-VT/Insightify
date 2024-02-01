@@ -1,0 +1,359 @@
+.post-header {
+    display: flex;
+    align-items: center;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+    padding-left: 100px;
+}
+
+.profile-image-container-header {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.profile-image-header {
+    width: 100%;
+    border-radius: 50px;
+}
+
+.username-content-header {
+    font-size: 25px;
+    margin-right: 40px;
+}
+
+.dash {
+    font-size: 30px;
+    margin: 0 80px;
+    color: transparent;
+}
+
+.title-content-header {
+    font-size: 30px;
+}
+
+.follow-bth {
+    background-color: black;
+    border-radius: 20px;
+    padding: 5px 10px;
+    transition: all 0.3s;
+    cursor: pointer;
+    color: white;
+}
+
+.post-container-main {
+    display: flex;
+    padding: 20px;
+}
+
+    .post-container-main .post-content-container {
+        display: flex;
+        width: 60%;
+        flex-direction: column;
+        padding: 10px;
+        border-radius: 25px;
+        transition: all 0.3s;
+    }
+
+        .post-container-main .post-content-container .identity-data {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: center;
+        }
+
+            .post-container-main .post-content-container .identity-data .identity-data-content {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: fit-content;
+            }
+
+                .post-container-main .post-content-container .identity-data .identity-data-content .profile-image-container {
+                    width: 50px;
+                    border-radius: 50px;
+                    margin-right: 5px;
+                }
+
+                    .post-container-main .post-content-container .identity-data .identity-data-content .profile-image-container .profile-image {
+                        width: 100%;
+                        border-radius: 50px;
+                    }
+
+                .post-container-main .post-content-container .identity-data .identity-data-content .username-content {
+                    font-size: 23px;
+                    margin-left: 5px;
+                }
+
+                .post-container-main .post-content-container .identity-data .identity-data-content .dot {
+                    margin: 3px;
+                    font-size: 30px;
+                }
+
+                .post-container-main .post-content-container .identity-data .identity-data-content .time-content {
+                    font-size: 20px;
+                }
+
+            .post-container-main .post-content-container .identity-data .report-btn .fa-regular {
+                margin-right: 20px;
+            }
+
+                .post-container-main .post-content-container .identity-data .report-btn .fa-regular:hover {
+                    cursor: pointer;
+                }
+
+        .post-container-main .post-content-container .post-content-data {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+            .post-container-main .post-content-container .post-content-data .title-container {
+                padding: 10px;
+            }
+
+                .post-container-main .post-content-container .post-content-data .title-container .post-title {
+                    font-size: 40px;
+                }
+
+            .post-container-main .post-content-container .post-content-data .post-hashtags {
+                display: flex;
+                flex-direction: row;
+            }
+
+                .post-container-main .post-content-container .post-content-data .post-hashtags .hashtag {
+                    text-decoration: none;
+                    width: fit-content;
+                    padding: 5px 10px;
+                    background-color: #ba46d7;
+                    border-radius: 20px;
+                    margin: 5px;
+                    color: white;
+                }
+
+            .post-container-main .post-content-container .post-content-data .description-container {
+                font-size: 27px;
+                padding: 10px;
+            }
+
+                .post-container-main .post-content-container .post-content-data .description-container .post-description {
+                    font-size: 28px;
+                }
+
+            .post-container-main .post-content-container .post-content-data .post-image-container {
+                padding: 10px;
+            }
+
+                .post-container-main .post-content-container .post-content-data .post-image-container .post-image {
+                    width: 100%;
+                    border-radius: 20px;
+                    border: 5px solid #d0b0d5;
+                }
+
+            .post-container-main .post-content-container .post-content-data .post-action-buttons {
+                display: flex;
+                flex-direction: row;
+            }
+
+                .post-container-main .post-content-container .post-content-data .post-action-buttons .like-btn,
+                .post-container-main .post-content-container .post-content-data .post-action-buttons .comment-btn,
+                .post-container-main .post-content-container .post-content-data .post-action-buttons .share-btn,
+                .post-container-main .post-content-container .post-content-data .post-action-buttons .save-btn {
+                    padding: 10px;
+                    font-size: 20px;
+                    color: #aa39c7;
+                }
+
+        .post-container-main .post-content-container .post-comments-section {
+            padding: 0 20px;
+        }
+
+            .post-container-main .post-content-container .post-comments-section .add-comment-container {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 50px;
+                box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+            }
+
+                .post-container-main .post-content-container .post-comments-section .add-comment-container .comment-body {
+                    display: flex;
+                    justify-content: center;
+                }
+
+                    .post-container-main .post-content-container .post-comments-section .add-comment-container .comment-body .textarea-comment {
+                        width: 100%;
+                        border: none;
+                        border-radius: 4px 4px 0px 0px;
+                        background-color: transparent;
+                        padding: 10px;
+                    }
+
+                .post-container-main .post-content-container .post-comments-section .add-comment-container .comment-create-btn-container {
+                    display: flex;
+                    justify-content: space-between;
+                    background-color: #f2f2f2;
+                    border-radius: 0px 0px 4px 4px;
+                    height: 35px;
+                }
+
+                    .post-container-main .post-content-container .post-comments-section .add-comment-container .comment-create-btn-container .comment-privacy-text {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        font-weight: 400;
+                        font-size: 15px;
+                        color: gray;
+                        padding: 10px;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    }
+
+                        .post-container-main .post-content-container .post-comments-section .add-comment-container .comment-create-btn-container .comment-privacy-text:hover {
+                            color: #4f4f4f;
+                        }
+
+                        .post-container-main .post-content-container .post-comments-section .add-comment-container .comment-create-btn-container .comment-privacy-text i {
+                            padding-right: 5px;
+                        }
+
+                    .post-container-main .post-content-container .post-comments-section .add-comment-container .comment-create-btn-container .comment-btn {
+                        border: 2px solid gray;
+                        background-color: transparent;
+                        color: black;
+                        padding: 10px;
+                        display: flex;
+                        text-align: center;
+                        align-items: center;
+                        border-radius: 10px;
+                        transition: all 0.3s;
+                    }
+
+                        .post-container-main .post-content-container .post-comments-section .add-comment-container .comment-create-btn-container .comment-btn:hover {
+                            border: 2px solid black;
+                            cursor: pointer;
+                        }
+
+            .post-container-main .post-content-container .post-comments-section .comments-container-main {
+                display: flex;
+                flex-direction: column;
+                height: fit-content;
+            }
+
+                .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container {
+                    display: flex;
+                    flex-direction: column;
+                    background-color: #f0f0f0;
+                    padding: 10px;
+                    border-radius: 25px;
+                    width: fit-content;
+                    transition: all 0.3s;
+                    margin: 10px 0;
+                    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+                }
+
+                    .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container:hover {
+                        box-shadow: none;
+                    }
+
+                    .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container .user-info-container-comment {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        text-align: center;
+                    }
+
+                        .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container .user-info-container-comment .profile-image-container-comment {
+                            width: 30px;
+                            margin-right: 5px;
+                        }
+
+                            .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container .user-info-container-comment .profile-image-container-comment .profile-image-comment {
+                                width: 100%;
+                                border-radius: 50px;
+                            }
+
+                        .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container .user-info-container-comment .username-content-comment {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            text-align: center;
+                            padding-bottom: 4px;
+                        }
+
+                        .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container .user-info-container-comment .dot-comment {
+                            padding-bottom: 3px;
+                            margin: 0 3px;
+                            font-size: 20px;
+                        }
+
+                        .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container .user-info-container-comment .time-content-comment {
+                            padding-bottom: 4px;
+                            color: gray;
+                        }
+
+                    .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container .comment-body {
+                        padding: 5px;
+                        margin: 5px 0;
+                        font-size: 18px;
+                    }
+
+                        .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container .comment-body .comment-text {
+                            color: gray;
+                        }
+
+                    .post-container-main .post-content-container .post-comments-section .comments-container-main .comment-container:hover .comment-text {
+                        color: rgb(114, 114, 114);
+                    }
+
+    .post-container-main .profile-content-container {
+        display: flex;
+        width: 40%;
+        justify-content: end;
+    }
+
+        .post-container-main .profile-content-container .profile-info-aside {
+            background-color: #f9fafa;
+            height: fit-content;
+            padding: 20px 20px;
+            margin: 10px;
+            border-radius: 20px;
+            width: 400px;
+        }
+
+            .post-container-main .profile-content-container .profile-info-aside .profile-name {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+
+                .post-container-main .profile-content-container .profile-info-aside .profile-name .profile-name-content {
+                    font-size: 20px;
+                }
+
+                .post-container-main .profile-content-container .profile-info-aside .profile-name .follow-bth {
+                    background-color: black;
+                    border-radius: 20px;
+                    padding: 5px 10px;
+                    transition: all 0.3s;
+                    cursor: pointer;
+                    color: white;
+                }
+
+                    .post-container-main .profile-content-container .profile-info-aside .profile-name .follow-bth:hover {
+                        background-color: white;
+                        color: black;
+                    }
+
+            .post-container-main .profile-content-container .profile-info-aside .profile-description {
+                padding: 10px;
+            }
+
+                .post-container-main .profile-content-container .profile-info-aside .profile-description .profile-description-content {
+                    font-size: 18px;
+                }
