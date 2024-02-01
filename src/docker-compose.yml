@@ -26,7 +26,7 @@ services:
       - "15672:15672"
 
   financialapi:
-    image: sk1es/insightify.financialdataapi
+    image: sk1es/insightify.financialdata:latest
     environment:
       IdentityUrl: "http://identityserver:5001"
       Mongo__Url: "mongodb://mongo:27017"
@@ -40,7 +40,7 @@ services:
       - redis
 
   financialbgtasks:
-    image: sk1es/insightify.financialdatabackgroundtasks:v3
+    image: sk1es/insightify.financialdatabgt:latest
     environment:
       ConnectionStrings__Redis: "redis:6379"
       ConnectionStrings__RabbitMQ: "amqp://rabbitmq:5672"
@@ -49,7 +49,7 @@ services:
       - rabbitmq
 
   newsapi:
-      image: dps1lence/insightify.news:v4
+      image: sk1es/insightify.newsapi:latest
       environment:
         Mongo__Url: "mongodb://mongo:27017"
         IdentityUrl: "http://identityserver:5001"
@@ -61,7 +61,7 @@ services:
         - identityserver
 
   newsbgtasks:
-    image: dps1lence/insightify.newsbackgroundtasks:v4
+    image: sk1es/insightify.bgt:latest
     environment:
       Mongo__Url: "mongodb://mongo:27017"
       Rabbit__Url: "amqp://rabbitmq:5672"
@@ -70,7 +70,7 @@ services:
       - rabbitmq
 
   notifications:
-    image: dps1lence/insightify.notifications:v4
+    image: sk1es/insightify.notifications:latest
     environment:
       Mongo__Url: "mongodb://mongo:27017"
       ASPNETCORE_URLS: http://+:5121
@@ -81,7 +81,7 @@ services:
       - mongo
 
   mvc:
-    image: dps1lence/insightify.mvc:v3
+    image: sk1es/insightify.mvc:latest
     environment:
       IdentityUrl: "http://identityserver:5001"
       GatewayUrl: "http://gateway:5030"
@@ -93,7 +93,7 @@ services:
       - identityserver
 
   gateway:
-    image: dps1lence/insightify.webgateway
+    image: sk1es/insightify.gateway:latest
     environment:
       ServiceEndpoints__FinancialData: "http://financialapi:5037"
       ServiceEndpoints__News: "http://newsapi:5035"
@@ -111,7 +111,7 @@ services:
       - identityserver
 
   posts:
-    image: sk1es/insightify.posts
+    image: sk1es/insightify.posts:latest
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=PostsV1;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
       IdentityUrl: "http://identityserver:5001"
@@ -123,7 +123,7 @@ services:
       - identityserver
 
   identityserver:
-    image: dps1lence/insightify.identity:v2
+    image: sk1es/insightify.identity:latest
     environment:
       ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=IdentityApi;User Id=sa; Password=SQLSxrvxr123$; TrustServerCertificate=True;"
     ports:
