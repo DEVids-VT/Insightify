@@ -38,6 +38,28 @@ namespace Insightify.MVC.Services.Posts
             return await CreatePostWithImageUrl(model, imageUrl);
         }
 
+        public async Task<PostViewModel> GetPost(int postId)
+        {
+            var postResponse = await _postClient.Post(postId);
+            var post = postResponse.Content;
+            if (post == null)
+            {
+                throw new NotFoundException();
+
+            }
+            var postOut = _mapper.Map<PostViewModel>(post);
+
+            var user = await _profilesClient.Profile(post.AuthorId);
+
+            if (user != null && user.Content != null)
+            {
+                postOut.UserImg = user.Content.Img;
+                postOut.Username = user.Content.Username;
+            }
+
+            return postOut;
+        }
+
         public async Task<IPage<PostViewModel>> GetPosts(string? title = null, int pageIndex = 1, int pageSize = 50)
         {
             var postsResponse = await _postClient.Posts(title, pageIndex, pageSize);

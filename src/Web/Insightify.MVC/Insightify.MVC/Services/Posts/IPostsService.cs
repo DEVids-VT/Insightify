@@ -10,5 +10,6 @@ namespace Insightify.MVC.Services.Posts
         Task<CreatePostResponseModel> CreatePost(CreatePostInputModel model);
         Task<int> LikePost(int postId);
         Task<IEnumerable<LikeViewModel>> Likes(int postId);
+        Task<PostViewModel> GetPost(int postId);
     }
 }

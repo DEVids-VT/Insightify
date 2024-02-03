@@ -53,6 +53,18 @@ namespace Insightify.Web.Gateway.Services.Posts
                 parsedHeaders["PageSize"],
                 parsedHeaders["TotalCount"]);
         }
+        public async Task<PostOutputModel> GetPost(int postId)
+        {
+            var postResponse = await _postClient.Post(postId);
+            var post = postResponse.Content;
+            if (post == null)
+            {
+                throw new NotFoundException();
+            }
+
+            var postOut = _mapper.Map<PostOutputModel>(post);
+            return postOut;
+        }
 
         public async Task<CreatePostOutputModel> CreatePost(CreatePostInputModel post)
         {

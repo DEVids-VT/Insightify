@@ -1,4 +1,4 @@
-﻿<header id="header-top-post" class="post-header hidden">
+﻿@* <header id="header-top-post" class="post-header hidden">
     <h1 class="title-content-header">Post Title</h1>
     <div class="dash">-</div>
     <div class="profile-image-container-header">
@@ -6,7 +6,9 @@
     </div>
     <h1 class="username-content-header">davidpetkov</h1>
     <div class="follow-bth">Follow</div>
-</header>
+</header> *@
+@model Insightify.MVC.Models.Posts.PostViewModel
+
 <div class="post-container-main">
     <div class="post-content-container">
         <div class="identity-data">
@@ -14,9 +16,9 @@
                 <div class="profile-image-container">
                     <img class="profile-image" src="~/images/107983.jpg" alt="profile-img">
                 </div>
-                <h1 class="username-content">davidpetkov</h1>
+                <h1 class="username-content">@Model.Username</h1>
                 <div class="dot">·</div>
-                <h2 class="time-content">3 hrs</h2>
+                <h2 class="time-content">@Model.UploadDate</h2>
             </div>
             <div class="report-btn">
                 <i class="fa-regular fa-flag"></i>
@@ -24,17 +26,19 @@
         </div>
         <div class="post-content-data">
             <div class="title-container">
-                <h1 class="post-title">Title</h1>
+                <h1 class="post-title">@Model.Title</h1>
             </div>
             <div class="post-hashtags">
-                <a class="hashtag" href="#">crypto</a>
-                <a class="hashtag" href="#">bitcoin</a>
+                @foreach (var tag in Model.Tags)
+                {
+                    <a class="hashtag" href="#">@tag</a>
+                }
             </div>
             <div class="description-container">
-                <h1 class="post-description">Description description description description description description description</h1>
+                <h1 class="post-description">@Model.Description</h1>
             </div>
             <div class="post-image-container">
-                <img class="post-image" src="~/images/wp6618526.jpg" alt="image-post">
+                <img class="post-image" src="@Model.ImageUrl" alt="image-post">
             </div>
             <div class="post-action-buttons">
                 <a class="like-btn" href="#"><i class="fa-regular fa-heart"></i></a>

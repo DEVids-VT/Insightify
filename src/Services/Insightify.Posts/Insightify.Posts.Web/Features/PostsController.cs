@@ -25,6 +25,10 @@ namespace Insightify.Posts.Web.Features
         public async Task<ActionResult<IPage<PostOutputModel>>> Search([FromQuery] SearchPostsQuery postsQuery)
             => await this.Send(postsQuery);
 
+        [HttpGet("{postId}")]
+        public async Task<ActionResult<PostOutputModel>> Get([FromRoute] int postId)
+            => await this.Send(new GetPostByIdQuery() { Id = postId });
+
         [HttpGet("mine")]
         public async Task<ActionResult<IPage<PostOutputModel>>> Mine([FromQuery] MinePostsQuery postsQuery)
             => await this.Send(postsQuery);
