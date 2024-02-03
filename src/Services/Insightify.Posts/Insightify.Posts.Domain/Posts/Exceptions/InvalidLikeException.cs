@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Insightify.Posts.Domain.Common;
-
-namespace Insightify.Posts.Domain.Posts.Exceptions
+﻿namespace Insightify.Posts.Domain.Posts.Exceptions
 {
+    using Insightify.Posts.Domain.Common;
+
     internal class InvalidLikeException : BaseDomainException
     {
         public InvalidLikeException()

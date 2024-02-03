@@ -29,6 +29,7 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
                 .Include(p => p.Comments)
                 .Include(p => p.Likes)
                 .Include(p => p.Saves)
+                .Include(p => p.Tags)
                 .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
 
         public async Task<bool> Delete(int id, CancellationToken cancellationToken = default)
@@ -92,6 +93,18 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             return true;
         }
 
+        public async Task<Tag> GetOrCreateTag(string name, CancellationToken cancellationToken = default)
+        {
+            if (Data.Tags.All(t => t.Name != name))
+            {
+                await Data.Tags.AddAsync(new Tag(name));
+                await this.Data.SaveChangesAsync(cancellationToken);
+            }
+
+            var tag = Data.Tags.First(c => c.Name == name);
+            return tag;
+        }
+
         public async Task<IPagedList<TOutputModel>> GetPosts<TOutputModel>(Specification<Post> postSpecification,
             int pageNumber, int pageSize = 10,
             CancellationToken cancellationToken = default)
@@ -101,7 +114,7 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             var postsQuery = this.GetPostsQuery(postSpecification).ToList();
 
             var posts = postsQuery
-                .Skip(pageNumber * pageSize)
+                .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
@@ -159,6 +172,7 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
                 .Include(p => p.Saves)
                 .Include(p => p.Comments)
                 .Include(p => p.Likes)
+                .Include(p => p.Tags)
                 .Where(specification);
             return posts;
         }

@@ -9,5 +9,6 @@
         IPostFactory WithDescription(string description);
         IPostFactory WithAuthor(string authorId);
         IPostFactory WithImageUrl(string url);
+        IPostFactory WithTags(IEnumerable<Tag> tags);
     }
 }

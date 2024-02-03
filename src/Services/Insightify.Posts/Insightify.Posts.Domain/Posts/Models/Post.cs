@@ -12,7 +12,12 @@
         private readonly HashSet<Like> likes;
         private readonly HashSet<Save> saves;
         private readonly HashSet<Comment> comments;
-        internal Post(string title, string description, string authorId, string? imageUrl)
+        private HashSet<Tag> tags;
+
+        //EFCore bug
+        private Post() {}
+
+        internal Post(string title, string description, string authorId, string? imageUrl, IEnumerable<Tag> tags)
         {
             this.Validate(title,description,authorId);
             if (imageUrl != null)
@@ -23,20 +28,24 @@
             this.Title = title;
             this.Description = description;
             this.AuthorId = authorId;
+            this.UploadDate = DateTime.UtcNow;
 
             this.likes = new HashSet<Like>();
             this.saves = new HashSet<Save>();
             this.comments = new HashSet<Comment>();
+            this.tags = new HashSet<Tag>(tags);
         }
 
         public string Title { get; private set; }
         public string? ImageUrl { get; private set; }
         public string AuthorId { get; }
         public string Description { get; private set; }
+        public DateTime UploadDate { get; }
 
         public IReadOnlyCollection<Like> Likes => likes.ToList().AsReadOnly();
         public IReadOnlyCollection<Save> Saves => saves.ToList().AsReadOnly();
         public IReadOnlyCollection<Comment> Comments => comments.ToList().AsReadOnly();
+        public IReadOnlyCollection<Tag> Tags => tags.ToList().AsReadOnly();
 
         public int TotalLikes => likes.Count;
         public int TotalSaves => saves.Count;
@@ -52,6 +61,38 @@
             if (likes.All(l => l.UserId != userId))
             {
                 likes.Add(new Like(userId, timestamp));
+            }
+            return this;
+        }
+
+        public Post UpdateTags(IEnumerable<Tag> tags)
+        {
+            this.tags = tags.ToHashSet();
+            return this;
+        }
+        public Post AddTag(Tag tag)
+        {
+            if (tags.All(t => t.Id != tag.Id))
+            {
+                tags.Add(tag);
+            }
+            return this;
+        }
+
+        public Post RemoveTag(int tagId)
+        {
+            if (tags.Any(t => t.Id == tagId))
+            {
+                tags.RemoveWhere(t => t.Id == tagId);
+            }
+
+            return this;
+        }
+        public Post RemoveTag(Tag tag)
+        {
+            if (tags.All(t => t.Id != tag.Id))
+            {
+                tags.Add(tag);
             }
             return this;
         }

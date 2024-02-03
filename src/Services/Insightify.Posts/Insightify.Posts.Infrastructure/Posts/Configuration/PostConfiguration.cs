@@ -27,6 +27,10 @@ namespace Insightify.Posts.Infrastructure.Posts.Configuration
                 .HasMaxLength(MaxTitleLength);
 
             builder
+                .Property(p => p.UploadDate)
+                .IsRequired();
+
+            builder
                 .Property(p => p.Description)
                 .IsRequired()
                 .HasMaxLength(MaxDescriptionLength);
