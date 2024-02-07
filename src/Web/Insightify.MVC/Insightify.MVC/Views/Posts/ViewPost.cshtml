@@ -89,6 +89,36 @@
     </div>
 </div>
 <script src="https://kit.fontawesome.com/1f167bd3a1.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.comment-btn').click(function (e) {
+            e.preventDefault();
+
+            const postId = window.location.pathname.split('/').pop();
+
+            const commentData = {
+                PostId: postId,
+                Content: $('.textarea-comment').val()
+            };
+
+            $.ajax({
+                url: '/Posts/Comment',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(commentData),
+                success: function (response) {
+                    console.log('Comment submitted successfully', response);
+                    location.reload();
+                    $('.textarea-comment').val('');
+                },
+                error: function (xhr, status, error) {
+                    console.error('Submission failed', xhr, status, error);
+                }
+            });
+        });
+    });
+</script>
 <script>
     var animateButton = function (e) {
 

@@ -8,6 +8,7 @@ using System.Text;
 
 namespace Insightify.MVC.Controllers
 {
+    [AllowAnonymous]
     public class PostsController : Controller
     {
         private readonly IPostsService _postService;
@@ -59,6 +60,23 @@ namespace Insightify.MVC.Controllers
         [HttpGet("post/{id}")]
         public async Task<IActionResult> ViewPost(int id)
         {
+            /*var post = new PostViewModel 
+            { 
+                Id = id,
+                Comments = new List<CommentViewModel>()
+                {
+                    new CommentViewModel
+                    {
+                        Content = "asda asd asd asdasd",
+                        Username = "asdasd", 
+                        UserPfp = "asdasd"
+                    }
+                },
+                Description = "asdasd asd asd asd asd asdasd asd",
+                Title = "Title",
+                Username = "asdasdasdasdda",
+                Tags = new List<string>() { "sd", "asdasd", "asdasd" }
+            };   */
             var post = await _postService.GetPost(id);
             var comments = await _postService.Comments(id);
             post.Comments = comments;
