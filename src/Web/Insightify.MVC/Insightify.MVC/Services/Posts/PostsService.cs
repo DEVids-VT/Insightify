@@ -122,5 +122,27 @@ namespace Insightify.MVC.Services.Posts
             var result = await _postClient.Create(postModel);
             return result.Content!;
         }
+        public async Task Comment(CreateCommentInputModel comment)
+        {
+            var commentRequest = _mapper.Map<CreateCommentRequestModel>(comment);
+            await _postClient.Comment(commentRequest);
+        }
+        public async Task<IEnumerable<CommentViewModel>> Comments(int postId)
+        {
+            var commentsResponse = await _postClient.Comments(postId);
+            var comments = commentsResponse.Content;
+            if (comments == null)
+            {
+                throw new NotFoundException();
+            }
+            var commentsOut = _mapper.Map<List<CommentViewModel>>(comments);
+            foreach (var comment in commentsOut)
+            {
+                var user = await _profilesClient.Profile(comment.AuthorId);
+                comment.Username = user.Content.Username;
+                comment.UserPfp = user.Content.Img;
+            }
+            return commentsOut;
+        }
     }
 }

@@ -60,7 +60,8 @@ namespace Insightify.MVC.Controllers
         public async Task<IActionResult> ViewPost(int id)
         {
             var post = await _postService.GetPost(id);
-
+            var comments = await _postService.Comments(id);
+            post.Comments = comments;
             return View(post);
         }
 
@@ -83,6 +84,12 @@ namespace Insightify.MVC.Controllers
         {
             var likeCount = await _postService.LikePost(postId);
             return Ok(likeCount);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Comment([FromBody] CreateCommentInputModel comment)
+        {
+            await _postService.Comment(comment);
+            return Ok();
         }
     }
 }

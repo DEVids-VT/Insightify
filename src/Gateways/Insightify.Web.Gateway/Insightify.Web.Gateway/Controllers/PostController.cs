@@ -53,5 +53,21 @@ namespace Insightify.Web.Gateway.Controllers
             var likes = await _postService.Likes(postId);
             return Ok(likes);
         }
+
+        [HttpPost]
+        [Route("comment")]
+        public async Task<IActionResult> Comment([FromBody] CreateCommentInputModel comment)
+        {
+            await _postService.Comment(comment);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("{postId}/comments")]
+        public async Task<IActionResult> Comments([FromRoute] int postId)
+        {
+            var comments = await _postService.Comments(postId);
+            return Ok(comments);
+        }
     }
 }

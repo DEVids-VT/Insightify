@@ -59,95 +59,19 @@
             </div>
             <div class="comments-container-main">
                 <div class="comment-container">
-                    <div class="user-info-container-comment">
-                        <div class="profile-image-container-comment">
-                            <img class="profile-image-comment" src="~/images/107983.jpg" alt="profile-img">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <div class="user-info-container-comment">
+                            <div class="profile-image-container-comment">
+                                <img class="profile-image-comment" src="@comment.UserPfp" alt="profile-img">
+                            </div>
+                            <h1 class="username-content-comment">@comment.Username</h1>
+                            <div class="dot-comment">·</div>
                         </div>
-                        <h1 class="username-content-comment">davidpetkov</h1>
-                        <div class="dot-comment">·</div>
-                        <h2 class="time-content-comment">3 hrs</h2>
-                    </div>
-                    <div class="comment-body">
-                        <p class="comment-text">kjjassa djdaksjkda jkajkdaskja jksj  kasdjk jda</p>
-                    </div>
-                </div>
-                <div class="comment-container">
-                    <div class="user-info-container-comment">
-                        <div class="profile-image-container-comment">
-                            <img class="profile-image-comment" src="~/images/107983.jpg" alt="profile-img">
+                        <div class="comment-body">
+                            <p class="comment-text">@comment.Content</p>
                         </div>
-                        <h1 class="username-content-comment">davidpetkov</h1>
-                        <div class="dot-comment">·</div>
-                        <h2 class="time-content-comment">3 hrs</h2>
-                    </div>
-                    <div class="comment-body">
-                        <p class="comment-text">kjjassa djdaksjkda jkajkdaskja jksj  kasdjk jda</p>
-                    </div>
-                </div>
-                <div class="comment-container">
-                    <div class="user-info-container-comment">
-                        <div class="profile-image-container-comment">
-                            <img class="profile-image-comment" src="~/images/107983.jpg" alt="profile-img">
-                        </div>
-                        <h1 class="username-content-comment">davidpetkov</h1>
-                        <div class="dot-comment">·</div>
-                        <h2 class="time-content-comment">3 hrs</h2>
-                    </div>
-                    <div class="comment-body">
-                        <p class="comment-text">kjjassa djdaksjkda jkajkdaskja jksj  kasdjk jda</p>
-                    </div>
-                </div>
-                <div class="comment-container">
-                    <div class="user-info-container-comment">
-                        <div class="profile-image-container-comment">
-                            <img class="profile-image-comment" src="~/images/107983.jpg" alt="profile-img">
-                        </div>
-                        <h1 class="username-content-comment">davidpetkov</h1>
-                        <div class="dot-comment">·</div>
-                        <h2 class="time-content-comment">3 hrs</h2>
-                    </div>
-                    <div class="comment-body">
-                        <p class="comment-text">kjjassa djdaksjkda jkajkdaskja jksj  kasdjk jda</p>
-                    </div>
-                </div>
-                <div class="comment-container">
-                    <div class="user-info-container-comment">
-                        <div class="profile-image-container-comment">
-                            <img class="profile-image-comment" src="~/images/107983.jpg" alt="profile-img">
-                        </div>
-                        <h1 class="username-content-comment">davidpetkov</h1>
-                        <div class="dot-comment">·</div>
-                        <h2 class="time-content-comment">3 hrs</h2>
-                    </div>
-                    <div class="comment-body">
-                        <p class="comment-text">kjjassa djdaksjkda jkajkdaskjakjjassa djdaksjkda jkajkdaskja jksj  kasdjk jdakjjassa djdaksjkda jkajkdaskja jksj  kasdjk jdakjjassa djdaksjkda jkajkdaskja jksj  kasdjk jdakjjassa djdaksjkda jkajkdaskja jksj  kasdjk jda jksj  kasdjk jda</p>
-                    </div>
-                </div>
-                <div class="comment-container">
-                    <div class="user-info-container-comment">
-                        <div class="profile-image-container-comment">
-                            <img class="profile-image-comment" src="~/images/107983.jpg" alt="profile-img">
-                        </div>
-                        <h1 class="username-content-comment">davidpetkov</h1>
-                        <div class="dot-comment">·</div>
-                        <h2 class="time-content-comment">3 hrs</h2>
-                    </div>
-                    <div class="comment-body">
-                        <p class="comment-text">kjjassa djdaksjkda jkajkdaskja jksj  kjjassa djdaksjkda jkajkdaskja jksj  kasdjk jdakjjassa djdaksjkda jkajkdaskja jksj  kasdjk jdakasdjk jda</p>
-                    </div>
-                </div>
-                <div class="comment-container">
-                    <div class="user-info-container-comment">
-                        <div class="profile-image-container-comment">
-                            <img class="profile-image-comment" src="~/images/107983.jpg" alt="profile-img">
-                        </div>
-                        <h1 class="username-content-comment">davidpetkov</h1>
-                        <div class="dot-comment">·</div>
-                        <h2 class="time-content-comment">3 hrs</h2>
-                    </div>
-                    <div class="comment-body">
-                        <p class="comment-text">kjjassa djdaksjkda jkajkkjjassa djdaksjkda jkajkdaskja jksj  kasdjk jdadaskja jksj  kasdjk jda</p>
-                    </div>
+                    }
                 </div>
             </div>
         </div>

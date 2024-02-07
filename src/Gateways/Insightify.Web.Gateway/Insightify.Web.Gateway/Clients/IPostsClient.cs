@@ -23,5 +23,11 @@ namespace Insightify.Web.Gateway.Clients
         Task Like(int postId);
         [Post("/posts/{postId}/dislike")]
         Task Dislike(int postId);
+
+        [Post("/posts/comment")]
+        Task Comment([Body] CreateCommentRequestModel comment);
+
+        [Get("/posts/{postId}/comments")]
+        Task <ApiResponse<List<CommentResponseModel>>> Comments(int postId);
     }
 }

@@ -11,5 +11,7 @@ namespace Insightify.MVC.Services.Posts
         Task<int> LikePost(int postId);
         Task<IEnumerable<LikeViewModel>> Likes(int postId);
         Task<PostViewModel> GetPost(int postId);
+        Task Comment(CreateCommentInputModel comment);
+        Task<IEnumerable<CommentViewModel>> Comments(int postId);
     }
 }

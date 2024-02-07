@@ -18,16 +18,18 @@ namespace Insightify.Web.Gateway.Services.Posts
         private readonly IPostsClient _postClient;
         private readonly IMapper _mapper;
         private readonly IValidator<CreatePostInputModel> _createPostValidator;
+        private readonly IValidator<CreateCommentInputModel> _createCommentValidator;
         private readonly ILogger _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PostService(IPostsClient postClient, IMapper mapper, IValidator<CreatePostInputModel> validator, ILogger<PostService> logger, IHttpContextAccessor httpContextAccessor)
+        public PostService(IPostsClient postClient, IMapper mapper, IValidator<CreatePostInputModel> validator, IValidator<CreateCommentInputModel> createCommentValidator,  ILogger<PostService> logger, IHttpContextAccessor httpContextAccessor)
         {
             _postClient = postClient;
             _mapper = mapper;
             _createPostValidator = validator;
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
+            _createCommentValidator = createCommentValidator;
         }
 
         public async Task<IPage<PostOutputModel>> GetPosts(string? title = null, int pageIndex = 1, int pageSize = 50)
@@ -64,6 +66,34 @@ namespace Insightify.Web.Gateway.Services.Posts
 
             var postOut = _mapper.Map<PostOutputModel>(post);
             return postOut;
+        }
+
+        public async Task Comment(CreateCommentInputModel comment)
+        {
+            var validationResult = _createCommentValidator.Validate(comment);
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    _logger.LogError($"{error.ErrorMessage} for {error.AttemptedValue}");
+                }
+
+                throw new ArgumentException();
+            }
+            var commentRequest = _mapper.Map<CreateCommentRequestModel>(comment);
+            await _postClient.Comment(commentRequest);
+        }
+
+        public async Task<IEnumerable<CommentOutputModel>> Comments(int postId)
+        {
+            var commentsResponse = await _postClient.Comments(postId);
+            var comments = commentsResponse.Content;
+            if (comments == null)
+            {
+                throw new NotFoundException();
+            }
+            var commentsOut = _mapper.Map<List<CommentOutputModel>>(comments);
+            return commentsOut;
         }
 
         public async Task<CreatePostOutputModel> CreatePost(CreatePostInputModel post)

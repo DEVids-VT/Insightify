@@ -21,5 +21,11 @@ namespace Insightify.MVC.Clients
 
         [Get("/posts/{postId}/likes")]
         Task<ApiResponse<List<LikeResponseModel>>> Likes(int postId);
+
+        [Post("/post/comment")]
+        Task Comment([Body] CreateCommentRequestModel comment);
+
+        [Get("/post/{postId}/comments")]
+        Task<ApiResponse<List<CommentResponseModel>>> Comments(int postId);
     }
 }
