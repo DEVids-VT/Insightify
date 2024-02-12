@@ -58,9 +58,10 @@
                 </div>
             </div>
             <div class="comments-container-main">
-                <div class="comment-container">
-                    @foreach (var comment in Model.Comments)
-                    {
+
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="comment-container">
                         <div class="user-info-container-comment">
                             <div class="profile-image-container-comment">
                                 <img class="profile-image-comment" src="@comment.UserPfp" alt="profile-img">
@@ -71,8 +72,8 @@
                         <div class="comment-body">
                             <p class="comment-text">@comment.Content</p>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
