@@ -18,7 +18,7 @@ namespace Insightify.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Feed([FromQuery] string? title = null, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 50, [FromQuery] bool json = false)
+        public async Task<IActionResult> Feed([FromQuery] string? title = null, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] bool json = false)
         {
             var result = await _postService.GetPosts(title, pageIndex, pageSize);
 
