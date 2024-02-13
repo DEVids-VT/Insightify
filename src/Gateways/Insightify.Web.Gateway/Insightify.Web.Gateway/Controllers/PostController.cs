@@ -23,6 +23,14 @@ namespace Insightify.Web.Gateway.Controllers
             return result != null ? Ok(result) : NotFound();
         }
 
+        [HttpGet]
+        [Route("{postId}")]
+        public async Task<IActionResult> Post([FromRoute] int postId)
+        {
+            var result = await _postService.GetPost(postId);
+            return result != null ? Ok(result) : NotFound();
+        }
+
         [HttpPost]
         [Route("create")]
         public async Task<IActionResult> Create([FromBody] CreatePostInputModel post)
@@ -44,6 +52,22 @@ namespace Insightify.Web.Gateway.Controllers
         {
             var likes = await _postService.Likes(postId);
             return Ok(likes);
+        }
+
+        [HttpPost]
+        [Route("comment")]
+        public async Task<IActionResult> Comment([FromBody] CreateCommentInputModel comment)
+        {
+            await _postService.Comment(comment);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("{postId}/comments")]
+        public async Task<IActionResult> Comments([FromRoute] int postId)
+        {
+            var comments = await _postService.Comments(postId);
+            return Ok(comments);
         }
     }
 }

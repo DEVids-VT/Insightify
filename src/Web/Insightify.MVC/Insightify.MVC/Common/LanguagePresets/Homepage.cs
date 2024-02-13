@@ -20,20 +20,17 @@ namespace Insightify.MVC.Common.LanguagePresets
                 Subtitle = "Купете Bitcoin, Ethereum и всички ваши любими криптовалути",
                 Ul = new List<ListElement>
                     {
-                        new ListElement
-                        {
+                        new() {
                             Text = "Доверен от повече от",
                             Highlight = "80 милиона",
                             Description = "потребители по целия свят"
                         },
-                        new ListElement
-                        {
+                        new() {
                             Text = "Лидер в регулаторните",
                             Highlight = "за съответствие и сигурност",
                             Description = "сертификати"
                         },
-                        new ListElement
-                        {
+                        new() {
                             Text = "В индустрията",
                             Highlight = "най-цялостното застрахователно покритие",
                             Description = "и проверено доказателство"
@@ -62,20 +59,17 @@ namespace Insightify.MVC.Common.LanguagePresets
                 Subtitle = "Buy Bitcoin, Ethereum, and all your favourite crypto",
                 Ul = new List<ListElement>
                 {
-                    new ListElement
-                    {
+                    new() {
                         Text = "Trusted by more than",
                         Highlight = "80M",
                         Description = "users world-wide"
                     },
-                    new ListElement
-                    {
+                    new() {
                         Text = "Leader in regulatory",
                         Highlight = "compliance and security",
                         Description = "certifications"
                     },
-                    new ListElement
-                    {
+                    new() {
                         Text = "The industry’s",
                         Highlight = "most comprehensive insurance coverage",
                         Description = "and verified proof"

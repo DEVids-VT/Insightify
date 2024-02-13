@@ -1,0 +1,155 @@
+﻿@* <header id="header-top-post" class="post-header hidden">
+    <h1 class="title-content-header">Post Title</h1>
+    <div class="dash">-</div>
+    <div class="profile-image-container-header">
+        <img class="profile-image-header" src="/107983.jpg" alt="profile-img">
+    </div>
+    <h1 class="username-content-header">davidpetkov</h1>
+    <div class="follow-bth">Follow</div>
+</header> *@
+@model Insightify.MVC.Models.Posts.PostViewModel
+
+<div class="post-container-main">
+    <div class="post-content-container">
+        <div class="identity-data">
+            <div class="identity-data-content">
+                <div class="profile-image-container">
+                    <img class="profile-image" src="~/images/107983.jpg" alt="profile-img">
+                </div>
+                <h1 class="username-content">@Model.Username</h1>
+                <div class="dot">·</div>
+                <h2 class="time-content">@Model.UploadDate</h2>
+            </div>
+            <div class="report-btn">
+                <i class="fa-regular fa-flag"></i>
+            </div>
+        </div>
+        <div class="post-content-data">
+            <div class="title-container">
+                <h1 class="post-title">@Model.Title</h1>
+            </div>
+            <div class="post-hashtags">
+                @foreach (var tag in Model.Tags)
+                {
+                    <a class="hashtag" href="#">@tag</a>
+                }
+            </div>
+            <div class="description-container">
+                <h1 class="post-description">@Model.Description</h1>
+            </div>
+            <div class="post-image-container">
+                <img class="post-image" src="@Model.ImageUrl" alt="image-post">
+            </div>
+            <div class="post-action-buttons">
+                <a class="like-btn" href="#"><i class="fa-regular fa-heart"></i></a>
+                <a class="comment-btn" href="#"><i class="fa-regular fa-comment"></i></a>
+                <a class="share-btn" href="#"><i class="fa-solid fa-share"></i></a>
+                <a class="save-btn" href="#"><i class="fa-regular fa-bookmark"></i></a>
+            </div>
+        </div>
+        <div class="post-comments-section">
+            <div class="add-comment-container">
+                <div class="comment-body">
+                    <textarea class="textarea-comment" placeholder="What are your thoughts?" rows="5"></textarea>
+                </div>
+                <div class="comment-create-btn-container">
+                    <a class="comment-privacy-text"><i class="fa-solid fa-question"></i>Privacy</a>
+                    <button class="comment-btn">Comment</button>
+                </div>
+            </div>
+            <div class="comments-container-main">
+
+                @foreach (var comment in Model.Comments)
+                {
+                    <div class="comment-container">
+                        <div class="user-info-container-comment">
+                            <div class="profile-image-container-comment">
+                                <img class="profile-image-comment" src="@comment.UserPfp" alt="profile-img">
+                            </div>
+                            <h1 class="username-content-comment">@comment.Username</h1>
+                            <div class="dot-comment">·</div>
+                        </div>
+                        <div class="comment-body">
+                            <p class="comment-text">@comment.Content</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="profile-content-container">
+        <div class="profile-info-aside">
+            <div class="profile-name">
+                <h1 class="profile-name-content">David Petkov</h1>
+                <div class="follow-bth bubbly-button">Follow</div>
+            </div>
+            <div class="profile-description">
+                <h1 class="profile-description-content">David Petkov Petkov Petkov Petkov Petkov Petkov Petkov Petkov</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/1f167bd3a1.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.comment-btn').click(function (e) {
+            e.preventDefault();
+
+            const postId = window.location.pathname.split('/').pop();
+
+            const commentData = {
+                PostId: postId,
+                Content: $('.textarea-comment').val()
+            };
+
+            $.ajax({
+                url: '/Posts/Comment',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(commentData),
+                success: function (response) {
+                    console.log('Comment submitted successfully', response);
+                    location.reload();
+                    $('.textarea-comment').val('');
+                },
+                error: function (xhr, status, error) {
+                    console.error('Submission failed', xhr, status, error);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    var animateButton = function (e) {
+
+        e.preventDefault;
+        //reset animation
+        e.target.classList.remove('animate');
+
+        e.target.classList.add('animate');
+        setTimeout(function () {
+            e.target.classList.remove('animate');
+        }, 700);
+    };
+
+    var bubblyButtons = document.getElementsByClassName("bubbly-button");
+
+    for (var i = 0; i < bubblyButtons.length; i++) {
+        bubblyButtons[i].addEventListener('click', animateButton, false);
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $(window).scroll(function () {
+            var scroll = $(window).scrollTop();
+            var header = $('#header-top-post');
+
+            if (scroll > 150) {
+                header.removeClass('hidden');
+            } else {
+                header.addClass('hidden');
+            }
+        });
+    });
+</script>
