@@ -10,7 +10,7 @@ html {
 body {
     display: flex;
     background-color: white;
-    color: #D1D5DB;
+    color: #83878E;
 }
 .loading-bar-container-img-gray {
     filter: grayscale(100%);

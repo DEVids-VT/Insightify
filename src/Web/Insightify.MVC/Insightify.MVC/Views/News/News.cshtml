@@ -4,54 +4,93 @@
 <link href="~/css/news.css" rel="stylesheet" />
 
 <div class="news-container">
-    <div class="news-sections-container">
-        <section class="news-section-posts">
-            @{
-                foreach (var item in Model)
-                {
-                    <div onclick="window.open('@item.Url', '_blank');" class="news-container-single">
-                        <div class="news-main">
-                            <div class="news-header-hour">
-                                <h1 class="news-headerhour-title">@item.Author</h1>
-                                <h1><strong>‧</strong></h1>
-                                <h1 class="news-headerhour-text">@item.PublishedAt</h1>
-                            </div>
-                            <div class="news-content">
-                                <h1 class="news-content-title">@item.Description</h1>
-                            </div>
-                        </div>
+    @if (Model.Count() > 4)
+    {
+        var news = new Stack<NewsViewModel>(Model.Take(4));
+        var mainNew = news.Pop();
+        var secondNew = news.Pop();
+        var thirdNew = news.Pop();
+        var fourthNew = news.Pop();
 
+        <div class="news-title">
+            <h1>Trending Now</h1>
+        </div>
+        <div class="trending-news-container">
+            <div class="main-news">
+                <div class="image-container">
+                    <img src="@mainNew.Image" alt="img">
+                </div>
+                <div class="text-container">
+                    <h2 class="date-txt">@mainNew.PublishedAt.ToLocalTime().ToString("MMM dd, yyyy")</h2>
+                    <h1 class="title-txt">@mainNew.Title</h1>
+                    <h3 class="source-txt">@mainNew.Source</h3>
+                </div>
+            </div>
+            <div class="secondary-news-container">
+                <div class="first-part">
+                    <div class="image-container">
+                        <img src="@secondNew.Image" alt="img">
+                    </div>
+                    <div class="text-container">
+                        <h2 class="date-txt">@secondNew.PublishedAt.ToLocalTime().ToString("MMM dd, yyyy")</h2>
+                        <h1 class="title-txt">@secondNew.Title</h1>
+                        <h3 class="source-txt">@secondNew.Source</h3>
+                    </div>
+                </div>
+                <div class="second-part">
+                    <div class="first-divider">
+                        <div class="image-container">
+                            <img src="@thirdNew.Image" alt="img">
+                        </div>
+                        <div class="text-container">
+                            <h2 class="date-txt">@thirdNew.PublishedAt.ToLocalTime().ToString("MMM dd, yyyy")</h2>
+                            <h1 class="title-txt">@thirdNew.Title</h1>
+                            <h3 class="source-txt">@thirdNew.Source</h3>
+                        </div>
+                    </div>
+                    <div class="second-divider">
+                        <div class="image-container">
+                            <img src="@fourthNew.Image" alt="img">
+                        </div>
+                        <div class="text-container">
+                            <h2 class="date-txt">@fourthNew.PublishedAt.ToLocalTime().ToString("MMM dd, yyyy")</h2>
+                            <h1 class="title-txt">@fourthNew.Title</h1>
+                            <h3 class="source-txt">@fourthNew.Source</h3>
+                        </div>
+                    </div>
+            </div>
+            </div>
+        </div>
+        <div class="news-items-container">
+            @{
+                foreach (var item in Model.Skip(4))
+                {
+                    <div class="news-item" onclick="window.open('@item.Url', '_blank');">
                         @if (item.Image != null)
                         {
-                            <div>
-                                <img class="news-image" src="@item.Image" />
+                            <div class="news-image-container">
+                                <img src="@item.Image" alt="News Image" class="news-image">
                             </div>
                         }
+                        <div class="news-item-content">
+                            <div class="news-meta">
+                                <span class="news-author">@item.Author</span> |
+                                <span class="news-date">@item.PublishedAt.ToString("MMM dd, yyyy")</span>
+                            </div>
+                            <h2 class="news-title">@item.Title</h2>
+                            <p class="news-description">@item.Description</p>
+                        </div>
                     </div>
-                    <div class="news-under-post-line"></div>
                 }
             }
-        </section>
-        <section class="section-news">
-            <div class="side-news-container">
-                <div class="d-flex align-items-start" style="width: 90%;">
-                    <h1 class="news-title">Popular voices</h1>
-                </div>
-                @{
-                    for (int i = 0; i < 6; i++)
-                    {
-                        <div class="news-element">
-                            <img class="news-footer-img" src="~/images/navbar/squid.jpg" />
-                            <div class="news-image-element-content">
-                                <h1 class="news-image-element-content-title">Microsoft</h1>
-                                <h2 class="news-image-element-content-content">1,209,283 followers</h2>
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-        </section>
-    </div>
+        </div>
+    }
+    else
+    {
+        <div class="news-title">
+            <h1>No news avalable!</h1>
+        </div>
+    }
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -60,12 +99,12 @@
     var newsPageSize = @Model.PageSize;
     var isNewsLoading = false;
     var newsLoadbar = `
-                <div class="loading-bar">
-                    <div class="loading-bar-container">
-                        <img class="loading-bar-container-img-gray" src="/images/logo/logo_violet_s.png" alt="loading">
-                    </div>
-                </div>
-            `;
+                            <div class="loading-bar">
+                                <div class="loading-bar-container">
+                                    <img class="loading-bar-container-img-gray" src="/images/logo/logo_violet_s.png" alt="loading">
+                                </div>
+                            </div>
+                        `;
 
     $(window).scroll(function () {
         if (!isNewsLoading && $(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
@@ -81,22 +120,22 @@
                     newsPage++;
                     result.forEach(function (item) {
                         var newsHtml = `
-                                    <div class="news-container-single">
-                                        <div class="news-main">
-                                            <div class="news-header-hour">
-                                                <h1 class="news-headerhour-title">${item.author}</h1>
-                                                <h1><strong>‧</strong></h1>
-                                                    <h1 class="news-headerhour-text">${item.publishedAt}</h1>
-                                            </div>
-                                            <div class="news-content">
-                                                <h1 class="news-content-title">${item.description}</h1>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <img class="news-image" src="${item.image}" />
-                                       </div>
-                                    </div>
-                                    <div class="news-under-post-line"></div>`;
+                                                <div class="news-container-single">
+                                                    <div class="news-main">
+                                                        <div class="news-header-hour">
+                                                            <h1 class="news-headerhour-title">${item.author}</h1>
+                                                            <h1><strong>‧</strong></h1>
+                                                                <h1 class="news-headerhour-text">${item.publishedAt}</h1>
+                                                        </div>
+                                                        <div class="news-content">
+                                                            <h1 class="news-content-title">${item.description}</h1>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <img class="news-image" src="${item.image}" />
+                                                   </div>
+                                                </div>
+                                                <div class="news-under-post-line"></div>`;
 
                         $('.news-section-posts').append(newsHtml);
                     });
