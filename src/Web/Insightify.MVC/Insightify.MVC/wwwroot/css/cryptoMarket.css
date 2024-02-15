@@ -32,42 +32,67 @@
 }
 
 .tr-item-head th {
-    text-align: left;
     padding: 10px 15px;
     border-bottom: 1px solid #ddd;
     color: #979797;
     font-weight: 500;
     height: 50px;
+    text-align: center;
 }
 .thead-item:hover{
     background-color: #F0F3FA;
 }
 .tr-item td {
-    text-align: left;
     padding: 10px 15px;
     border-bottom: 1px solid #ddd;
+    text-align: center;
     color: #757575;
 }
 
 /* First Column Styling */
 .td-item:first-child {
     display: flex;
+    justify-content: center;
+    align-items: center;
     align-items: center;
     gap: 10px;
     padding-left: 20px;
 }
-.tr-item:hover{
+    .td-item:first-child a {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+.td-item a:hover {
+    color: #949494;
+}
+        .td-item:first-child a .table-item-img {
+            margin-right: 15px;
+        }
+.thead-item th {
+    text-align: center;
+}
+.tr-item:hover {
     background-color: #F0F3FA;
-
 }
 .table-item-img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
-
+.green {
+    color: #60e639 !important;
+}
+.red {
+    color: #db4141!important;
+}
+.tr-item:hover {
+    cursor: pointer;
+}
 .currency-id, .currency-name {
     margin: 0;
+    font-size: 20px;
 }
 
 /* Last Column Styling */

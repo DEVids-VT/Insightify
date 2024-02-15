@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Insightify.MVC.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     public class FinancialDataController : Controller
     {
         private readonly IFinancialDataService _financialDataService;
@@ -18,41 +18,234 @@ namespace Insightify.MVC.Controllers
         [HttpGet("marketdata")]
         public async Task<IActionResult> AllCurrencies()
         {
-            var model = await _financialDataService.GetAllCurrencies();
-            //var model = new List<CryptoCurrencyModel>
-            //{
-            //    new CryptoCurrencyModel
-            //    {
-            //        Id = "btc",
-            //        Name = "bitcoin",
-            //        Image = new Image
-            //        {
-            //            Small = "/images/camera_lense_0.jpeg"
-            //        },
-            //        MarketCapRank = 1,
-            //        MarketData = new MarketData
-            //        {
-            //            CurrentPrice = new CurrentPrice
-            //            {
-            //                Usd = 200
-            //            },
-            //            MarketCapChange24h = 20,
-            //            MarketCap = new MarketCap
-            //            {
-            //                Usd = 2000
-            //            },
-            //            TotalVolume = new TotalVolume
-            //            {
-            //                Usd = 10
-            //            },
-            //            CirculatingSupply = 200
-            //        },
-            //        Categories = new List<string>
-            //        {
-            //            "sdadsaasdadsasdadsasd"
-            //        }
-            //    }
-            //};
+            //var model = await _financialDataService.GetAllCurrencies();
+            var model = new List<CryptoCurrencyModel>
+            {
+                new CryptoCurrencyModel
+                {
+                    Id = "btc",
+                    Name = "bitcoin",
+                    Image = new Image
+                    {
+                        Small = "/images/camera_lense_0.jpeg"
+                    },
+                    MarketCapRank = 1,
+                    MarketData = new MarketData
+                    {
+                        CurrentPrice = new CurrentPrice
+                        {
+                            Usd = 200
+                        },
+                        MarketCapChange24h = 20,
+                        MarketCap = new MarketCap
+                        {
+                            Usd = 2000
+                        },
+                        TotalVolume = new TotalVolume
+                        {
+                            Usd = 10
+                        },
+                        CirculatingSupply = 200,
+                        PriceChange24h = 0.01
+                    },
+                    Categories = new List<string>
+                    {
+                        "sdadsaasdadsasdadsasd"
+                    }
+                },
+                new CryptoCurrencyModel
+                {
+                    Id = "btc",
+                    Name = "bitcoin",
+                    Image = new Image
+                    {
+                        Small = "/images/camera_lense_0.jpeg"
+                    },
+                    MarketCapRank = 1,
+                    MarketData = new MarketData
+                    {
+                        CurrentPrice = new CurrentPrice
+                        {
+                            Usd = 200
+                        },
+                        MarketCapChange24h = 20,
+                        MarketCap = new MarketCap
+                        {
+                            Usd = 2000
+                        },
+                        TotalVolume = new TotalVolume
+                        {
+                            Usd = 10
+                        },
+                        CirculatingSupply = 200,
+                        PriceChange24h = -0.01
+                    },
+                    Categories = new List<string>
+                    {
+                        "sdadsaasdadsasdadsasd"
+                    }
+                },
+                new CryptoCurrencyModel
+                {
+                    Id = "btc",
+                    Name = "bitcoin",
+                    Image = new Image
+                    {
+                        Small = "/images/camera_lense_0.jpeg"
+                    },
+                    MarketCapRank = 1,
+                    MarketData = new MarketData
+                    {
+                        CurrentPrice = new CurrentPrice
+                        {
+                            Usd = 200
+                        },
+                        MarketCapChange24h = 20,
+                        MarketCap = new MarketCap
+                        {
+                            Usd = 2000
+                        },
+                        TotalVolume = new TotalVolume
+                        {
+                            Usd = 10
+                        },
+                        CirculatingSupply = 200,
+                        PriceChange24h = 0.01
+                    },
+                    Categories = new List<string>
+                    {
+                        "sdadsaasdadsasdadsasd"
+                    }
+                },
+                new CryptoCurrencyModel
+                {
+                    Id = "btc",
+                    Name = "bitcoin",
+                    Image = new Image
+                    {
+                        Small = "/images/camera_lense_0.jpeg"
+                    },
+                    MarketCapRank = 1,
+                    MarketData = new MarketData
+                    {
+                        CurrentPrice = new CurrentPrice
+                        {
+                            Usd = 200
+                        },
+                        MarketCapChange24h = 20,
+                        MarketCap = new MarketCap
+                        {
+                            Usd = 2000
+                        },
+                        TotalVolume = new TotalVolume
+                        {
+                            Usd = 10
+                        },
+                        CirculatingSupply = 200,
+                        PriceChange24h = 0.01
+                    },
+                    Categories = new List<string>
+                    {
+                        "sdadsaasdadsasdadsasd"
+                    }
+                },
+                new CryptoCurrencyModel
+                {
+                    Id = "btc",
+                    Name = "bitcoin",
+                    Image = new Image
+                    {
+                        Small = "/images/camera_lense_0.jpeg"
+                    },
+                    MarketCapRank = 1,
+                    MarketData = new MarketData
+                    {
+                        CurrentPrice = new CurrentPrice
+                        {
+                            Usd = 200
+                        },
+                        MarketCapChange24h = 20,
+                        MarketCap = new MarketCap
+                        {
+                            Usd = 2000
+                        },
+                        TotalVolume = new TotalVolume
+                        {
+                            Usd = 10
+                        },
+                        CirculatingSupply = 200,
+                        PriceChange24h = 0.01
+                    },
+                    Categories = new List<string>
+                    {
+                        "sdadsaasdadsasdadsasd"
+                    }
+                },
+                new CryptoCurrencyModel
+                {
+                    Id = "btc",
+                    Name = "bitcoin",
+                    Image = new Image
+                    {
+                        Small = "/images/camera_lense_0.jpeg"
+                    },
+                    MarketCapRank = 1,
+                    MarketData = new MarketData
+                    {
+                        CurrentPrice = new CurrentPrice
+                        {
+                            Usd = 200
+                        },
+                        MarketCapChange24h = 20,
+                        MarketCap = new MarketCap
+                        {
+                            Usd = 2000
+                        },
+                        TotalVolume = new TotalVolume
+                        {
+                            Usd = 10
+                        },
+                        CirculatingSupply = 200,
+                        PriceChange24h = -0.01
+                    },
+                    Categories = new List<string>
+                    {
+                        "sdadsaasdadsasdadsasd"
+                    }
+                },
+                new CryptoCurrencyModel
+                {
+                    Id = "btc",
+                    Name = "bitcoin",
+                    Image = new Image
+                    {
+                        Small = "/images/camera_lense_0.jpeg"
+                    },
+                    MarketCapRank = 1,
+                    MarketData = new MarketData
+                    {
+                        CurrentPrice = new CurrentPrice
+                        {
+                            Usd = 200
+                        },
+                        MarketCapChange24h = 20,
+                        MarketCap = new MarketCap
+                        {
+                            Usd = 2000
+                        },
+                        TotalVolume = new TotalVolume
+                        {
+                            Usd = 10
+                        },
+                        CirculatingSupply = 200,
+                        PriceChange24h = 0.01
+                    },
+                    Categories = new List<string>
+                    {
+                        "sdadsaasdadsasdadsasd"
+                    }
+                }
+            };
 
             return View(model);
         }
