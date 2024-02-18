@@ -114,7 +114,7 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             var postsQuery = this.GetPostsQuery(postSpecification).ToList();
 
             var posts = postsQuery
-                .Skip(pageNumber * pageSize)
+                .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();
 
@@ -127,6 +127,23 @@ namespace Insightify.Posts.Infrastructure.Posts.Repositories
             }
 
             return new PagedList<TOutputModel>(mappedPosts, pageNumber + 1, pageSize, totalPages, totalCount);
+        }
+
+        public async Task<TOutputModel> GetPostById<TOutputModel>(int id, CancellationToken cancellationToken = default)
+        {
+            var post = await this.All()
+                .Include(p => p.Saves)
+                .Include(p => p.Comments)
+                .Include(p => p.Likes)
+                .Include(p =>p.Tags)
+                .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+
+            if (post == null)
+            {
+                throw new NotFoundException("post", id);
+            }
+            var mappedPost = mapper.Map<TOutputModel>(post);
+            return mappedPost;
         }
 
         public async Task<IEnumerable<TCommentOutputModel>> GetComments<TCommentOutputModel>(int id, CancellationToken cancellationToken = default)

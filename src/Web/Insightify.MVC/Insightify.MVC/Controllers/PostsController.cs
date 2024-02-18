@@ -1,12 +1,14 @@
 ﻿using Insightify.Framework.Pagination;
 using Insightify.MVC.Models.Posts;
 using Insightify.MVC.Services.Posts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
 using System.Text;
 
 namespace Insightify.MVC.Controllers
 {
+    [AllowAnonymous]
     public class PostsController : Controller
     {
         private readonly IPostsService _postService;
@@ -16,11 +18,11 @@ namespace Insightify.MVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Feed([FromQuery] string? title = null, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 50, [FromQuery] bool json = false)
+        public async Task<IActionResult> Feed([FromQuery] string? title = null, [FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] bool json = false)
         {
             var result = await _postService.GetPosts(title, pageIndex, pageSize);
 
-            //await Task.Delay(1000);S
+            //await Task.Delay(1000);
 
             //var postViewModelList = new List<PostViewModel>();
             //var random = new Random();
@@ -55,6 +57,31 @@ namespace Insightify.MVC.Controllers
 
             return json ? Json(result) : View(result);
         }
+        [HttpGet("post/{id}")]
+        public async Task<IActionResult> ViewPost(int id)
+        {
+            /*var post = new PostViewModel 
+            { 
+                Id = id,
+                Comments = new List<CommentViewModel>()
+                {
+                    new CommentViewModel
+                    {
+                        Content = "asda asd asd asdasd",
+                        Username = "asdasd", 
+                        UserPfp = "asdasd"
+                    }
+                },
+                Description = "asdasd asd asd asd asd asdasd asd",
+                Title = "Title",
+                Username = "asdasdasdasdda",
+                Tags = new List<string>() { "sd", "asdasd", "asdasd" }
+            };   */
+            var post = await _postService.GetPost(id);
+            var comments = await _postService.Comments(id);
+            post.Comments = comments;
+            return View(post);
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -75,6 +102,12 @@ namespace Insightify.MVC.Controllers
         {
             var likeCount = await _postService.LikePost(postId);
             return Ok(likeCount);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Comment([FromBody] CreateCommentInputModel comment)
+        {
+            await _postService.Comment(comment);
+            return Ok();
         }
     }
 }

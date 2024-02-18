@@ -15,5 +15,8 @@ namespace Insightify.MVC.Models.Posts
         public int CommentCount { get; set; }
         public string? Username { get; set; }
         public string? UserImg { get; set; }
+        public DateTime UploadDate { get; set; }
+        public IEnumerable<string> Tags { get; set; }
+        public IEnumerable<CommentViewModel> Comments { get; set; } = new List<CommentViewModel>();
     }
 }

@@ -9,16 +9,17 @@
                 foreach (var post in Model)
                 {
                     <div class="post-container">
+                        <input type="hidden" value="@post.Id"/>
                         <header class="post-header">
                             <div class="post-header-info">
                                 <div class="post-header-image">
                                     @if (post.UserImg != null)
                                     {
-                                        <img class="header-img-data" src="@post.UserImg" />
+                                        <img class="header-img-data" src="@post.UserImg"/>
                                     }
                                     else
                                     {
-                                        <img class="header-img-data" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here." />
+                                        <img class="header-img-data" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Default_pfp.jpg" alt="Image here."/>
                                     }
                                     <h1 class="header-img-text">@post.Username</h1>
                                 </div>
@@ -27,13 +28,13 @@
                                 </div>
                             </div>
                             <div class="post-header-buttons">
-                                <a class="follow-btn">1 hour ago</a>
+                                <a class="follow-btn">@post.UploadDate</a>
                             </div>
                         </header>
                         <div class="post-content">
                             <div class="post-content-bg"></div>
                             <h1 class="content-title">@post.Title</h1>
-                            <img class="uploaded-image-file" src="@post.ImageUrl" alt="Image" />
+                            <img class="uploaded-image-file" src="@post.ImageUrl" alt="Image"/>
 
                             <p class="content-text-container">
                                 @post.Description
@@ -41,7 +42,7 @@
                         </div>
                         <div class="post-footer">
                             <div class="footer-buttons">
-                                <a data-post-id="@post.Id" class="like-btn footer-btn-action" href="#"><i class="fa fa-heart"></i>  @post.LikeCount</a>
+                                <a data-post-id="@post.Id" class="like-btn footer-btn-action" href="#"><i class="fa fa-heart"></i> @post.LikeCount</a>
                             </div>
                         </div>
                     </div>
@@ -70,6 +71,23 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Attach click event to each .post-container
+        $('.post-container').click(function() {
+            // Find the hidden input within the clicked .post-container and get its value
+            var postId = $(this).find('input[type="hidden"]').val();
+            // Redirect to the desired URL using the postId
+            window.location.href = '/post/' + postId;
+        });
+
+        // Prevent redirection when clicking on elements inside the post-container that should not trigger the redirect
+        // For example, if you have buttons or links inside .post-container that have their own action
+        $('.post-container .like-btn, .post-container a').click(function(e) {
+            e.stopPropagation(); // Prevent the event from bubbling up to the .post-container
+        });
+    });
+</script>
 <script>
     $(document).on('click', '.like-btn', function(e) {
         e.preventDefault();
@@ -122,6 +140,7 @@
                     result.forEach(function (post) {
                         var postHtml = `
                             <div class="post-container">
+                                <input type="hidden" value="${post.id}" />
                                 <header class="post-header">
                                     <div class="post-header-info">
                                         <div class="post-header-image">
@@ -130,7 +149,7 @@
                                         </div>
                                         <div class="post-header-hour">
                                             <h1><strong>‧</strong></h1>
-                                            <h1 class="headerhour-text">2 hr. ago</h1>
+                                            <h1 class="headerhour-text">${post.uploadDate}</h1>
                                         </div>
                                     </div>
                                     <div class="post-header-buttons">
@@ -157,6 +176,18 @@
                             <div class="under-post-line"></div>`;
 
                         $('#postContainer').append(postHtml);
+                        $('.post-container').click(function() {
+                            // Find the hidden input within the clicked .post-container and get its value
+                            var postId = $(this).find('input[type="hidden"]').val();
+                            // Redirect to the desired URL using the postId
+                            window.location.href = '/post/' + postId;
+                        });
+
+                        // Prevent redirection when clicking on elements inside the post-container that should not trigger the redirect
+                        // For example, if you have buttons or links inside .post-container that have their own action
+                        $('.post-container .like-btn, .post-container a').click(function(e) {
+                            e.stopPropagation(); // Prevent the event from bubbling up to the .post-container
+                        });
                     });
                 },
                 complete: function () {

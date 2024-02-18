@@ -38,6 +38,28 @@ namespace Insightify.MVC.Services.Posts
             return await CreatePostWithImageUrl(model, imageUrl);
         }
 
+        public async Task<PostViewModel> GetPost(int postId)
+        {
+            var postResponse = await _postClient.Post(postId);
+            var post = postResponse.Content;
+            if (post == null)
+            {
+                throw new NotFoundException();
+
+            }
+            var postOut = _mapper.Map<PostViewModel>(post);
+
+            var user = await _profilesClient.Profile(post.AuthorId);
+
+            if (user != null && user.Content != null)
+            {
+                postOut.UserImg = user.Content.Img;
+                postOut.Username = user.Content.Username;
+            }
+
+            return postOut;
+        }
+
         public async Task<IPage<PostViewModel>> GetPosts(string? title = null, int pageIndex = 1, int pageSize = 50)
         {
             var postsResponse = await _postClient.Posts(title, pageIndex, pageSize);
@@ -99,6 +121,28 @@ namespace Insightify.MVC.Services.Posts
 
             var result = await _postClient.Create(postModel);
             return result.Content!;
+        }
+        public async Task Comment(CreateCommentInputModel comment)
+        {
+            var commentRequest = _mapper.Map<CreateCommentRequestModel>(comment);
+            await _postClient.Comment(commentRequest);
+        }
+        public async Task<IEnumerable<CommentViewModel>> Comments(int postId)
+        {
+            var commentsResponse = await _postClient.Comments(postId);
+            var comments = commentsResponse.Content;
+            if (comments == null)
+            {
+                throw new NotFoundException();
+            }
+            var commentsOut = _mapper.Map<List<CommentViewModel>>(comments);
+            foreach (var comment in commentsOut)
+            {
+                var user = await _profilesClient.Profile(comment.AuthorId);
+                comment.Username = user.Content.Username;
+                comment.UserPfp = user.Content.Img;
+            }
+            return commentsOut;
         }
     }
 }
