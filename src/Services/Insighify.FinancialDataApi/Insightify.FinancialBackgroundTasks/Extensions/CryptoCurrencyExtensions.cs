@@ -8,14 +8,14 @@ namespace Insightify.FinancialBackgroundTasks.Extensions
         {
             return currency switch
             {
-                CryptoCurrency.Cardano => "cardano",
-                CryptoCurrency.Tether => "tether",
+                //CryptoCurrency.Cardano => "cardano",
+                //CryptoCurrency.Tether => "tether",
                 CryptoCurrency.Solana => "solana",
-                CryptoCurrency.Polkadot => "polkadot",
+                //CryptoCurrency.Polkadot => "polkadot",
                 CryptoCurrency.BinanceCoin => "binancecoin",
                 CryptoCurrency.Bitcoin => "bitcoin",
                 CryptoCurrency.Ethereum => "ethereum",
-                CryptoCurrency.Ripple => "ripple",
+                //CryptoCurrency.Ripple => "ripple",
                 _ => throw new ArgumentException("Invalid cryptocurrency"),
             };
         }
