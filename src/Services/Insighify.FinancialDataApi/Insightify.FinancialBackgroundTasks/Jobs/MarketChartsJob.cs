@@ -42,6 +42,7 @@ namespace Insightify.FinancialBackgroundTasks.Jobs
 
                 var apiEndpoint = $"/api/v3/coins/{currency.GetID()}/market_chart";
                 var response = await _fetcher.FetchDataWithQueryAsync<MarketChartModel>(apiEndpoint, queryParams);
+                await Task.Delay(30000);
 
                 _redis.JsonSet($"{currency.GetID()}:market_chart", JsonConvert.SerializeObject(response));
             }
