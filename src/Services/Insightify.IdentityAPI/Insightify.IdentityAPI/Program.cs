@@ -74,7 +74,7 @@ try
 
     using var scope = app.Services.CreateScope();
 
-    //await DatabaseMiddleware.MigrateDatabase(scope, app.Configuration, app.Logger);
+    await DatabaseMiddleware.MigrateDatabase(scope, app.Configuration, app.Logger);
 
     app.Logger.LogInformation("Starting web host ({ApplicationName})...", appName);
     app.Run();
