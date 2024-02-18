@@ -8,7 +8,6 @@ using System.Text;
 
 namespace Insightify.MVC.Controllers
 {
-    [AllowAnonymous]
     public class PostsController : Controller
     {
         private readonly IPostsService _postService;
@@ -22,61 +21,12 @@ namespace Insightify.MVC.Controllers
         {
             var result = await _postService.GetPosts(title, pageIndex, pageSize);
 
-            //await Task.Delay(1000);
-
-            //var postViewModelList = new List<PostViewModel>();
-            //var random = new Random();
-            //string[] words = { "apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "indian plum", "jackfruit", "kiwi", "lemon", "mango", "nectarine", "orange", "papaya", "quince", "raspberry", "strawberry", "tangerine", "ugli fruit", "vanilla", "watermelon", "xylocarp", "yellow passionfruit", "zucchini" };
-
-            //for (int i = 0; i < 20; i++)
-            //{
-            //    int wordCount = random.Next(50, 500 + 1);
-            //    var stringBuilder = new StringBuilder();
-
-            //    for (int j = 0; j < wordCount; j++)
-            //    {
-            //        int index = random.Next(words.Length);
-            //        stringBuilder.Append(words[index]);
-            //        stringBuilder.Append(' ');
-            //    }
-
-            //    postViewModelList.Add(new PostViewModel
-            //    {
-            //        Id = i + 1,
-            //        AuthorId = (i + 1).ToString(),
-            //        CommentCount = i * 5,
-            //        Description = stringBuilder.ToString(),
-            //        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
-            //        LikeCount = i * 100,
-            //        SaveCount = i * 20,
-            //        Title = "Title " + (i + 1)
-            //    });
-            //}
-
-            //var result = new Page<PostViewModel>(postViewModelList, 1, 10, 20);
-
+            
             return json ? Json(result) : View(result);
         }
         [HttpGet("post/{id}")]
         public async Task<IActionResult> ViewPost(int id)
         {
-            /*var post = new PostViewModel 
-            { 
-                Id = id,
-                Comments = new List<CommentViewModel>()
-                {
-                    new CommentViewModel
-                    {
-                        Content = "asda asd asd asdasd",
-                        Username = "asdasd", 
-                        UserPfp = "asdasd"
-                    }
-                },
-                Description = "asdasd asd asd asd asd asdasd asd",
-                Title = "Title",
-                Username = "asdasdasdasdda",
-                Tags = new List<string>() { "sd", "asdasd", "asdasd" }
-            };   */
             var post = await _postService.GetPost(id);
             var comments = await _postService.Comments(id);
             post.Comments = comments;
