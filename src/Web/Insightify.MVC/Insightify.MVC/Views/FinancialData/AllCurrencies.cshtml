@@ -11,10 +11,10 @@
                     <th class="thead-item">Coin</th>
                     <th class="thead-item">Rank</th>
                     <th class="thead-item">Price</th>
-                    <th class="thead-item">Change % 24h</th>
                     <th class="thead-item">Market cap</th>
                     <th class="thead-item">Volume 24h</th>
                     <th class="thead-item">Circulating supply</th>
+                    <th class="thead-item">Change % 24h</th>
                     <th class="thead-item">Category</th>
                 </tr>
             </thead>
@@ -31,10 +31,13 @@
                         </td>
                         <td class="td-item">@item.MarketCapRank</td>
                         <td class="td-item">@item.MarketData.CurrentPrice.Usd</td>
-                        <td class="td-item">@item.MarketData.PriceChange24h</td>
                         <td class="td-item">@item.MarketData.MarketCap.Usd</td>
                         <td class="td-item">@item.MarketData.TotalVolume.Usd</td>
                         <td class="td-item">@item.MarketData.CirculatingSupply</td>
+                        @{
+                            var cssClass = item.MarketData.PriceChange24h >= 0 ? "green" : "red";
+                        }
+                        <td class="td-item @cssClass">@item.MarketData.PriceChange24h</td>
                         <td class="td-item">@item.Categories.FirstOrDefault()</td>
                     </tr>
                 }
