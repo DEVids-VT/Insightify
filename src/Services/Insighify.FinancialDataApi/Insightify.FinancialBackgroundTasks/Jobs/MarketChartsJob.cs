@@ -31,7 +31,7 @@ namespace Insightify.FinancialBackgroundTasks.Jobs
 
         public async Task Execute(IJobExecutionContext context)
         {
-            /*foreach (CryptoCurrency currency in Enum.GetValues(typeof(CryptoCurrency)))
+            foreach (CryptoCurrency currency in Enum.GetValues(typeof(CryptoCurrency)))
             {
                 var queryParams = new Dictionary<string, string>()
                 {
@@ -43,8 +43,7 @@ namespace Insightify.FinancialBackgroundTasks.Jobs
                 var response = await _fetcher.FetchDataWithQueryAsync<MarketChartModel>(apiEndpoint, queryParams);
 
                 _redis.JsonSet($"{currency.GetID()}:market_chart", JsonConvert.SerializeObject(response));
-            }*/
-            await Task.Delay(1);
+            }
         }
     }
 }

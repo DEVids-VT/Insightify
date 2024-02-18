@@ -12,6 +12,10 @@ namespace Insightify.FinancialBackgroundTasks.Extensions
                 CryptoCurrency.Tether => "tether",
                 CryptoCurrency.Solana => "solana",
                 CryptoCurrency.Polkadot => "polkadot",
+                CryptoCurrency.BinanceCoin => "binancecoin",
+                CryptoCurrency.Bitcoin => "bitcoin",
+                CryptoCurrency.Ethereum => "ethereum",
+                CryptoCurrency.Ripple => "ripple",
                 _ => throw new ArgumentException("Invalid cryptocurrency"),
             };
         }

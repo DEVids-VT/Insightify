@@ -11,6 +11,11 @@ namespace Insightify.FinancialBackgroundTasks.Infrastructure.Enums
 		Solana,
 		Cardano,
         Tether,
-        Polkadot
+        Polkadot,
+        BinanceCoin,
+        Ripple,
+        Bitcoin,
+        Ethereum,
+
     }
 }

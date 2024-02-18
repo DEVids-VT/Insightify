@@ -55,7 +55,7 @@ namespace Insightify.FinancialBackgroundTasks.Extensions
                     .ForJob(cryptoCurrencyJobKey)
                     .WithIdentity("FetchCurrencies-trigger")
                     .StartNow()
-                    .WithSimpleSchedule(s => s.WithIntervalInMinutes(1))
+                    .WithSimpleSchedule(s => s.WithIntervalInMinutes(3))
                 );
             });
             services.AddQuartzHostedService(qz => qz.WaitForJobsToComplete = true);
