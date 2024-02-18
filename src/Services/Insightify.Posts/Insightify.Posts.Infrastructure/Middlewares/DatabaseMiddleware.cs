@@ -1,19 +1,20 @@
-﻿using Insightify.IdentityAPI.Data;
-using Insightify.IdentityAPI.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Polly;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics.CodeAnalysis;
-
-namespace Insightify.IdentityAPI.Middleware
+using Insightify.Posts.Infrastructure.Common;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Polly;
+namespace Insightify.Posts.Infrastructure.Middlewares
 {
+
     [ExcludeFromCodeCoverage]
     public class DatabaseMiddleware
     {
         public static async Task MigrateDatabase(IServiceScope scope, IConfiguration config, ILogger logger)
         {
             var retryPolicy = CreateRetryPolicy(config, logger);
-            var context = scope.ServiceProvider.GetRequiredService<IdentityApiDbContext>();
+            var context = scope.ServiceProvider.GetRequiredService<PostsDbContext>();
             await retryPolicy.ExecuteAsync(async () =>
             {
                 await context.Database.MigrateAsync();
@@ -42,4 +43,5 @@ namespace Insightify.IdentityAPI.Middleware
             return Policy.NoOpAsync();
         }
     }
+
 }

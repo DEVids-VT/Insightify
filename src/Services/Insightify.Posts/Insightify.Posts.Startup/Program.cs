@@ -8,6 +8,7 @@ using Insightify.Posts.Web;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using System.Diagnostics.CodeAnalysis;
 using Insightify.Posts.Web.Middlewares;
+using Insightify.Posts.Infrastructure.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +46,12 @@ app.UseHealthChecks("/hc", new HealthCheckOptions()
 {
     Predicate = _ => true,
 });
+
+app.Logger.LogInformation("Migrating database for {AppName}...", AppName);
+
+using var scope = app.Services.CreateScope();
+
+await DatabaseMiddleware.MigrateDatabase(scope, app.Configuration, app.Logger);
 
 app.Run();
 [ExcludeFromCodeCoverage]

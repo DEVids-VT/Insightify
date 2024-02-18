@@ -18,6 +18,8 @@ services:
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -130,3 +132,7 @@ services:
     - "5001:5001"
     depends_on:
       - sqlserver
+
+volumes:
+  sqlserver-data:
+    driver: local
