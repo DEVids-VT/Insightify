@@ -10,6 +10,7 @@ using StackExchange.Redis;
 
 namespace Insightify.FinancialBackgroundTasks.Jobs
 {
+    [DisallowConcurrentExecution]
     internal class CryptoCurrencyJob : IJob
     {
         private readonly IApiFetcher _fetcher;

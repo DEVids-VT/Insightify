@@ -4,10 +4,7 @@
     {
         Bitcoin,
         Ethereum,
-        Cardano,
         BinanceCoin,
-        Tether,
         Solana,
-        Polkadot
     }
 }

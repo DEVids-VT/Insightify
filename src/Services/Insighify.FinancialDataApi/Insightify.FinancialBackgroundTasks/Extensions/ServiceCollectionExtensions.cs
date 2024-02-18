@@ -41,8 +41,8 @@ namespace Insightify.FinancialBackgroundTasks.Extensions
                 qz.AddTrigger(opts => opts
                     .ForJob(marketChartsJobKey)
                     .WithIdentity("FetchCharts-trigger")
-                    .StartNow()
-                    .WithSimpleSchedule(s => s.WithIntervalInMinutes(1))
+                    .StartAt(DateBuilder.FutureDate(1, IntervalUnit.Minute)) // 1 minute in the future
+                    .WithSimpleSchedule(s => s.WithIntervalInMinutes(3))
                 );
 
                 var cryptoCurrencyJobKey = new JobKey("CryptoCurrencies");

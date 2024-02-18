@@ -15,6 +15,7 @@ using StackExchange.Redis;
 
 namespace Insightify.FinancialBackgroundTasks.Jobs
 {
+    [DisallowConcurrentExecution]
     public class MarketChartsJob : IJob
     {
         private readonly IApiFetcher _fetcher;
