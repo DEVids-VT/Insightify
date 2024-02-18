@@ -9,11 +9,11 @@ namespace Insightify.FinancialBackgroundTasks.Infrastructure.Enums
     public enum CryptoCurrency
 	{
 		Solana,
-		Cardano,
-        Tether,
-        Polkadot,
+		//Cardano,
+  //      Tether,
+  //      Polkadot,
         BinanceCoin,
-        Ripple,
+        //Ripple,
         Bitcoin,
         Ethereum,
 
