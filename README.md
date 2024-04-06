@@ -6,6 +6,10 @@
 ![image](https://github.com/DEVids-VT/Insightify/assets/68961310/309d29ff-fc81-4f08-9233-49d7f22bf271)
 # Crypto Microservice Application
 
+## Awards 
+- 1st prize with gold medals at the Bulgarian Mathematical Society's Student Science Section
+- 1st place in the national IT tournament 'John Atanasoff'
+
 ## Title
 
 Insightify
